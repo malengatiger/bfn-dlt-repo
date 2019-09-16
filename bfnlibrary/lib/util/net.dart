@@ -1,3 +1,5 @@
+import 'package:bfnlibrary/util/local_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 class Net {
 
@@ -11,7 +13,7 @@ class Net {
       print('🍏 🍎 🍐 🍊 getAccounts: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
       return response.body;
     } else {
-      throw Exception('🍏 🍎 🍐 🍊 Failed to load post');
+      throw Exception(' 👿  Failed: getAccounts');
     }
   }
   static Future<String> getInvoices() async {
@@ -21,7 +23,7 @@ class Net {
       print('🍏 🍎 🍐 🍊 getInvoices: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
       return response.body;
     } else {
-      throw Exception('🍏 🍎 🍐 🍊 Failed to load post');
+      throw Exception(' 👿  Failed : getInvoices');
     }
   }
   static Future<String> getInvoiceOffers() async {
@@ -31,7 +33,7 @@ class Net {
       print('🍏 🍎 🍐 🍊 getInvoiceOffers: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
       return response.body;
     } else {
-      throw Exception('🍏 🍎 🍐 🍊 Failed to load post');
+      throw Exception(' 👿  Failed: getInvoiceOffers');
     }
   }
   static Future<String> ping() async {
@@ -41,8 +43,21 @@ class Net {
       print('🍏 🍎 🍐 🍊 ping: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
       return response.body;
     } else {
-      throw Exception('🍏 🍎 🍐 🍊 Failed to load post');
+      throw Exception(' 👿  Failed ping');
     }
+
+  }
+  static Future<String> startDemoDataGeneration() async {
+    final response = await http.get(URL + 'admin/demo');
+
+    if (response.statusCode == 200) {
+      print('🍏 🍎 🍐 🍊 startDemoDataGeneration: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      Prefs.setDemoBoolean('DEMO DATA COMPLETE');
+      return response.body;
+    } else {
+      throw Exception(' 👿  Failed: startDemoDataGeneration');
+    }
+
   }
 
 }

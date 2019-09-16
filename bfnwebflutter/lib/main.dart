@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
+import 'package:bfnlibrary/util/local_storage.dart';
 import 'package:bfnlibrary/util/net.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BFN WebApp',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
       home: MyHomePage(title: 'BFN - Business Finance Network 2019'),
     );
@@ -33,17 +35,35 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool isBusy = false;
   List<AccountInfo> accounts = List();
   List<Invoice> invoices = List();
   List<InvoiceOffer> invoiceOffers = List();
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-    _getNet();
+  var text = 'BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019 BFN - Business Finance Network 2019';
+  @override
+  initState() {
+    super.initState();
+    _ping();
   }
 
+  _ping() async {
+    print('\n\n🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  ping Corda node 🍊 🍊 🍊\n\n');
+    var res = await Net.ping();
+    print(res);
+    var m = await Prefs.getDemoBoolean();
+    print('🎽 🎽 demo boolean: $m');
+  }
+  _startDemoData() async {
+    print(' 🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  start startDemoDataGeneration');
+    setState(() {
+      isBusy = true;
+    });
+    var result = await Net.startDemoDataGeneration();
+    print(result);
+    setState(() {
+      isBusy = false;
+    });
+  }
   _getNet() async {
     accounts.clear();
     invoices.clear();
@@ -103,26 +123,88 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        bottom: PreferredSize(child: Column(), preferredSize: Size.fromHeight(200)),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            SizedBox(height: 24,),
+            isBusy? Container(): RaisedButton(
+              onPressed: _startDemoData,
+              color: Colors.pink,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('Start Demo Data Generation', style: TextStyle(color: Colors.white,
+                fontSize: 20),),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            RaisedButton(
+              onPressed: _getNet,
+              color: Colors.blue[600],
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('Get Corda Node Data', style: TextStyle(color: Colors.white,
+                    fontSize: 20),),
+              ),
             ),
+//          GridView.count(crossAxisCount: 3,
+//          children: <Widget>[
+//            Card(
+//              elevation: 8,
+//              color: Colors.teal[100],
+//              child: Container(
+//                width: 120,height: 120,
+//              ),
+//            ),
+//            Card(
+//              elevation: 8,
+//              color: Colors.purple[100],
+//              child: Container(
+//                width: 120,height: 120,
+//              ),
+//            ),
+//            Card(
+//              elevation: 8,
+//              color: Colors.red[100],
+//              child: Container(
+//                width: 120,height: 120,
+//              ),
+//            ),
+//            Card(
+//              elevation: 8,
+//              color: Colors.orange[100],
+//              child: Container(
+//                width: 120,height: 120,
+//              ),
+//            ),
+//            Card(
+//              elevation: 8,
+//              color: Colors.cyan[100],
+//              child: Container(
+//                width: 120,height: 120,
+//              ),
+//            ),
+//          ],),
+            Card(
+              child: Container(
+                width: 400, height: 400,
+                color: Colors.amber[300],
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(text),
+                ),
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: _incrementCounter,
+//        tooltip: 'Increment',
+//        child: Icon(Icons.add),
+//      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
