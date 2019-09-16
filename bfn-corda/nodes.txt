@@ -1,0 +1,40 @@
+node {
+        name "O=ParisInvestor,L=Paris,C=FR"
+        p2pPort 10029
+        rpcSettings {
+            address("localhost:10030")
+            adminAddress("localhost:10070")
+        }
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+
+    }
+    node {
+        name "O=SandtonInvestor,L=Sandton,C=ZA"
+        p2pPort 10031
+        rpcSettings {
+            address("localhost:10033")
+            adminAddress("localhost:10073")
+        }
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+
+    }
+    node {
+        name "O=CapeTownCustomer,L=Cape Town,C=ZA"
+        p2pPort 10014
+        rpcSettings {
+            address("localhost:10015")
+            adminAddress("localhost:10055")
+        }
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+
+    }
+    node {
+        name "O=OneConnectSuppliers,L=Johannesburg,C=ZA"
+        p2pPort 10011
+        rpcSettings {
+            address("localhost:10012")
+            adminAddress("localhost:10052")
+        }
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+
+    }

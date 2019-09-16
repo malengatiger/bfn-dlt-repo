@@ -1,0 +1,3 @@
+[INFO ] 2019-08-01T14:47:06,234Z [main] cordapp.JarScanningCordappLoader.<init> - Loading CorDapps from RestrictedURL(url=file:/Users/aubs/WORK/CORDA/bfn-corda-repo/bfn-corda/contracts/build/generated-custom-cordapps/20190801-144705.598/custom-cordapp_1_4_8ab10483-90f1-49e9-a751-ed0cca44fac5.jar, rootPackageName=null) {}
+[INFO ] 2019-08-01T14:47:06,255Z [main] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/bfn-corda-repo/bfn-corda/contracts/build/generated-custom-cordapps/20190801-144705.598/custom-cordapp_1_4_8ab10483-90f1-49e9-a751-ed0cca44fac5.jar {}
+[INFO ] 2019-08-01T14:47:06,308Z [main] cordapp.JarScanningCordappLoader.findNotaryService - Found notary service CorDapp implementations:  {}
