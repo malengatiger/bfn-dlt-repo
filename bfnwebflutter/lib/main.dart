@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
+import 'package:bfnlibrary/util/bloc.dart';
 import 'package:bfnlibrary/util/local_storage.dart';
 import 'package:bfnlibrary/util/net.dart';
 import 'package:flutter/material.dart';
@@ -47,11 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _ping() async {
-    print('\n\n🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  ping Corda node 🍊 🍊 🍊\n\n');
+    print('\n\n🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  ping Corda node ... 🍊 🍊 🍊\n\n');
     var res = await Net.ping();
     print(res);
-    var m = await Prefs.getDemoBoolean();
+    var m = await Prefs.getDemoString();
     print('🎽 🎽 demo boolean: $m');
+    print('\n\n🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  getting Corda node data ... 🍊 🍊 🍊\n\n');
+    await bfnBloc.getAccounts();
+    await bfnBloc.getInvoices();
+    await bfnBloc.getInvoiceOffers();
   }
   _startDemoData() async {
     print(' 🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  🎽 🎽  start startDemoDataGeneration');
@@ -74,48 +79,48 @@ class _MyHomePageState extends State<MyHomePage> {
     var cnt = 0;
     String result = await Net.getAccounts();
     List map = json.decode(result);
-    print('🏈  🏈  🏈  🏈  about to print accounts received from corda ...  🏈  🏈  🏈  🏈 ');
+//    print('🏈  🏈  🏈  🏈  about to print accounts received from corda ...  🏈  🏈  🏈  🏈 ');
     map.forEach((f) {
 
       accounts.add(AccountInfo.fromJson(f));
     });
     print(
         '🧩 🧩 🧩 🧩 🧩 🧩 🧩  getAccounts found  💜 ${accounts.length}  💜 accounts on corda node  🧩 🧩 🧩 🧩');
-    accounts.forEach((acc) {
-      cnt++;
-      print('🧩 🧩 account: 👽 👽 #$cnt ' + acc.toJson().toString() + " 🧩 ");
-    });
-    print('🏈  🏈  🏈  🏈  completed printing accounts...  🏈  🏈  🏈  🏈 ');
+//    accounts.forEach((acc) {
+//      cnt++;
+//      print('🧩 🧩 account: 👽 👽 #$cnt ' + acc.toJson().toString() + " 🧩 ");
+//    });
+//    print('🏈  🏈  🏈  🏈  completed printing accounts...  🏈  🏈  🏈  🏈 ');
 
     cnt = 0;
     String result1 = await Net.getInvoices();
     List map1 = json.decode(result1);
-    print('\n\n🏈  🏈  🏈  🏈  about to print invoices received from corda ...  🏈  🏈  🏈  🏈 ');
+//    print('\n\n🏈  🏈  🏈  🏈  about to print invoices received from corda ...  🏈  🏈  🏈  🏈 ');
     map1.forEach((f) {
       invoices.add(Invoice.fromJson(f));
     });
     print(
         '🍎 🍎 🍎 🍎 🍎 🍎 🍎   getInvoices found  💜 ${invoices.length}  💜 invoices on corda node  🍎 🍎 🍎 🍎 ');
-    invoices.forEach((acc) {
-      cnt++;
-      print('🍎 🍎 invoice: 🌽 #$cnt ' + acc.toJson().toString() + " 🍎 ");
-    });
-    print('🏈  🏈  🏈  🏈  completed printing invoices...  🏈  🏈  🏈  🏈 ');
+//    invoices.forEach((acc) {
+//      cnt++;
+//      print('🍎 🍎 invoice: 🌽 #$cnt ' + acc.toJson().toString() + " 🍎 ");
+//    });
+//    print('🏈  🏈  🏈  🏈  completed printing invoices...  🏈  🏈  🏈  🏈 ');
 
     cnt = 0;
     String result2 = await Net.getInvoiceOffers();
     List map2 = json.decode(result2);
-    print('\n\n🏀 🏀 🏀 🏀 🏀  about to print invoiceOffers received from corda ... 🏀 🏀 🏀 🏀 ');
+//    print('\n\n🏀 🏀 🏀 🏀 🏀  about to print invoiceOffers received from corda ... 🏀 🏀 🏀 🏀 ');
     map2.forEach((f) {
       invoiceOffers.add(InvoiceOffer.fromJson(f));
     });
     print(
         '🎽 🎽 🎽 🎽 🎽 🎽 🎽   getInvoiceOffers found  💜 ${invoiceOffers.length}  💜 invoiceOffers on corda node  🎽 🎽 🎽 🎽 ');
-    invoiceOffers.forEach((acc) {
-      cnt++;
-      print('🥦 🥦  invoiceOffer: 🍊 #$cnt ' + acc.toJson().toString() + " 🥦 ");
-    });
-    print('🏀 🏀 🏀 🏀   completed printing invoiceOffers...  🏀 🏀 🏀 🏀 ');
+//    invoiceOffers.forEach((acc) {
+//      cnt++;
+//      print('🥦 🥦  invoiceOffer: 🍊 #$cnt ' + acc.toJson().toString() + " 🥦 ");
+//    });
+//    print('🏀 🏀 🏀 🏀   completed printing invoiceOffers...  🏀 🏀 🏀 🏀 ');
   }
 
   @override

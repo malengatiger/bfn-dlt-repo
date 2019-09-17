@@ -5,6 +5,7 @@ import com.bfn.dto.InvoiceDTO;
 import com.bfn.dto.InvoiceOfferDTO;
 import com.bfn.dto.NodeInfoDTO;
 import com.bfn.flows.admin.AccountRegistrationFlow;
+import com.bfn.flows.admin.ShareAccountInfoFlow;
 import com.bfn.flows.invoices.InvoiceOfferFlow;
 import com.bfn.flows.invoices.InvoiceRegistrationFlow;
 import com.bfn.states.InvoiceOfferState;
@@ -35,7 +36,7 @@ public class TheUtil {
     private final static Logger logger = LoggerFactory.getLogger(TheUtil.class);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    public  static List<NodeInfoDTO> listNodes(CordaRPCOps proxy) {
+    public static List<NodeInfoDTO> listNodes(CordaRPCOps proxy) {
 
         List<NodeInfo> nodes = proxy.networkMapSnapshot();
         List<NodeInfoDTO> nodeList = new ArrayList();
@@ -56,31 +57,33 @@ public class TheUtil {
                 + nodeList.size() + " \uD83D\uDC9A ");
         return nodeList;
     }
+
     public static List<AccountInfoDTO> getAccounts(CordaRPCOps proxy) {
 
         List<StateAndRef<AccountInfo>> accounts = proxy.vaultQuery(AccountInfo.class).getStates();
         int cnt = 0;
         List<AccountInfoDTO> list = new ArrayList<>();
-        for (StateAndRef<AccountInfo> ref: accounts) {
+        for (StateAndRef<AccountInfo> ref : accounts) {
             cnt++;
 //            logger.info(" \uD83C\uDF3A AccountInfo: #".concat("" + cnt + " :: ").concat(ref.getState().getData().toString()
 //                    .concat(" \uD83E\uDD4F ")));
             AccountInfo info = ref.getState().getData();
             AccountInfoDTO dto = new AccountInfoDTO(info.getIdentifier().getId().toString(),
-                    info.getHost().toString(),info.getName(),info.getStatus().name());
+                    info.getHost().toString(), info.getName(), info.getStatus().name());
             list.add(dto);
         }
         String msg = "\uD83C\uDF3A  \uD83C\uDF3A done listing accounts:  \uD83C\uDF3A " + list.size();
         logger.info(msg);
         return list;
     }
+
     public static List<InvoiceDTO> getInvoiceStates(CordaRPCOps proxy) {
         QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
-        Vault.Page<InvoiceState> page = proxy.vaultQueryByWithPagingSpec(InvoiceState.class, criteria, new PageSpecification(1,200));
+        Vault.Page<InvoiceState> page = proxy.vaultQueryByWithPagingSpec(InvoiceState.class, criteria, new PageSpecification(1, 200));
 
         List<InvoiceDTO> list = new ArrayList<>();
         int cnt = 0;
-        for (StateAndRef<InvoiceState> ref: page.getStates()) {
+        for (StateAndRef<InvoiceState> ref : page.getStates()) {
             InvoiceState m = ref.getState().getData();
             InvoiceDTO invoice = new InvoiceDTO(
                     m.getInvoiceId().toString(),
@@ -97,40 +100,43 @@ public class TheUtil {
 
         return list;
     }
+
     public static List<InvoiceOfferDTO> getInvoiceOfferStates(CordaRPCOps proxy) {
 
         QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
-        Vault.Page<InvoiceOfferState> page = proxy.vaultQueryByWithPagingSpec(InvoiceOfferState.class, criteria, new PageSpecification(1,200));
+        Vault.Page<InvoiceOfferState> page = proxy.vaultQueryByWithPagingSpec(InvoiceOfferState.class, criteria, new PageSpecification(1, 200));
         List<InvoiceOfferDTO> list = new ArrayList<>();
 
         int cnt = 0;
-        for (StateAndRef<InvoiceOfferState> ref: page.getStates()) {
+        for (StateAndRef<InvoiceOfferState> ref : page.getStates()) {
             InvoiceOfferState m = ref.getState().getData();
             InvoiceOfferDTO invoice = new InvoiceOfferDTO(m.getInvoiceId().toString(),
                     m.getOfferAmount(),
                     m.getDiscount(),
                     m.getSupplier().getIdentifier().getId().toString(),
                     m.getInvestor().getIdentifier().getId().toString(),
-                    m.getOwner() != null? m.getOwner().getIdentifier().getId().toString() : null);
+                    m.getOwner() != null ? m.getOwner().getIdentifier().getId().toString() : null);
             list.add(invoice);
         }
         String m = " \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A done listing InvoiceOfferStates:  \uD83C\uDF3A " + list.size();
         logger.info(m);
         return list;
     }
+
     public static List<String> listFlows(CordaRPCOps proxy) {
 
         logger.info("🥬 🥬 🥬 🥬 Registered Flows on Corda BFN ...  \uD83E\uDD6C ");
         List<String> flows = proxy.registeredFlows();
         int cnt = 0;
-        for (String info: flows) {
+        for (String info : flows) {
             cnt++;
-            logger.info("\uD83E\uDD4F \uD83E\uDD4F #$"+cnt+" \uD83E\uDD6C BFN Corda Flow:  \uD83E\uDD4F" + info + "   \uD83C\uDF4E ");
+            logger.info("\uD83E\uDD4F \uD83E\uDD4F #$" + cnt + " \uD83E\uDD6C BFN Corda Flow:  \uD83E\uDD4F" + info + "   \uD83C\uDF4E ");
         }
 
         logger.info("🥬 🥬 🥬 🥬 Total Registered Flows  \uD83C\uDF4E  " + cnt + "  \uD83C\uDF4E \uD83E\uDD6C ");
         return flows;
     }
+
     public static List<String> listNotaries(CordaRPCOps proxy) {
 
         List<Party> notaryIdentities = proxy.notaryIdentities();
@@ -141,6 +147,7 @@ public class TheUtil {
         }
         return list;
     }
+
     public static InvoiceDTO startRegisterInvoiceFlow(CordaRPCOps proxy, InvoiceDTO invoice) throws Exception {
 
         logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: " + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
@@ -151,7 +158,7 @@ public class TheUtil {
             List<StateAndRef<AccountInfo>> accounts = proxy.vaultQuery(AccountInfo.class).getStates();
             logger.info(" \uD83C\uDF4F \uD83C\uDF4F AccountInfo's found by vaultQuery: \uD83D\uDD34 " + accounts.size() + " \uD83D\uDD34 ");
             AccountInfo supplierInfo = null, customerInfo = null;
-            for (StateAndRef<AccountInfo> info: accounts) {
+            for (StateAndRef<AccountInfo> info : accounts) {
 
                 if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoice.getCustomerId())) {
                     customerInfo = info.getState().getData();
@@ -175,7 +182,7 @@ public class TheUtil {
                     invoice.getTotalAmount(),
                     invoice.getValueAddedTax(),
                     new Date(proxy.currentNodeTime().toEpochMilli()),
-                    supplierInfo,customerInfo,
+                    supplierInfo, customerInfo,
                     UUID.randomUUID());
 
             CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
@@ -205,12 +212,12 @@ public class TheUtil {
                     AccountRegistrationFlow.class, accountName).getReturnValue();
 
             logger.info("\uD83C\uDF4F AccountRegistrationFlow started ... \uD83C\uDF4F \uD83C\uDF4F waiting for signedTransaction ....");
+
             AccountInfo accountInfo = accountInfoCordaFuture.get();
             logger.info("\uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F AccountRegistrationFlow completed... " +
                     "\uD83C\uDF4F \uD83C\uDF4F \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06  \n\uD83D\uDC4C \uD83D\uDC4C " +
                     "\uD83D\uDC4C \uD83D\uDC4C  accountInfo returned: \uD83E\uDD4F " +
                     accountInfo.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
-
 
             AccountInfoDTO dto = new AccountInfoDTO();
             dto.setHost(accountInfo.getHost().toString());
@@ -224,7 +231,26 @@ public class TheUtil {
             throw e;
         }
     }
-    public static InvoiceOfferDTO startInvoiceOfferFlow(CordaRPCOps proxy,InvoiceOfferDTO invoiceOffer) throws Exception {
+
+    public static String startAccountSharingFlow(CordaRPCOps proxy,
+                                                 Party otherParty, StateAndRef<AccountInfo> account) throws Exception {
+        try {
+            logger.info("\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35  startAccountSharingFlow: .....");
+            CordaFuture<String> accountInfoCordaFuture = proxy.startFlowDynamic(
+                    ShareAccountInfoFlow.class, otherParty, account).getReturnValue();
+            logger.info("\uD83C\uDF4F AccountRegistrationFlow started ... \uD83C\uDF4F \uD83C\uDF4F waiting for signedTransaction ....");
+
+            String result = accountInfoCordaFuture.get();
+            logger.info("Returned string: ".concat(result));
+
+            return "MISSION ACCOMPLISHED";
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }
+
+    public static InvoiceOfferDTO startInvoiceOfferFlow(CordaRPCOps proxy, InvoiceOfferDTO invoiceOffer) throws Exception {
 
         logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceOfferDTO: " + GSON.toJson(invoiceOffer) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
         try {
@@ -234,7 +260,7 @@ public class TheUtil {
             List<StateAndRef<AccountInfo>> accounts = proxy.vaultQuery(AccountInfo.class).getStates();
             logger.info(" \uD83C\uDF4F \uD83C\uDF4F AccountInfo's found by vaultQuery: \uD83D\uDD34 " + accounts.size() + " \uD83D\uDD34 ");
             AccountInfo supplierInfo = null, investorInfo = null;
-            for (StateAndRef<AccountInfo> info: accounts) {
+            for (StateAndRef<AccountInfo> info : accounts) {
 
                 if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoiceOffer.getInvestorId())) {
                     investorInfo = info.getState().getData();
@@ -295,6 +321,7 @@ public class TheUtil {
         invoice.setDateRegistered(state.getDateRegistered());
         return invoice;
     }
+
     private static InvoiceOfferDTO getDTO(InvoiceOfferState state) {
         AccountInfo owner = state.getOwner();
         String ownerId = null;
@@ -306,12 +333,12 @@ public class TheUtil {
                 state.getOfferAmount(),
                 state.getDiscount(),
                 state.getSupplier().getIdentifier().getId().toString(),
-                state.getInvestor().getIdentifier().getId().toString(), ownerId );
+                state.getInvestor().getIdentifier().getId().toString(), ownerId);
 
-        if (state.getOfferDate() !=  null) {
+        if (state.getOfferDate() != null) {
             invoiceOffer.setOfferDate(state.getOfferDate());
         }
-        if (state.getOwnerDate() !=  null) {
+        if (state.getOwnerDate() != null) {
             invoiceOffer.setInvestorDate(state.getOwnerDate());
         }
         return invoiceOffer;

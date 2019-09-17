@@ -27,7 +27,7 @@ class BFNBloc {
     list.forEach((m) {
       accounts.add(AccountInfo.fromJson(m));
     });
-    print('🍏 🍏 getAccounts found ${accounts.length} 🍏 🍏  - adding to stream');
+    print('🍏 🍏 BFNBloc: getAccounts found 🔆 ${accounts.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     acctController.sink.add(accounts);
   }
   getInvoices() async {
@@ -37,7 +37,7 @@ class BFNBloc {
     list.forEach((m) {
       invoices.add(Invoice.fromJson(m));
     });
-    print('🍏 🍏 getInvoices found ${invoices.length} 🍏 🍏  - adding to stream');
+    print('🍏 🍏 BFNBloc: getInvoices found 🔆 ${invoices.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     invoiceController.sink.add(invoices);
   }
   getInvoiceOffers() async {
@@ -47,7 +47,7 @@ class BFNBloc {
     list.forEach((m) {
       offers.add(InvoiceOffer.fromJson(m));
     });
-    print('🍏 🍏 getInvoiceOffers found ${offers.length} 🍏 🍏  - adding to stream');
+    print('🍏 🍏 BFNBloc: getInvoiceOffers found 🔆 ${offers.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     offerController.sink.add(offers);
   }
 }

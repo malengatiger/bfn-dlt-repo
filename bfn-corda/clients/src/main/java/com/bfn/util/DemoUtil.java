@@ -3,14 +3,11 @@ package com.bfn.util;
 import com.bfn.dto.AccountInfoDTO;
 import com.bfn.dto.InvoiceDTO;
 import com.bfn.dto.InvoiceOfferDTO;
-import com.bfn.flows.admin.ShareAccountInfoWithAllNodesFlow;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.corda.core.concurrent.CordaFuture;
 import net.corda.core.messaging.CordaRPCOps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,35 +35,30 @@ public class DemoUtil {
         TheUtil.listNotaries(proxy);
         List flows = TheUtil.listFlows(proxy);
         demoSummary.setNumberOfFlows(flows.size());
-        registerAccounts();
+
+        //start data generation
+        registerSupplierAccounts();
+        registerCustomerAccounts();
+        registerInvestorAccounts();
+
+        registerInvoices();
+
         long end = System.currentTimeMillis();
         demoSummary.setEnded(new Date().toString());
         demoSummary.setElapsedSeconds((end - start)/1000);
         return demoSummary;
     }
 
-    private static void registerAccounts() throws Exception {
-        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 will add 3 accounts");
+    public static void registerSupplierAccounts() throws Exception {
+        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 will add 3 accounts");
         String key = "" + random.nextInt(100);
-        AccountInfoDTO supplier1 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier One Pty Ltd".concat("::").concat(key));
-        AccountInfoDTO customer1 = TheUtil.startAccountRegistrationFlow(proxy,"Customer One LLC".concat("::").concat(key));
-        AccountInfoDTO investor1 = TheUtil.startAccountRegistrationFlow(proxy,"Investor One Inc.".concat("::").concat(key));
-
-        AccountInfoDTO supplier2 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Two Pty Ltd".concat("::").concat(key));
-        AccountInfoDTO customer2 = TheUtil.startAccountRegistrationFlow(proxy,"Customer Two LLC".concat("::").concat(key));
-        AccountInfoDTO investor2 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Two LLC".concat("::").concat(key));
-
-        AccountInfoDTO supplier3 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Three Pty Ltd".concat("::").concat(key));
-        AccountInfoDTO customer3 = TheUtil.startAccountRegistrationFlow(proxy,"Customer Three LLC".concat("::").concat(key));
-        AccountInfoDTO investor3 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Three Pty Ltd".concat("::").concat(key));
-
-        AccountInfoDTO investor4 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Four Inc.".concat("::").concat(key));
-        AccountInfoDTO investor5 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Five LLC".concat("::").concat(key));
-
-        AccountInfoDTO supplier4 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Four Pty Ltd".concat("::").concat(key));
-        AccountInfoDTO supplier5 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Five Pty Ltd".concat("::").concat(key));
-        AccountInfoDTO supplier6 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Six Pty Ltd".concat("::").concat(key));
-        AccountInfoDTO supplier7 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Seven Pty Ltd".concat("::").concat(key));
+        AccountInfoDTO supplier1 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier One Pty Ltd".concat("#").concat(key));
+        AccountInfoDTO supplier2 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Two Pty Ltd".concat("#").concat(key));
+        AccountInfoDTO supplier3 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Three Pty Ltd".concat("#").concat(key));
+        AccountInfoDTO supplier4 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Four Pty Ltd".concat("#").concat(key));
+        AccountInfoDTO supplier5 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Five Pty Ltd".concat("#").concat(key));
+        AccountInfoDTO supplier6 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Six Pty Ltd".concat("#").concat(key));
+        AccountInfoDTO supplier7 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Seven Pty Ltd".concat("#").concat(key));
 
         suppliers.add(supplier1);
         suppliers.add(supplier2);
@@ -76,10 +68,40 @@ public class DemoUtil {
         suppliers.add(supplier6);
         suppliers.add(supplier7);
 
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts complete ...  \uD83D\uDD06 \uD83D\uDD06 added 15 accounts");
+        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
+        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E List of Accounts on Node  \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
+        demoSummary.setNumberOfAccounts(demoSummary.getNumberOfAccounts() + list.size());
+
+
+    }
+    public static void registerCustomerAccounts() throws Exception {
+        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 will add 3 accounts");
+        String key = "" + random.nextInt(100);
+        AccountInfoDTO customer1 = TheUtil.startAccountRegistrationFlow(proxy,"Customer One LLC".concat("#").concat(key));
+        AccountInfoDTO customer2 = TheUtil.startAccountRegistrationFlow(proxy,"Customer Two LLC".concat("#").concat(key));
+        AccountInfoDTO customer3 = TheUtil.startAccountRegistrationFlow(proxy,"Customer Three LLC".concat("#").concat(key));
 
         customers.add(customer1);
         customers.add(customer2);
         customers.add(customer3);
+
+
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts complete ...  \uD83D\uDD06 \uD83D\uDD06 added 15 accounts");
+        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
+        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E List of Customer Accounts on Node  \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
+        demoSummary.setNumberOfAccounts(demoSummary.getNumberOfAccounts() + list.size());
+
+    }
+    public static void registerInvestorAccounts() throws Exception {
+        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvestorAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 will add 3 accounts");
+        String key = "" + random.nextInt(100);
+
+        AccountInfoDTO investor1 = TheUtil.startAccountRegistrationFlow(proxy,"Investor One Inc.".concat("#").concat(key));
+        AccountInfoDTO investor2 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Two LLC".concat("#").concat(key));
+        AccountInfoDTO investor3 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Three Pty Ltd".concat("#").concat(key));
+        AccountInfoDTO investor4 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Four Inc.".concat("#").concat(key));
+        AccountInfoDTO investor5 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Five LLC".concat("#").concat(key));
 
         investors.add(investor1);
         investors.add(investor2);
@@ -87,21 +109,15 @@ public class DemoUtil {
         investors.add(investor4);
         investors.add(investor5);
 
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerAccounts complete ...  \uD83D\uDD06 \uD83D\uDD06 added 15 accounts");
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvestorAccounts complete ...  \uD83D\uDD06 \uD83D\uDD06 added 15 accounts");
         List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
-        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E List of Accounts on Node  \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
-        demoSummary.setNumberOfAccounts(list.size());
-
-//        String parm = "SharingAccounts \uD83C\uDF4E ";
-//        CordaFuture<String> future = proxy.startFlowDynamic(
-//                ShareAccountInfoWithAllNodesFlow.class, parm).getReturnValue();
-//        logger.info("\uD83C\uDFC8  \uD83C\uDFC8 SharedAccountInfo flow returned: ".concat(future.get()));
-        registerInvoices();
+        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E List of Investor Accounts on Node  \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
+        demoSummary.setNumberOfAccounts(demoSummary.getNumberOfAccounts() + list.size());
 
     }
 
-    static Random random = new Random(System.currentTimeMillis());
-    private static void registerInvoices() throws Exception {
+    private static Random random = new Random(System.currentTimeMillis());
+    public static void registerInvoices() throws Exception {
         logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices started ...  \uD83D\uDD06 \uD83D\uDD06 ");
 
         for (AccountInfoDTO supplier: suppliers ) {
@@ -133,7 +149,7 @@ public class DemoUtil {
         logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+list2.size()+" InvoiceOfferStates added ...  \uD83C\uDF4A ");
 
     }
-    private static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier, AccountInfoDTO investor) throws Exception {
+    public static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier, AccountInfoDTO investor) throws Exception {
         logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoiceOffer started ...  \uD83D\uDD06 \uD83D\uDD06 ");
 
         InvoiceOfferDTO m = new InvoiceOfferDTO();

@@ -17,43 +17,52 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 @StartableByRPC
 public class ShareAccountInfoFlow extends FlowLogic<String> {
     private final static Logger logger = LoggerFactory.getLogger(ShareAccountInfoFlow.class);
-    private final AccountInfo accountInfo;
-    private  final Party party;
+    private final Party otherParty;
+    private final StateAndRef<AccountInfo> account;
 
-    public ShareAccountInfoFlow(AccountInfo accountInfo, Party party) {
-        this.accountInfo = accountInfo;
-        this.party = party;
+    public ShareAccountInfoFlow(Party otherParty, StateAndRef<AccountInfo> account) {
+        this.otherParty = otherParty;
+        this.account = account;
     }
 
     @Override
     @Suspendable
     public String call() throws FlowException {
         ServiceHub hub = getServiceHub();
-        logger.info(" \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A ShareAccountInfoWithAllNodesFlow call: instant: "
-                .concat(hub.getClock().instant().toString())
-        .concat(" parm: ").concat(accountInfo.getName()));
-        List<NodeInfo> list = hub.getNetworkMapCache().getAllNodes();
+        logger.info(" \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A ShareAccountInfoFlow call: instant: " );
         AccountService accountService = hub.cordaService(KeyManagementBackedAccountService.class);
-        List<StateAndRef<AccountInfo>> states = accountService.allAccounts();
-
         try {
-            CordaFuture<Unit> future = accountService.shareAccountInfoWithParty(accountInfo.getIdentifier().getId(), party);
-            Unit result = null;
-            result = future.get();
+            logger.info(" \uD83C\uDF38  \uD83C\uDF38 ... sharing "
+                    .concat(account.getState().getData().getName()).concat(" with \uD83E\uDD6C \uD83E\uDD6C "
+                            .concat(otherParty.getName().toString())));
+
+            CompletableFuture<Unit> future = accountService.shareAccountInfoWithParty(
+                    account.getState().getData().getIdentifier().getId(), otherParty).toCompletableFuture();
+            logger.info("\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C CompletableFuture<Unit> future obtained");
+            Unit result = future.get();
             if (result != null) {
-                logger.info("We have a result from sharing future result: ".concat(result.toString()));
+                logger.info(" \uD83D\uDE0E  \uD83D\uDE0E We have a GOOD result from sharing future result: "
+                        .concat(result.toString()));
+            } else {
+                logger.info(" \uD83D\uDE0E  \uD83D\uDE0E We have a \uD83D\uDC7F NULL result" +
+                        " \uD83D\uDC7F from sharing future result: ");
             }
+
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error("\uD83D\uDC7F \uD83D\uDC7F InterruptedException: ".concat(e.getMessage()));
+            throw new FlowException("InterruptedException: Unable to share accounts");
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            logger.error("\uD83D\uDC7F \uD83D\uDC7F ExecutionException: ".concat(e.getMessage()));
+            throw new FlowException("ExecutionException: Unable to share accounts");
         }
 
-        return "\uD83C\uDFC8  \uD83C\uDFC8 Accounts shared: " + states.size() + " with " + list.size();
+        return "\uD83C\uDFC8  \uD83C\uDFC8 Account shared: "
+                + account.getState().getData().getName();
     }
 }

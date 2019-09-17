@@ -10,7 +10,7 @@ class Net {
     final response = await http.get(URL + 'admin/getAccounts');
 
     if (response.statusCode == 200) {
-      print('🍏 🍎 🍐 🍊 getAccounts: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      print('🍎 🍊 Net: getAccounts: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
       return response.body;
     } else {
       throw Exception(' 👿  Failed: getAccounts');
@@ -20,7 +20,7 @@ class Net {
     final response = await http.get(URL + 'admin/getInvoiceStates');
 
     if (response.statusCode == 200) {
-      print('🍏 🍎 🍐 🍊 getInvoices: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      print('🍎 🍊 Net: getInvoices: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
       return response.body;
     } else {
       throw Exception(' 👿  Failed : getInvoices');
@@ -30,7 +30,7 @@ class Net {
     final response = await http.get(URL + 'admin/getInvoiceOfferStates');
 
     if (response.statusCode == 200) {
-      print('🍏 🍎 🍐 🍊 getInvoiceOffers: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      print('🍎 🍊 Net: getInvoiceOffers: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
       return response.body;
     } else {
       throw Exception(' 👿  Failed: getInvoiceOffers');
@@ -40,7 +40,7 @@ class Net {
     final response = await http.get(URL + 'admin/ping');
 
     if (response.statusCode == 200) {
-      print('🍏 🍎 🍐 🍊 ping: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      print('🍎 🍊 Net: ping: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
       return response.body;
     } else {
       throw Exception(' 👿  Failed ping');
@@ -51,8 +51,8 @@ class Net {
     final response = await http.get(URL + 'admin/demo');
 
     if (response.statusCode == 200) {
-      print('🍏 🍎 🍐 🍊 startDemoDataGeneration: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-      Prefs.setDemoBoolean('DEMO DATA COMPLETE');
+      print('🍎 🍊 Net: startDemoDataGeneration: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      Prefs.setDemoString('DEMO DATA COMPLETE');
       return response.body;
     } else {
       throw Exception(' 👿  Failed: startDemoDataGeneration');

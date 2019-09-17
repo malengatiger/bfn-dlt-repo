@@ -8,9 +8,15 @@ import com.bfn.util.DemoSummary;
 import com.bfn.util.DemoUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
+import net.corda.core.contracts.StateAndRef;
+import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
 import net.corda.core.node.NetworkParameters;
 import net.corda.core.node.NodeInfo;
+import net.corda.core.node.services.Vault;
+import net.corda.core.node.services.vault.PageSpecification;
+import net.corda.core.node.services.vault.QueryCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -59,6 +65,40 @@ public class AdminController {
     private List<AccountInfoDTO> getAccounts() {
         return TheUtil.getAccounts(proxy);
     }
+
+    @GetMapping(value = "shareAccounts")
+    private String shareAccounts() throws Exception {
+        List<NodeInfo> nodes = proxy.networkMapSnapshot();
+        logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Nodes running: " + nodes.size());
+        QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
+        Vault.Page<AccountInfo> page = proxy.vaultQueryByWithPagingSpec(AccountInfo.class,
+                criteria,new PageSpecification(1,200));
+        String myNode = proxy.nodeInfo().getLegalIdentities().get(0).getName().toString();
+        for (NodeInfo nodeInfo: nodes) {
+            String name = nodeInfo.getLegalIdentities().get(0).getName().toString();
+            Party otherParty = nodeInfo.getLegalIdentities().get(0);
+            if (name.equalsIgnoreCase(myNode)) {
+                logger.info(" \uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node");
+                continue;
+            }
+            if (name.contains("Notary")) {
+                logger.info(" \uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary");
+                continue;
+            }
+
+            List<StateAndRef<AccountInfo>> list = page.getStates();
+            logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Accounts on Node: " + list.size());
+            for (StateAndRef<AccountInfo> ref: list) {
+                logger.info(" \uD83D\uDE0E  \uD83D\uDE0E  \uD83D\uDE0E sharing accounts from myNode: "
+                        .concat(myNode).concat(" to " + name)
+                .concat("; account shared: \uD83D\uDD37 ".concat(ref.getState().getData().getName())));
+                String result = TheUtil.startAccountSharingFlow(proxy,otherParty,ref);
+                logger.info("\uD83C\uDF81 \uD83C\uDF81 \uD83C\uDF81 Result from sharing account ".concat(result));
+            }
+        }
+        return "Account Sharing DONE";
+    }
+
 
     @GetMapping(value = "getInvoiceStates")
     public List<InvoiceDTO> getInvoiceStates() {
