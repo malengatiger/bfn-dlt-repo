@@ -81,11 +81,11 @@ public class AdminController {
             String name = nodeInfo.getLegalIdentities().get(0).getName().toString();
             Party otherParty = nodeInfo.getLegalIdentities().get(0);
             if (name.equalsIgnoreCase(myNode)) {
-                logger.info("\uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node");
+                logger.info("\uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node \uD83E\uDD6C ");
                 continue;
             }
             if (name.contains("Notary")) {
-                logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary");
+                logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary \uD83E\uDD6C \uD83E\uDD6C ");
                 continue;
             }
 

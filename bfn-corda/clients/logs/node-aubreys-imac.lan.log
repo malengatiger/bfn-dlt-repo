@@ -23337,3 +23337,236 @@ java.lang.Exception: Invalid Node
 [INFO ] 2019-09-17T12:45:52,385 [http-nio-10411-exec-8] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ExtraStupid  Investor Inc
 [INFO ] 2019-09-17T12:47:41,292 [http-nio-10414-exec-8] TheUtil - 🌺  🌺 done listing accounts:  🌺 20
 [INFO ] 2019-09-17T12:48:07,307 [http-nio-10416-exec-7] TheUtil - 🌺  🌺 done listing accounts:  🌺 20
+[INFO ] 2019-09-17T12:51:32,626 [http-nio-10411-exec-1] TheUtil - 🔵 🔵 🔵  startAccountRegistrationFlow: Input Parameters: MeegoDead  Investor Inc
+[INFO ] 2019-09-17T12:51:32,649 [http-nio-10411-exec-1] TheUtil - 🍏 AccountRegistrationFlow started ... 🍏 🍏 waiting for signedTransaction ....
+[INFO ] 2019-09-17T12:51:32,699 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 AccountRegistrationFlow completed... 🍏 🍏 🔆 🔆 🔆  
+👌 👌 👌 👌  accountInfo returned: 🥏 AccountInfo(name=MeegoDead  Investor Inc, host=O=OCTNetworkOperator, L=Sandton, C=ZA, identifier=95b2e5d2-dcec-42f0-bdba-6955c60ff012, status=ACTIVE) 🥏 🥏 
+[INFO ] 2019-09-17T12:51:32,708 [http-nio-10411-exec-1] AdminController - 
+
+🦠 🦠 shareAccounts: Nodes running: 4
+[INFO ] 2019-09-17T12:51:32,752 [http-nio-10411-exec-1] AdminController - 🦠 🦠  Accounts on Node: 21
+[INFO ] 2019-09-17T12:51:32,753 [http-nio-10411-exec-1] AdminController - 🔕  🔕  ignore sharing - party on same node
+[INFO ] 2019-09-17T12:51:32,820 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier One Pty Ltd#73
+[INFO ] 2019-09-17T12:51:32,871 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Two Pty Ltd#73
+[INFO ] 2019-09-17T12:51:32,921 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Three Pty Ltd#73
+[INFO ] 2019-09-17T12:51:32,976 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Four Pty Ltd#73
+[INFO ] 2019-09-17T12:51:33,022 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Five Pty Ltd#73
+[INFO ] 2019-09-17T12:51:33,069 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Six Pty Ltd#73
+[INFO ] 2019-09-17T12:51:33,111 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Seven Pty Ltd#73
+[INFO ] 2019-09-17T12:51:33,150 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer One LLC#70
+[INFO ] 2019-09-17T12:51:33,191 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Two LLC#70
+[INFO ] 2019-09-17T12:51:33,234 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Three LLC#70
+[INFO ] 2019-09-17T12:51:33,283 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor One Inc.#64
+[INFO ] 2019-09-17T12:51:33,328 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Two LLC#64
+[INFO ] 2019-09-17T12:51:33,372 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Three Pty Ltd#64
+[INFO ] 2019-09-17T12:51:33,417 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Four Inc.#64
+[INFO ] 2019-09-17T12:51:33,457 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Five LLC#64
+[INFO ] 2019-09-17T12:51:33,530 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: SomeSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:33,604 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: BigSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:33,665 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ParisSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:33,716 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: HassanMinaj  Investor Inc
+[INFO ] 2019-09-17T12:51:33,761 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ExtraStupid  Investor Inc
+[INFO ] 2019-09-17T12:51:33,813 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: MeegoDead  Investor Inc
+[INFO ] 2019-09-17T12:51:33,813 [http-nio-10411-exec-1] AdminController - 🔕  🔕 ignore sharing - this party is a Notary
+[INFO ] 2019-09-17T12:51:33,899 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier One Pty Ltd#73
+[INFO ] 2019-09-17T12:51:33,965 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Two Pty Ltd#73
+[INFO ] 2019-09-17T12:51:34,017 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Three Pty Ltd#73
+[INFO ] 2019-09-17T12:51:34,079 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Four Pty Ltd#73
+[INFO ] 2019-09-17T12:51:34,124 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Five Pty Ltd#73
+[INFO ] 2019-09-17T12:51:34,234 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Six Pty Ltd#73
+[INFO ] 2019-09-17T12:51:34,276 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Seven Pty Ltd#73
+[INFO ] 2019-09-17T12:51:34,317 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer One LLC#70
+[INFO ] 2019-09-17T12:51:34,358 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Two LLC#70
+[INFO ] 2019-09-17T12:51:34,402 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Three LLC#70
+[INFO ] 2019-09-17T12:51:34,450 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor One Inc.#64
+[INFO ] 2019-09-17T12:51:34,503 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Two LLC#64
+[INFO ] 2019-09-17T12:51:34,560 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Three Pty Ltd#64
+[INFO ] 2019-09-17T12:51:34,601 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Four Inc.#64
+[INFO ] 2019-09-17T12:51:34,658 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Five LLC#64
+[INFO ] 2019-09-17T12:51:34,699 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: SomeSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:34,743 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: BigSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:34,786 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ParisSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:34,827 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: HassanMinaj  Investor Inc
+[INFO ] 2019-09-17T12:51:34,873 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ExtraStupid  Investor Inc
+[INFO ] 2019-09-17T12:51:34,929 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: MeegoDead  Investor Inc
+[INFO ] 2019-09-17T12:51:50,921 [http-nio-10411-exec-2] AdminController - 
+
+🦠 🦠 shareAccounts: Nodes running: 4
+[INFO ] 2019-09-17T12:51:50,967 [http-nio-10411-exec-2] AdminController - 🦠 🦠  Accounts on Node: 21
+[INFO ] 2019-09-17T12:51:50,967 [http-nio-10411-exec-2] AdminController - 🔕  🔕  ignore sharing - party on same node
+[INFO ] 2019-09-17T12:51:51,012 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier One Pty Ltd#73
+[INFO ] 2019-09-17T12:51:51,054 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Two Pty Ltd#73
+[INFO ] 2019-09-17T12:51:51,096 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Three Pty Ltd#73
+[INFO ] 2019-09-17T12:51:51,145 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Four Pty Ltd#73
+[INFO ] 2019-09-17T12:51:51,185 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Five Pty Ltd#73
+[INFO ] 2019-09-17T12:51:51,228 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Six Pty Ltd#73
+[INFO ] 2019-09-17T12:51:51,266 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Seven Pty Ltd#73
+[INFO ] 2019-09-17T12:51:51,312 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer One LLC#70
+[INFO ] 2019-09-17T12:51:51,354 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Two LLC#70
+[INFO ] 2019-09-17T12:51:51,394 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Three LLC#70
+[INFO ] 2019-09-17T12:51:51,443 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor One Inc.#64
+[INFO ] 2019-09-17T12:51:51,480 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Two LLC#64
+[INFO ] 2019-09-17T12:51:51,524 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Three Pty Ltd#64
+[INFO ] 2019-09-17T12:51:51,568 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Four Inc.#64
+[INFO ] 2019-09-17T12:51:51,614 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Five LLC#64
+[INFO ] 2019-09-17T12:51:51,659 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: SomeSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:51,704 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: BigSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:51,751 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ParisSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:51,800 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: HassanMinaj  Investor Inc
+[INFO ] 2019-09-17T12:51:51,850 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ExtraStupid  Investor Inc
+[INFO ] 2019-09-17T12:51:51,896 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: MeegoDead  Investor Inc
+[INFO ] 2019-09-17T12:51:51,896 [http-nio-10411-exec-2] AdminController - 🔕  🔕 ignore sharing - this party is a Notary
+[INFO ] 2019-09-17T12:51:51,951 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier One Pty Ltd#73
+[INFO ] 2019-09-17T12:51:51,996 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Two Pty Ltd#73
+[INFO ] 2019-09-17T12:51:52,040 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Three Pty Ltd#73
+[INFO ] 2019-09-17T12:51:52,081 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Four Pty Ltd#73
+[INFO ] 2019-09-17T12:51:52,122 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Five Pty Ltd#73
+[INFO ] 2019-09-17T12:51:52,165 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Six Pty Ltd#73
+[INFO ] 2019-09-17T12:51:52,206 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Seven Pty Ltd#73
+[INFO ] 2019-09-17T12:51:52,279 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer One LLC#70
+[INFO ] 2019-09-17T12:51:52,362 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Two LLC#70
+[INFO ] 2019-09-17T12:51:52,424 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Three LLC#70
+[INFO ] 2019-09-17T12:51:52,465 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor One Inc.#64
+[INFO ] 2019-09-17T12:51:52,520 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Two LLC#64
+[INFO ] 2019-09-17T12:51:52,662 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Three Pty Ltd#64
+[INFO ] 2019-09-17T12:51:52,698 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Four Inc.#64
+[INFO ] 2019-09-17T12:51:52,741 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Five LLC#64
+[INFO ] 2019-09-17T12:51:52,784 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: SomeSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:52,827 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: BigSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:52,867 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ParisSchmuck Investor Inc
+[INFO ] 2019-09-17T12:51:52,905 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: HassanMinaj  Investor Inc
+[INFO ] 2019-09-17T12:51:52,948 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ExtraStupid  Investor Inc
+[INFO ] 2019-09-17T12:51:52,986 [http-nio-10411-exec-2] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: MeegoDead  Investor Inc
+[INFO ] 2019-09-17T12:52:12,743 [http-nio-10416-exec-1] TheUtil - 🌺  🌺 done listing accounts:  🌺 21
+[INFO ] 2019-09-17T12:52:27,601 [http-nio-10414-exec-1] TheUtil - 🌺  🌺 done listing accounts:  🌺 21
+[INFO ] 2019-09-17T12:54:12,296 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62679465: startup date [Tue Sep 17 14:37:48 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-17T12:54:12,298 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[INFO ] 2019-09-17T12:54:17,467 [main] ShareAccountInfoFlow -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-17T12:54:18,408 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 41969 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-17T12:54:18,410 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-17T12:54:18,460 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6a988392: startup date [Tue Sep 17 14:54:18 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-17T12:54:19,349 [main] TomcatWebServer - Tomcat initialized with port(s): 10411 (http)
+[INFO ] 2019-09-17T12:54:19,362 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10411"]
+[INFO ] 2019-09-17T12:54:19,371 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-17T12:54:19,371 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-17T12:54:19,379 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-17T12:54:19,475 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-17T12:54:19,476 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 1019 ms
+[INFO ] 2019-09-17T12:54:19,490 [localhost-startStop-1] ShareAccountInfoFlow - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-17T12:54:19,493 [localhost-startStop-1] ShareAccountInfoFlow -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-17T12:54:19,493 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-17T12:54:19,493 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-17T12:54:19,493 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-17T12:54:19,558 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-17T12:54:19,561 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-17T12:54:19,562 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-17T12:54:19,562 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-17T12:54:19,562 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-17T12:54:19,562 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-17T12:54:19,603 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10421  🔆
+[INFO ] 2019-09-17T12:54:20,371 [main] RPCClient - Startup took 695 msec
+[INFO ] 2019-09-17T12:54:20,371 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-17T12:54:20,545 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 OCTNetworkOperator  💚  💚
+[INFO ] 2019-09-17T12:54:20,571 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCTNetworkOperator, L=Sandton, C=ZA], platformVersion=4, serial=1568720420366)
+[INFO ] 2019-09-17T12:54:20,578 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCTNetworkOperator, L=Sandton, C=ZA], platformVersion=4, serial=1568720420366)
+[INFO ] 2019-09-17T12:54:20,584 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCTNetworkOperator, L=Sandton, C=ZA], platformVersion=4, serial=1568720420366)
+[INFO ] 2019-09-17T12:54:20,589 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCTNetworkOperator, L=Sandton, C=ZA], platformVersion=4, serial=1568720420366)
+[INFO ] 2019-09-17T12:54:20,595 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCTNetworkOperator, L=Sandton, C=ZA], platformVersion=4, serial=1568720420366)
+[INFO ] 2019-09-17T12:54:20,651 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-17T12:54:20,782 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6a988392: startup date [Tue Sep 17 14:54:18 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-17T12:54:20,844 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.util.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-17T12:54:20,845 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-17T12:54:20,846 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-17T12:54:20,846 [main] RequestMappingHandlerMapping - Mapped "{[/admin/shareAccounts],methods=[GET]}" onto private java.lang.String com.bfn.webserver.AdminController.shareAccounts() throws java.lang.Exception
+[INFO ] 2019-09-17T12:54:20,846 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-17T12:54:20,847 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates()
+[INFO ] 2019-09-17T12:54:20,847 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-17T12:54:20,847 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-17T12:54:20,848 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.AdminController.listNodes()
+[INFO ] 2019-09-17T12:54:20,848 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-17T12:54:20,848 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-17T12:54:20,849 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-17T12:54:20,850 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-17T12:54:20,850 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-17T12:54:20,852 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-17T12:54:20,853 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-17T12:54:20,853 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-17T12:54:20,854 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-17T12:54:20,856 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-17T12:54:20,856 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-17T12:54:20,856 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-17T12:54:20,857 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-17T12:54:20,857 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates()
+[INFO ] 2019-09-17T12:54:20,857 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-17T12:54:20,857 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-17T12:54:20,858 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.SupplierController.listNodes()
+[INFO ] 2019-09-17T12:54:20,859 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-17T12:54:20,860 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-17T12:54:20,876 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-17T12:54:20,877 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-17T12:54:20,910 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-17T12:54:21,115 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-17T12:54:21,126 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10411"]
+[INFO ] 2019-09-17T12:54:21,138 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-17T12:54:21,149 [main] TomcatWebServer - Tomcat started on port(s): 10411 (http) with context path ''
+[INFO ] 2019-09-17T12:54:21,152 [main] BFNWebApi - Started BFNWebApi in 3.532 seconds (JVM running for 4.309)
+[INFO ] 2019-09-17T12:54:21,153 [main] ShareAccountInfoFlow -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Tue Sep 17 14:54:21 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-17T12:55:13,425 [http-nio-10411-exec-1] [/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+[INFO ] 2019-09-17T12:55:13,425 [http-nio-10411-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+[INFO ] 2019-09-17T12:55:13,438 [http-nio-10411-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 13 ms
+[INFO ] 2019-09-17T12:55:13,465 [http-nio-10411-exec-1] TheUtil - 🔵 🔵 🔵  startAccountRegistrationFlow: Input Parameters: LastChance  Investor Inc
+[INFO ] 2019-09-17T12:55:13,573 [http-nio-10411-exec-1] TheUtil - 🍏 AccountRegistrationFlow started ... 🍏 🍏 waiting for signedTransaction ....
+[INFO ] 2019-09-17T12:55:13,699 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 AccountRegistrationFlow completed... 🍏 🍏 🔆 🔆 🔆  
+👌 👌 👌 👌  accountInfo returned: 🥏 AccountInfo(name=LastChance  Investor Inc, host=O=OCTNetworkOperator, L=Sandton, C=ZA, identifier=0099ae51-cbbb-43ef-a7ca-21630315ef8d, status=ACTIVE) 🥏 🥏 
+[INFO ] 2019-09-17T12:55:13,724 [http-nio-10411-exec-1] AdminController - 
+
+🦠 🦠 shareAccounts: Nodes running: 4
+[INFO ] 2019-09-17T12:55:13,943 [http-nio-10411-exec-1] AdminController - 🦠 🦠  Accounts on Node: 22
+[INFO ] 2019-09-17T12:55:13,947 [http-nio-10411-exec-1] AdminController - 🔕  🔕  ignore sharing - party on same node 🥬 
+[INFO ] 2019-09-17T12:55:14,031 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier One Pty Ltd#73
+[INFO ] 2019-09-17T12:55:14,068 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Two Pty Ltd#73
+[INFO ] 2019-09-17T12:55:14,108 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Three Pty Ltd#73
+[INFO ] 2019-09-17T12:55:14,150 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Four Pty Ltd#73
+[INFO ] 2019-09-17T12:55:14,187 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Five Pty Ltd#73
+[INFO ] 2019-09-17T12:55:14,228 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Six Pty Ltd#73
+[INFO ] 2019-09-17T12:55:14,271 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Seven Pty Ltd#73
+[INFO ] 2019-09-17T12:55:14,312 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer One LLC#70
+[INFO ] 2019-09-17T12:55:14,359 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Two LLC#70
+[INFO ] 2019-09-17T12:55:14,402 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Three LLC#70
+[INFO ] 2019-09-17T12:55:14,444 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor One Inc.#64
+[INFO ] 2019-09-17T12:55:14,479 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Two LLC#64
+[INFO ] 2019-09-17T12:55:14,520 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Three Pty Ltd#64
+[INFO ] 2019-09-17T12:55:14,563 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Four Inc.#64
+[INFO ] 2019-09-17T12:55:14,614 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Five LLC#64
+[INFO ] 2019-09-17T12:55:14,666 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: SomeSchmuck Investor Inc
+[INFO ] 2019-09-17T12:55:14,711 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: BigSchmuck Investor Inc
+[INFO ] 2019-09-17T12:55:14,752 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ParisSchmuck Investor Inc
+[INFO ] 2019-09-17T12:55:14,798 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: HassanMinaj  Investor Inc
+[INFO ] 2019-09-17T12:55:14,841 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ExtraStupid  Investor Inc
+[INFO ] 2019-09-17T12:55:14,886 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: MeegoDead  Investor Inc
+[INFO ] 2019-09-17T12:55:14,926 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: LastChance  Investor Inc
+[INFO ] 2019-09-17T12:55:14,927 [http-nio-10411-exec-1] AdminController - 🔕  🔕 ignore sharing - this party is a Notary 🥬 🥬 
+[INFO ] 2019-09-17T12:55:15,002 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier One Pty Ltd#73
+[INFO ] 2019-09-17T12:55:15,044 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Two Pty Ltd#73
+[INFO ] 2019-09-17T12:55:15,087 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Three Pty Ltd#73
+[INFO ] 2019-09-17T12:55:15,133 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Four Pty Ltd#73
+[INFO ] 2019-09-17T12:55:15,179 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Five Pty Ltd#73
+[INFO ] 2019-09-17T12:55:15,221 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Six Pty Ltd#73
+[INFO ] 2019-09-17T12:55:15,267 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Supplier Seven Pty Ltd#73
+[INFO ] 2019-09-17T12:55:15,413 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer One LLC#70
+[INFO ] 2019-09-17T12:55:15,455 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Two LLC#70
+[INFO ] 2019-09-17T12:55:15,500 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Customer Three LLC#70
+[INFO ] 2019-09-17T12:55:15,542 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor One Inc.#64
+[INFO ] 2019-09-17T12:55:15,583 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Two LLC#64
+[INFO ] 2019-09-17T12:55:15,624 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Three Pty Ltd#64
+[INFO ] 2019-09-17T12:55:15,662 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Four Inc.#64
+[INFO ] 2019-09-17T12:55:15,709 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: Investor Five LLC#64
+[INFO ] 2019-09-17T12:55:15,749 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: SomeSchmuck Investor Inc
+[INFO ] 2019-09-17T12:55:15,792 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: BigSchmuck Investor Inc
+[INFO ] 2019-09-17T12:55:15,834 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ParisSchmuck Investor Inc
+[INFO ] 2019-09-17T12:55:15,873 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: HassanMinaj  Investor Inc
+[INFO ] 2019-09-17T12:55:15,929 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: ExtraStupid  Investor Inc
+[INFO ] 2019-09-17T12:55:16,004 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: MeegoDead  Investor Inc
+[INFO ] 2019-09-17T12:55:16,104 [http-nio-10411-exec-1] AdminController - 🎁 Result from sharing account 🏈  🏈 Account shared: LastChance  Investor Inc
+[INFO ] 2019-09-17T12:56:30,488 [http-nio-10414-exec-4] TheUtil - 🌺  🌺 done listing accounts:  🌺 22
+[INFO ] 2019-09-17T12:56:47,700 [http-nio-10416-exec-3] TheUtil - 🌺  🌺 done listing accounts:  🌺 22
