@@ -54,10 +54,11 @@ public class AdminController {
     }
 
     @PostMapping(value = "/startAccountRegistrationFlow", produces = "application/json")
-    private AccountInfoDTO startAccountRegistrationFlow(@RequestParam String accountName) throws ExecutionException, InterruptedException {
+    private AccountInfoDTO startAccountRegistrationFlow(@RequestParam String accountName) throws Exception {
 
         AccountInfoDTO accountInfoDTO = TheUtil.startAccountRegistrationFlow(proxy, accountName);
-        getAccounts();
+        //share account
+        shareAccounts();
         return accountInfoDTO;
     }
 
@@ -69,34 +70,31 @@ public class AdminController {
     @GetMapping(value = "shareAccounts")
     private String shareAccounts() throws Exception {
         List<NodeInfo> nodes = proxy.networkMapSnapshot();
-        logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Nodes running: " + nodes.size());
+        logger.info("\n\n\uD83E\uDDA0 \uD83E\uDDA0 shareAccounts: Nodes running: " + nodes.size());
         QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
         Vault.Page<AccountInfo> page = proxy.vaultQueryByWithPagingSpec(AccountInfo.class,
                 criteria,new PageSpecification(1,200));
         String myNode = proxy.nodeInfo().getLegalIdentities().get(0).getName().toString();
+        List<StateAndRef<AccountInfo>> list = page.getStates();
+        logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Accounts on Node: " + list.size());
         for (NodeInfo nodeInfo: nodes) {
             String name = nodeInfo.getLegalIdentities().get(0).getName().toString();
             Party otherParty = nodeInfo.getLegalIdentities().get(0);
             if (name.equalsIgnoreCase(myNode)) {
-                logger.info(" \uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node");
+                logger.info("\uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node");
                 continue;
             }
             if (name.contains("Notary")) {
-                logger.info(" \uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary");
+                logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary");
                 continue;
             }
 
-            List<StateAndRef<AccountInfo>> list = page.getStates();
-            logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Accounts on Node: " + list.size());
             for (StateAndRef<AccountInfo> ref: list) {
-                logger.info(" \uD83D\uDE0E  \uD83D\uDE0E  \uD83D\uDE0E sharing accounts from myNode: "
-                        .concat(myNode).concat(" to " + name)
-                .concat("; account shared: \uD83D\uDD37 ".concat(ref.getState().getData().getName())));
                 String result = TheUtil.startAccountSharingFlow(proxy,otherParty,ref);
-                logger.info("\uD83C\uDF81 \uD83C\uDF81 \uD83C\uDF81 Result from sharing account ".concat(result));
+                logger.info("\uD83C\uDF81 Result from sharing account ".concat(result));
             }
         }
-        return "Account Sharing DONE";
+        return "Account Sharing DONE. shared  \uD83D\uDD37 " + list.size() + "  \uD83D\uDD37 accounts";
     }
 
 

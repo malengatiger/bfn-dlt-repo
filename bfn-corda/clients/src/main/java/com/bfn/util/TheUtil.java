@@ -235,15 +235,12 @@ public class TheUtil {
     public static String startAccountSharingFlow(CordaRPCOps proxy,
                                                  Party otherParty, StateAndRef<AccountInfo> account) throws Exception {
         try {
-            logger.info("\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35  startAccountSharingFlow: .....");
             CordaFuture<String> accountInfoCordaFuture = proxy.startFlowDynamic(
                     ShareAccountInfoFlow.class, otherParty, account).getReturnValue();
-            logger.info("\uD83C\uDF4F AccountRegistrationFlow started ... \uD83C\uDF4F \uD83C\uDF4F waiting for signedTransaction ....");
-
+//            logger.info("\uD83C\uDF4F startAccountSharingFlow started ... " +
+//                    "\uD83C\uDF4F \uD83C\uDF4F waiting for result ....");
             String result = accountInfoCordaFuture.get();
-            logger.info("Returned string: ".concat(result));
-
-            return "MISSION ACCOMPLISHED";
+            return result;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw e;
