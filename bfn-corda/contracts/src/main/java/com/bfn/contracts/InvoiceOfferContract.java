@@ -1,11 +1,11 @@
 package com.bfn.contracts;
 
 import com.bfn.states.InvoiceOfferState;
+import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount;
 import net.corda.core.contracts.Command;
 import net.corda.core.contracts.CommandData;
 import net.corda.core.contracts.Contract;
 import net.corda.core.contracts.ContractState;
-import net.corda.core.identity.Party;
 import net.corda.core.transactions.LedgerTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +25,8 @@ public class InvoiceOfferContract implements Contract {
     @Override
     public void verify(LedgerTransaction tx) throws IllegalArgumentException{
 
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 InvoiceOfferContract: verify starting ..... \uD83E\uDD6C \uD83E\uDD6C ");
-        if (tx.getInputStates().size() != 0) {
-            throw new IllegalArgumentException("Input state is invalid");
-        }
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 InvoiceOfferContract: verify starting" +
+                " ..... \uD83E\uDD6C \uD83E\uDD6C ");
         if (tx.getOutputStates().size() != 1) {
             throw new IllegalArgumentException("One output InvoiceOfferState is required");
         }
@@ -36,13 +34,14 @@ public class InvoiceOfferContract implements Contract {
             throw new IllegalArgumentException("Only one command allowed");
         }
         Command command = tx.getCommand(0);
-        if (!(command.getValue() instanceof MakeOffer)) {
-            throw new IllegalArgumentException("Only MakeOffer command allowed");
+        if ((command.getValue() instanceof MakeOffer || command.getValue() instanceof BuyOffer)) {
+        } else {
+            throw new IllegalArgumentException("Only MakeOffer or BuyOffer command allowed");
         }
         List<PublicKey> requiredSigners = command.getSigners();
         logger.info(" \uD83D\uDD34  \uD83D\uDD34 Required signers: " + requiredSigners.size());
         for (PublicKey key: requiredSigners) {
-            logger.info(" \uD83D\uDD34 publicKey: ".concat(key.toString()));
+            logger.info(" \uD83D\uDD34 Required signer publicKey: ".concat(key.toString()));
         }
         ContractState contractState = tx.getOutput(0);
         if (!(contractState instanceof InvoiceOfferState)) {
@@ -58,28 +57,23 @@ public class InvoiceOfferContract implements Contract {
         if (invoiceState.getOwner() == null) {
             throw new IllegalArgumentException("Owner is definitely required");
         }
-        if (invoiceState.getOwnerDate() != null) {
-            throw new IllegalArgumentException("OwnerDate should be null");
-        }
-        Party party = invoiceState.getSupplier().getHost();
-        PublicKey supplierPublicKey = party.getOwningKey();
+
+
+        PublicKey supplierPublicKey = invoiceState.getSupplier().getHost().getOwningKey();
+        logger.info(" \uD83D\uDD34 Supplier publicKey: ".concat(supplierPublicKey.toString()));
         if (!requiredSigners.contains(supplierPublicKey)) {
             throw new IllegalArgumentException("Supplier Party must sign");
         }
-        Party party2 = invoiceState.getInvestor().getHost();
-        PublicKey investorPublicKey = party2.getOwningKey();
+        PublicKey investorPublicKey = invoiceState.getInvestor().getHost().getOwningKey();
+        logger.info(" \uD83D\uDD34 Investor publicKey: ".concat(supplierPublicKey.toString()));
         if (!requiredSigners.contains(investorPublicKey)) {
             throw new IllegalArgumentException("Investor Party must sign");
         }
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 InvoiceOfferContract: verification done OK! .....\uD83E\uDD1F \uD83E\uDD1F ");
 
     }
-//
-//    // Used to indicate the transaction's intent.
-//    public interface Commands extends CommandData {
-//        class Action implements Commands {}
-//    }
 
     public static class Register implements CommandData {}
     public static class MakeOffer implements CommandData {}
+    public static class BuyOffer implements CommandData {}
 }

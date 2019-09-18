@@ -10,20 +10,39 @@ public class InvoiceDTO {
     Double amount, totalAmount, valueAddedTax;
     private Date dateRegistered;
     private String supplierId, customerId;
+    private String supplierPublicKey, customerPublicKey;
 
     public InvoiceDTO() {
     }
 
-    public InvoiceDTO(String invoiceId, String invoiceNumber, String description, Double amount,
-                      Double totalAmount, Double valueAddedTax, String supplierId, String customerId) {
+    public InvoiceDTO(String invoiceId, String invoiceNumber, String description, Double amount, Double totalAmount, Double valueAddedTax, Date dateRegistered, String supplierId, String customerId, String supplierPublicKey, String customerPublicKey) {
         this.invoiceId = invoiceId;
         this.invoiceNumber = invoiceNumber;
         this.description = description;
         this.amount = amount;
         this.totalAmount = totalAmount;
         this.valueAddedTax = valueAddedTax;
+        this.dateRegistered = dateRegistered;
         this.supplierId = supplierId;
         this.customerId = customerId;
+        this.supplierPublicKey = supplierPublicKey;
+        this.customerPublicKey = customerPublicKey;
+    }
+
+    public String getSupplierPublicKey() {
+        return supplierPublicKey;
+    }
+
+    public String getCustomerPublicKey() {
+        return customerPublicKey;
+    }
+
+    public void setSupplierPublicKey(String supplierPublicKey) {
+        this.supplierPublicKey = supplierPublicKey;
+    }
+
+    public void setCustomerPublicKey(String customerPublicKey) {
+        this.customerPublicKey = customerPublicKey;
     }
 
     public String getInvoiceId() {

@@ -71,15 +71,17 @@ public class AccountRegistrationFlow extends FlowLogic<AccountInfo> {
         Party bnoParty = serviceHub.getMyInfo().getLegalIdentities().get(0);
         AccountInfo accountInfo = new AccountInfo(accountName, bnoParty,
                 new UniqueIdentifier(), AccountStatus.ACTIVE);
-        // We retrieve the notary identity from the network map.
 
-        logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... RegisterAccountFlow call started ...");
+        logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  " +
+                "... RegisterAccountFlow call started ...");
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
 
         AccountCommand command = new Create();
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Notary: " + notary.getName().toString()
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Notary: "
+                + notary.getName().toString()
                 + "  \uD83C\uDF4A accountName: " + accountName
-                + "  \uD83C\uDF4A bnoParty: "+ bnoParty.getName().toString() +" \uD83C\uDF4E publicKey: ".concat(bnoParty.getOwningKey().toString()));
+                + "  \uD83C\uDF4A bnoParty: "+ bnoParty.getName().toString()
+                + " \uD83C\uDF4E publicKey: ".concat(bnoParty.getOwningKey().toString()));
 
         progressTracker.setCurrentStep(GENERATING_TRANSACTION);
         TransactionBuilder txBuilder = new TransactionBuilder(notary)
@@ -88,21 +90,19 @@ public class AccountRegistrationFlow extends FlowLogic<AccountInfo> {
 
         progressTracker.setCurrentStep(VERIFYING_TRANSACTION);
         txBuilder.verify(serviceHub);
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 RegisterAccountFlow TransactionBuilder verified");
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06  TransactionBuilder verified");
         // Signing the transaction.
         progressTracker.setCurrentStep(SIGNING_TRANSACTION);
         SignedTransaction signedTx = serviceHub.signInitialTransaction(txBuilder);
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 RegisterAccountFlow signInitialTransaction executed ...");
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 RegisterAccountFlow signInitialTransaction returned: ".concat(signedTx.toString()));
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 signInitialTransaction executed ...");
 
-        PartyAndCertificate partyAndCertificate = serviceHub.getKeyManagementService()
-                .freshKeyAndCert(getOurIdentityAndCert(),false,accountInfo.getIdentifier().getId());
+        SignedTransaction mSignedTransactionDone = subFlow(
+                new FinalityFlow(signedTx, ImmutableList.of(),
+                        FINALISING_TRANSACTION.childProgressTracker()));
+        logger.info((" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06  " +
+                "FinalityFlow has been executed").concat(" txId: ")
+                .concat(mSignedTransactionDone.getId().toString()));
 
-        logger.info(" \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A returning partyAndCertificate:  \uD83D\uDD11 ".concat(partyAndCertificate.toString()));
-
-        SignedTransaction mSignedTransactionDone = subFlow(new FinalityFlow(signedTx, ImmutableList.of(), FINALISING_TRANSACTION.childProgressTracker()));
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 FinalityFlow has been executed".concat(" :  ").concat(mSignedTransactionDone.toString()));
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 returning accountInfo:: ".concat(accountInfo.toString()));
         return accountInfo;
     }
 }

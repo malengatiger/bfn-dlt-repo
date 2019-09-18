@@ -5,17 +5,22 @@ import com.bfn.dto.InvoiceDTO;
 import com.bfn.dto.InvoiceOfferDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
+import net.corda.core.contracts.StateAndRef;
+import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
+import net.corda.core.node.NodeInfo;
+import net.corda.core.node.services.Vault;
+import net.corda.core.node.services.vault.PageSpecification;
+import net.corda.core.node.services.vault.QueryCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+
+import java.util.*;
 
 public class DemoUtil {
 
-    private final static Logger logger = LoggerFactory.getLogger(TheUtil.class);
+    private final static Logger logger = LoggerFactory.getLogger(DemoUtil.class);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     private static CordaRPCOps proxy;
@@ -32,7 +37,6 @@ public class DemoUtil {
         investors = new ArrayList<>();
         List nodes = TheUtil.listNodes(proxy);
         demoSummary.setNumberOfNodes(nodes.size());
-        TheUtil.listNotaries(proxy);
         List flows = TheUtil.listFlows(proxy);
         demoSummary.setNumberOfFlows(flows.size());
 
@@ -41,84 +45,124 @@ public class DemoUtil {
         registerCustomerAccounts();
         registerInvestorAccounts();
 
+        shareAccounts();
         registerInvoices();
+
+        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
+        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E Total Number of Accounts on Node after sharing:" +
+                " \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
+        demoSummary.setNumberOfAccounts(list.size());
 
         long end = System.currentTimeMillis();
         demoSummary.setEnded(new Date().toString());
         demoSummary.setElapsedSeconds((end - start)/1000);
         return demoSummary;
     }
+    private static void shareAccounts() throws Exception {
+        List<NodeInfo> nodes = proxy.networkMapSnapshot();
+        logger.info("\n\n\uD83E\uDDA0 \uD83E\uDDA0 shareAccounts: Nodes running: " + nodes.size());
+        QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
+        Vault.Page<AccountInfo> page = proxy.vaultQueryByWithPagingSpec(AccountInfo.class,
+                criteria,new PageSpecification(1,200));
+        String myNode = proxy.nodeInfo().getLegalIdentities().get(0).getName().toString();
+        List<StateAndRef<AccountInfo>> list = page.getStates();
+        logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Accounts on "+myNode+" Node: " + list.size());
+        for (NodeInfo nodeInfo: nodes) {
+            String name = nodeInfo.getLegalIdentities().get(0).getName().toString();
+            Party otherParty = nodeInfo.getLegalIdentities().get(0);
+            if (name.equalsIgnoreCase(myNode)) {
+                logger.info("\uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node \uD83E\uDD6C ");
+                continue;
+            }
+            if (name.contains("Notary")) {
+                logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary \uD83E\uDD6C \uD83E\uDD6C ");
+                continue;
+            }
 
-    public static void registerSupplierAccounts() throws Exception {
-        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 will add 3 accounts");
+            for (StateAndRef<AccountInfo> accountInfoStateAndRef: list) {
+                String result = TheUtil.startAccountSharingFlow(proxy,otherParty,accountInfoStateAndRef);
+                logger.info("\uD83C\uDF81 Result from sharing account: ".concat(result));
+            }
+        }
+    }
+
+    private static void registerSupplierAccounts() throws Exception {
+        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts started ...  " +
+                "\uD83D\uDD06 \uD83D\uDD06 ");
         String key = "" + random.nextInt(100);
-        AccountInfoDTO supplier1 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier One Pty Ltd".concat("#").concat(key));
-        AccountInfoDTO supplier2 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Two Pty Ltd".concat("#").concat(key));
-        AccountInfoDTO supplier3 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Three Pty Ltd".concat("#").concat(key));
-        AccountInfoDTO supplier4 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Four Pty Ltd".concat("#").concat(key));
-        AccountInfoDTO supplier5 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Five Pty Ltd".concat("#").concat(key));
-        AccountInfoDTO supplier6 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Six Pty Ltd".concat("#").concat(key));
-        AccountInfoDTO supplier7 = TheUtil.startAccountRegistrationFlow(proxy,"Supplier Seven Pty Ltd".concat("#").concat(key));
+        String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
+        
+        AccountInfoDTO supplier1 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Supplier One".concat("#").concat(key)));
+        AccountInfoDTO supplier2 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Supplier Two".concat("#").concat(key)));
 
         suppliers.add(supplier1);
         suppliers.add(supplier2);
-        suppliers.add(supplier3);
-        suppliers.add(supplier4);
-        suppliers.add(supplier5);
-        suppliers.add(supplier6);
-        suppliers.add(supplier7);
 
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts complete ...  \uD83D\uDD06 \uD83D\uDD06 added 15 accounts");
-        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
-        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E List of Accounts on Node  \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
-        demoSummary.setNumberOfAccounts(demoSummary.getNumberOfAccounts() + list.size());
-
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts complete ..." +
+                "  \uD83D\uDD06 \uD83D\uDD06 added "+suppliers.size()+" accounts");
 
     }
-    public static void registerCustomerAccounts() throws Exception {
-        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 will add 3 accounts");
+    private static void registerCustomerAccounts() throws Exception {
+        String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
+        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 ");
         String key = "" + random.nextInt(100);
-        AccountInfoDTO customer1 = TheUtil.startAccountRegistrationFlow(proxy,"Customer One LLC".concat("#").concat(key));
-        AccountInfoDTO customer2 = TheUtil.startAccountRegistrationFlow(proxy,"Customer Two LLC".concat("#").concat(key));
-        AccountInfoDTO customer3 = TheUtil.startAccountRegistrationFlow(proxy,"Customer Three LLC".concat("#").concat(key));
+        AccountInfoDTO customer1 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Customer One LLC".concat("#").concat(key)));
+        AccountInfoDTO customer2 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Customer Two LLC".concat("#").concat(key)));
 
         customers.add(customer1);
         customers.add(customer2);
-        customers.add(customer3);
 
-
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts complete ...  \uD83D\uDD06 \uD83D\uDD06 added 15 accounts");
-        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
-        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E List of Customer Accounts on Node  \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
-        demoSummary.setNumberOfAccounts(demoSummary.getNumberOfAccounts() + list.size());
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts complete ...  " +
+                "\uD83D\uDD06 \uD83D\uDD06 added "+customers.size()+" accounts");
 
     }
-    public static void registerInvestorAccounts() throws Exception {
-        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvestorAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 will add 3 accounts");
+    private static void registerInvestorAccounts() throws Exception {
+        String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
+        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvestorAccounts started ... " +
+                " \uD83D\uDD06 \uD83D\uDD06");
         String key = "" + random.nextInt(100);
 
-        AccountInfoDTO investor1 = TheUtil.startAccountRegistrationFlow(proxy,"Investor One Inc.".concat("#").concat(key));
-        AccountInfoDTO investor2 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Two LLC".concat("#").concat(key));
-        AccountInfoDTO investor3 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Three Pty Ltd".concat("#").concat(key));
-        AccountInfoDTO investor4 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Four Inc.".concat("#").concat(key));
-        AccountInfoDTO investor5 = TheUtil.startAccountRegistrationFlow(proxy,"Investor Five LLC".concat("#").concat(key));
+        AccountInfoDTO investor1 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Investor One Inc.".concat("#").concat(key)));
+        AccountInfoDTO investor2 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Investor Two LLC".concat("#").concat(key)));
 
         investors.add(investor1);
         investors.add(investor2);
-        investors.add(investor3);
-        investors.add(investor4);
-        investors.add(investor5);
 
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvestorAccounts complete ...  \uD83D\uDD06 \uD83D\uDD06 added 15 accounts");
-        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
-        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E List of Investor Accounts on Node  \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
-        demoSummary.setNumberOfAccounts(demoSummary.getNumberOfAccounts() + list.size());
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 registerInvestorAccounts complete ...  " +
+                "\uD83D\uDD06 \uD83D\uDD06 added "+investors.size()+"  accounts");
 
     }
 
     private static Random random = new Random(System.currentTimeMillis());
-    public static void registerInvoices() throws Exception {
-        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices started ...  \uD83D\uDD06 \uD83D\uDD06 ");
+    private static void registerInvoices() throws Exception {
+
+//        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
+//        logger.info("\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices:" +
+//                "  \uD83D\uDD06 \uD83D\uDD06 Total Number of Accounts on ALL NODES:  \uD83D\uDC8E " + list.size() + "  \uD83D\uDC8E ");
+//        suppliers.clear();
+//        for (AccountInfoDTO m: list) {
+//            if (m.getName().contains("Supplier")) {
+//                suppliers.add(m);
+//            }
+//        }
+//        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices:" +
+//                "  \uD83D\uDD06 \uD83D\uDD06 " + suppliers.size() + " suppliers");
+//        customers.clear();
+//        for (AccountInfoDTO m: list) {
+//            if (m.getName().contains("Customer")) {
+//                customers.add(m);
+//            }
+//        }
+//        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices:" +
+//                "  \uD83D\uDD06 \uD83D\uDD06 " + customers.size() + " customers");
+//        investors.clear();
+//        for (AccountInfoDTO m: list) {
+//            if (m.getName().contains("Investor")) {
+//                investors.add(m);
+//            }
+//        }
+//        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices:" +
+//                "  \uD83D\uDD06 \uD83D\uDD06 " + investors.size() + " investors");
 
         for (AccountInfoDTO supplier: suppliers ) {
             for (AccountInfoDTO customer: customers) {
@@ -141,16 +185,18 @@ public class DemoUtil {
             }
         }
 
-        List<InvoiceDTO> list = TheUtil.getInvoiceStates(proxy);
-        logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+list.size()+" InvoiceStates added ...  \uD83C\uDF4A ");
-        demoSummary.setNumberOfInvoices(list.size());
-        List<InvoiceOfferDTO> list2 = TheUtil.getInvoiceOfferStates(proxy);
+        List<InvoiceDTO> invoiceStates = TheUtil.getInvoiceStates(proxy);
+        logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+invoiceStates.size()+" InvoiceStates on node ...  \uD83C\uDF4A ");
+        demoSummary.setNumberOfInvoices(invoiceStates.size());
+
+        List<InvoiceOfferDTO> list2 = TheUtil.getInvoiceOfferStates(proxy, false);
         demoSummary.setNumberOfInvoiceOffers(list2.size());
-        logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+list2.size()+" InvoiceOfferStates added ...  \uD83C\uDF4A ");
+        logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+list2.size()+" InvoiceOfferStates on node ...  \uD83C\uDF4A ");
 
     }
-    public static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier, AccountInfoDTO investor) throws Exception {
-        logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoiceOffer started ...  \uD83D\uDD06 \uD83D\uDD06 ");
+    private static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier, AccountInfoDTO investor) throws Exception {
+        logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoiceOffer started ..." +
+                "  \uD83D\uDD06 \uD83D\uDD06 ");
 
         InvoiceOfferDTO m = new InvoiceOfferDTO();
         m.setInvoiceId(invoice.getInvoiceId());
@@ -161,10 +207,7 @@ public class DemoUtil {
         m.setDiscount(random.nextInt(25) * 1.0);
         m.setOfferAmount(invoice.getTotalAmount() * ((100.0 - m.getDiscount()) / 100));
 
-
         TheUtil.startInvoiceOfferFlow(proxy,m);
-
-
     }
 }
 

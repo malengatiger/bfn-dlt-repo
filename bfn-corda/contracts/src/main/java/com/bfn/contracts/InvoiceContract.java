@@ -1,16 +1,19 @@
 package com.bfn.contracts;
 
 import com.bfn.states.InvoiceState;
+import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount;
 import net.corda.core.contracts.Command;
 import net.corda.core.contracts.CommandData;
 import net.corda.core.contracts.Contract;
 import net.corda.core.contracts.ContractState;
+import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
 import net.corda.core.transactions.LedgerTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.PublicKey;
+import java.util.Arrays;
 import java.util.List;
 
 // ************
@@ -22,8 +25,6 @@ public class InvoiceContract implements Contract {
     public static final String ID = InvoiceContract.class.getName();
     private final static Logger logger = LoggerFactory.getLogger(InvoiceContract.class);
 
-    // A transaction is valid if the verify() function of the contract of all the transaction's input and output states
-    // does not throw an exception.
     @Override
     public void verify(LedgerTransaction tx) throws IllegalArgumentException{
 
@@ -44,7 +45,7 @@ public class InvoiceContract implements Contract {
         List<PublicKey> requiredSigners = command.getSigners();
         logger.info(" \uD83D\uDD34  \uD83D\uDD34 Required signers: " + requiredSigners.size());
         for (PublicKey key: requiredSigners) {
-            logger.info(" \uD83D\uDD34 publicKey: ".concat(key.toString()));
+            logger.info(" \uD83D\uDD34 Required signer: publicKey: ".concat(key.toString()));
         }
         ContractState contractState = tx.getOutput(0);
         if (!(contractState instanceof InvoiceState)) {
@@ -57,25 +58,17 @@ public class InvoiceContract implements Contract {
         if (invoiceState.getCustomerInfo() == null) {
             throw new IllegalArgumentException("Customer is required");
         }
-        Party party = invoiceState.getSupplierInfo().getHost();
-        PublicKey supplierPublicKey = party.getOwningKey();
-        if (!requiredSigners.contains(supplierPublicKey)) {
+
+        if (!requiredSigners.contains(invoiceState.getSupplierInfo().getHost().getOwningKey())) {
             throw new IllegalArgumentException("Supplier Party must sign");
         }
-        Party party2 = invoiceState.getCustomerInfo().getHost();
-        PublicKey customerPublicKey = party2.getOwningKey();
-        if (!requiredSigners.contains(customerPublicKey)) {
+
+        if (!requiredSigners.contains(invoiceState.getCustomerInfo().getHost().getOwningKey())) {
             throw new IllegalArgumentException("Customer Party must sign");
         }
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 InvoiceContract: verification done OK! .....\uD83E\uDD1F \uD83E\uDD1F ");
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 InvoiceContract: verification done OK! .....\uD83E\uDD1F \uD83E\uDD1F ");
 
     }
-//
-//    // Used to indicate the transaction's intent.
-//    public interface Commands extends CommandData {
-//        class Action implements Commands {}
-//    }
 
     public static class Register implements CommandData {}
-    public static class MakeOffer implements CommandData {}
 }

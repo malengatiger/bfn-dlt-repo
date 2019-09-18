@@ -35,7 +35,7 @@ public class ShareAccountInfoFlow extends FlowLogic<String> {
     @Suspendable
     public String call() throws FlowException {
         ServiceHub hub = getServiceHub();
-        logger.info(" \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A ShareAccountInfoFlow call: instant: " );
+        logger.info(" \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A ShareAccountInfoFlow call started" );
         AccountService accountService = hub.cordaService(KeyManagementBackedAccountService.class);
         try {
             logger.info(" \uD83C\uDF38  \uD83C\uDF38 ... sharing "
@@ -44,7 +44,6 @@ public class ShareAccountInfoFlow extends FlowLogic<String> {
 
             CompletableFuture<Unit> future = accountService.shareAccountInfoWithParty(
                     account.getState().getData().getIdentifier().getId(), otherParty).toCompletableFuture();
-            logger.info("\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C CompletableFuture<Unit> future obtained");
             Unit result = future.get();
             if (result != null) {
                 logger.info(" \uD83D\uDE0E  \uD83D\uDE0E We have a GOOD result from sharing future result: "

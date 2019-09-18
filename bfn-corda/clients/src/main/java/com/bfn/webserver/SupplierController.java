@@ -133,9 +133,9 @@ public class SupplierController {
         return TheUtil.getInvoiceStates(proxy);
     }
     @GetMapping(value = "getInvoiceOfferStates")
-    public List<InvoiceOfferDTO> getInvoiceOfferStates() {
+    public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam boolean consumed) {
 
-        return TheUtil.getInvoiceOfferStates(proxy);
+        return TheUtil.getInvoiceOfferStates(proxy, consumed);
     }
 
     private class PingResult {

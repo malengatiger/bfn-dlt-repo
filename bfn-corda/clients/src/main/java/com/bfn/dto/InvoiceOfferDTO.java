@@ -10,18 +10,38 @@ public class InvoiceOfferDTO {
      double offerAmount, discount;
      String supplierId, investorId, ownerId;
      Date offerDate, investorDate;
+    private String supplierPublicKey, investorPublicKey;
 
-    public InvoiceOfferDTO(String invoiceId, double offerAmount, double discount,
-                           String supplierId, String investorId, String ownerId) {
+    public InvoiceOfferDTO(String invoiceId, double offerAmount, double discount, String supplierId, String investorId, String ownerId, Date offerDate, Date investorDate, String supplierPublicKey, String investorPublicKey) {
         this.invoiceId = invoiceId;
         this.offerAmount = offerAmount;
         this.discount = discount;
         this.supplierId = supplierId;
         this.investorId = investorId;
         this.ownerId = ownerId;
+        this.offerDate = offerDate;
+        this.investorDate = investorDate;
+        this.supplierPublicKey = supplierPublicKey;
+        this.investorPublicKey = investorPublicKey;
     }
 
     public InvoiceOfferDTO() {
+    }
+
+    public String getSupplierPublicKey() {
+        return supplierPublicKey;
+    }
+
+    public void setSupplierPublicKey(String supplierPublicKey) {
+        this.supplierPublicKey = supplierPublicKey;
+    }
+
+    public String getInvestorPublicKey() {
+        return investorPublicKey;
+    }
+
+    public void setInvestorPublicKey(String investorPublicKey) {
+        this.investorPublicKey = investorPublicKey;
     }
 
     public String getOwnerId() {

@@ -3,16 +3,20 @@ package com.bfn.flows.invoices;
 import co.paralleluniverse.fibers.Suspendable;
 import com.bfn.contracts.InvoiceOfferContract;
 import com.bfn.states.InvoiceOfferState;
-import com.bfn.states.InvoiceState;
 import com.google.common.collect.ImmutableList;
 import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount;
-import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccountFlow;
+import com.r3.corda.lib.accounts.workflows.services.AccountService;
+import com.r3.corda.lib.accounts.workflows.services.KeyManagementBackedAccountService;
 import net.corda.core.contracts.StateAndRef;
 import net.corda.core.flows.*;
 import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
 import net.corda.core.node.NodeInfo;
 import net.corda.core.node.ServiceHub;
+import net.corda.core.node.services.KeyManagementService;
+import net.corda.core.node.services.Vault;
+import net.corda.core.node.services.vault.PageSpecification;
+import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.core.transactions.TransactionBuilder;
 import net.corda.core.utilities.ProgressTracker;
@@ -20,14 +24,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.PublicKey;
+import java.util.Date;
 import java.util.List;
 
 @InitiatingFlow
 @StartableByRPC
-public class InvoiceOfferFlow extends FlowLogic<SignedTransaction> {
-    private final static Logger logger = LoggerFactory.getLogger(InvoiceOfferFlow.class);
+public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
+    private final static Logger logger = LoggerFactory.getLogger(BuyInvoiceOfferFlow.class);
 
-    final InvoiceOfferState invoiceOfferState;
+    final StateAndRef<InvoiceOfferState> invoiceOfferState;
     private final ProgressTracker.Step SENDING_TRANSACTION = new ProgressTracker.Step("Sending transaction to counterParty");
     private final ProgressTracker.Step GENERATING_TRANSACTION = new ProgressTracker.Step("Generating transaction based on new IOU.");
     private final ProgressTracker.Step VERIFYING_TRANSACTION = new ProgressTracker.Step("Verifying contract constraints.");
@@ -63,11 +68,8 @@ public class InvoiceOfferFlow extends FlowLogic<SignedTransaction> {
         return progressTracker;
     }
 
-    public InvoiceOfferFlow(InvoiceOfferState invoiceOfferState) {
+    public BuyInvoiceOfferFlow(StateAndRef<InvoiceOfferState> invoiceOfferState) {
         this.invoiceOfferState = invoiceOfferState;
-        logger.info("\uD83C\uDF3A \uD83C\uDF3A InvoiceOfferFlow constructor with invoiceOfferState supplier: \uD83C\uDF4F "
-                + invoiceOfferState.getSupplier().toString() + "\n investor: ".concat(invoiceOfferState.getInvestor().toString()));
-
     }
 
     @Override
@@ -75,39 +77,66 @@ public class InvoiceOfferFlow extends FlowLogic<SignedTransaction> {
     public SignedTransaction call() throws FlowException {
         // We retrieve the notary identity from the network map.
         final ServiceHub serviceHub = getServiceHub();
-        logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... RegisterInvoiceFlow call started ...");
-        logger.info("  invoiceOfferState: InvoiceId: ".concat(invoiceOfferState.getInvoiceId().toString()));
+        logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... BuyInvoiceOfferFlow call started ...");
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
+        QueryCriteria.VaultQueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.CONSUMED);
+        Vault.Page page = serviceHub.getVaultService().queryBy(InvoiceOfferState.class,criteria,
+                new PageSpecification(1,200));
+        List<StateAndRef<InvoiceOfferState>> refs = page.getStates();
+        boolean isFound = false;
+        logger.info(" \uD83D\uDCA6  \uD83D\uDCA6 Number of consumed InvoiceOfferStates:  \uD83D\uDCA6 " + refs.size() + "  \uD83D\uDCA6");
+        for (StateAndRef<InvoiceOfferState> ref: refs) {
+            InvoiceOfferState state = ref.getState().getData();
+            if (invoiceOfferState.getState().getData().getInvoiceId().toString()
+                    .equalsIgnoreCase(state.getInvoiceId().toString())) {
+                isFound = true;
+            }
+        }
+        if (isFound) {
+            throw new FlowException("InvoiceOfferState is already CONSUMED");
+        }
 
-        InvoiceOfferContract.MakeOffer command = new InvoiceOfferContract.MakeOffer();
+        InvoiceOfferContract.BuyOffer command = new InvoiceOfferContract.BuyOffer();
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Notary: " + notary.getName().toString()
-                + "  \uD83C\uDF4A supplierParty: " + invoiceOfferState.getSupplier().getName()
-                + "  \uD83C\uDF4AinvestorParty: "+ invoiceOfferState.getInvestor().getName()
-                +" \uD83C\uDF4E  discount: " + invoiceOfferState.getDiscount()
-                + "  \uD83D\uDC9A offerAmount" + invoiceOfferState.getOfferAmount());
+                + "  \uD83C\uDF4A supplierParty: " + invoiceOfferState.getState().getData().getSupplier().getName()
+                + "  \uD83C\uDF4AinvestorParty: "+ invoiceOfferState.getState().getData().getInvestor().getName()
+                +" \uD83C\uDF4E  discount: " + invoiceOfferState.getState().getData().getDiscount()
+                + "  \uD83D\uDC9A offerAmount" + invoiceOfferState.getState().getData().getOfferAmount());
 
-        Party supplierParty = invoiceOfferState.getSupplier().getHost();
-        Party investorParty = invoiceOfferState.getInvestor().getHost();
+        progressTracker.setCurrentStep(GENERATING_TRANSACTION);
+        InvoiceOfferState oldState = invoiceOfferState.getState().getData();
+        InvoiceOfferState offerState = new InvoiceOfferState(
+                oldState.getInvoiceId(),
+                oldState.getOfferAmount(),
+                oldState.getDiscount(),
+                oldState.getSupplier(),
+                oldState.getInvestor(),
+                oldState.getInvestor(),
+                oldState.getOfferDate(),
+                new Date(), oldState.getSupplierPublicKey(), oldState.getInvestorPublicKey());
+
+        Party supplierParty = invoiceOfferState.getState().getData().getSupplier().getHost();
+        Party investorParty = invoiceOfferState.getState().getData().getInvestor().getHost();;
+
         PublicKey investorKey = investorParty.getOwningKey();
         PublicKey supplierKey = supplierParty.getOwningKey();
 
-        progressTracker.setCurrentStep(GENERATING_TRANSACTION);
         TransactionBuilder txBuilder = new TransactionBuilder(notary);
-        txBuilder.addOutputState(invoiceOfferState, InvoiceOfferContract.ID);
-        txBuilder.addCommand(command, supplierKey,
-                investorKey);
+        txBuilder.addInputState(invoiceOfferState);
+        txBuilder.addOutputState(offerState, InvoiceOfferContract.ID);
+
+        txBuilder.addCommand(command, supplierKey, investorKey);
 
         progressTracker.setCurrentStep(VERIFYING_TRANSACTION);
         txBuilder.verify(serviceHub);
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Offer TransactionBuilder verified");
         // Signing the transaction.
         progressTracker.setCurrentStep(SIGNING_TRANSACTION);
         SignedTransaction signedTx = serviceHub.signInitialTransaction(txBuilder);
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Offer Transaction signInitialTransaction executed ...");
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 BuyInvoiceOfferFlow signInitialTransaction executed ...");
 
         NodeInfo nodeInfo = serviceHub.getMyInfo();
-        String investorOrg = invoiceOfferState.getInvestor().getHost().getName().getOrganisation();
-        String supplierOrg = invoiceOfferState.getSupplier().getHost().getName().getOrganisation();
+        String investorOrg = offerState.getInvestor().getHost().getName().getOrganisation();
+        String supplierOrg = offerState.getSupplier().getHost().getName().getOrganisation();
 
         if (investorOrg.equalsIgnoreCase(supplierOrg)) {
             logger.info(" \uD83C\uDFC0  \uD83C\uDFC0  \uD83C\uDFC0 Supplier and Investor are on the same node. FlowSession not required");
@@ -126,12 +155,12 @@ public class InvoiceOfferFlow extends FlowLogic<SignedTransaction> {
             if (supplierOrg.equalsIgnoreCase(thisNodeOrg)) {
                 otherPartyFlowSession = initiateFlow(investorParty);
                 logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 ... FlowSession set up for  \uD83D\uDE21 investor: "
-                        .concat(invoiceOfferState.getInvestor().getName()));
+                        .concat(offerState.getInvestor().getName()));
             }
             if (investorOrg.equalsIgnoreCase(thisNodeOrg)) {
                 otherPartyFlowSession = initiateFlow(supplierParty);
                 logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 ... FlowSession set up for  \uD83D\uDE21 supplier: "
-                        .concat(invoiceOfferState.getSupplier().getName()));
+                        .concat(offerState.getSupplier().getName()));
             }
             if (otherPartyFlowSession == null) {
                 throw new IllegalStateException("Unable to set up FlowSession: investor: "

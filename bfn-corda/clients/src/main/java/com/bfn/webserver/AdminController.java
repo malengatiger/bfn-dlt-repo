@@ -76,7 +76,7 @@ public class AdminController {
                 criteria,new PageSpecification(1,200));
         String myNode = proxy.nodeInfo().getLegalIdentities().get(0).getName().toString();
         List<StateAndRef<AccountInfo>> list = page.getStates();
-        logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Accounts on Node: " + list.size());
+        logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Accounts on "+myNode+" Node: " + list.size());
         for (NodeInfo nodeInfo: nodes) {
             String name = nodeInfo.getLegalIdentities().get(0).getName().toString();
             Party otherParty = nodeInfo.getLegalIdentities().get(0);
@@ -89,14 +89,13 @@ public class AdminController {
                 continue;
             }
 
-            for (StateAndRef<AccountInfo> ref: list) {
-                String result = TheUtil.startAccountSharingFlow(proxy,otherParty,ref);
+            for (StateAndRef<AccountInfo> accountInfoStateAndRef: list) {
+                String result = TheUtil.startAccountSharingFlow(proxy,otherParty,accountInfoStateAndRef);
                 logger.info("\uD83C\uDF81 Result from sharing account ".concat(result));
             }
         }
         return "Account Sharing DONE. shared  \uD83D\uDD37 " + list.size() + "  \uD83D\uDD37 accounts";
     }
-
 
     @GetMapping(value = "getInvoiceStates")
     public List<InvoiceDTO> getInvoiceStates() {
@@ -104,8 +103,8 @@ public class AdminController {
     }
 
     @GetMapping(value = "getInvoiceOfferStates")
-    public List<InvoiceOfferDTO> getInvoiceOfferStates() {
-        return TheUtil.getInvoiceOfferStates(proxy);
+    public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam boolean consumed) {
+        return TheUtil.getInvoiceOfferStates(proxy, consumed);
     }
 
     @GetMapping(value = "/hello", produces = "text/plain")
