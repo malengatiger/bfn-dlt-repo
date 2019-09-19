@@ -109,6 +109,7 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
                 oldState.getInvoiceId(),
                 oldState.getOfferAmount(),
                 oldState.getDiscount(),
+                oldState.getOriginalAmount(),
                 oldState.getSupplier(),
                 oldState.getInvestor(),
                 oldState.getInvestor(),

@@ -180,7 +180,11 @@ public class DemoUtil {
 
                 InvoiceDTO invoice = TheUtil.startRegisterInvoiceFlow(proxy,m);
                 for (AccountInfoDTO investor: investors) {
-                    registerInvoiceOffer(invoice,supplier,investor);
+                    try {
+                        registerInvoiceOffer(invoice, supplier, investor);
+                    } catch (Exception e) {
+
+                    }
                 }
             }
         }
@@ -205,7 +209,11 @@ public class DemoUtil {
         m.setInvestorId(investor.getIdentifier());
         m.setOfferDate(new Date());
         m.setDiscount(random.nextInt(25) * 1.0);
+        if (m.getDiscount() == 0) {
+            m.setDiscount(5.8);
+        }
         m.setOfferAmount(invoice.getTotalAmount() * ((100.0 - m.getDiscount()) / 100));
+        m.setOriginalAmount(invoice.getTotalAmount());
 
         TheUtil.startInvoiceOfferFlow(proxy,m);
     }

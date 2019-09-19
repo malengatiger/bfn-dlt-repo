@@ -28,15 +28,16 @@ import java.util.UUID;
 public class InvoiceOfferState implements ContractState {
     private final static Logger logger = LoggerFactory.getLogger(InvoiceContract.class);
     private final UUID invoiceId;
-    private final double offerAmount, discount;
+    private final double offerAmount, discount, originalAmount;
     private final AccountInfo supplier, investor, owner;
     private final Date offerDate, ownerDate;
     private final PublicKey supplierPublicKey, investorPublicKey;
 
-    public InvoiceOfferState(UUID invoiceId, double offerAmount, double discount, AccountInfo supplier, AccountInfo investor, AccountInfo owner, Date offerDate, Date ownerDate, PublicKey supplierPublicKey, PublicKey investorPublicKey) {
+    public InvoiceOfferState(UUID invoiceId, double offerAmount, double discount, double originalAmount, AccountInfo supplier, AccountInfo investor, AccountInfo owner, Date offerDate, Date ownerDate, PublicKey supplierPublicKey, PublicKey investorPublicKey) {
         this.invoiceId = invoiceId;
         this.offerAmount = offerAmount;
         this.discount = discount;
+        this.originalAmount = originalAmount;
         this.supplier = supplier;
         this.investor = investor;
         this.owner = owner;
@@ -59,6 +60,10 @@ public class InvoiceOfferState implements ContractState {
 
     public PublicKey getInvestorPublicKey() {
         return investorPublicKey;
+    }
+
+    public double getOriginalAmount() {
+        return originalAmount;
     }
 
     public AccountInfo getOwner() {

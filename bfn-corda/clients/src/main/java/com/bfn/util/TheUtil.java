@@ -167,6 +167,7 @@ public class TheUtil {
             if (customerInfo == null) {
                 throw new Exception("Customer is bloody missing");
             }
+            invoice.setTotalAmount(invoice.getAmount() * (invoice.getValueAddedTax()/100));
             InvoiceState invoiceState = new InvoiceState(UUID.randomUUID(),
                     invoice.getInvoiceNumber(),invoice.getDescription(),
                     invoice.getAmount(),invoice.getTotalAmount(),invoice.getValueAddedTax(),
@@ -269,40 +270,60 @@ public class TheUtil {
     public static InvoiceOfferDTO startInvoiceOfferFlow(CordaRPCOps proxy, InvoiceOfferDTO invoiceOffer) throws Exception {
 
         try {
-            logger.info("\uD83C\uDF4F SUPPLIER: ".concat(invoiceOffer.getSupplierId()).concat("  \uD83D\uDD06  ")
-                    .concat("  \uD83E\uDDE1 INVESTOR: ").concat(invoiceOffer.getInvestorId()));
+            logger.info("\uD83C\uDF4F INVOICE: ".concat(invoiceOffer.getInvoiceId()).concat("  \uD83D\uDD06  ")
+                    .concat("  \uD83E\uDDE1 DISCOUNT: ").concat("" + invoiceOffer.getDiscount())
+            .concat("  \uD83E\uDDE1 INVESTOR: ").concat("" + invoiceOffer.getInvestorId()));
 
-            List<StateAndRef<AccountInfo>> accounts = proxy.vaultQuery(AccountInfo.class).getStates();
-            AccountInfo supplierInfo = null, investorInfo = null;
-            for (StateAndRef<AccountInfo> info : accounts) {
+            //todo - refactor to proper query ...
+            QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
+            Vault.Page<InvoiceState> invoiceStatePage = proxy.vaultQueryByWithPagingSpec(
+                    InvoiceState.class, criteria,
+                    new PageSpecification(1, 200));
+            InvoiceState invoiceState = null;
+            for (StateAndRef<InvoiceState> state: invoiceStatePage.getStates()) {
+                if (state.getState().getData().getInvoiceId().toString().equalsIgnoreCase(invoiceOffer.getInvoiceId())) {
+                    invoiceState = state.getState().getData();
+                    break;
+                }
+            }
+            if (invoiceState == null) {
+                throw new Exception("Invoice not found");
+            }
+            AccountInfo investorInfo = null;
+            Vault.Page<AccountInfo> acctsPage = proxy.vaultQueryByWithPagingSpec(
+                    AccountInfo.class, criteria,
+                    new PageSpecification(1, 200));
 
+            for (StateAndRef<AccountInfo> info : acctsPage.getStates()) {
                 if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoiceOffer.getInvestorId())) {
                     investorInfo = info.getState().getData();
                     logger.info("\uD83C\uDF4F \uD83C\uDF4F Investor AccountInfo found: ".concat(info.getState().getData().getName()));
                 }
-                if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoiceOffer.getSupplierId())) {
-                    supplierInfo = info.getState().getData();
-                    logger.info("\uD83C\uDF4F \uD83C\uDF4F Supplier AccountInfo found: ".concat(info.getState().getData().getName()));
-                }
-            }
-            if (supplierInfo == null) {
-                throw new Exception("Supplier is fucking missing");
             }
             if (investorInfo == null) {
-                throw new Exception("Investor is bloody missing");
+                throw new Exception("Investor not found");
             }
-            invoiceOffer.setOfferDate(new Date());
+            if (invoiceOffer.getDiscount() == 0) {
+                throw new Exception("Discount not found");
+            }
+
+            invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
+                    ((100.0 - invoiceOffer.getDiscount())/100));
+
             InvoiceOfferState invoiceOfferState = new InvoiceOfferState(
-                    UUID.fromString(invoiceOffer.getInvoiceId()),
+                    invoiceState.getInvoiceId(),
                     invoiceOffer.getOfferAmount(),
                     invoiceOffer.getDiscount(),
-                    supplierInfo,
+                    invoiceState.getTotalAmount(),
+                    invoiceState.getSupplierInfo(),
                     investorInfo,
-                    supplierInfo,
+                    invoiceState.getSupplierInfo(),
                     new Date(proxy.currentNodeTime().toEpochMilli()),
                     null, null, null);
+
             CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
-                    InvoiceOfferFlow.class, invoiceOfferState).getReturnValue();
+                    InvoiceOfferFlow.class, invoiceOfferState)
+                    .getReturnValue();
 
             SignedTransaction issueTx = signedTransactionCordaFuture.get();
             logger.info("\uD83C\uDF4F \uD83C\uDF4F flow completed... " +

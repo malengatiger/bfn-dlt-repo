@@ -7,15 +7,16 @@ import java.util.UUID;
 
 public class InvoiceOfferDTO {
      String invoiceId;
-     double offerAmount, discount;
+     double offerAmount, discount, originalAmount;
      String supplierId, investorId, ownerId;
      Date offerDate, investorDate;
     private String supplierPublicKey, investorPublicKey;
 
-    public InvoiceOfferDTO(String invoiceId, double offerAmount, double discount, String supplierId, String investorId, String ownerId, Date offerDate, Date investorDate, String supplierPublicKey, String investorPublicKey) {
+    public InvoiceOfferDTO(String invoiceId, double offerAmount, double discount, double originalAmount, String supplierId, String investorId, String ownerId, Date offerDate, Date investorDate, String supplierPublicKey, String investorPublicKey) {
         this.invoiceId = invoiceId;
         this.offerAmount = offerAmount;
         this.discount = discount;
+        this.originalAmount = originalAmount;
         this.supplierId = supplierId;
         this.investorId = investorId;
         this.ownerId = ownerId;
@@ -26,6 +27,14 @@ public class InvoiceOfferDTO {
     }
 
     public InvoiceOfferDTO() {
+    }
+
+    public double getOriginalAmount() {
+        return originalAmount;
+    }
+
+    public void setOriginalAmount(double originalAmount) {
+        this.originalAmount = originalAmount;
     }
 
     public String getSupplierPublicKey() {
