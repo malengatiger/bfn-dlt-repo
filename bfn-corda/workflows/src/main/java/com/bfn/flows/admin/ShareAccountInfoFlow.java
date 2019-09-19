@@ -24,9 +24,9 @@ import java.util.concurrent.ExecutionException;
 public class ShareAccountInfoFlow extends FlowLogic<String> {
     private final static Logger logger = LoggerFactory.getLogger(ShareAccountInfoFlow.class);
     private final Party otherParty;
-    private final StateAndRef<AccountInfo> account;
+    private final AccountInfo account;
 
-    public ShareAccountInfoFlow(Party otherParty, StateAndRef<AccountInfo> account) {
+    public ShareAccountInfoFlow(Party otherParty, AccountInfo account) {
         this.otherParty = otherParty;
         this.account = account;
     }
@@ -35,22 +35,15 @@ public class ShareAccountInfoFlow extends FlowLogic<String> {
     @Suspendable
     public String call() throws FlowException {
         ServiceHub hub = getServiceHub();
-        logger.info(" \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A ShareAccountInfoFlow call started" );
         AccountService accountService = hub.cordaService(KeyManagementBackedAccountService.class);
         try {
-            logger.info(" \uD83C\uDF38  \uD83C\uDF38 ... sharing "
-                    .concat(account.getState().getData().getName()).concat(" with \uD83E\uDD6C \uD83E\uDD6C "
-                            .concat(otherParty.getName().toString())));
-
             CompletableFuture<Unit> future = accountService.shareAccountInfoWithParty(
-                    account.getState().getData().getIdentifier().getId(), otherParty).toCompletableFuture();
+                    account.getIdentifier().getId(), otherParty).toCompletableFuture();
             Unit result = future.get();
             if (result != null) {
-                logger.info(" \uD83D\uDE0E  \uD83D\uDE0E We have a GOOD result from sharing future result: "
-                        .concat(result.toString()));
-            } else {
-                logger.info(" \uD83D\uDE0E  \uD83D\uDE0E We have a \uD83D\uDC7F NULL result" +
-                        " \uD83D\uDC7F from sharing future result: ");
+                logger.info(" \uD83D\uDE0E \uD83D\uDE0E "+account.getName()
+                        +" shared with \uD83D\uDC7F " +
+                        otherParty.getName().getOrganisation());
             }
 
         } catch (InterruptedException e) {
@@ -61,7 +54,7 @@ public class ShareAccountInfoFlow extends FlowLogic<String> {
             throw new FlowException("ExecutionException: Unable to share accounts");
         }
 
-        return "\uD83C\uDFC8  \uD83C\uDFC8 Account shared: "
-                + account.getState().getData().getName();
+        return "\uD83C\uDFC8 \uD83C\uDFC8 Account shared: "
+                + account.getName() + " with " + otherParty.getName().getOrganisation();
     }
 }

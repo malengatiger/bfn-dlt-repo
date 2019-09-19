@@ -237,8 +237,23 @@ public class TheUtil {
         }
     }
 
-    public static AccountInfoDTO startAccountRegistrationFlow(CordaRPCOps proxy, String accountName) throws ExecutionException, InterruptedException {
+    public static AccountInfoDTO startAccountRegistrationFlow(CordaRPCOps proxy, String accountName) throws Exception {
         try {
+            QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
+            Vault.Page<AccountInfo> page = proxy.vaultQueryByWithPagingSpec(
+                    AccountInfo.class, criteria,
+                    new PageSpecification(1, 200));
+            logger.info(" \uD83E\uDDA0 \uD83E\uDDA0 Accounts found on network:  \uD83E\uDD6C " + page.getStates().size());
+            for (StateAndRef<AccountInfo> ref: page.getStates()) {
+                AccountInfo info = ref.getState().getData();
+                if (info.getName().equalsIgnoreCase(accountName)) {
+                    logger.info("Account "+accountName+" \uD83D\uDC7F \uD83D\uDC7F already exists on the network");
+                    throw new Exception("Account already exists on the network");
+                }
+            }
+
+            List<NodeInfo> nodes = proxy.networkMapSnapshot();
+
             CordaFuture<AccountInfo> accountInfoCordaFuture = proxy.startTrackedFlowDynamic(
                     AccountRegistrationFlow.class, accountName).getReturnValue();
 
@@ -247,6 +262,22 @@ public class TheUtil {
                     " \uD83D\uDC4C \uD83D\uDC4C " +
                     "\uD83D\uDC4C accountInfo returned: \uD83E\uDD4F " +
                     accountInfo.getName().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
+            String name = accountInfo.getHost().getName().getOrganisation();
+            for (NodeInfo node: nodes) {
+                Party otherParty = node.getLegalIdentities().get(0);
+                if (name.equalsIgnoreCase(otherParty.getName().getOrganisation())) {
+                    logger.info("\uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node \uD83E\uDD6C ");
+                    continue;
+                }
+                if (otherParty.getName().getOrganisation().contains("Notary")) {
+                    logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary \uD83E\uDD6C \uD83E\uDD6C ");
+                    continue;
+                }
+                startAccountSharingFlow(proxy,otherParty,accountInfo);
+                logger.info(" \uD83D\uDE0E \uD83D\uDE0E "+accountName
+                        +" shared with \uD83D\uDC7F " +
+                        node.getLegalIdentities().get(0).getName().getOrganisation());
+            }
 
             AccountInfoDTO dto = new AccountInfoDTO();
             dto.setHost(accountInfo.getHost().toString());
@@ -261,7 +292,7 @@ public class TheUtil {
     }
 
     public static String startAccountSharingFlow(CordaRPCOps proxy,
-                                                 Party otherParty, StateAndRef<AccountInfo> account) throws Exception {
+                                                 Party otherParty, AccountInfo account) throws Exception {
         try {
             CordaFuture<String> accountInfoCordaFuture = proxy.startFlowDynamic(
                     ShareAccountInfoFlow.class, otherParty, account).getReturnValue();

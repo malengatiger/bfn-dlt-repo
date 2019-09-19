@@ -27,7 +27,7 @@ public class BFNWebApi {
      * Starts our Spring Boot application.
      */
     private static final Logger LOGGER = Logger.getLogger(BFNWebApi.class.getSimpleName());
-    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(ShareAccountInfoFlow.class);
+    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(BFNWebApi.class);
 
     public static void main(String[] args) {
         logger.info(" \uD83D\uDD06  \uD83D\uDD06 BFNWebApi starting   \uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06️");

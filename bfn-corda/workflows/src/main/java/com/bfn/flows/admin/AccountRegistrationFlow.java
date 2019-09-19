@@ -7,16 +7,23 @@ import com.r3.corda.lib.accounts.contracts.commands.AccountCommand;
 import com.r3.corda.lib.accounts.contracts.commands.Create;
 import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
 import com.r3.corda.lib.accounts.contracts.types.AccountStatus;
+import com.r3.corda.lib.accounts.workflows.services.AccountService;
+import com.r3.corda.lib.accounts.workflows.services.KeyManagementBackedAccountService;
+import kotlin.Unit;
 import net.corda.core.contracts.UniqueIdentifier;
 import net.corda.core.flows.*;
 import net.corda.core.identity.Party;
 import net.corda.core.identity.PartyAndCertificate;
+import net.corda.core.node.NodeInfo;
 import net.corda.core.node.ServiceHub;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.core.transactions.TransactionBuilder;
 import net.corda.core.utilities.ProgressTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @InitiatingFlow
 @StartableByRPC
@@ -80,7 +87,7 @@ public class AccountRegistrationFlow extends FlowLogic<AccountInfo> {
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Notary: "
                 + notary.getName().toString()
                 + "  \uD83C\uDF4A accountName: " + accountName
-                + "  \uD83C\uDF4A bnoParty: "+ bnoParty.getName().toString()
+                + "  \uD83C\uDF4A bnoParty: " + bnoParty.getName().toString()
                 + " \uD83C\uDF4E publicKey: ".concat(bnoParty.getOwningKey().toString()));
 
         progressTracker.setCurrentStep(GENERATING_TRANSACTION);
@@ -103,6 +110,26 @@ public class AccountRegistrationFlow extends FlowLogic<AccountInfo> {
                 "FinalityFlow has been executed").concat(" txId: ")
                 .concat(mSignedTransactionDone.getId().toString()));
 
+//        shareAccount(serviceHub, accountInfo);
+
         return accountInfo;
     }
+
+//    @Suspendable
+//    private void shareAccount(ServiceHub serviceHub, AccountInfo accountInfo) throws FlowException {
+//        //share account with all parties on network
+//        List<NodeInfo> nodes = serviceHub.getNetworkMapCache().getAllNodes();
+//        int cnt = 0;
+//        for (NodeInfo node : nodes) {
+//            Party party = node.getLegalIdentities().get(0);
+//            if (party.getName().getOrganisation().contains("Notary")) {
+//                continue;
+//            }
+//            cnt++;
+//            subFlow(new ShareAccountInfoFlow(party, accountInfo));
+//        }
+//
+//        logger.info(" \uD83C\uDF3A \uD83C\uDF3A \uD83C\uDF3A \uD83C\uDF3A Shared this account with "
+//                + cnt + " nodes");
+//    }
 }

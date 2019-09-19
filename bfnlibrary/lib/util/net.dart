@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 class Net {
 
-  static const URL = 'http://localhost:10411/';
+  static const URL = 'http://192.168.86.240:10416/';
 //  static const URL = 'https://jsonplaceholder.typicode.com/posts/2';
 
   static Future<String> getAccounts() async {

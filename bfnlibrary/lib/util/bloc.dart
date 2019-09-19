@@ -20,7 +20,7 @@ class BFNBloc {
     offerController.close();
   }
 
-  getAccounts() async {
+  Future<List<AccountInfo>> getAccounts() async {
     var res = await Net.getAccounts();
     List list = json.decode(res);
     var accounts = List<AccountInfo>();
@@ -29,8 +29,9 @@ class BFNBloc {
     });
     print('🍏 🍏 BFNBloc: getAccounts found 🔆 ${accounts.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     acctController.sink.add(accounts);
+    return accounts;
   }
-  getInvoices() async {
+  Future<List<Invoice>> getInvoices() async {
     var res = await Net.getInvoices();
     List list = json.decode(res);
     var invoices = List<Invoice>();
@@ -39,8 +40,9 @@ class BFNBloc {
     });
     print('🍏 🍏 BFNBloc: getInvoices found 🔆 ${invoices.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     invoiceController.sink.add(invoices);
+    return invoices;
   }
-  getInvoiceOffers() async {
+  Future<List<InvoiceOffer>> getInvoiceOffers() async {
     var res = await Net.getInvoiceOffers();
     List list = json.decode(res);
     var offers = List<InvoiceOffer>();
@@ -49,5 +51,6 @@ class BFNBloc {
     });
     print('🍏 🍏 BFNBloc: getInvoiceOffers found 🔆 ${offers.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     offerController.sink.add(offers);
+    return offers;
   }
 }
