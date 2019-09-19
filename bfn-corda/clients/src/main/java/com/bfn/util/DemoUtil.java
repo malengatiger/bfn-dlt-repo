@@ -179,9 +179,10 @@ public class DemoUtil {
                 m.setDateRegistered(new Date());
 
                 InvoiceDTO invoice = TheUtil.startRegisterInvoiceFlow(proxy,m);
+                double discount = random.nextInt(25) * 1.0;
                 for (AccountInfoDTO investor: investors) {
                     try {
-                        registerInvoiceOffer(invoice, supplier, investor);
+                        registerInvoiceOffer(invoice, supplier, investor, discount);
                     } catch (Exception e) {
 
                     }
@@ -198,7 +199,8 @@ public class DemoUtil {
         logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+list2.size()+" InvoiceOfferStates on node ...  \uD83C\uDF4A ");
 
     }
-    private static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier, AccountInfoDTO investor) throws Exception {
+    private static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier,
+                                             AccountInfoDTO investor, double discount) throws Exception {
         logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoiceOffer started ..." +
                 "  \uD83D\uDD06 \uD83D\uDD06 ");
 
@@ -208,7 +210,7 @@ public class DemoUtil {
         m.setOwnerId(supplier.getIdentifier());
         m.setInvestorId(investor.getIdentifier());
         m.setOfferDate(new Date());
-        m.setDiscount(random.nextInt(25) * 1.0);
+        m.setDiscount(discount);
         if (m.getDiscount() == 0) {
             m.setDiscount(5.8);
         }

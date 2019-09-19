@@ -24,7 +24,7 @@ public class InvoiceRegistrationFlowResponder extends FlowLogic<SignedTransactio
     @Override
     @Suspendable
     public SignedTransaction call() throws FlowException {
-        logger.info("\uD83E\uDD6C \uD83E\uDD6C Responder call method at " + new Date().toString());
+        logger.info("\uD83E\uDD6C \uD83E\uDD6C InvoiceRegistrationFlowResponder call method at ");
         final ServiceHub serviceHub = getServiceHub();
         Party myself = serviceHub.getMyInfo().getLegalIdentities().get(0);
         Party party = counterPartySession.getCounterparty();
@@ -42,7 +42,7 @@ public class InvoiceRegistrationFlowResponder extends FlowLogic<SignedTransactio
         subFlow(signTransactionFlow);
         SignedTransaction signedTransaction = subFlow(new ReceiveFinalityFlow(counterPartySession));
         logger.info("\uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A \uD83D\uDC99 \uD83D\uDC9C ReceiveFinalityFlow executed \uD83E\uDD1F");
-        logger.info("returning signedTransaction \uD83E\uDD1F \uD83C\uDF4F \uD83C\uDF4E ".concat(signedTransaction.toString()));
+        logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  Transaction finalized! \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C \uD83E\uDD1F \uD83C\uDF4F \uD83C\uDF4E ".concat(signedTransaction.toString()));
         return signedTransaction;
 
     }

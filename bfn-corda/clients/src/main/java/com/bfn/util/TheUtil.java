@@ -154,11 +154,11 @@ public class TheUtil {
 
                 if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoice.getCustomerId())) {
                     customerInfo = info.getState().getData();
-                    logger.info(" \uD83C\uDF4F \uD83C\uDF4F Customer AccountInfo found: ".concat(info.getState().getData().getName()));
+                    logger.info("\uD83C\uDF4F \uD83C\uDF4F Customer AccountInfo found: ".concat(info.getState().getData().getName()));
                 }
                 if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoice.getSupplierId())) {
                     supplierInfo = info.getState().getData();
-                    logger.info(" \uD83C\uDF4F \uD83C\uDF4F Supplier AccountInfo found: ".concat(info.getState().getData().getName()));
+                    logger.info("\uD83C\uDF4F \uD83C\uDF4F Supplier AccountInfo found: ".concat(info.getState().getData().getName()));
                 }
             }
             if (supplierInfo == null) {
@@ -167,6 +167,8 @@ public class TheUtil {
             if (customerInfo == null) {
                 throw new Exception("Customer is bloody missing");
             }
+            logger.info("\uD83D\uDC7D \uD83D\uDC7D SUPPLIER: ".concat(supplierInfo.getHost().getName().getOrganisation()));
+            logger.info("\uD83D\uDC7D \uD83D\uDC7D CUSTOMER: ".concat(customerInfo.getHost().getName().getOrganisation()));
             double m = invoice.getValueAddedTax() / 100;
             logger.info("discount used: " + m);
             invoice.setTotalAmount(invoice.getAmount() + (m * invoice.getAmount()));
@@ -310,6 +312,9 @@ public class TheUtil {
             if (invoiceOffer.getDiscount() == 0) {
                 throw new Exception("Discount not found");
             }
+            logger.info("\uD83D\uDC7D \uD83D\uDC7D INVOICE: ".concat(invoiceOffer.getInvoiceId())
+            .concat(" totalAmount: " + invoiceState.getTotalAmount()));
+            logger.info("\uD83D\uDC7D \uD83D\uDC7D INVESTOR: ".concat(investorInfo.getHost().getName().getOrganisation()));
 
             invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
                     ((100.0 - invoiceOffer.getDiscount())/100));
@@ -374,6 +379,7 @@ public class TheUtil {
         InvoiceOfferDTO o = new InvoiceOfferDTO();
         o.setInvoiceId(state.getInvoiceId().toString());
         o.setOfferAmount(state.getOfferAmount());
+        o.setOriginalAmount(state.getOriginalAmount());
         o.setDiscount(state.getDiscount());
         o.setSupplierId(state.getSupplier().getIdentifier().getId().toString());
         o.setInvestorId(state.getInvestor().getIdentifier().getId().toString());

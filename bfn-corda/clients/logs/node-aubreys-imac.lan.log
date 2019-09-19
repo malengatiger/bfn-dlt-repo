@@ -6347,3 +6347,1515 @@ java.util.concurrent.RejectedExecutionException: event executor terminated
   "supplierId": "32272607-9140-430d-b33c-7ce4379f10b5",
   "customerId": "a85c2774-55e2-400f-aa46-97a8fa738b6b"
 }
+[INFO ] 2019-09-19T09:05:20,694 [http-nio-10416-exec-5] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceOfferDTO: {
+  "invoiceId": "62900cbb-eaa6-4642-b3c2-61d07c3cc5c2",
+  "offerAmount": 0.0,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "investorId": "62900cbb-eaa6-4642-b3c2-61d07c3cc5c2"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:05:20,696 [http-nio-10416-exec-5] TheUtil - 🍏 INVOICE: 62900cbb-eaa6-4642-b3c2-61d07c3cc5c2  🔆    🧡 DISCOUNT: 10.0  🧡 INVESTOR: 62900cbb-eaa6-4642-b3c2-61d07c3cc5c2
+[ERROR] 2019-09-19T09:05:20,938 [http-nio-10416-exec-5] [dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: Failed to register invoiceOffer. Failed to register invoiceOffer. Invoice not found] with root cause
+java.lang.Exception: Failed to register invoiceOffer. Failed to register invoiceOffer. Invoice not found
+	at com.bfn.webserver.SupplierController.startInvoiceOfferFlow(SupplierController.java:124) ~[main/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_221]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_221]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_221]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_221]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1471) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_221]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_221]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_221]
+[INFO ] 2019-09-19T09:06:20,017 [http-nio-10416-exec-7] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceOfferDTO: {
+  "invoiceId": "2cfdf1b0-3127-4c65-8431-ec869e0e942e",
+  "offerAmount": 0.0,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "investorId": "62900cbb-eaa6-4642-b3c2-61d07c3cc5c2"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:06:20,017 [http-nio-10416-exec-7] TheUtil - 🍏 INVOICE: 2cfdf1b0-3127-4c65-8431-ec869e0e942e  🔆    🧡 DISCOUNT: 10.0  🧡 INVESTOR: 62900cbb-eaa6-4642-b3c2-61d07c3cc5c2
+[ERROR] 2019-09-19T09:06:20,047 [http-nio-10416-exec-7] [dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: Failed to register invoiceOffer. Failed to register invoiceOffer. Invoice not found] with root cause
+java.lang.Exception: Failed to register invoiceOffer. Failed to register invoiceOffer. Invoice not found
+	at com.bfn.webserver.SupplierController.startInvoiceOfferFlow(SupplierController.java:124) ~[main/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_221]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_221]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_221]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_221]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1471) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_221]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_221]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_221]
+[INFO ] 2019-09-19T09:07:40,916 [http-nio-10416-exec-10] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceOfferDTO: {
+  "invoiceId": "f091c2e6-d921-4e9b-914a-93fe7b78289d",
+  "offerAmount": 0.0,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "investorId": "62900cbb-eaa6-4642-b3c2-61d07c3cc5c2"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:07:40,916 [http-nio-10416-exec-10] TheUtil - 🍏 INVOICE: f091c2e6-d921-4e9b-914a-93fe7b78289d  🔆    🧡 DISCOUNT: 10.0  🧡 INVESTOR: 62900cbb-eaa6-4642-b3c2-61d07c3cc5c2
+[INFO ] 2019-09-19T09:07:40,994 [http-nio-10416-exec-10] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor One Inc.#19
+[INFO ] 2019-09-19T09:07:41,353 [http-nio-10416-exec-10] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=7C72922CB17E24ACF02A0D1B49A57AA6DCCD5B39F32D6E10FFE6AAED8D3C95D3) 🥏 🥏 
+[INFO ] 2019-09-19T09:07:41,353 [http-nio-10416-exec-10] SupplierController -  🧩  🧩 Returned invoiceOffer: {
+  "invoiceId": "f091c2e6-d921-4e9b-914a-93fe7b78289d",
+  "offerAmount": 8235.41175,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "supplierId": "bfb32f25-bed9-47c7-9a76-5a3ec5c30dee",
+  "investorId": "62900cbb-eaa6-4642-b3c2-61d07c3cc5c2",
+  "ownerId": "bfb32f25-bed9-47c7-9a76-5a3ec5c30dee",
+  "offerDate": "Sep 19, 2019 11:07:40 AM"
+}
+[INFO ] 2019-09-19T09:22:22,618 [http-nio-10416-exec-1] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceOfferDTO: {
+  "invoiceId": "f091c2e6-d921-4e9b-914a-93fe7b78289d",
+  "offerAmount": 0.0,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "investorId": "62900cbb-eaa6-4642-b3c2-61d07c3cc5c2"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:22:22,643 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: f091c2e6-d921-4e9b-914a-93fe7b78289d  🔆    🧡 DISCOUNT: 10.0  🧡 INVESTOR: 62900cbb-eaa6-4642-b3c2-61d07c3cc5c2
+[INFO ] 2019-09-19T09:22:22,714 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor One Inc.#19
+[INFO ] 2019-09-19T09:22:22,966 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=BD56D39440EAC9A1B2A79FCAF2932471903E02FB7AD6F3F2D2D33A50E9DAA030) 🥏 🥏 
+[INFO ] 2019-09-19T09:22:22,967 [http-nio-10416-exec-1] SupplierController -  🧩  🧩 Returned invoiceOffer: {
+  "invoiceId": "f091c2e6-d921-4e9b-914a-93fe7b78289d",
+  "offerAmount": 8235.41175,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "supplierId": "bfb32f25-bed9-47c7-9a76-5a3ec5c30dee",
+  "investorId": "62900cbb-eaa6-4642-b3c2-61d07c3cc5c2",
+  "ownerId": "bfb32f25-bed9-47c7-9a76-5a3ec5c30dee",
+  "offerDate": "Sep 19, 2019 11:22:22 AM"
+}
+[WARN ] 2019-09-19T09:38:37,658 [Thread-48 (ActiveMQ-client-global-threads)] client - AMQ212037: Connection failure has been detected: AMQ119015: The connection was disconnected because of server shutdown [code=DISCONNECTED]
+[WARN ] 2019-09-19T09:38:37,662 [Thread-48 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - Terminating observables.
+[WARN ] 2019-09-19T09:38:37,702 [Thread-53 (ActiveMQ-client-global-threads)] client - AMQ212037: Connection failure has been detected: AMQ119015: The connection was disconnected because of server shutdown [code=DISCONNECTED]
+[WARN ] 2019-09-19T09:38:37,704 [Thread-53 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - Terminating observables.
+[WARN ] 2019-09-19T09:38:37,798 [Thread-50 (ActiveMQ-client-global-threads)] client - AMQ212037: Connection failure has been detected: AMQ119015: The connection was disconnected because of server shutdown [code=DISCONNECTED]
+[WARN ] 2019-09-19T09:38:37,800 [Thread-50 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - Terminating observables.
+[INFO ] 2019-09-19T09:38:44,897 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6a988392: startup date [Thu Sep 19 08:08:33 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:38:44,902 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[WARN ] 2019-09-19T09:38:44,904 [Thread-48 (ActiveMQ-client-global-threads)] client - AMQ212004: Failed to connect to server.
+[ERROR] 2019-09-19T09:38:44,905 [Thread-48 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - Could not reconnect to the RPC server.
+[INFO ] 2019-09-19T09:38:44,941 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6a988392: startup date [Thu Sep 19 08:08:58 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:38:44,944 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[WARN ] 2019-09-19T09:38:44,946 [Thread-50 (ActiveMQ-client-global-threads)] client - AMQ212004: Failed to connect to server.
+[ERROR] 2019-09-19T09:38:44,947 [Thread-50 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - Could not reconnect to the RPC server.
+[INFO ] 2019-09-19T09:38:45,007 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6a988392: startup date [Thu Sep 19 08:27:26 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:38:45,011 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[WARN ] 2019-09-19T09:38:45,013 [Thread-53 (ActiveMQ-client-global-threads)] client - AMQ212004: Failed to connect to server.
+[ERROR] 2019-09-19T09:38:45,013 [Thread-53 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - Could not reconnect to the RPC server.
+[INFO ] 2019-09-19T09:53:22,593 [main] ShareAccountInfoFlow -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-19T09:53:23,354 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 79781 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-19T09:53:23,355 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-19T09:53:23,388 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6a988392: startup date [Thu Sep 19 11:53:23 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:53:24,257 [main] TomcatWebServer - Tomcat initialized with port(s): 10411 (http)
+[INFO ] 2019-09-19T09:53:24,269 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10411"]
+[INFO ] 2019-09-19T09:53:24,277 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-19T09:53:24,278 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-19T09:53:24,286 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-19T09:53:24,376 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-19T09:53:24,376 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 990 ms
+[INFO ] 2019-09-19T09:53:24,389 [localhost-startStop-1] ShareAccountInfoFlow - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:24,392 [localhost-startStop-1] ShareAccountInfoFlow -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:24,392 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:24,392 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:24,393 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:24,449 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-19T09:53:24,452 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:24,453 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:24,453 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:24,453 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:24,453 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:24,486 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10421  🔆
+[INFO ] 2019-09-19T09:53:25,274 [main] RPCClient - Startup took 717 msec
+[INFO ] 2019-09-19T09:53:25,274 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-19T09:53:25,453 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 OCT  💚  💚
+[INFO ] 2019-09-19T09:53:25,481 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1568886708395)
+[INFO ] 2019-09-19T09:53:25,491 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1568886708395)
+[INFO ] 2019-09-19T09:53:25,501 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1568886708395)
+[INFO ] 2019-09-19T09:53:25,510 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1568886708395)
+[INFO ] 2019-09-19T09:53:25,519 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1568886708395)
+[INFO ] 2019-09-19T09:53:25,577 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:25,701 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6a988392: startup date [Thu Sep 19 11:53:23 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:53:25,760 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.util.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:25,761 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:25,762 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-19T09:53:25,762 [main] RequestMappingHandlerMapping - Mapped "{[/admin/shareAccounts],methods=[GET]}" onto private java.lang.String com.bfn.webserver.AdminController.shareAccounts() throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:25,763 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-19T09:53:25,763 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-19T09:53:25,763 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-19T09:53:25,764 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-19T09:53:25,764 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.AdminController.listNodes()
+[INFO ] 2019-09-19T09:53:25,765 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-19T09:53:25,766 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-19T09:53:25,767 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-19T09:53:25,768 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-19T09:53:25,768 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-19T09:53:25,771 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-19T09:53:25,771 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-19T09:53:25,772 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-19T09:53:25,772 [main] RequestMappingHandlerMapping - Mapped "{[/investor/buyInvoiceOffer],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.buyInvoiceOffer(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:25,773 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-19T09:53:25,775 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-19T09:53:25,775 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-19T09:53:25,776 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-19T09:53:25,776 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-19T09:53:25,776 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.SupplierController.listNodes()
+[INFO ] 2019-09-19T09:53:25,776 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:25,777 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:25,777 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:25,779 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-19T09:53:25,780 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-19T09:53:25,800 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:25,801 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:25,834 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-19T09:53:26,034 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-19T09:53:26,046 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10411"]
+[INFO ] 2019-09-19T09:53:26,058 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-19T09:53:26,069 [main] TomcatWebServer - Tomcat started on port(s): 10411 (http) with context path ''
+[INFO ] 2019-09-19T09:53:26,072 [main] BFNWebApi - Started BFNWebApi in 3.386 seconds (JVM running for 4.446)
+[INFO ] 2019-09-19T09:53:26,073 [main] ShareAccountInfoFlow -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Thu Sep 19 11:53:26 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-19T09:53:34,543 [main] ShareAccountInfoFlow -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-19T09:53:35,572 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 79851 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-19T09:53:35,572 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-19T09:53:35,620 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62679465: startup date [Thu Sep 19 11:53:35 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:53:36,891 [main] TomcatWebServer - Tomcat initialized with port(s): 10414 (http)
+[INFO ] 2019-09-19T09:53:36,907 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10414"]
+[INFO ] 2019-09-19T09:53:36,916 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-19T09:53:36,917 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-19T09:53:36,925 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-19T09:53:37,022 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-19T09:53:37,022 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 1405 ms
+[INFO ] 2019-09-19T09:53:37,035 [localhost-startStop-1] ShareAccountInfoFlow - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:37,037 [localhost-startStop-1] ShareAccountInfoFlow -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:37,038 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:37,038 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:37,038 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:37,102 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-19T09:53:37,105 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:37,105 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:37,105 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:37,105 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:37,106 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:37,140 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10427  🔆
+[INFO ] 2019-09-19T09:53:38,085 [main] RPCClient - Startup took 877 msec
+[INFO ] 2019-09-19T09:53:38,086 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-19T09:53:38,287 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 CapeTown  💚  💚
+[INFO ] 2019-09-19T09:53:38,319 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1568886706194)
+[INFO ] 2019-09-19T09:53:38,330 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1568886706194)
+[INFO ] 2019-09-19T09:53:38,340 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1568886706194)
+[INFO ] 2019-09-19T09:53:38,350 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1568886706194)
+[INFO ] 2019-09-19T09:53:38,361 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1568886706194)
+[INFO ] 2019-09-19T09:53:38,426 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:38,578 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62679465: startup date [Thu Sep 19 11:53:35 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:53:38,650 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.util.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:38,653 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:38,654 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-19T09:53:38,655 [main] RequestMappingHandlerMapping - Mapped "{[/admin/shareAccounts],methods=[GET]}" onto private java.lang.String com.bfn.webserver.AdminController.shareAccounts() throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:38,655 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-19T09:53:38,657 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-19T09:53:38,658 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-19T09:53:38,659 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-19T09:53:38,660 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.AdminController.listNodes()
+[INFO ] 2019-09-19T09:53:38,661 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-19T09:53:38,661 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-19T09:53:38,663 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-19T09:53:38,664 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-19T09:53:38,664 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-19T09:53:38,669 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-19T09:53:38,670 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-19T09:53:38,673 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-19T09:53:38,674 [main] RequestMappingHandlerMapping - Mapped "{[/investor/buyInvoiceOffer],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.buyInvoiceOffer(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:38,675 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-19T09:53:38,677 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-19T09:53:38,678 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-19T09:53:38,678 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-19T09:53:38,679 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-19T09:53:38,679 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.SupplierController.listNodes()
+[INFO ] 2019-09-19T09:53:38,679 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:38,680 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:38,680 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:38,682 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-19T09:53:38,682 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-19T09:53:38,705 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:38,706 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:38,813 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-19T09:53:39,053 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-19T09:53:39,066 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10414"]
+[INFO ] 2019-09-19T09:53:39,079 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-19T09:53:39,092 [main] TomcatWebServer - Tomcat started on port(s): 10414 (http) with context path ''
+[INFO ] 2019-09-19T09:53:39,095 [main] BFNWebApi - Started BFNWebApi in 4.45 seconds (JVM running for 5.131)
+[INFO ] 2019-09-19T09:53:39,097 [main] ShareAccountInfoFlow -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Thu Sep 19 11:53:39 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-19T09:53:42,379 [main] ShareAccountInfoFlow -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-19T09:53:43,288 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 79882 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-19T09:53:43,289 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-19T09:53:43,332 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62679465: startup date [Thu Sep 19 11:53:43 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:53:44,253 [main] TomcatWebServer - Tomcat initialized with port(s): 10416 (http)
+[INFO ] 2019-09-19T09:53:44,264 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10416"]
+[INFO ] 2019-09-19T09:53:44,272 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-19T09:53:44,272 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-19T09:53:44,280 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-19T09:53:44,374 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-19T09:53:44,374 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 1044 ms
+[INFO ] 2019-09-19T09:53:44,385 [localhost-startStop-1] ShareAccountInfoFlow - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:44,387 [localhost-startStop-1] ShareAccountInfoFlow -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:44,388 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:44,388 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:44,388 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-19T09:53:44,443 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-19T09:53:44,446 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:44,446 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:44,447 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:44,447 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:44,447 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-19T09:53:44,481 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10429  🔆
+[INFO ] 2019-09-19T09:53:45,337 [main] RPCClient - Startup took 789 msec
+[INFO ] 2019-09-19T09:53:45,337 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-19T09:53:45,518 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 Regulator  💚  💚
+[INFO ] 2019-09-19T09:53:45,547 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T09:53:45,560 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T09:53:45,570 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T09:53:45,579 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T09:53:45,587 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T09:53:45,643 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:45,762 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62679465: startup date [Thu Sep 19 11:53:43 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T09:53:45,817 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.util.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:45,818 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:45,819 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-19T09:53:45,819 [main] RequestMappingHandlerMapping - Mapped "{[/admin/shareAccounts],methods=[GET]}" onto private java.lang.String com.bfn.webserver.AdminController.shareAccounts() throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:45,819 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-19T09:53:45,821 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-19T09:53:45,821 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-19T09:53:45,822 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-19T09:53:45,822 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.AdminController.listNodes()
+[INFO ] 2019-09-19T09:53:45,823 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-19T09:53:45,823 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-19T09:53:45,824 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-19T09:53:45,824 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-19T09:53:45,825 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-19T09:53:45,828 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-19T09:53:45,828 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-19T09:53:45,828 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-19T09:53:45,829 [main] RequestMappingHandlerMapping - Mapped "{[/investor/buyInvoiceOffer],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.buyInvoiceOffer(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:45,830 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-19T09:53:45,832 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-19T09:53:45,833 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-19T09:53:45,833 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-19T09:53:45,833 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-19T09:53:45,833 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.SupplierController.listNodes()
+[INFO ] 2019-09-19T09:53:45,834 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:45,834 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:45,834 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-19T09:53:45,836 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-19T09:53:45,836 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-19T09:53:45,853 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:45,853 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T09:53:45,886 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-19T09:53:46,091 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-19T09:53:46,102 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10416"]
+[INFO ] 2019-09-19T09:53:46,114 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-19T09:53:46,125 [main] TomcatWebServer - Tomcat started on port(s): 10416 (http) with context path ''
+[INFO ] 2019-09-19T09:53:46,128 [main] BFNWebApi - Started BFNWebApi in 3.657 seconds (JVM running for 4.348)
+[INFO ] 2019-09-19T09:53:46,129 [main] ShareAccountInfoFlow -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Thu Sep 19 11:53:46 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-19T09:54:30,759 [http-nio-10416-exec-1] [/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+[INFO ] 2019-09-19T09:54:30,775 [http-nio-10416-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+[INFO ] 2019-09-19T09:54:30,788 [http-nio-10416-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 13 ms
+[INFO ] 2019-09-19T09:54:30,806 [http-nio-10416-exec-1] AdminController - 🔵 🔵 🔵 starting DemoDataGenerator ... 🍏
+[INFO ] 2019-09-19T09:54:30,808 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 DemoUtil started ...  🔆 🔆 will list network components
+[INFO ] 2019-09-19T09:54:30,847 [http-nio-10416-exec-1] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=Regulator, L=Johannesburg, C=ZA
+[INFO ] 2019-09-19T09:54:30,848 [http-nio-10416-exec-1] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=Notary, L=Pretoria, C=ZA
+[INFO ] 2019-09-19T09:54:30,848 [http-nio-10416-exec-1] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=OCT, L=Sandton, C=ZA
+[INFO ] 2019-09-19T09:54:30,848 [http-nio-10416-exec-1] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=CapeTown, L=Cape Town, C=ZA
+[INFO ] 2019-09-19T09:54:30,849 [http-nio-10416-exec-1] TheUtil -  🧡 💛 💚 Corda NetworkNodes found: 💚 4 💚 
+[INFO ] 2019-09-19T09:54:30,849 [http-nio-10416-exec-1] TheUtil - 🥬 🥬 🥬 🥬 Registered Flows on Corda BFN ...  🥬 
+[INFO ] 2019-09-19T09:54:30,871 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$1 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.AccountRegistrationFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,871 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$2 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.NewKeyForAccount   🍎 
+[INFO ] 2019-09-19T09:54:30,871 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$3 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.ShareAccountInfoFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,871 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$4 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.BuyInvoiceOfferFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,872 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$5 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.InvoiceOfferFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,872 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$6 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.InvoiceRegistrationFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,872 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$7 🥬 BFN Corda Flow:  🥏com.bfn.flows.tokens.IssueTokensFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,872 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$8 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.AccountsForHost   🍎 
+[INFO ] 2019-09-19T09:54:30,872 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$9 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.AllAccounts   🍎 
+[INFO ] 2019-09-19T09:54:30,872 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$10 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.CreateAccount   🍎 
+[INFO ] 2019-09-19T09:54:30,873 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$11 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.OurAccounts   🍎 
+[INFO ] 2019-09-19T09:54:30,873 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$12 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.RequestAccountInfo   🍎 
+[INFO ] 2019-09-19T09:54:30,873 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$13 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount   🍎 
+[INFO ] 2019-09-19T09:54:30,873 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$14 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareAccountInfo   🍎 
+[INFO ] 2019-09-19T09:54:30,873 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$15 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareStateAndSyncAccounts   🍎 
+[INFO ] 2019-09-19T09:54:30,873 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$16 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareStateWithAccount   🍎 
+[INFO ] 2019-09-19T09:54:30,874 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$17 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.internal.flows.GetAccountKeyPolicyFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,874 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$18 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.internal.flows.SetAccountKeyPolicyFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,874 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$19 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialIssueTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,874 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$20 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialMoveFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,874 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$21 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialMoveNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,875 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$22 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialRedeemFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,875 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$23 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.CreateEvolvableTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,875 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$24 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.IssueTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,875 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$25 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.MoveFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,875 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$26 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.MoveNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,875 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$27 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.RedeemFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,876 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$28 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.RedeemNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:30,876 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$29 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.UpdateEvolvableToken   🍎 
+[INFO ] 2019-09-19T09:54:30,876 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$30 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.CheckTokenPointer   🍎 
+[INFO ] 2019-09-19T09:54:30,876 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$31 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.DvPFlow   🍎 
+[INFO ] 2019-09-19T09:54:30,876 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$32 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.GetDistributionList   🍎 
+[INFO ] 2019-09-19T09:54:30,876 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$33 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.RedeemFungibleGBP   🍎 
+[INFO ] 2019-09-19T09:54:30,877 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$34 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.RedeemNonFungibleHouse   🍎 
+[INFO ] 2019-09-19T09:54:30,877 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$35 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Authorise   🍎 
+[INFO ] 2019-09-19T09:54:30,877 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$36 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Deauthorise   🍎 
+[INFO ] 2019-09-19T09:54:30,877 [http-nio-10416-exec-1] TheUtil - 🥏 🥏 #$37 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Initiate   🍎 
+[INFO ] 2019-09-19T09:54:30,877 [http-nio-10416-exec-1] TheUtil - 🥬 🥬 🥬 🥬 Total Registered Flows  🍎  37  🍎 🥬 
+[INFO ] 2019-09-19T09:54:30,877 [http-nio-10416-exec-1] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerSupplierAccounts started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:32,713 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 Regulator.Supplier One#33 🥏 🥏 
+[INFO ] 2019-09-19T09:54:32,774 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 Regulator.Supplier Two#33 🥏 🥏 
+[INFO ] 2019-09-19T09:54:32,775 [http-nio-10416-exec-1] DemoUtil -  🔆 🔆 🔆 🔆 registerSupplierAccounts complete ...  🔆 🔆 added 2 accounts
+[INFO ] 2019-09-19T09:54:32,781 [http-nio-10416-exec-1] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerCustomerAccounts started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:32,831 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 Regulator.Customer One LLC#99 🥏 🥏 
+[INFO ] 2019-09-19T09:54:32,878 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 Regulator.Customer Two LLC#99 🥏 🥏 
+[INFO ] 2019-09-19T09:54:32,879 [http-nio-10416-exec-1] DemoUtil -  🔆 🔆 registerCustomerAccounts complete ...  🔆 🔆 added 2 accounts
+[INFO ] 2019-09-19T09:54:32,885 [http-nio-10416-exec-1] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerInvestorAccounts started ...  🔆 🔆
+[INFO ] 2019-09-19T09:54:32,927 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 Regulator.Investor One Inc.#10 🥏 🥏 
+[INFO ] 2019-09-19T09:54:32,969 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 Regulator.Investor Two LLC#10 🥏 🥏 
+[INFO ] 2019-09-19T09:54:32,970 [http-nio-10416-exec-1] DemoUtil -  🔆 🔆 registerInvestorAccounts complete ...  🔆 🔆 added 2  accounts
+[INFO ] 2019-09-19T09:54:32,987 [http-nio-10416-exec-1] DemoUtil - 
+
+🦠 🦠 shareAccounts: Nodes running: 4
+[INFO ] 2019-09-19T09:54:33,268 [http-nio-10416-exec-1] DemoUtil - 🦠 🦠  Accounts on O=Regulator, L=Johannesburg, C=ZA Node: 6
+[INFO ] 2019-09-19T09:54:33,269 [http-nio-10416-exec-1] DemoUtil - 🔕  🔕  ignore sharing - party on same node 🥬 
+[INFO ] 2019-09-19T09:54:33,269 [http-nio-10416-exec-1] DemoUtil - 🔕  🔕 ignore sharing - this party is a Notary 🥬 🥬 
+[INFO ] 2019-09-19T09:54:34,149 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier One#33
+[INFO ] 2019-09-19T09:54:35,300 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier Two#33
+[INFO ] 2019-09-19T09:54:35,401 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer One LLC#99
+[INFO ] 2019-09-19T09:54:35,495 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer Two LLC#99
+[INFO ] 2019-09-19T09:54:35,635 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:54:35,776 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:54:36,428 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier One#33
+[INFO ] 2019-09-19T09:54:37,532 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier Two#33
+[INFO ] 2019-09-19T09:54:37,643 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer One LLC#99
+[INFO ] 2019-09-19T09:54:37,742 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer Two LLC#99
+[INFO ] 2019-09-19T09:54:37,825 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:54:37,910 [http-nio-10416-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:54:37,914 [http-nio-10416-exec-1] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886877910",
+  "description": "Demo Invoice at Thu Sep 19 11:54:37 SAST 2019",
+  "amount": 79000.0,
+  "totalAmount": 86900.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:54:37 AM",
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "0bf343ea-3292-44e7-a25f-fd58c6163d98"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:54:37,914 [http-nio-10416-exec-1] TheUtil - 🍏 SUPPLIER: 71edb231-ec9b-43e0-a281-6fa42d29414d  🔆    🧡 CUSTOMER: 0bf343ea-3292-44e7-a25f-fd58c6163d98
+[INFO ] 2019-09-19T09:54:37,946 [http-nio-10416-exec-1] TheUtil -  🍏 🍏 Supplier AccountInfo found: Regulator.Supplier One#33
+[INFO ] 2019-09-19T09:54:37,947 [http-nio-10416-exec-1] TheUtil -  🍏 🍏 Customer AccountInfo found: Regulator.Customer One LLC#99
+[INFO ] 2019-09-19T09:54:37,947 [http-nio-10416-exec-1] TheUtil - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-19T09:54:37,947 [http-nio-10416-exec-1] TheUtil - 👽 👽 CUSTOMER: Regulator
+[INFO ] 2019-09-19T09:54:37,948 [http-nio-10416-exec-1] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:54:39,858 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=911913235FA3AAACE0FBDD91F1A3B2C213F60C342A98AB38B9192046ACAA76B0) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:39,858 [http-nio-10416-exec-1] TheUtil - {
+  "invoiceId": "687c1848-700f-490d-909f-ec8125de85de",
+  "invoiceNumber": "INV_1568886877910",
+  "description": "Demo Invoice at Thu Sep 19 11:54:37 SAST 2019",
+  "amount": 79000.0,
+  "totalAmount": 86900.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "0bf343ea-3292-44e7-a25f-fd58c6163d98"
+}
+[INFO ] 2019-09-19T09:54:39,859 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:39,859 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: 687c1848-700f-490d-909f-ec8125de85de  🔆    🧡 DISCOUNT: 19.0  🧡 INVESTOR: bb39ea29-0c3b-4057-8a49-a59f2912bb80
+[INFO ] 2019-09-19T09:54:39,981 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:54:39,981 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVOICE: 687c1848-700f-490d-909f-ec8125de85de
+[INFO ] 2019-09-19T09:54:39,981 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-19T09:54:40,163 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=96DB8C6552226A84991F1B9CD5F8EE98B838175ECAD48FBC55D1E1DFDC061F8D) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:40,163 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:40,163 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: 687c1848-700f-490d-909f-ec8125de85de  🔆    🧡 DISCOUNT: 6.0  🧡 INVESTOR: e45ecf1c-0919-41ea-bec3-e6ed4323313e
+[INFO ] 2019-09-19T09:54:40,209 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:54:40,210 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVOICE: 687c1848-700f-490d-909f-ec8125de85de
+[INFO ] 2019-09-19T09:54:40,210 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-19T09:54:40,341 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=867162EB4857E0CF8D0BA41CD23EE26CA4F13E77D3E0685015DA188185F01E63) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:40,341 [http-nio-10416-exec-1] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886880341",
+  "description": "Demo Invoice at Thu Sep 19 11:54:40 SAST 2019",
+  "amount": 64000.0,
+  "totalAmount": 70400.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:54:40 AM",
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e40e248d-8fa3-434b-8177-f4af12896584"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:54:40,341 [http-nio-10416-exec-1] TheUtil - 🍏 SUPPLIER: 71edb231-ec9b-43e0-a281-6fa42d29414d  🔆    🧡 CUSTOMER: e40e248d-8fa3-434b-8177-f4af12896584
+[INFO ] 2019-09-19T09:54:40,360 [http-nio-10416-exec-1] TheUtil -  🍏 🍏 Supplier AccountInfo found: Regulator.Supplier One#33
+[INFO ] 2019-09-19T09:54:40,360 [http-nio-10416-exec-1] TheUtil -  🍏 🍏 Customer AccountInfo found: Regulator.Customer Two LLC#99
+[INFO ] 2019-09-19T09:54:40,360 [http-nio-10416-exec-1] TheUtil - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-19T09:54:40,360 [http-nio-10416-exec-1] TheUtil - 👽 👽 CUSTOMER: Regulator
+[INFO ] 2019-09-19T09:54:40,360 [http-nio-10416-exec-1] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:54:40,470 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=000709F49C29B78A3D6C5D0F66581448467F558F39C8BFCEF3D35CFAD8821B2E) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:40,470 [http-nio-10416-exec-1] TheUtil - {
+  "invoiceId": "ab6a168e-3034-4a31-afc5-77a0cfa15ba3",
+  "invoiceNumber": "INV_1568886880341",
+  "description": "Demo Invoice at Thu Sep 19 11:54:40 SAST 2019",
+  "amount": 64000.0,
+  "totalAmount": 70400.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e40e248d-8fa3-434b-8177-f4af12896584"
+}
+[INFO ] 2019-09-19T09:54:40,471 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:40,471 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: ab6a168e-3034-4a31-afc5-77a0cfa15ba3  🔆    🧡 DISCOUNT: 1.0  🧡 INVESTOR: bb39ea29-0c3b-4057-8a49-a59f2912bb80
+[INFO ] 2019-09-19T09:54:40,511 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:54:40,511 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVOICE: ab6a168e-3034-4a31-afc5-77a0cfa15ba3
+[INFO ] 2019-09-19T09:54:40,511 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-19T09:54:40,632 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=67CD53A41BCD3BFCDB9AB385382CA862AFC719BBC3F53FCD8099C638CF4C4FC9) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:40,632 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:40,632 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: ab6a168e-3034-4a31-afc5-77a0cfa15ba3  🔆    🧡 DISCOUNT: 7.0  🧡 INVESTOR: e45ecf1c-0919-41ea-bec3-e6ed4323313e
+[INFO ] 2019-09-19T09:54:40,665 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:54:40,665 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVOICE: ab6a168e-3034-4a31-afc5-77a0cfa15ba3
+[INFO ] 2019-09-19T09:54:40,665 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-19T09:54:40,788 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=C83C76BC7A821B36FA8D59622E6D2EEF7EC39289768E75D10F970DFAFDBB97EE) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:40,789 [http-nio-10416-exec-1] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886880789",
+  "description": "Demo Invoice at Thu Sep 19 11:54:40 SAST 2019",
+  "amount": 47000.0,
+  "totalAmount": 51700.00000000001,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:54:40 AM",
+  "supplierId": "948fdd02-f207-4423-b702-b4ff275fa588",
+  "customerId": "0bf343ea-3292-44e7-a25f-fd58c6163d98"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:54:40,789 [http-nio-10416-exec-1] TheUtil - 🍏 SUPPLIER: 948fdd02-f207-4423-b702-b4ff275fa588  🔆    🧡 CUSTOMER: 0bf343ea-3292-44e7-a25f-fd58c6163d98
+[INFO ] 2019-09-19T09:54:40,805 [http-nio-10416-exec-1] TheUtil -  🍏 🍏 Supplier AccountInfo found: Regulator.Supplier Two#33
+[INFO ] 2019-09-19T09:54:40,805 [http-nio-10416-exec-1] TheUtil -  🍏 🍏 Customer AccountInfo found: Regulator.Customer One LLC#99
+[INFO ] 2019-09-19T09:54:40,806 [http-nio-10416-exec-1] TheUtil - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-19T09:54:40,806 [http-nio-10416-exec-1] TheUtil - 👽 👽 CUSTOMER: Regulator
+[INFO ] 2019-09-19T09:54:40,806 [http-nio-10416-exec-1] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:54:40,915 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=C869607B61F313CC53B4249D9B67D8918D95A5E3C74804CD563DF4D8DB6BAFBC) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:40,915 [http-nio-10416-exec-1] TheUtil - {
+  "invoiceId": "a9696953-3ed5-495f-bd86-4653739db8de",
+  "invoiceNumber": "INV_1568886880789",
+  "description": "Demo Invoice at Thu Sep 19 11:54:40 SAST 2019",
+  "amount": 47000.0,
+  "totalAmount": 51700.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "948fdd02-f207-4423-b702-b4ff275fa588",
+  "customerId": "0bf343ea-3292-44e7-a25f-fd58c6163d98"
+}
+[INFO ] 2019-09-19T09:54:40,915 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:40,916 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: a9696953-3ed5-495f-bd86-4653739db8de  🔆    🧡 DISCOUNT: 22.0  🧡 INVESTOR: bb39ea29-0c3b-4057-8a49-a59f2912bb80
+[INFO ] 2019-09-19T09:54:40,954 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:54:40,954 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVOICE: a9696953-3ed5-495f-bd86-4653739db8de
+[INFO ] 2019-09-19T09:54:40,954 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-19T09:54:41,075 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=09FA0943AE27095B04059E592EB1D189C9770BAFBCB79EAE1CB6C8AB9730EF8C) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:41,076 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:41,076 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: a9696953-3ed5-495f-bd86-4653739db8de  🔆    🧡 DISCOUNT: 20.0  🧡 INVESTOR: e45ecf1c-0919-41ea-bec3-e6ed4323313e
+[INFO ] 2019-09-19T09:54:41,123 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:54:41,124 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVOICE: a9696953-3ed5-495f-bd86-4653739db8de
+[INFO ] 2019-09-19T09:54:41,124 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-19T09:54:41,222 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=A0847250570D10F3104DCB1FD5B5F42EFC530A2A4EB86167009054E13E2DA251) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:41,223 [http-nio-10416-exec-1] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886881222",
+  "description": "Demo Invoice at Thu Sep 19 11:54:41 SAST 2019",
+  "amount": 69000.0,
+  "totalAmount": 75900.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:54:41 AM",
+  "supplierId": "948fdd02-f207-4423-b702-b4ff275fa588",
+  "customerId": "e40e248d-8fa3-434b-8177-f4af12896584"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:54:41,223 [http-nio-10416-exec-1] TheUtil - 🍏 SUPPLIER: 948fdd02-f207-4423-b702-b4ff275fa588  🔆    🧡 CUSTOMER: e40e248d-8fa3-434b-8177-f4af12896584
+[INFO ] 2019-09-19T09:54:41,237 [http-nio-10416-exec-1] TheUtil -  🍏 🍏 Supplier AccountInfo found: Regulator.Supplier Two#33
+[INFO ] 2019-09-19T09:54:41,238 [http-nio-10416-exec-1] TheUtil -  🍏 🍏 Customer AccountInfo found: Regulator.Customer Two LLC#99
+[INFO ] 2019-09-19T09:54:41,238 [http-nio-10416-exec-1] TheUtil - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-19T09:54:41,238 [http-nio-10416-exec-1] TheUtil - 👽 👽 CUSTOMER: Regulator
+[INFO ] 2019-09-19T09:54:41,238 [http-nio-10416-exec-1] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:54:41,337 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=7A12EB276A7A93C756AFABFA0DCB59CB8C08AED088B2DA0AD40514775218A38D) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:41,337 [http-nio-10416-exec-1] TheUtil - {
+  "invoiceId": "12cf8668-d0dc-4fb1-9a3d-700888ea6410",
+  "invoiceNumber": "INV_1568886881222",
+  "description": "Demo Invoice at Thu Sep 19 11:54:41 SAST 2019",
+  "amount": 69000.0,
+  "totalAmount": 75900.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "948fdd02-f207-4423-b702-b4ff275fa588",
+  "customerId": "e40e248d-8fa3-434b-8177-f4af12896584"
+}
+[INFO ] 2019-09-19T09:54:41,338 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:41,338 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: 12cf8668-d0dc-4fb1-9a3d-700888ea6410  🔆    🧡 DISCOUNT: 21.0  🧡 INVESTOR: bb39ea29-0c3b-4057-8a49-a59f2912bb80
+[INFO ] 2019-09-19T09:54:41,371 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:54:41,372 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVOICE: 12cf8668-d0dc-4fb1-9a3d-700888ea6410
+[INFO ] 2019-09-19T09:54:41,372 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-19T09:54:41,485 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=A3AFFA47AF3781432B7F65491E50F4578A52734537D3593EF7D406ADD0E1BBAE) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:41,485 [http-nio-10416-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:41,485 [http-nio-10416-exec-1] TheUtil - 🍏 INVOICE: 12cf8668-d0dc-4fb1-9a3d-700888ea6410  🔆    🧡 DISCOUNT: 7.0  🧡 INVESTOR: e45ecf1c-0919-41ea-bec3-e6ed4323313e
+[INFO ] 2019-09-19T09:54:41,521 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:54:41,522 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVOICE: 12cf8668-d0dc-4fb1-9a3d-700888ea6410
+[INFO ] 2019-09-19T09:54:41,522 [http-nio-10416-exec-1] TheUtil - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-19T09:54:41,632 [http-nio-10416-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=001F4AE2D99C6C42DCBAC43D0F273D3C3AC18FC8A7EE2DA34BAA22D742F4215F) 🥏 🥏 
+[INFO ] 2019-09-19T09:54:41,649 [http-nio-10416-exec-1] DemoUtil -  🍊  🍊 4 InvoiceStates on node ...  🍊 
+[INFO ] 2019-09-19T09:54:41,649 [http-nio-10416-exec-1] TheUtil -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-19T09:54:41,679 [http-nio-10416-exec-1] TheUtil -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-19T09:54:41,680 [http-nio-10416-exec-1] DemoUtil -  🍊  🍊 8 InvoiceOfferStates on node ...  🍊 
+[INFO ] 2019-09-19T09:54:41,696 [http-nio-10416-exec-1] TheUtil - 🌺  🌺 done listing accounts:  🌺 6
+[INFO ] 2019-09-19T09:54:41,696 [http-nio-10416-exec-1] DemoUtil -  🍎  🍎 Total Number of Accounts on Node after sharing: 🍎  🍎 6
+[INFO ] 2019-09-19T09:54:41,697 [http-nio-10416-exec-1] AdminController - 
+
+🔵 🔵 🔵 DemoUtil result:  🍏 {
+  "numberOfAccounts": 6,
+  "numberOfInvoices": 4,
+  "numberOfInvoiceOffers": 8,
+  "numberOfNodes": 4,
+  "numberOfFlows": 37,
+  "started": "Thu Sep 19 11:54:30 SAST 2019",
+  "ended": "Thu Sep 19 11:54:41 SAST 2019",
+  "elapsedSeconds": 10.0
+}    🧡 💛 💚 💙 💜
+
+
+[INFO ] 2019-09-19T09:54:55,908 [http-nio-10414-exec-2] [/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+[INFO ] 2019-09-19T09:54:55,909 [http-nio-10414-exec-2] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+[INFO ] 2019-09-19T09:54:55,922 [http-nio-10414-exec-2] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 13 ms
+[INFO ] 2019-09-19T09:54:55,943 [http-nio-10414-exec-2] AdminController - 🔵 🔵 🔵 starting DemoDataGenerator ... 🍏
+[INFO ] 2019-09-19T09:54:55,946 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 DemoUtil started ...  🔆 🔆 will list network components
+[INFO ] 2019-09-19T09:54:55,993 [http-nio-10414-exec-2] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=CapeTown, L=Cape Town, C=ZA
+[INFO ] 2019-09-19T09:54:55,993 [http-nio-10414-exec-2] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=Regulator, L=Johannesburg, C=ZA
+[INFO ] 2019-09-19T09:54:55,993 [http-nio-10414-exec-2] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=Notary, L=Pretoria, C=ZA
+[INFO ] 2019-09-19T09:54:55,993 [http-nio-10414-exec-2] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=OCT, L=Sandton, C=ZA
+[INFO ] 2019-09-19T09:54:55,994 [http-nio-10414-exec-2] TheUtil -  🧡 💛 💚 Corda NetworkNodes found: 💚 4 💚 
+[INFO ] 2019-09-19T09:54:55,994 [http-nio-10414-exec-2] TheUtil - 🥬 🥬 🥬 🥬 Registered Flows on Corda BFN ...  🥬 
+[INFO ] 2019-09-19T09:54:56,002 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$1 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.AccountRegistrationFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,003 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$2 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.NewKeyForAccount   🍎 
+[INFO ] 2019-09-19T09:54:56,003 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$3 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.ShareAccountInfoFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,003 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$4 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.BuyInvoiceOfferFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,003 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$5 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.InvoiceOfferFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,003 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$6 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.InvoiceRegistrationFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,003 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$7 🥬 BFN Corda Flow:  🥏com.bfn.flows.tokens.IssueTokensFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,004 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$8 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.AccountsForHost   🍎 
+[INFO ] 2019-09-19T09:54:56,004 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$9 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.AllAccounts   🍎 
+[INFO ] 2019-09-19T09:54:56,004 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$10 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.CreateAccount   🍎 
+[INFO ] 2019-09-19T09:54:56,004 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$11 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.OurAccounts   🍎 
+[INFO ] 2019-09-19T09:54:56,004 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$12 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.RequestAccountInfo   🍎 
+[INFO ] 2019-09-19T09:54:56,004 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$13 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount   🍎 
+[INFO ] 2019-09-19T09:54:56,005 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$14 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareAccountInfo   🍎 
+[INFO ] 2019-09-19T09:54:56,005 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$15 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareStateAndSyncAccounts   🍎 
+[INFO ] 2019-09-19T09:54:56,005 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$16 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareStateWithAccount   🍎 
+[INFO ] 2019-09-19T09:54:56,005 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$17 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.internal.flows.GetAccountKeyPolicyFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,005 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$18 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.internal.flows.SetAccountKeyPolicyFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,005 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$19 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialIssueTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,006 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$20 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialMoveFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,006 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$21 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialMoveNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,006 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$22 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialRedeemFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,006 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$23 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.CreateEvolvableTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,006 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$24 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.IssueTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,007 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$25 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.MoveFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,007 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$26 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.MoveNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,007 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$27 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.RedeemFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,007 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$28 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.RedeemNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:54:56,007 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$29 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.UpdateEvolvableToken   🍎 
+[INFO ] 2019-09-19T09:54:56,007 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$30 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.CheckTokenPointer   🍎 
+[INFO ] 2019-09-19T09:54:56,008 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$31 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.DvPFlow   🍎 
+[INFO ] 2019-09-19T09:54:56,008 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$32 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.GetDistributionList   🍎 
+[INFO ] 2019-09-19T09:54:56,008 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$33 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.RedeemFungibleGBP   🍎 
+[INFO ] 2019-09-19T09:54:56,008 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$34 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.RedeemNonFungibleHouse   🍎 
+[INFO ] 2019-09-19T09:54:56,008 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$35 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Authorise   🍎 
+[INFO ] 2019-09-19T09:54:56,008 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$36 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Deauthorise   🍎 
+[INFO ] 2019-09-19T09:54:56,009 [http-nio-10414-exec-2] TheUtil - 🥏 🥏 #$37 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Initiate   🍎 
+[INFO ] 2019-09-19T09:54:56,009 [http-nio-10414-exec-2] TheUtil - 🥬 🥬 🥬 🥬 Total Registered Flows  🍎  37  🍎 🥬 
+[INFO ] 2019-09-19T09:54:56,009 [http-nio-10414-exec-2] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerSupplierAccounts started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:56,321 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 CapeTown.Supplier One#8 🥏 🥏 
+[INFO ] 2019-09-19T09:54:56,364 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 CapeTown.Supplier Two#8 🥏 🥏 
+[INFO ] 2019-09-19T09:54:56,364 [http-nio-10414-exec-2] DemoUtil -  🔆 🔆 🔆 🔆 registerSupplierAccounts complete ...  🔆 🔆 added 2 accounts
+[INFO ] 2019-09-19T09:54:56,370 [http-nio-10414-exec-2] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerCustomerAccounts started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:54:56,409 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 CapeTown.Customer One LLC#41 🥏 🥏 
+[INFO ] 2019-09-19T09:54:56,446 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 CapeTown.Customer Two LLC#41 🥏 🥏 
+[INFO ] 2019-09-19T09:54:56,447 [http-nio-10414-exec-2] DemoUtil -  🔆 🔆 registerCustomerAccounts complete ...  🔆 🔆 added 2 accounts
+[INFO ] 2019-09-19T09:54:56,453 [http-nio-10414-exec-2] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerInvestorAccounts started ...  🔆 🔆
+[INFO ] 2019-09-19T09:54:56,499 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 CapeTown.Investor One Inc.#72 🥏 🥏 
+[INFO ] 2019-09-19T09:54:56,549 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 CapeTown.Investor Two LLC#72 🥏 🥏 
+[INFO ] 2019-09-19T09:54:56,550 [http-nio-10414-exec-2] DemoUtil -  🔆 🔆 registerInvestorAccounts complete ...  🔆 🔆 added 2  accounts
+[INFO ] 2019-09-19T09:54:56,572 [http-nio-10414-exec-2] DemoUtil - 
+
+🦠 🦠 shareAccounts: Nodes running: 4
+[INFO ] 2019-09-19T09:54:56,892 [http-nio-10414-exec-2] DemoUtil - 🦠 🦠  Accounts on O=CapeTown, L=Cape Town, C=ZA Node: 12
+[INFO ] 2019-09-19T09:54:56,893 [http-nio-10414-exec-2] DemoUtil - 🔕  🔕  ignore sharing - party on same node 🥬 
+[INFO ] 2019-09-19T09:54:57,057 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier One#33
+[INFO ] 2019-09-19T09:54:57,143 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier Two#33
+[INFO ] 2019-09-19T09:54:57,249 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer One LLC#99
+[INFO ] 2019-09-19T09:54:57,368 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer Two LLC#99
+[INFO ] 2019-09-19T09:54:57,496 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:54:57,612 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:54:57,703 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Supplier One#8
+[INFO ] 2019-09-19T09:54:57,783 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Supplier Two#8
+[INFO ] 2019-09-19T09:54:57,859 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Customer One LLC#41
+[INFO ] 2019-09-19T09:54:57,925 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Customer Two LLC#41
+[INFO ] 2019-09-19T09:54:57,980 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T09:54:58,040 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Investor Two LLC#72
+[INFO ] 2019-09-19T09:54:58,041 [http-nio-10414-exec-2] DemoUtil - 🔕  🔕 ignore sharing - this party is a Notary 🥬 🥬 
+[INFO ] 2019-09-19T09:54:58,249 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier One#33
+[INFO ] 2019-09-19T09:54:58,369 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier Two#33
+[INFO ] 2019-09-19T09:54:58,448 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer One LLC#99
+[INFO ] 2019-09-19T09:54:58,535 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer Two LLC#99
+[INFO ] 2019-09-19T09:54:58,619 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:54:58,686 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:54:58,744 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Supplier One#8
+[INFO ] 2019-09-19T09:54:58,818 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Supplier Two#8
+[INFO ] 2019-09-19T09:54:58,873 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Customer One LLC#41
+[INFO ] 2019-09-19T09:54:58,941 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Customer Two LLC#41
+[INFO ] 2019-09-19T09:54:59,000 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T09:54:59,057 [http-nio-10414-exec-2] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Investor Two LLC#72
+[INFO ] 2019-09-19T09:54:59,061 [http-nio-10414-exec-2] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886899057",
+  "description": "Demo Invoice at Thu Sep 19 11:54:59 SAST 2019",
+  "amount": 28000.0,
+  "totalAmount": 30800.000000000004,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:54:59 AM",
+  "supplierId": "b1dfa2ed-768d-457f-aaf1-b4c7f7290ef8",
+  "customerId": "9524fd82-0c7a-4f84-a64f-ae8b82f276a0"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:54:59,061 [http-nio-10414-exec-2] TheUtil - 🍏 SUPPLIER: b1dfa2ed-768d-457f-aaf1-b4c7f7290ef8  🔆    🧡 CUSTOMER: 9524fd82-0c7a-4f84-a64f-ae8b82f276a0
+[INFO ] 2019-09-19T09:54:59,096 [http-nio-10414-exec-2] TheUtil -  🍏 🍏 Supplier AccountInfo found: CapeTown.Supplier One#8
+[INFO ] 2019-09-19T09:54:59,097 [http-nio-10414-exec-2] TheUtil -  🍏 🍏 Customer AccountInfo found: CapeTown.Customer One LLC#41
+[INFO ] 2019-09-19T09:54:59,097 [http-nio-10414-exec-2] TheUtil - 👽 👽 SUPPLIER: CapeTown
+[INFO ] 2019-09-19T09:54:59,097 [http-nio-10414-exec-2] TheUtil - 👽 👽 CUSTOMER: CapeTown
+[INFO ] 2019-09-19T09:54:59,097 [http-nio-10414-exec-2] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:55:00,855 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=5273652D28F406E10760D36ED5D5E7D5BEB11A7473DD31E07B20FB4A5B17F2D6) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:00,856 [http-nio-10414-exec-2] TheUtil - {
+  "invoiceId": "671d3e06-a839-4aab-a2e0-1733f1f65bea",
+  "invoiceNumber": "INV_1568886899057",
+  "description": "Demo Invoice at Thu Sep 19 11:54:59 SAST 2019",
+  "amount": 28000.0,
+  "totalAmount": 30800.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "b1dfa2ed-768d-457f-aaf1-b4c7f7290ef8",
+  "customerId": "9524fd82-0c7a-4f84-a64f-ae8b82f276a0"
+}
+[INFO ] 2019-09-19T09:55:00,856 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:00,856 [http-nio-10414-exec-2] TheUtil - 🍏 INVOICE: 671d3e06-a839-4aab-a2e0-1733f1f65bea  🔆    🧡 DISCOUNT: 12.0  🧡 INVESTOR: f652fbf5-5064-4542-8f5e-eb5af87ad05c
+[INFO ] 2019-09-19T09:55:00,989 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T09:55:00,989 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVOICE: 671d3e06-a839-4aab-a2e0-1733f1f65bea
+[INFO ] 2019-09-19T09:55:00,989 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[INFO ] 2019-09-19T09:55:01,238 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=E9C16D2BCC2DF4D7C1D7022AE6669E7F8D3657A9F36DC0BC5B427FCBB6408451) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:01,239 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:01,239 [http-nio-10414-exec-2] TheUtil - 🍏 INVOICE: 671d3e06-a839-4aab-a2e0-1733f1f65bea  🔆    🧡 DISCOUNT: 1.0  🧡 INVESTOR: 4b025e35-2660-4cf7-b83d-45b2655f54ef
+[INFO ] 2019-09-19T09:55:01,276 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor Two LLC#72
+[INFO ] 2019-09-19T09:55:01,276 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVOICE: 671d3e06-a839-4aab-a2e0-1733f1f65bea
+[INFO ] 2019-09-19T09:55:01,276 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[INFO ] 2019-09-19T09:55:01,377 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=6E322A57BE0114BCD3FF74DFDF01EEA07669FDC89793B2573F162681144D8325) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:01,377 [http-nio-10414-exec-2] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886901377",
+  "description": "Demo Invoice at Thu Sep 19 11:55:01 SAST 2019",
+  "amount": 78000.0,
+  "totalAmount": 85800.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:55:01 AM",
+  "supplierId": "b1dfa2ed-768d-457f-aaf1-b4c7f7290ef8",
+  "customerId": "d22a7c36-184c-4b0a-904d-02fad6383e76"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:55:01,378 [http-nio-10414-exec-2] TheUtil - 🍏 SUPPLIER: b1dfa2ed-768d-457f-aaf1-b4c7f7290ef8  🔆    🧡 CUSTOMER: d22a7c36-184c-4b0a-904d-02fad6383e76
+[INFO ] 2019-09-19T09:55:01,407 [http-nio-10414-exec-2] TheUtil -  🍏 🍏 Supplier AccountInfo found: CapeTown.Supplier One#8
+[INFO ] 2019-09-19T09:55:01,407 [http-nio-10414-exec-2] TheUtil -  🍏 🍏 Customer AccountInfo found: CapeTown.Customer Two LLC#41
+[INFO ] 2019-09-19T09:55:01,407 [http-nio-10414-exec-2] TheUtil - 👽 👽 SUPPLIER: CapeTown
+[INFO ] 2019-09-19T09:55:01,407 [http-nio-10414-exec-2] TheUtil - 👽 👽 CUSTOMER: CapeTown
+[INFO ] 2019-09-19T09:55:01,407 [http-nio-10414-exec-2] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:55:01,524 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=2A9F08678EB100CF5FB473F2D9407397B227B74F0265D4A0BCCB3E6DE0CAD930) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:01,524 [http-nio-10414-exec-2] TheUtil - {
+  "invoiceId": "d59edd47-f8ba-43a7-b26d-ae9274403ab2",
+  "invoiceNumber": "INV_1568886901377",
+  "description": "Demo Invoice at Thu Sep 19 11:55:01 SAST 2019",
+  "amount": 78000.0,
+  "totalAmount": 85800.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "b1dfa2ed-768d-457f-aaf1-b4c7f7290ef8",
+  "customerId": "d22a7c36-184c-4b0a-904d-02fad6383e76"
+}
+[INFO ] 2019-09-19T09:55:01,525 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:01,525 [http-nio-10414-exec-2] TheUtil - 🍏 INVOICE: d59edd47-f8ba-43a7-b26d-ae9274403ab2  🔆    🧡 DISCOUNT: 22.0  🧡 INVESTOR: f652fbf5-5064-4542-8f5e-eb5af87ad05c
+[INFO ] 2019-09-19T09:55:01,580 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T09:55:01,580 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVOICE: d59edd47-f8ba-43a7-b26d-ae9274403ab2
+[INFO ] 2019-09-19T09:55:01,580 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[INFO ] 2019-09-19T09:55:01,683 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=436CC2817074AA15752F37B9E19B392FEC5DE17779A1810732BAFB777776EFDC) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:01,683 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:01,683 [http-nio-10414-exec-2] TheUtil - 🍏 INVOICE: d59edd47-f8ba-43a7-b26d-ae9274403ab2  🔆    🧡 DISCOUNT: 24.0  🧡 INVESTOR: 4b025e35-2660-4cf7-b83d-45b2655f54ef
+[INFO ] 2019-09-19T09:55:01,720 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor Two LLC#72
+[INFO ] 2019-09-19T09:55:01,720 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVOICE: d59edd47-f8ba-43a7-b26d-ae9274403ab2
+[INFO ] 2019-09-19T09:55:01,720 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[INFO ] 2019-09-19T09:55:01,839 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=7BFCEBFD2DE2E5A700CF23E9D0CE30E41FF7727CFFA01F2F951CE78AEE8BF9EB) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:01,839 [http-nio-10414-exec-2] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886901839",
+  "description": "Demo Invoice at Thu Sep 19 11:55:01 SAST 2019",
+  "amount": 15000.0,
+  "totalAmount": 16500.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:55:01 AM",
+  "supplierId": "8ffb2d80-bcab-4db8-9848-4d40be06ff16",
+  "customerId": "9524fd82-0c7a-4f84-a64f-ae8b82f276a0"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:55:01,840 [http-nio-10414-exec-2] TheUtil - 🍏 SUPPLIER: 8ffb2d80-bcab-4db8-9848-4d40be06ff16  🔆    🧡 CUSTOMER: 9524fd82-0c7a-4f84-a64f-ae8b82f276a0
+[INFO ] 2019-09-19T09:55:01,864 [http-nio-10414-exec-2] TheUtil -  🍏 🍏 Supplier AccountInfo found: CapeTown.Supplier Two#8
+[INFO ] 2019-09-19T09:55:01,864 [http-nio-10414-exec-2] TheUtil -  🍏 🍏 Customer AccountInfo found: CapeTown.Customer One LLC#41
+[INFO ] 2019-09-19T09:55:01,865 [http-nio-10414-exec-2] TheUtil - 👽 👽 SUPPLIER: CapeTown
+[INFO ] 2019-09-19T09:55:01,865 [http-nio-10414-exec-2] TheUtil - 👽 👽 CUSTOMER: CapeTown
+[INFO ] 2019-09-19T09:55:01,865 [http-nio-10414-exec-2] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:55:01,986 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=AFA9CFCD5C00F3369CC939A79018B05E17CBF82A9CBE6DE71E395C0ADC3FCB6E) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:01,987 [http-nio-10414-exec-2] TheUtil - {
+  "invoiceId": "27e43d00-0d8f-4334-b87c-0e6195051778",
+  "invoiceNumber": "INV_1568886901839",
+  "description": "Demo Invoice at Thu Sep 19 11:55:01 SAST 2019",
+  "amount": 15000.0,
+  "totalAmount": 16500.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "8ffb2d80-bcab-4db8-9848-4d40be06ff16",
+  "customerId": "9524fd82-0c7a-4f84-a64f-ae8b82f276a0"
+}
+[INFO ] 2019-09-19T09:55:01,987 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:01,987 [http-nio-10414-exec-2] TheUtil - 🍏 INVOICE: 27e43d00-0d8f-4334-b87c-0e6195051778  🔆    🧡 DISCOUNT: 4.0  🧡 INVESTOR: f652fbf5-5064-4542-8f5e-eb5af87ad05c
+[INFO ] 2019-09-19T09:55:02,026 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T09:55:02,027 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVOICE: 27e43d00-0d8f-4334-b87c-0e6195051778
+[INFO ] 2019-09-19T09:55:02,027 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[INFO ] 2019-09-19T09:55:02,126 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=F33310FC9222E129EB242BCFB18F386816C7D3697D9058574F13A7ABFC88C160) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:02,127 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:02,127 [http-nio-10414-exec-2] TheUtil - 🍏 INVOICE: 27e43d00-0d8f-4334-b87c-0e6195051778  🔆    🧡 DISCOUNT: 23.0  🧡 INVESTOR: 4b025e35-2660-4cf7-b83d-45b2655f54ef
+[INFO ] 2019-09-19T09:55:02,167 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor Two LLC#72
+[INFO ] 2019-09-19T09:55:02,167 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVOICE: 27e43d00-0d8f-4334-b87c-0e6195051778
+[INFO ] 2019-09-19T09:55:02,168 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[INFO ] 2019-09-19T09:55:02,283 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=82A587EEE8D57AA120097DE8706F2CC8B8078E74280457EA009A2C89A47E89B9) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:02,283 [http-nio-10414-exec-2] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886902283",
+  "description": "Demo Invoice at Thu Sep 19 11:55:02 SAST 2019",
+  "amount": 59000.0,
+  "totalAmount": 64900.00000000001,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:55:02 AM",
+  "supplierId": "8ffb2d80-bcab-4db8-9848-4d40be06ff16",
+  "customerId": "d22a7c36-184c-4b0a-904d-02fad6383e76"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:55:02,284 [http-nio-10414-exec-2] TheUtil - 🍏 SUPPLIER: 8ffb2d80-bcab-4db8-9848-4d40be06ff16  🔆    🧡 CUSTOMER: d22a7c36-184c-4b0a-904d-02fad6383e76
+[INFO ] 2019-09-19T09:55:02,309 [http-nio-10414-exec-2] TheUtil -  🍏 🍏 Supplier AccountInfo found: CapeTown.Supplier Two#8
+[INFO ] 2019-09-19T09:55:02,309 [http-nio-10414-exec-2] TheUtil -  🍏 🍏 Customer AccountInfo found: CapeTown.Customer Two LLC#41
+[INFO ] 2019-09-19T09:55:02,309 [http-nio-10414-exec-2] TheUtil - 👽 👽 SUPPLIER: CapeTown
+[INFO ] 2019-09-19T09:55:02,310 [http-nio-10414-exec-2] TheUtil - 👽 👽 CUSTOMER: CapeTown
+[INFO ] 2019-09-19T09:55:02,310 [http-nio-10414-exec-2] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:55:02,411 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=779A7527FDE614E04B003203EBE5C8D9B79161FCA8D6EC0B0676C9E30C4D1ABD) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:02,411 [http-nio-10414-exec-2] TheUtil - {
+  "invoiceId": "3a8c83b7-ec01-4643-9a69-4d177307e497",
+  "invoiceNumber": "INV_1568886902283",
+  "description": "Demo Invoice at Thu Sep 19 11:55:02 SAST 2019",
+  "amount": 59000.0,
+  "totalAmount": 64900.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "8ffb2d80-bcab-4db8-9848-4d40be06ff16",
+  "customerId": "d22a7c36-184c-4b0a-904d-02fad6383e76"
+}
+[INFO ] 2019-09-19T09:55:02,412 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:02,412 [http-nio-10414-exec-2] TheUtil - 🍏 INVOICE: 3a8c83b7-ec01-4643-9a69-4d177307e497  🔆    🧡 DISCOUNT: 21.0  🧡 INVESTOR: f652fbf5-5064-4542-8f5e-eb5af87ad05c
+[INFO ] 2019-09-19T09:55:02,451 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T09:55:02,451 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVOICE: 3a8c83b7-ec01-4643-9a69-4d177307e497
+[INFO ] 2019-09-19T09:55:02,451 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[INFO ] 2019-09-19T09:55:02,574 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=D7112954E24A4620D7FB5515E64A068035360491335B2B27357478E2C8FEC42F) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:02,575 [http-nio-10414-exec-2] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:02,575 [http-nio-10414-exec-2] TheUtil - 🍏 INVOICE: 3a8c83b7-ec01-4643-9a69-4d177307e497  🔆    🧡 DISCOUNT: 12.0  🧡 INVESTOR: 4b025e35-2660-4cf7-b83d-45b2655f54ef
+[INFO ] 2019-09-19T09:55:02,623 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor Two LLC#72
+[INFO ] 2019-09-19T09:55:02,624 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVOICE: 3a8c83b7-ec01-4643-9a69-4d177307e497
+[INFO ] 2019-09-19T09:55:02,624 [http-nio-10414-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[INFO ] 2019-09-19T09:55:02,725 [http-nio-10414-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=AE9D8F71CBFEB59802EB2FD32927999BFAE4AB55E61849F7E9999F7971AF42A0) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:02,741 [http-nio-10414-exec-2] DemoUtil -  🍊  🍊 4 InvoiceStates on node ...  🍊 
+[INFO ] 2019-09-19T09:55:02,742 [http-nio-10414-exec-2] TheUtil -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-19T09:55:02,766 [http-nio-10414-exec-2] TheUtil -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-19T09:55:02,767 [http-nio-10414-exec-2] DemoUtil -  🍊  🍊 8 InvoiceOfferStates on node ...  🍊 
+[INFO ] 2019-09-19T09:55:02,791 [http-nio-10414-exec-2] TheUtil - 🌺  🌺 done listing accounts:  🌺 12
+[INFO ] 2019-09-19T09:55:02,792 [http-nio-10414-exec-2] DemoUtil -  🍎  🍎 Total Number of Accounts on Node after sharing: 🍎  🍎 12
+[INFO ] 2019-09-19T09:55:02,793 [http-nio-10414-exec-2] AdminController - 
+
+🔵 🔵 🔵 DemoUtil result:  🍏 {
+  "numberOfAccounts": 12,
+  "numberOfInvoices": 4,
+  "numberOfInvoiceOffers": 8,
+  "numberOfNodes": 4,
+  "numberOfFlows": 37,
+  "started": "Thu Sep 19 11:54:55 SAST 2019",
+  "ended": "Thu Sep 19 11:55:02 SAST 2019",
+  "elapsedSeconds": 6.0
+}    🧡 💛 💚 💙 💜
+
+
+[INFO ] 2019-09-19T09:55:07,916 [http-nio-10411-exec-1] [/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+[INFO ] 2019-09-19T09:55:07,918 [http-nio-10411-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+[INFO ] 2019-09-19T09:55:07,930 [http-nio-10411-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 12 ms
+[INFO ] 2019-09-19T09:55:07,950 [http-nio-10411-exec-1] AdminController - 🔵 🔵 🔵 starting DemoDataGenerator ... 🍏
+[INFO ] 2019-09-19T09:55:07,956 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 DemoUtil started ...  🔆 🔆 will list network components
+[INFO ] 2019-09-19T09:55:07,986 [http-nio-10411-exec-1] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=OCT, L=Sandton, C=ZA
+[INFO ] 2019-09-19T09:55:07,986 [http-nio-10411-exec-1] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=Regulator, L=Johannesburg, C=ZA
+[INFO ] 2019-09-19T09:55:07,986 [http-nio-10411-exec-1] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=Notary, L=Pretoria, C=ZA
+[INFO ] 2019-09-19T09:55:07,987 [http-nio-10411-exec-1] TheUtil - 🌺 🌺 BFN Corda Node: 🌺 O=CapeTown, L=Cape Town, C=ZA
+[INFO ] 2019-09-19T09:55:07,987 [http-nio-10411-exec-1] TheUtil -  🧡 💛 💚 Corda NetworkNodes found: 💚 4 💚 
+[INFO ] 2019-09-19T09:55:07,987 [http-nio-10411-exec-1] TheUtil - 🥬 🥬 🥬 🥬 Registered Flows on Corda BFN ...  🥬 
+[INFO ] 2019-09-19T09:55:07,994 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$1 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.AccountRegistrationFlow   🍎 
+[INFO ] 2019-09-19T09:55:07,995 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$2 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.NewKeyForAccount   🍎 
+[INFO ] 2019-09-19T09:55:07,995 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$3 🥬 BFN Corda Flow:  🥏com.bfn.flows.admin.ShareAccountInfoFlow   🍎 
+[INFO ] 2019-09-19T09:55:07,995 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$4 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.BuyInvoiceOfferFlow   🍎 
+[INFO ] 2019-09-19T09:55:07,995 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$5 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.InvoiceOfferFlow   🍎 
+[INFO ] 2019-09-19T09:55:07,996 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$6 🥬 BFN Corda Flow:  🥏com.bfn.flows.invoices.InvoiceRegistrationFlow   🍎 
+[INFO ] 2019-09-19T09:55:07,996 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$7 🥬 BFN Corda Flow:  🥏com.bfn.flows.tokens.IssueTokensFlow   🍎 
+[INFO ] 2019-09-19T09:55:07,996 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$8 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.AccountsForHost   🍎 
+[INFO ] 2019-09-19T09:55:07,996 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$9 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.AllAccounts   🍎 
+[INFO ] 2019-09-19T09:55:07,996 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$10 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.CreateAccount   🍎 
+[INFO ] 2019-09-19T09:55:07,996 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$11 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.OurAccounts   🍎 
+[INFO ] 2019-09-19T09:55:07,996 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$12 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.RequestAccountInfo   🍎 
+[INFO ] 2019-09-19T09:55:07,997 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$13 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount   🍎 
+[INFO ] 2019-09-19T09:55:07,997 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$14 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareAccountInfo   🍎 
+[INFO ] 2019-09-19T09:55:07,997 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$15 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareStateAndSyncAccounts   🍎 
+[INFO ] 2019-09-19T09:55:07,997 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$16 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.flows.ShareStateWithAccount   🍎 
+[INFO ] 2019-09-19T09:55:07,997 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$17 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.internal.flows.GetAccountKeyPolicyFlow   🍎 
+[INFO ] 2019-09-19T09:55:07,998 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$18 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.accounts.workflows.internal.flows.SetAccountKeyPolicyFlow   🍎 
+[INFO ] 2019-09-19T09:55:07,998 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$19 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialIssueTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,998 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$20 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialMoveFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,998 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$21 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialMoveNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,998 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$22 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.ConfidentialRedeemFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,998 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$23 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.CreateEvolvableTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,998 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$24 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.IssueTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,999 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$25 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.MoveFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,999 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$26 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.MoveNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,999 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$27 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.RedeemFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,999 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$28 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.RedeemNonFungibleTokens   🍎 
+[INFO ] 2019-09-19T09:55:07,999 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$29 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.flows.rpc.UpdateEvolvableToken   🍎 
+[INFO ] 2019-09-19T09:55:07,999 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$30 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.CheckTokenPointer   🍎 
+[INFO ] 2019-09-19T09:55:08,000 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$31 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.DvPFlow   🍎 
+[INFO ] 2019-09-19T09:55:08,000 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$32 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.GetDistributionList   🍎 
+[INFO ] 2019-09-19T09:55:08,000 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$33 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.RedeemFungibleGBP   🍎 
+[INFO ] 2019-09-19T09:55:08,000 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$34 🥬 BFN Corda Flow:  🥏com.r3.corda.lib.tokens.workflows.internal.testflows.RedeemNonFungibleHouse   🍎 
+[INFO ] 2019-09-19T09:55:08,001 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$35 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Authorise   🍎 
+[INFO ] 2019-09-19T09:55:08,002 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$36 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Deauthorise   🍎 
+[INFO ] 2019-09-19T09:55:08,002 [http-nio-10411-exec-1] TheUtil - 🥏 🥏 #$37 🥬 BFN Corda Flow:  🥏net.corda.core.flows.ContractUpgradeFlow$Initiate   🍎 
+[INFO ] 2019-09-19T09:55:08,002 [http-nio-10411-exec-1] TheUtil - 🥬 🥬 🥬 🥬 Total Registered Flows  🍎  37  🍎 🥬 
+[INFO ] 2019-09-19T09:55:08,003 [http-nio-10411-exec-1] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerSupplierAccounts started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:08,311 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 OCT.Supplier One#30 🥏 🥏 
+[INFO ] 2019-09-19T09:55:08,348 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 OCT.Supplier Two#30 🥏 🥏 
+[INFO ] 2019-09-19T09:55:08,349 [http-nio-10411-exec-1] DemoUtil -  🔆 🔆 🔆 🔆 registerSupplierAccounts complete ...  🔆 🔆 added 2 accounts
+[INFO ] 2019-09-19T09:55:08,354 [http-nio-10411-exec-1] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerCustomerAccounts started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:08,387 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 OCT.Customer One LLC#68 🥏 🥏 
+[INFO ] 2019-09-19T09:55:08,421 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 OCT.Customer Two LLC#68 🥏 🥏 
+[INFO ] 2019-09-19T09:55:08,421 [http-nio-10411-exec-1] DemoUtil -  🔆 🔆 registerCustomerAccounts complete ...  🔆 🔆 added 2 accounts
+[INFO ] 2019-09-19T09:55:08,426 [http-nio-10411-exec-1] DemoUtil - 
+
+🔆 🔆 🔆 🔆 registerInvestorAccounts started ...  🔆 🔆
+[INFO ] 2019-09-19T09:55:08,457 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 OCT.Investor One Inc.#23 🥏 🥏 
+[INFO ] 2019-09-19T09:55:08,490 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 OCT.Investor Two LLC#23 🥏 🥏 
+[INFO ] 2019-09-19T09:55:08,490 [http-nio-10411-exec-1] DemoUtil -  🔆 🔆 registerInvestorAccounts complete ...  🔆 🔆 added 2  accounts
+[INFO ] 2019-09-19T09:55:08,504 [http-nio-10411-exec-1] DemoUtil - 
+
+🦠 🦠 shareAccounts: Nodes running: 4
+[INFO ] 2019-09-19T09:55:08,813 [http-nio-10411-exec-1] DemoUtil - 🦠 🦠  Accounts on O=OCT, L=Sandton, C=ZA Node: 18
+[INFO ] 2019-09-19T09:55:08,814 [http-nio-10411-exec-1] DemoUtil - 🔕  🔕  ignore sharing - party on same node 🥬 
+[INFO ] 2019-09-19T09:55:09,007 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier One#33
+[INFO ] 2019-09-19T09:55:09,066 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier Two#33
+[INFO ] 2019-09-19T09:55:09,117 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer One LLC#99
+[INFO ] 2019-09-19T09:55:09,173 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer Two LLC#99
+[INFO ] 2019-09-19T09:55:09,224 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:55:09,283 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:55:09,339 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Supplier One#8
+[INFO ] 2019-09-19T09:55:09,398 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Supplier Two#8
+[INFO ] 2019-09-19T09:55:09,466 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Customer One LLC#41
+[INFO ] 2019-09-19T09:55:09,552 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Customer Two LLC#41
+[INFO ] 2019-09-19T09:55:09,649 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T09:55:09,714 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Investor Two LLC#72
+[INFO ] 2019-09-19T09:55:09,762 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Supplier One#30
+[INFO ] 2019-09-19T09:55:09,820 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Supplier Two#30
+[INFO ] 2019-09-19T09:55:09,930 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Customer One LLC#68
+[INFO ] 2019-09-19T09:55:10,002 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Customer Two LLC#68
+[INFO ] 2019-09-19T09:55:10,057 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Investor One Inc.#23
+[INFO ] 2019-09-19T09:55:10,115 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Investor Two LLC#23
+[INFO ] 2019-09-19T09:55:10,116 [http-nio-10411-exec-1] DemoUtil - 🔕  🔕 ignore sharing - this party is a Notary 🥬 🥬 
+[INFO ] 2019-09-19T09:55:10,211 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier One#33
+[INFO ] 2019-09-19T09:55:10,286 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Supplier Two#33
+[INFO ] 2019-09-19T09:55:10,376 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer One LLC#99
+[INFO ] 2019-09-19T09:55:10,457 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Customer Two LLC#99
+[INFO ] 2019-09-19T09:55:10,540 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor One Inc.#10
+[INFO ] 2019-09-19T09:55:10,631 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: Regulator.Investor Two LLC#10
+[INFO ] 2019-09-19T09:55:10,715 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Supplier One#8
+[INFO ] 2019-09-19T09:55:10,789 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Supplier Two#8
+[INFO ] 2019-09-19T09:55:10,865 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Customer One LLC#41
+[INFO ] 2019-09-19T09:55:10,923 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Customer Two LLC#41
+[INFO ] 2019-09-19T09:55:10,978 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T09:55:11,029 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: CapeTown.Investor Two LLC#72
+[INFO ] 2019-09-19T09:55:11,074 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Supplier One#30
+[INFO ] 2019-09-19T09:55:11,129 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Supplier Two#30
+[INFO ] 2019-09-19T09:55:11,181 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Customer One LLC#68
+[INFO ] 2019-09-19T09:55:11,231 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Customer Two LLC#68
+[INFO ] 2019-09-19T09:55:11,279 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Investor One Inc.#23
+[INFO ] 2019-09-19T09:55:11,329 [http-nio-10411-exec-1] DemoUtil - 🎁 Result from sharing account: 🏈  🏈 Account shared: OCT.Investor Two LLC#23
+[INFO ] 2019-09-19T09:55:11,334 [http-nio-10411-exec-1] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886911329",
+  "description": "Demo Invoice at Thu Sep 19 11:55:11 SAST 2019",
+  "amount": 35000.0,
+  "totalAmount": 38500.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:55:11 AM",
+  "supplierId": "0956e2d8-09fb-4db2-97ec-6749d18db162",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:55:11,334 [http-nio-10411-exec-1] TheUtil - 🍏 SUPPLIER: 0956e2d8-09fb-4db2-97ec-6749d18db162  🔆    🧡 CUSTOMER: e21aceb8-eda9-488a-9a69-bb37743a4642
+[INFO ] 2019-09-19T09:55:11,373 [http-nio-10411-exec-1] TheUtil -  🍏 🍏 Supplier AccountInfo found: OCT.Supplier One#30
+[INFO ] 2019-09-19T09:55:11,373 [http-nio-10411-exec-1] TheUtil -  🍏 🍏 Customer AccountInfo found: OCT.Customer One LLC#68
+[INFO ] 2019-09-19T09:55:11,373 [http-nio-10411-exec-1] TheUtil - 👽 👽 SUPPLIER: OCT
+[INFO ] 2019-09-19T09:55:11,374 [http-nio-10411-exec-1] TheUtil - 👽 👽 CUSTOMER: OCT
+[INFO ] 2019-09-19T09:55:11,374 [http-nio-10411-exec-1] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:55:13,552 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=20E33E4F556625D151379D25A6E7F2A5DA5266EA196E4DB3063467D8C608D4D6) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:13,553 [http-nio-10411-exec-1] TheUtil - {
+  "invoiceId": "d118d84c-b46a-454f-afaa-1d2671329dff",
+  "invoiceNumber": "INV_1568886911329",
+  "description": "Demo Invoice at Thu Sep 19 11:55:11 SAST 2019",
+  "amount": 35000.0,
+  "totalAmount": 38500.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "0956e2d8-09fb-4db2-97ec-6749d18db162",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+}
+[INFO ] 2019-09-19T09:55:13,553 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:13,554 [http-nio-10411-exec-1] TheUtil - 🍏 INVOICE: d118d84c-b46a-454f-afaa-1d2671329dff  🔆    🧡 DISCOUNT: 14.0  🧡 INVESTOR: 62b0fa64-9f43-45a2-af86-d44f039b141c
+[INFO ] 2019-09-19T09:55:13,687 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor One Inc.#23
+[INFO ] 2019-09-19T09:55:13,687 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVOICE: d118d84c-b46a-454f-afaa-1d2671329dff
+[INFO ] 2019-09-19T09:55:13,687 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVESTOR: OCT
+[INFO ] 2019-09-19T09:55:13,929 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=175B90AE1322E4F4F130139995F41A66669278281FF33E57CDFFB5CAF9B6D104) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:13,930 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:13,932 [http-nio-10411-exec-1] TheUtil - 🍏 INVOICE: d118d84c-b46a-454f-afaa-1d2671329dff  🔆    🧡 DISCOUNT: 7.0  🧡 INVESTOR: b6ba8072-4453-4add-9bd3-1ef930994108
+[INFO ] 2019-09-19T09:55:13,993 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor Two LLC#23
+[INFO ] 2019-09-19T09:55:13,993 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVOICE: d118d84c-b46a-454f-afaa-1d2671329dff
+[INFO ] 2019-09-19T09:55:13,993 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVESTOR: OCT
+[INFO ] 2019-09-19T09:55:14,106 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=29BB8A16421E4D3527F12BF24BCDDEC39B50B3CFB5B8D61E17F6A5A8CCEB4716) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:14,107 [http-nio-10411-exec-1] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886914107",
+  "description": "Demo Invoice at Thu Sep 19 11:55:14 SAST 2019",
+  "amount": 35000.0,
+  "totalAmount": 38500.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:55:14 AM",
+  "supplierId": "0956e2d8-09fb-4db2-97ec-6749d18db162",
+  "customerId": "b6069f70-2636-4250-801e-8728e9238ee2"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:55:14,107 [http-nio-10411-exec-1] TheUtil - 🍏 SUPPLIER: 0956e2d8-09fb-4db2-97ec-6749d18db162  🔆    🧡 CUSTOMER: b6069f70-2636-4250-801e-8728e9238ee2
+[INFO ] 2019-09-19T09:55:14,140 [http-nio-10411-exec-1] TheUtil -  🍏 🍏 Supplier AccountInfo found: OCT.Supplier One#30
+[INFO ] 2019-09-19T09:55:14,140 [http-nio-10411-exec-1] TheUtil -  🍏 🍏 Customer AccountInfo found: OCT.Customer Two LLC#68
+[INFO ] 2019-09-19T09:55:14,140 [http-nio-10411-exec-1] TheUtil - 👽 👽 SUPPLIER: OCT
+[INFO ] 2019-09-19T09:55:14,140 [http-nio-10411-exec-1] TheUtil - 👽 👽 CUSTOMER: OCT
+[INFO ] 2019-09-19T09:55:14,141 [http-nio-10411-exec-1] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:55:14,309 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=C52F51C78F1423D2EEBEFFE8A413973C097DD971DCA348C2B963DD64F347A663) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:14,310 [http-nio-10411-exec-1] TheUtil - {
+  "invoiceId": "cd7ed773-df9c-4ae4-b451-d20d7750ee3a",
+  "invoiceNumber": "INV_1568886914107",
+  "description": "Demo Invoice at Thu Sep 19 11:55:14 SAST 2019",
+  "amount": 35000.0,
+  "totalAmount": 38500.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "0956e2d8-09fb-4db2-97ec-6749d18db162",
+  "customerId": "b6069f70-2636-4250-801e-8728e9238ee2"
+}
+[INFO ] 2019-09-19T09:55:14,310 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:14,310 [http-nio-10411-exec-1] TheUtil - 🍏 INVOICE: cd7ed773-df9c-4ae4-b451-d20d7750ee3a  🔆    🧡 DISCOUNT: 23.0  🧡 INVESTOR: 62b0fa64-9f43-45a2-af86-d44f039b141c
+[INFO ] 2019-09-19T09:55:14,356 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor One Inc.#23
+[INFO ] 2019-09-19T09:55:14,357 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVOICE: cd7ed773-df9c-4ae4-b451-d20d7750ee3a
+[INFO ] 2019-09-19T09:55:14,357 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVESTOR: OCT
+[INFO ] 2019-09-19T09:55:14,469 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=93E78C1C9C9AA4E3AEF9216D78A6E5CB7273A4416DC687557E109D8699A067BF) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:14,469 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:14,470 [http-nio-10411-exec-1] TheUtil - 🍏 INVOICE: cd7ed773-df9c-4ae4-b451-d20d7750ee3a  🔆    🧡 DISCOUNT: 11.0  🧡 INVESTOR: b6ba8072-4453-4add-9bd3-1ef930994108
+[INFO ] 2019-09-19T09:55:14,520 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor Two LLC#23
+[INFO ] 2019-09-19T09:55:14,520 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVOICE: cd7ed773-df9c-4ae4-b451-d20d7750ee3a
+[INFO ] 2019-09-19T09:55:14,520 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVESTOR: OCT
+[INFO ] 2019-09-19T09:55:14,635 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=84622EB2427C3866133F35DE4AF878817C24AFE1156DD1221B7A5191BD798ED9) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:14,636 [http-nio-10411-exec-1] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886914636",
+  "description": "Demo Invoice at Thu Sep 19 11:55:14 SAST 2019",
+  "amount": 69000.0,
+  "totalAmount": 75900.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:55:14 AM",
+  "supplierId": "b39eb50d-fc83-4cd2-b219-c1f05a1f5756",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:55:14,636 [http-nio-10411-exec-1] TheUtil - 🍏 SUPPLIER: b39eb50d-fc83-4cd2-b219-c1f05a1f5756  🔆    🧡 CUSTOMER: e21aceb8-eda9-488a-9a69-bb37743a4642
+[INFO ] 2019-09-19T09:55:14,674 [http-nio-10411-exec-1] TheUtil -  🍏 🍏 Supplier AccountInfo found: OCT.Supplier Two#30
+[INFO ] 2019-09-19T09:55:14,675 [http-nio-10411-exec-1] TheUtil -  🍏 🍏 Customer AccountInfo found: OCT.Customer One LLC#68
+[INFO ] 2019-09-19T09:55:14,675 [http-nio-10411-exec-1] TheUtil - 👽 👽 SUPPLIER: OCT
+[INFO ] 2019-09-19T09:55:14,675 [http-nio-10411-exec-1] TheUtil - 👽 👽 CUSTOMER: OCT
+[INFO ] 2019-09-19T09:55:14,675 [http-nio-10411-exec-1] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:55:14,762 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=7280108D358298E5E434B6EFD95B321EF2A8ED24FA05EB1350346457D797C859) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:14,762 [http-nio-10411-exec-1] TheUtil - {
+  "invoiceId": "3cd97c1c-74d1-41d4-9da7-de31f3ab79bb",
+  "invoiceNumber": "INV_1568886914636",
+  "description": "Demo Invoice at Thu Sep 19 11:55:14 SAST 2019",
+  "amount": 69000.0,
+  "totalAmount": 75900.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "b39eb50d-fc83-4cd2-b219-c1f05a1f5756",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+}
+[INFO ] 2019-09-19T09:55:14,763 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:14,763 [http-nio-10411-exec-1] TheUtil - 🍏 INVOICE: 3cd97c1c-74d1-41d4-9da7-de31f3ab79bb  🔆    🧡 DISCOUNT: 19.0  🧡 INVESTOR: 62b0fa64-9f43-45a2-af86-d44f039b141c
+[INFO ] 2019-09-19T09:55:14,813 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor One Inc.#23
+[INFO ] 2019-09-19T09:55:14,814 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVOICE: 3cd97c1c-74d1-41d4-9da7-de31f3ab79bb
+[INFO ] 2019-09-19T09:55:14,814 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVESTOR: OCT
+[INFO ] 2019-09-19T09:55:14,945 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=E3B0240C322DB03D49EEFEE8F667F34CEB7377F8FC838E8931F33134305C81D7) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:14,946 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:14,946 [http-nio-10411-exec-1] TheUtil - 🍏 INVOICE: 3cd97c1c-74d1-41d4-9da7-de31f3ab79bb  🔆    🧡 DISCOUNT: 3.0  🧡 INVESTOR: b6ba8072-4453-4add-9bd3-1ef930994108
+[INFO ] 2019-09-19T09:55:15,015 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor Two LLC#23
+[INFO ] 2019-09-19T09:55:15,016 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVOICE: 3cd97c1c-74d1-41d4-9da7-de31f3ab79bb
+[INFO ] 2019-09-19T09:55:15,016 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVESTOR: OCT
+[INFO ] 2019-09-19T09:55:15,113 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=66A6876E9EEF66666F7ADA1B5830F691F044F4D364999DC7E291B974712CA634) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:15,113 [http-nio-10411-exec-1] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "INV_1568886915113",
+  "description": "Demo Invoice at Thu Sep 19 11:55:15 SAST 2019",
+  "amount": 76000.0,
+  "totalAmount": 83600.0,
+  "valueAddedTax": 10.0,
+  "dateRegistered": "Sep 19, 2019 11:55:15 AM",
+  "supplierId": "b39eb50d-fc83-4cd2-b219-c1f05a1f5756",
+  "customerId": "b6069f70-2636-4250-801e-8728e9238ee2"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T09:55:15,114 [http-nio-10411-exec-1] TheUtil - 🍏 SUPPLIER: b39eb50d-fc83-4cd2-b219-c1f05a1f5756  🔆    🧡 CUSTOMER: b6069f70-2636-4250-801e-8728e9238ee2
+[INFO ] 2019-09-19T09:55:15,148 [http-nio-10411-exec-1] TheUtil -  🍏 🍏 Supplier AccountInfo found: OCT.Supplier Two#30
+[INFO ] 2019-09-19T09:55:15,148 [http-nio-10411-exec-1] TheUtil -  🍏 🍏 Customer AccountInfo found: OCT.Customer Two LLC#68
+[INFO ] 2019-09-19T09:55:15,148 [http-nio-10411-exec-1] TheUtil - 👽 👽 SUPPLIER: OCT
+[INFO ] 2019-09-19T09:55:15,148 [http-nio-10411-exec-1] TheUtil - 👽 👽 CUSTOMER: OCT
+[INFO ] 2019-09-19T09:55:15,149 [http-nio-10411-exec-1] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T09:55:15,261 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=AAF9AB9D11FA5AB4EDBA55AF5F3BFB9E06D3563E1E350EC56F978C80CBEE75F6) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:15,262 [http-nio-10411-exec-1] TheUtil - {
+  "invoiceId": "4051d21a-3c15-48b3-9ba1-f43dab8fa7ba",
+  "invoiceNumber": "INV_1568886915113",
+  "description": "Demo Invoice at Thu Sep 19 11:55:15 SAST 2019",
+  "amount": 76000.0,
+  "totalAmount": 83600.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "b39eb50d-fc83-4cd2-b219-c1f05a1f5756",
+  "customerId": "b6069f70-2636-4250-801e-8728e9238ee2"
+}
+[INFO ] 2019-09-19T09:55:15,262 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:15,262 [http-nio-10411-exec-1] TheUtil - 🍏 INVOICE: 4051d21a-3c15-48b3-9ba1-f43dab8fa7ba  🔆    🧡 DISCOUNT: 23.0  🧡 INVESTOR: 62b0fa64-9f43-45a2-af86-d44f039b141c
+[INFO ] 2019-09-19T09:55:15,330 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor One Inc.#23
+[INFO ] 2019-09-19T09:55:15,330 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVOICE: 4051d21a-3c15-48b3-9ba1-f43dab8fa7ba
+[INFO ] 2019-09-19T09:55:15,331 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVESTOR: OCT
+[INFO ] 2019-09-19T09:55:15,431 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=DFBDDF1BBF7E567E976F753BD3310A0B5EBFFBA30DD2EE266F8159C9FFED27AC) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:15,431 [http-nio-10411-exec-1] DemoUtil - 
+🔆 🔆 🔆 🔆 registerInvoiceOffer started ...  🔆 🔆 
+[INFO ] 2019-09-19T09:55:15,431 [http-nio-10411-exec-1] TheUtil - 🍏 INVOICE: 4051d21a-3c15-48b3-9ba1-f43dab8fa7ba  🔆    🧡 DISCOUNT: 8.0  🧡 INVESTOR: b6ba8072-4453-4add-9bd3-1ef930994108
+[INFO ] 2019-09-19T09:55:15,486 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 Investor AccountInfo found: OCT.Investor Two LLC#23
+[INFO ] 2019-09-19T09:55:15,486 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVOICE: 4051d21a-3c15-48b3-9ba1-f43dab8fa7ba
+[INFO ] 2019-09-19T09:55:15,486 [http-nio-10411-exec-1] TheUtil - 👽 👽 INVESTOR: OCT
+[INFO ] 2019-09-19T09:55:15,632 [http-nio-10411-exec-1] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=61BB9F5840EA93419FF250296D61B51A01DF76DE3071C83614987C631AD8AAD9) 🥏 🥏 
+[INFO ] 2019-09-19T09:55:15,651 [http-nio-10411-exec-1] DemoUtil -  🍊  🍊 4 InvoiceStates on node ...  🍊 
+[INFO ] 2019-09-19T09:55:15,651 [http-nio-10411-exec-1] TheUtil -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-19T09:55:15,694 [http-nio-10411-exec-1] TheUtil -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-19T09:55:15,695 [http-nio-10411-exec-1] DemoUtil -  🍊  🍊 8 InvoiceOfferStates on node ...  🍊 
+[INFO ] 2019-09-19T09:55:15,729 [http-nio-10411-exec-1] TheUtil - 🌺  🌺 done listing accounts:  🌺 18
+[INFO ] 2019-09-19T09:55:15,729 [http-nio-10411-exec-1] DemoUtil -  🍎  🍎 Total Number of Accounts on Node after sharing: 🍎  🍎 18
+[INFO ] 2019-09-19T09:55:15,730 [http-nio-10411-exec-1] AdminController - 
+
+🔵 🔵 🔵 DemoUtil result:  🍏 {
+  "numberOfAccounts": 18,
+  "numberOfInvoices": 4,
+  "numberOfInvoiceOffers": 8,
+  "numberOfNodes": 4,
+  "numberOfFlows": 37,
+  "started": "Thu Sep 19 11:55:07 SAST 2019",
+  "ended": "Thu Sep 19 11:55:15 SAST 2019",
+  "elapsedSeconds": 7.0
+}    🧡 💛 💚 💙 💜
+
+
+[INFO ] 2019-09-19T09:57:00,508 [http-nio-10416-exec-5] TheUtil - 🌺  🌺 done listing accounts:  🌺 18
+[INFO ] 2019-09-19T10:00:01,502 [http-nio-10416-exec-7] TheUtil - 🌺  🌺 done listing accounts:  🌺 18
+[INFO ] 2019-09-19T10:02:16,577 [http-nio-10416-exec-2] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-09876006",
+  "description": "MegaCustomer Mega Order #10",
+  "amount": 240000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T10:02:16,591 [http-nio-10416-exec-2] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-09876006",
+  "description": "MegaCustomer Mega Order #10",
+  "amount": 240000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T10:02:16,592 [http-nio-10416-exec-2] TheUtil - 🍏 SUPPLIER: 71edb231-ec9b-43e0-a281-6fa42d29414d  🔆    🧡 CUSTOMER: e21aceb8-eda9-488a-9a69-bb37743a4642
+[INFO ] 2019-09-19T10:02:16,630 [http-nio-10416-exec-2] TheUtil -  🍏 🍏 Supplier AccountInfo found: Regulator.Supplier One#33
+[INFO ] 2019-09-19T10:02:16,630 [http-nio-10416-exec-2] TheUtil -  🍏 🍏 Customer AccountInfo found: OCT.Customer One LLC#68
+[INFO ] 2019-09-19T10:02:16,630 [http-nio-10416-exec-2] TheUtil - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-19T10:02:16,631 [http-nio-10416-exec-2] TheUtil - 👽 👽 CUSTOMER: OCT
+[INFO ] 2019-09-19T10:02:16,631 [http-nio-10416-exec-2] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T10:02:16,889 [http-nio-10416-exec-2] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=B74AE0E0F957B66482EB9B5A442B4817196441F0876F2D52F1636C219FD54184) 🥏 🥏 
+[INFO ] 2019-09-19T10:02:16,890 [http-nio-10416-exec-2] TheUtil - {
+  "invoiceId": "d5083a18-24de-4dc7-a2a6-133255156b89",
+  "invoiceNumber": "879-09876006",
+  "description": "MegaCustomer Mega Order #10",
+  "amount": 240000.0,
+  "totalAmount": 264000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+}
+[INFO ] 2019-09-19T10:05:21,322 [http-nio-10416-exec-4] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-09876006",
+  "description": "MegaCustomer Mega Order #10",
+  "amount": 240000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T10:05:21,348 [http-nio-10416-exec-4] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-09876006",
+  "description": "MegaCustomer Mega Order #10",
+  "amount": 240000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T10:05:21,349 [http-nio-10416-exec-4] TheUtil - 🍏 SUPPLIER: 71edb231-ec9b-43e0-a281-6fa42d29414d  🔆    🧡 CUSTOMER: e21aceb8-eda9-488a-9a69-bb37743a4642
+[INFO ] 2019-09-19T10:05:21,386 [http-nio-10416-exec-4] TheUtil -  🍏 🍏 Supplier AccountInfo found: Regulator.Supplier One#33
+[INFO ] 2019-09-19T10:05:21,386 [http-nio-10416-exec-4] TheUtil -  🍏 🍏 Customer AccountInfo found: OCT.Customer One LLC#68
+[INFO ] 2019-09-19T10:05:21,386 [http-nio-10416-exec-4] TheUtil - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-19T10:05:21,386 [http-nio-10416-exec-4] TheUtil - 👽 👽 CUSTOMER: OCT
+[INFO ] 2019-09-19T10:05:21,387 [http-nio-10416-exec-4] TheUtil - discount used: 0.1
+[ERROR] 2019-09-19T10:05:21,527 [http-nio-10416-exec-4] [dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: Failed to register invoice. net.corda.core.flows.FlowException: InvoiceState is already on file] with root cause
+java.lang.Exception: Failed to register invoice. net.corda.core.flows.FlowException: InvoiceState is already on file
+	at com.bfn.util.TheUtil.startRegisterInvoiceFlow(TheUtil.java:193) ~[main/:?]
+	at com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(SupplierController.java:111) ~[main/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_221]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_221]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_221]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_221]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) ~[spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1471) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_221]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_221]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_221]
+[INFO ] 2019-09-19T10:06:43,472 [http-nio-10416-exec-6] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-09876007",
+  "description": "MegaCustomer Mega Order #11",
+  "amount": 440000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T10:06:43,512 [http-nio-10416-exec-6] TheUtil - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-09876007",
+  "description": "MegaCustomer Mega Order #11",
+  "amount": 440000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T10:06:43,513 [http-nio-10416-exec-6] TheUtil - 🍏 SUPPLIER: 71edb231-ec9b-43e0-a281-6fa42d29414d  🔆    🧡 CUSTOMER: e21aceb8-eda9-488a-9a69-bb37743a4642
+[INFO ] 2019-09-19T10:06:43,549 [http-nio-10416-exec-6] TheUtil -  🍏 🍏 Supplier AccountInfo found: Regulator.Supplier One#33
+[INFO ] 2019-09-19T10:06:43,550 [http-nio-10416-exec-6] TheUtil -  🍏 🍏 Customer AccountInfo found: OCT.Customer One LLC#68
+[INFO ] 2019-09-19T10:06:43,550 [http-nio-10416-exec-6] TheUtil - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-19T10:06:43,550 [http-nio-10416-exec-6] TheUtil - 👽 👽 CUSTOMER: OCT
+[INFO ] 2019-09-19T10:06:43,550 [http-nio-10416-exec-6] TheUtil - discount used: 0.1
+[INFO ] 2019-09-19T10:06:43,862 [http-nio-10416-exec-6] TheUtil - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=4257A0D97C4E3502B9A645A829988DB196F922A5CDCDCA5C00D21BF6F715BA22) 🥏 🥏 
+[INFO ] 2019-09-19T10:06:43,863 [http-nio-10416-exec-6] TheUtil - {
+  "invoiceId": "eaeabb51-f0c2-419a-8f97-14d251f3bc73",
+  "invoiceNumber": "879-09876007",
+  "description": "MegaCustomer Mega Order #11",
+  "amount": 440000.0,
+  "totalAmount": 484000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "customerId": "e21aceb8-eda9-488a-9a69-bb37743a4642"
+}
+[INFO ] 2019-09-19T10:11:23,030 [http-nio-10416-exec-2] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceOfferDTO: {
+  "invoiceId": "eaeabb51-f0c2-419a-8f97-14d251f3bc73",
+  "offerAmount": 0.0,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "investorId": "f652fbf5-5064-4542-8f5e-eb5af87ad05c"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-19T10:11:23,053 [http-nio-10416-exec-2] TheUtil - 🍏 INVOICE: eaeabb51-f0c2-419a-8f97-14d251f3bc73  🔆    🧡 DISCOUNT: 10.0  🧡 INVESTOR: f652fbf5-5064-4542-8f5e-eb5af87ad05c
+[INFO ] 2019-09-19T10:11:23,110 [http-nio-10416-exec-2] TheUtil - 🍏 🍏 Investor AccountInfo found: CapeTown.Investor One Inc.#72
+[INFO ] 2019-09-19T10:11:23,111 [http-nio-10416-exec-2] TheUtil - 👽 👽 INVOICE: eaeabb51-f0c2-419a-8f97-14d251f3bc73
+[INFO ] 2019-09-19T10:11:23,111 [http-nio-10416-exec-2] TheUtil - 👽 👽 INVESTOR: CapeTown
+[WARN ] 2019-09-19T10:11:23,242 [Thread-113 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - A hot observable returned from an RPC was never subscribed to. This wastes server-side resources because it was queueing observations for retrieval. It is being closed now, but please adjust your code to call .notUsed() on the observable to close it explicitly. (Java users: subscribe to it then unsubscribe). If you aren't sure where the leak is coming from, set -Dnet.corda.client.rpc.trackRpcCallSites=true on the JVM command line and you will get a stack trace with this warning.
+[WARN ] 2019-09-19T10:11:23,242 [Thread-113 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - A hot observable returned from an RPC was never subscribed to. This wastes server-side resources because it was queueing observations for retrieval. It is being closed now, but please adjust your code to call .notUsed() on the observable to close it explicitly. (Java users: subscribe to it then unsubscribe). If you aren't sure where the leak is coming from, set -Dnet.corda.client.rpc.trackRpcCallSites=true on the JVM command line and you will get a stack trace with this warning.
+[WARN ] 2019-09-19T10:11:23,242 [Thread-113 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - A hot observable returned from an RPC was never subscribed to. This wastes server-side resources because it was queueing observations for retrieval. It is being closed now, but please adjust your code to call .notUsed() on the observable to close it explicitly. (Java users: subscribe to it then unsubscribe). If you aren't sure where the leak is coming from, set -Dnet.corda.client.rpc.trackRpcCallSites=true on the JVM command line and you will get a stack trace with this warning.
+[INFO ] 2019-09-19T10:11:23,383 [http-nio-10416-exec-2] TheUtil - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=A90302B8B22147F778DB6E92F8FCF91F569E776AA977E40EF24040D5A9420F2F) 🥏 🥏 
+[INFO ] 2019-09-19T10:11:23,384 [http-nio-10416-exec-2] SupplierController -  🧩  🧩 Returned invoiceOffer: {
+  "invoiceId": "eaeabb51-f0c2-419a-8f97-14d251f3bc73",
+  "offerAmount": 435600.0,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "supplierId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "investorId": "f652fbf5-5064-4542-8f5e-eb5af87ad05c",
+  "ownerId": "71edb231-ec9b-43e0-a281-6fa42d29414d",
+  "offerDate": "Sep 19, 2019 12:11:23 PM"
+}
+[INFO ] 2019-09-19T10:16:06,090 [http-nio-10416-exec-4] TheUtil -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-19T10:16:06,128 [http-nio-10416-exec-4] TheUtil -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 9
+[INFO ] 2019-09-19T10:21:46,923 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62679465: startup date [Thu Sep 19 11:53:43 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T10:21:46,939 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[INFO ] 2019-09-19T10:21:53,295 [main] ShareAccountInfoFlow -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-19T10:21:54,147 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 83570 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-19T10:21:54,148 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-19T10:21:54,191 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62679465: startup date [Thu Sep 19 12:21:54 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T10:21:55,108 [main] TomcatWebServer - Tomcat initialized with port(s): 10416 (http)
+[INFO ] 2019-09-19T10:21:55,120 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10416"]
+[INFO ] 2019-09-19T10:21:55,129 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-19T10:21:55,129 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-19T10:21:55,137 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-19T10:21:55,227 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-19T10:21:55,227 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 1038 ms
+[INFO ] 2019-09-19T10:21:55,239 [localhost-startStop-1] ShareAccountInfoFlow - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-19T10:21:55,241 [localhost-startStop-1] ShareAccountInfoFlow -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-19T10:21:55,241 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-19T10:21:55,241 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-19T10:21:55,241 [localhost-startStop-1] ShareAccountInfoFlow -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-19T10:21:55,295 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-19T10:21:55,298 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-19T10:21:55,298 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-19T10:21:55,298 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-19T10:21:55,298 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-19T10:21:55,299 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-19T10:21:55,334 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10429  🔆
+[INFO ] 2019-09-19T10:21:56,147 [main] RPCClient - Startup took 743 msec
+[INFO ] 2019-09-19T10:21:56,147 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-19T10:21:56,324 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 Regulator  💚  💚
+[INFO ] 2019-09-19T10:21:56,351 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T10:21:56,358 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T10:21:56,365 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T10:21:56,371 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T10:21:56,378 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1568886708232)
+[INFO ] 2019-09-19T10:21:56,435 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T10:21:56,560 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62679465: startup date [Thu Sep 19 12:21:54 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-19T10:21:56,620 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-19T10:21:56,622 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.util.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-19T10:21:56,622 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T10:21:56,622 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-19T10:21:56,623 [main] RequestMappingHandlerMapping - Mapped "{[/admin/shareAccounts],methods=[GET]}" onto private java.lang.String com.bfn.webserver.AdminController.shareAccounts() throws java.lang.Exception
+[INFO ] 2019-09-19T10:21:56,623 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-19T10:21:56,623 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-19T10:21:56,624 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-19T10:21:56,624 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.AdminController.listNodes()
+[INFO ] 2019-09-19T10:21:56,626 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-19T10:21:56,626 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-19T10:21:56,627 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-19T10:21:56,628 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-19T10:21:56,628 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-19T10:21:56,633 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-19T10:21:56,633 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-19T10:21:56,633 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-19T10:21:56,634 [main] RequestMappingHandlerMapping - Mapped "{[/investor/buyInvoiceOffer],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.buyInvoiceOffer(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T10:21:56,634 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-19T10:21:56,636 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-19T10:21:56,636 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-19T10:21:56,637 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-19T10:21:56,637 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-19T10:21:56,637 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.SupplierController.listNodes()
+[INFO ] 2019-09-19T10:21:56,637 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-19T10:21:56,638 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-19T10:21:56,638 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-19T10:21:56,640 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-19T10:21:56,640 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-19T10:21:56,658 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T10:21:56,658 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-19T10:21:56,694 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-19T10:21:56,921 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-19T10:21:56,952 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10416"]
+[INFO ] 2019-09-19T10:21:56,966 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-19T10:21:56,979 [main] TomcatWebServer - Tomcat started on port(s): 10416 (http) with context path ''
+[INFO ] 2019-09-19T10:21:56,983 [main] BFNWebApi - Started BFNWebApi in 3.595 seconds (JVM running for 4.274)
+[INFO ] 2019-09-19T10:21:56,984 [main] ShareAccountInfoFlow -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Thu Sep 19 12:21:56 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-19T10:22:16,008 [http-nio-10416-exec-1] [/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+[INFO ] 2019-09-19T10:22:16,008 [http-nio-10416-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+[INFO ] 2019-09-19T10:22:16,021 [http-nio-10416-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 13 ms
+[INFO ] 2019-09-19T10:22:16,050 [http-nio-10416-exec-1] TheUtil -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-19T10:22:16,435 [http-nio-10416-exec-1] TheUtil -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 9

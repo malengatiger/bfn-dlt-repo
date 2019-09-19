@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @CordaService
-public class MyCordaService extends SingletonSerializeAsToken {
-    private final static Logger logger = LoggerFactory.getLogger(MyCordaService.class);
+public class BFNCordaService extends SingletonSerializeAsToken {
+    private final static Logger logger = LoggerFactory.getLogger(BFNCordaService.class);
     private AppServiceHub serviceHub;
-    public MyCordaService(AppServiceHub serviceHub) {
+    public BFNCordaService(AppServiceHub serviceHub) {
         this.serviceHub = serviceHub;
-        logger.info("\uD83D\uDE21 \uD83D\uDE21 \uD83D\uDE21 MyCordaService Constructor. \uD83D\uDCA6 Read up on service usage  \uD83D\uDE21");
+        logger.info("\uD83D\uDE21 \uD83D\uDE21 \uD83D\uDE21 BFNCordaService Constructor. \uD83D\uDCA6 Read up on service usage  \uD83D\uDE21");
         getInfo();
     }
     // public api of service
@@ -22,3 +22,6 @@ public class MyCordaService extends SingletonSerializeAsToken {
         return serviceHub.getNetworkParameters().toString();
     }
 }
+/*
+BFNCordaService
+ */

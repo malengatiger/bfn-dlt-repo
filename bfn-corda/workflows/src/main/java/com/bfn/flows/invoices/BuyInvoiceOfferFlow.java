@@ -2,6 +2,7 @@ package com.bfn.flows.invoices;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.bfn.contracts.InvoiceOfferContract;
+import com.bfn.flows.admin.BFNCordaService;
 import com.bfn.states.InvoiceOfferState;
 import com.google.common.collect.ImmutableList;
 import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount;
@@ -80,22 +81,10 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
         final ServiceHub serviceHub = getServiceHub();
         logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... BuyInvoiceOfferFlow call started ...");
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
-        QueryCriteria.VaultQueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.CONSUMED);
-        Vault.Page page = serviceHub.getVaultService().queryBy(InvoiceOfferState.class,criteria,
-                new PageSpecification(1,200));
-        List<StateAndRef<InvoiceOfferState>> refs = page.getStates();
-        boolean isFound = false;
-        logger.info(" \uD83D\uDCA6  \uD83D\uDCA6 Number of consumed InvoiceOfferStates:  \uD83D\uDCA6 " + refs.size() + "  \uD83D\uDCA6");
-        for (StateAndRef<InvoiceOfferState> ref: refs) {
-            InvoiceOfferState state = ref.getState().getData();
-            if (invoiceOfferState.getState().getData().getInvoiceId().toString()
-                    .equalsIgnoreCase(state.getInvoiceId().toString())) {
-                isFound = true;
-            }
-        }
-        if (isFound) {
-            throw new FlowException("InvoiceOfferState is already CONSUMED");
-        }
+
+        checkIfAlreadyConsumed(serviceHub);
+        BFNCordaService bfnCordaService = serviceHub.cordaService(BFNCordaService.class);
+        bfnCordaService.getInfo();
 
         InvoiceOfferContract.BuyOffer command = new InvoiceOfferContract.BuyOffer();
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Notary: " + notary.getName().toString()
@@ -189,6 +178,30 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
         return signedTransaction;
 
     }
+
+    @Suspendable
+    private void checkIfAlreadyConsumed(ServiceHub serviceHub) throws FlowException {
+        QueryCriteria.VaultQueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(
+                Vault.StateStatus.CONSUMED);
+        Vault.Page page = serviceHub.getVaultService().queryBy(InvoiceOfferState.class,criteria,
+                new PageSpecification(1,200));
+        List<StateAndRef<InvoiceOfferState>> refs = page.getStates();
+        boolean isFound = false;
+        logger.info(" \uD83D\uDCA6 \uD83D\uDCA6 Number of consumed InvoiceOfferStates: " +
+                "\uD83D\uDCA6 " + refs.size() + "  \uD83D\uDCA6");
+
+        for (StateAndRef<InvoiceOfferState> ref: refs) {
+            InvoiceOfferState state = ref.getState().getData();
+            if (invoiceOfferState.getState().getData().getInvoiceId().toString()
+                    .equalsIgnoreCase(state.getInvoiceId().toString())) {
+                isFound = true;
+            }
+        }
+        if (isFound) {
+            throw new FlowException("InvoiceOfferState is already CONSUMED");
+        }
+    }
+
     @Suspendable
     private SignedTransaction getSignedTransaction(SignedTransaction signedTx, List<FlowSession> sessions)
             throws FlowException {

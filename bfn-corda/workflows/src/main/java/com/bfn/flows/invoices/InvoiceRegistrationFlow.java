@@ -2,15 +2,21 @@ package com.bfn.flows.invoices;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.bfn.contracts.InvoiceContract;
+import com.bfn.flows.admin.BFNCordaService;
+import com.bfn.states.InvoiceOfferState;
 import com.bfn.states.InvoiceState;
 import com.google.common.collect.ImmutableList;
 import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount;
+import net.corda.core.contracts.StateAndRef;
 import net.corda.core.flows.*;
 import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.AnonymousParty;
 import net.corda.core.identity.Party;
 import net.corda.core.node.NodeInfo;
 import net.corda.core.node.ServiceHub;
+import net.corda.core.node.services.Vault;
+import net.corda.core.node.services.vault.PageSpecification;
+import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.core.transactions.TransactionBuilder;
 import net.corda.core.utilities.ProgressTracker;
@@ -79,6 +85,10 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
         invoiceState.setDateRegistered(new Date());
 
+        BFNCordaService bfnCordaService = serviceHub.cordaService(BFNCordaService.class);
+        bfnCordaService.getInfo();
+
+        checkDuplicate(serviceHub);
         Party supplierParty = invoiceState.getSupplierInfo().getHost();
         Party customerParty = invoiceState.getCustomerInfo().getHost();
 
@@ -184,5 +194,26 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
                 " \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C OTHER NODE(S): FinalityFlow has been executed ... " +
                 "\uD83E\uDD66 \uD83E\uDD66");
         return mSignedTransactionDone;
+    }
+    @Suspendable
+    private void checkDuplicate(ServiceHub serviceHub) throws FlowException {
+        QueryCriteria.VaultQueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
+        Vault.Page page = serviceHub.getVaultService().queryBy(InvoiceState.class, criteria,
+                new PageSpecification(1, 200));
+        List<StateAndRef<InvoiceState>> refs = page.getStates();
+        boolean isFound = false;
+        logger.info(" \uD83D\uDCA6  \uD83D\uDCA6 Number of InvoiceStates:  \uD83D\uDCA6 " + refs.size() + "  \uD83D\uDCA6");
+        for (StateAndRef<InvoiceState> ref : refs) {
+            InvoiceState state = ref.getState().getData();
+            if (invoiceState.getInvoiceNumber().toString()
+                    .equalsIgnoreCase(state.getInvoiceNumber())
+                    && invoiceState.getSupplierInfo().getIdentifier().getId().toString()
+                    .equalsIgnoreCase(state.getSupplierInfo().getIdentifier().getId().toString())) {
+                isFound = true;
+            }
+        }
+        if (isFound) {
+            throw new FlowException("InvoiceState is already on file");
+        }
     }
 }

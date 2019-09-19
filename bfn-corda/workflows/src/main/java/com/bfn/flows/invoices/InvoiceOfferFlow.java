@@ -2,6 +2,7 @@ package com.bfn.flows.invoices;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.bfn.contracts.InvoiceOfferContract;
+import com.bfn.flows.admin.BFNCordaService;
 import com.bfn.states.InvoiceOfferState;
 import com.bfn.states.InvoiceState;
 import com.google.common.collect.ImmutableList;
@@ -13,6 +14,9 @@ import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
 import net.corda.core.node.NodeInfo;
 import net.corda.core.node.ServiceHub;
+import net.corda.core.node.services.Vault;
+import net.corda.core.node.services.vault.PageSpecification;
+import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.core.transactions.TransactionBuilder;
 import net.corda.core.utilities.ProgressTracker;
@@ -69,22 +73,27 @@ public class InvoiceOfferFlow extends FlowLogic<SignedTransaction> {
                 + invoiceOfferState.getSupplier().toString() + "\n investor: ".concat(invoiceOfferState.getInvestor().toString()));
 
     }
+
     private static final int LOCAL_SUPPLIER = 1, LOCAL_INVESTOR = 2, REMOTE_SUPPLIER = 3, REMOTE_INVESTOR = 4;
 
     @Override
     @Suspendable
     public SignedTransaction call() throws FlowException {
-        // We retrieve the notary identity from the network map.
         final ServiceHub serviceHub = getServiceHub();
         logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... RegisterInvoiceFlow call started ...");
         logger.info("  invoiceOfferState: InvoiceId: ".concat(invoiceOfferState.getInvoiceId().toString()));
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
 
+        checkDuplicate(serviceHub);
+
+        BFNCordaService bfnCordaService = serviceHub.cordaService(BFNCordaService.class);
+        bfnCordaService.getInfo();
+
         InvoiceOfferContract.MakeOffer command = new InvoiceOfferContract.MakeOffer();
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Notary: " + notary.getName().toString()
                 + "  \uD83C\uDF4A supplierParty: " + invoiceOfferState.getSupplier().getName()
-                + "  \uD83C\uDF4AinvestorParty: "+ invoiceOfferState.getInvestor().getName()
-                +" \uD83C\uDF4E  discount: " + invoiceOfferState.getDiscount()
+                + "  \uD83C\uDF4AinvestorParty: " + invoiceOfferState.getInvestor().getName()
+                + " \uD83C\uDF4E  discount: " + invoiceOfferState.getDiscount()
                 + "  \uD83D\uDC9A offerAmount" + invoiceOfferState.getOfferAmount());
 
         Party supplierParty = invoiceOfferState.getSupplier().getHost();
@@ -139,17 +148,17 @@ public class InvoiceOfferFlow extends FlowLogic<SignedTransaction> {
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Registration: signInitialTransaction executed ...");
 
         if (supplierStatus == LOCAL_SUPPLIER && investorStatus == REMOTE_INVESTOR) {
-            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 LOCAL_SUPPLIER and REMOTE_CUSTOMER ...");
+            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 LOCAL_SUPPLIER and REMOTE_INVESTOR ...");
             investorSession = initiateFlow(investorParty);
             signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(investorSession));
         }
         if (supplierStatus == REMOTE_SUPPLIER && investorStatus == LOCAL_INVESTOR) {
-            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 REMOTE_SUPPLIER and LOCAL_CUSTOMER ...");
+            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 REMOTE_SUPPLIER and LOCAL_INVESTOR ...");
             supplierSession = initiateFlow(supplierParty);
             signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(supplierSession));
         }
         if (supplierStatus == REMOTE_SUPPLIER && investorStatus == REMOTE_INVESTOR) {
-            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 REMOTE_SUPPLIER and REMOTE_CUSTOMER ...");
+            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 REMOTE_SUPPLIER and REMOTE_INVESTOR ...");
             supplierSession = initiateFlow(supplierParty);
             investorSession = initiateFlow(investorParty);
             signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(supplierSession, investorSession));
@@ -158,6 +167,28 @@ public class InvoiceOfferFlow extends FlowLogic<SignedTransaction> {
         return signedTransaction;
 
     }
+    @Suspendable
+    private void checkDuplicate(ServiceHub serviceHub) throws FlowException {
+        QueryCriteria.VaultQueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
+        Vault.Page page = serviceHub.getVaultService().queryBy(InvoiceOfferState.class, criteria,
+                new PageSpecification(1, 200));
+        List<StateAndRef<InvoiceOfferState>> refs = page.getStates();
+        boolean isFound = false;
+        logger.info(" \uD83D\uDCA6  \uD83D\uDCA6 Number of InvoiceOfferStates:  \uD83D\uDCA6 " + refs.size() + "  \uD83D\uDCA6");
+        for (StateAndRef<InvoiceOfferState> ref : refs) {
+            InvoiceOfferState state = ref.getState().getData();
+            if (invoiceOfferState.getInvoiceId().toString()
+                    .equalsIgnoreCase(state.getInvoiceId().toString())
+                    && invoiceOfferState.getInvestor().getIdentifier().getId().toString()
+                    .equalsIgnoreCase(state.getInvestor().getIdentifier().getId().toString())) {
+                isFound = true;
+            }
+        }
+        if (isFound) {
+            throw new FlowException("InvoiceOfferState is already on file");
+        }
+    }
+
     @Suspendable
     private SignedTransaction getSignedTransaction(SignedTransaction signedTx, List<FlowSession> sessions)
             throws FlowException {
