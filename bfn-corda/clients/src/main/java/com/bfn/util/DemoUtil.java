@@ -172,9 +172,9 @@ public class DemoUtil {
                 m.setCustomerId(customer.getIdentifier());
                 int num = random.nextInt(100);
                 if (num == 0) num = 92;
-                m.setAmount(num * 1000.05);
-                m.setValueAddedTax(15.0);
-                m.setTotalAmount(m.getAmount() * 1.15);
+                m.setAmount(num * 1000.00);
+                m.setValueAddedTax(10.0);
+                m.setTotalAmount(m.getAmount() * 1.10);
                 m.setDescription("Demo Invoice at ".concat(new Date().toString()));
                 m.setDateRegistered(new Date());
 

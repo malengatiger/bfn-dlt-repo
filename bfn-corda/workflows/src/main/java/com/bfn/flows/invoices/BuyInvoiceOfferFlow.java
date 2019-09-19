@@ -71,6 +71,7 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
     public BuyInvoiceOfferFlow(StateAndRef<InvoiceOfferState> invoiceOfferState) {
         this.invoiceOfferState = invoiceOfferState;
     }
+    private static final int LOCAL_SUPPLIER = 1, LOCAL_INVESTOR = 2, REMOTE_SUPPLIER = 3, REMOTE_INVESTOR = 4;
 
     @Override
     @Suspendable
@@ -139,50 +140,75 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
         String investorOrg = offerState.getInvestor().getHost().getName().getOrganisation();
         String supplierOrg = offerState.getSupplier().getHost().getName().getOrganisation();
 
-        if (investorOrg.equalsIgnoreCase(supplierOrg)) {
-            logger.info(" \uD83C\uDFC0  \uD83C\uDFC0  \uD83C\uDFC0 Supplier and Investor are on the same node. FlowSession not required");
+        String thisNodeOrg = nodeInfo.getLegalIdentities().get(0).getName().getOrganisation();
+        int supplierStatus, investorStatus;
+        if (supplierOrg.equalsIgnoreCase(thisNodeOrg)) {
+            supplierStatus = LOCAL_SUPPLIER;
+        } else {
+            supplierStatus = REMOTE_SUPPLIER;
+        }
+        if (investorOrg.equalsIgnoreCase(thisNodeOrg)) {
+            investorStatus = LOCAL_INVESTOR;
+        } else {
+            investorStatus = REMOTE_INVESTOR;
+        }
+        if (supplierStatus == LOCAL_SUPPLIER && investorStatus == LOCAL_INVESTOR) {
+            logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Supplier and Customer are on the same node ...");
+            logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Registration: signInitialTransaction executed ...");
             SignedTransaction mSignedTransactionDone = subFlow(
-                    new FinalityFlow(signedTx, ImmutableList.of(),
-                            FINALISING_TRANSACTION.childProgressTracker()));
-            logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  " +
+                    new FinalityFlow(signedTx, ImmutableList.of(), FINALISING_TRANSACTION.childProgressTracker()));
+            logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  SAME NODE ==> " +
                     "FinalityFlow has been executed ... \uD83E\uDD66 \uD83E\uDD66");
             return mSignedTransactionDone;
-        } else {
-            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21  Supplier and Investor are NOT on the same node." +
-                    "  \uD83D\uDE21 FlowSession is required");
-            FlowSession otherPartyFlowSession = null;
-            String thisNodeOrg = nodeInfo.getLegalIdentities().get(0).getName().getOrganisation();
-
-            if (supplierOrg.equalsIgnoreCase(thisNodeOrg)) {
-                otherPartyFlowSession = initiateFlow(investorParty);
-                logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 ... FlowSession set up for  \uD83D\uDE21 investor: "
-                        .concat(offerState.getInvestor().getName()));
-            }
-            if (investorOrg.equalsIgnoreCase(thisNodeOrg)) {
-                otherPartyFlowSession = initiateFlow(supplierParty);
-                logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 ... FlowSession set up for  \uD83D\uDE21 supplier: "
-                        .concat(offerState.getSupplier().getName()));
-            }
-            if (otherPartyFlowSession == null) {
-                throw new IllegalStateException("Unable to set up FlowSession: investor: "
-                        .concat(investorOrg).concat(" supplier: ".concat(supplierOrg)));
-            }
-            progressTracker.setCurrentStep(GATHERING_SIGNATURES);
-            logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Collecting Signatures ....");
-            SignedTransaction signedTransaction = subFlow(
-                    new CollectSignaturesFlow(signedTx,
-                            ImmutableList.of(otherPartyFlowSession),
-                            GATHERING_SIGNATURES.childProgressTracker()));
-            logger.info(("\uD83C\uDFBD \uD83C\uDFBD \uD83C\uDFBD Signatures collected OK!  \uD83D\uDE21 \uD83D\uDE21 " +
-                    "will call FinalityFlow ... \uD83C\uDF3A \uD83C\uDF3A  \uD83C\uDF3A \uD83C\uDF3A : ")
-                    .concat(signedTransaction.getId().toString()));
-
-            SignedTransaction mSignedTransactionDone = subFlow(
-                    new FinalityFlow(signedTransaction, ImmutableList.of(otherPartyFlowSession),
-                            FINALISING_TRANSACTION.childProgressTracker()));
-            logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D " +
-                    " FinalityFlow has been executed ... \uD83E\uDD66 \uD83E\uDD66");
-            return mSignedTransactionDone;
         }
+        logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 Supplier and Customer are NOT on the same node ..." +
+                "  \uD83D\uDE21 flowSession(s) required");
+
+        FlowSession supplierSession;
+        FlowSession investorSession;
+        SignedTransaction signedTransaction = null;
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Registration: signInitialTransaction executed ...");
+
+        if (supplierStatus == LOCAL_SUPPLIER && investorStatus == REMOTE_INVESTOR) {
+            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 LOCAL_SUPPLIER and REMOTE_CUSTOMER ...");
+            investorSession = initiateFlow(investorParty);
+            signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(investorSession));
+        }
+        if (supplierStatus == REMOTE_SUPPLIER && investorStatus == LOCAL_INVESTOR) {
+            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 REMOTE_SUPPLIER and LOCAL_CUSTOMER ...");
+            supplierSession = initiateFlow(supplierParty);
+            signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(supplierSession));
+        }
+        if (supplierStatus == REMOTE_SUPPLIER && investorStatus == REMOTE_INVESTOR) {
+            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 REMOTE_SUPPLIER and REMOTE_CUSTOMER ...");
+            supplierSession = initiateFlow(supplierParty);
+            investorSession = initiateFlow(investorParty);
+            signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(supplierSession, investorSession));
+        }
+
+        return signedTransaction;
+
+    }
+    @Suspendable
+    private SignedTransaction getSignedTransaction(SignedTransaction signedTx, List<FlowSession> sessions)
+            throws FlowException {
+        logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 getSignedTransaction ... sessions: " + sessions.size());
+        progressTracker.setCurrentStep(GATHERING_SIGNATURES);
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 ... Collecting Signatures ....");
+        SignedTransaction signedTransaction = subFlow(
+                new CollectSignaturesFlow(signedTx,
+                        sessions,
+                        GATHERING_SIGNATURES.childProgressTracker()));
+        logger.info(("\uD83C\uDFBD \uD83C\uDFBD \uD83C\uDFBD \uD83C\uDFBD  Signatures collected OK!  \uD83D\uDE21 \uD83D\uDE21 " +
+                ".... will call FinalityFlow ... \uD83C\uDF3A \uD83C\uDF3A txId: ")
+                .concat(signedTransaction.getId().toString()));
+
+        SignedTransaction mSignedTransactionDone = subFlow(
+                new FinalityFlow(signedTransaction, sessions,
+                        FINALISING_TRANSACTION.childProgressTracker()));
+        logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  " +
+                " \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C OTHER NODE(S): FinalityFlow has been executed ... " +
+                "\uD83E\uDD66 \uD83E\uDD66");
+        return mSignedTransactionDone;
     }
 }

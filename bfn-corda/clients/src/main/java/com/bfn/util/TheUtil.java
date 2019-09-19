@@ -167,7 +167,9 @@ public class TheUtil {
             if (customerInfo == null) {
                 throw new Exception("Customer is bloody missing");
             }
-            invoice.setTotalAmount(invoice.getAmount() * (invoice.getValueAddedTax()/100));
+            double m = invoice.getValueAddedTax() / 100;
+            logger.info("discount used: " + m);
+            invoice.setTotalAmount(invoice.getAmount() + (m * invoice.getAmount()));
             InvoiceState invoiceState = new InvoiceState(UUID.randomUUID(),
                     invoice.getInvoiceNumber(),invoice.getDescription(),
                     invoice.getAmount(),invoice.getTotalAmount(),invoice.getValueAddedTax(),
@@ -181,7 +183,9 @@ public class TheUtil {
                     "\uD83C\uDF4F \uD83C\uDF4F \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06  " +
                     "\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C  signedTransaction returned: \uD83E\uDD4F "
                     + issueTx.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
-            return getDTO(invoiceState);
+            InvoiceDTO mm = getDTO(invoiceState);
+            logger.info(GSON.toJson(mm));
+            return mm;
         } catch (Exception e) {
             if (e.getMessage() != null) {
                 throw new Exception("Failed to register invoice. ".concat(e.getMessage()));

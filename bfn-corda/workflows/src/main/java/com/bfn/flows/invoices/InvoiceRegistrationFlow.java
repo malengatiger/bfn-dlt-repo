@@ -69,7 +69,7 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
                 + invoiceState.getSupplierInfo().getName());
     }
 
-    static final int LOCAL_SUPPLIER = 1, LOCAL_CUSTOMER = 2, REMOTE_SUPPLIER = 3, REMOTE_CUSTOMER = 4;
+    private static final int LOCAL_SUPPLIER = 1, LOCAL_CUSTOMER = 2, REMOTE_SUPPLIER = 3, REMOTE_CUSTOMER = 4;
 
     @Override
     @Suspendable
@@ -111,7 +111,7 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         txBuilder.verify(serviceHub);
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Register TransactionBuilder verified");
         progressTracker.setCurrentStep(SIGNING_TRANSACTION);
-        SignedTransaction signedTx;
+        SignedTransaction signedTx = serviceHub.signInitialTransaction(txBuilder);
 
         NodeInfo nodeInfo = serviceHub.getMyInfo();
         String thisNodeOrg = nodeInfo.getLegalIdentities().get(0).getName().getOrganisation();
@@ -129,7 +129,6 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
 
         if (supplierStatus == LOCAL_SUPPLIER && customerStatus == LOCAL_CUSTOMER) {
             logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Supplier and Customer are on the same node ...");
-            signedTx = serviceHub.signInitialTransaction(txBuilder);
             logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Registration: signInitialTransaction executed ...");
             SignedTransaction mSignedTransactionDone = subFlow(
                     new FinalityFlow(signedTx, ImmutableList.of(), FINALISING_TRANSACTION.childProgressTracker()));
@@ -142,7 +141,6 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         FlowSession supplierSession;
         FlowSession customerSession;
         SignedTransaction signedTransaction = null;
-        signedTx = serviceHub.signInitialTransaction(txBuilder);
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Registration: signInitialTransaction executed ...");
 
         if (supplierStatus == LOCAL_SUPPLIER && customerStatus == REMOTE_CUSTOMER) {
@@ -166,7 +164,8 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
 
     }
     @Suspendable
-    private SignedTransaction getSignedTransaction(SignedTransaction signedTx, List<FlowSession> sessions) throws FlowException {
+    private SignedTransaction getSignedTransaction(SignedTransaction signedTx, List<FlowSession> sessions)
+            throws FlowException {
         logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 getSignedTransaction ... sessions: " + sessions.size());
         progressTracker.setCurrentStep(GATHERING_SIGNATURES);
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 ... Collecting Signatures ....");
@@ -181,7 +180,9 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         SignedTransaction mSignedTransactionDone = subFlow(
                 new FinalityFlow(signedTransaction, sessions,
                         FINALISING_TRANSACTION.childProgressTracker()));
-        logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  OTHER NODE(S): FinalityFlow has been executed ... \uD83E\uDD66 \uD83E\uDD66");
+        logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  " +
+                " \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C OTHER NODE(S): FinalityFlow has been executed ... " +
+                "\uD83E\uDD66 \uD83E\uDD66");
         return mSignedTransactionDone;
     }
 }
