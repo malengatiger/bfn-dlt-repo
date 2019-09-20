@@ -89,6 +89,7 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         bfnCordaService.getInfo();
 
         checkDuplicate(serviceHub);
+
         Party supplierParty = invoiceState.getSupplierInfo().getHost();
         Party customerParty = invoiceState.getCustomerInfo().getHost();
 

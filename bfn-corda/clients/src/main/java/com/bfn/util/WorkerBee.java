@@ -11,6 +11,8 @@ import com.bfn.flows.invoices.InvoiceOfferFlow;
 import com.bfn.flows.invoices.InvoiceRegistrationFlow;
 import com.bfn.states.InvoiceOfferState;
 import com.bfn.states.InvoiceState;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
@@ -25,17 +27,14 @@ import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
-public class TheUtil {
-    private final static Logger logger = LoggerFactory.getLogger(TheUtil.class);
+public class WorkerBee {
+    private final static Logger logger = LoggerFactory.getLogger(WorkerBee.class);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static List<NodeInfoDTO> listNodes(CordaRPCOps proxy) {
@@ -140,7 +139,7 @@ public class TheUtil {
         return list;
     }
 
-    public static InvoiceDTO startRegisterInvoiceFlow(CordaRPCOps proxy, InvoiceDTO invoice) throws Exception {
+    public static InvoiceDTO startInvoiceRegistrationFlow(CordaRPCOps proxy, InvoiceDTO invoice) throws Exception {
 
         logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: "
                 + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
@@ -237,8 +236,11 @@ public class TheUtil {
         }
     }
 
-    public static AccountInfoDTO startAccountRegistrationFlow(CordaRPCOps proxy, String accountName) throws Exception {
+    public static AccountInfoDTO startAccountRegistrationFlow(CordaRPCOps proxy,
+                                                              String accountName, String email, String password,
+                                                              String cellphone) throws Exception {
         try {
+            logger.info("phone: ".concat(cellphone));
             QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
             Vault.Page<AccountInfo> page = proxy.vaultQueryByWithPagingSpec(
                     AccountInfo.class, criteria,
@@ -253,7 +255,6 @@ public class TheUtil {
             }
 
             List<NodeInfo> nodes = proxy.networkMapSnapshot();
-
             CordaFuture<AccountInfo> accountInfoCordaFuture = proxy.startTrackedFlowDynamic(
                     AccountRegistrationFlow.class, accountName).getReturnValue();
 
@@ -262,6 +263,12 @@ public class TheUtil {
                     " \uD83D\uDC4C \uD83D\uDC4C " +
                     "\uD83D\uDC4C accountInfo returned: \uD83E\uDD4F " +
                     accountInfo.getName().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
+            //create user record in firebase
+            UserRecord userRecord = AuthUtil.createUser(accountName,email,password,
+                    cellphone, accountInfo.getIdentifier().getId().toString());
+            logger.info("\uD83C\uDF4E \uD83C\uDF4E \uD83C\uDF4E User created on Firebase: "
+                    .concat(GSON.toJson(userRecord)));
+
             String name = accountInfo.getHost().getName().getOrganisation();
             for (NodeInfo node: nodes) {
                 Party otherParty = node.getLegalIdentities().get(0);
@@ -273,10 +280,11 @@ public class TheUtil {
                     logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary \uD83E\uDD6C \uD83E\uDD6C ");
                     continue;
                 }
-                startAccountSharingFlow(proxy,otherParty,accountInfo);
+                String res = startAccountSharingFlow(proxy,otherParty,accountInfo);
                 logger.info(" \uD83D\uDE0E \uD83D\uDE0E "+accountName
                         +" shared with \uD83D\uDC7F " +
                         node.getLegalIdentities().get(0).getName().getOrganisation());
+                logger.info(res);
             }
 
             AccountInfoDTO dto = new AccountInfoDTO();
@@ -291,8 +299,8 @@ public class TheUtil {
         }
     }
 
-    public static String startAccountSharingFlow(CordaRPCOps proxy,
-                                                 Party otherParty, AccountInfo account) throws Exception {
+    private static String startAccountSharingFlow(CordaRPCOps proxy,
+                                                  Party otherParty, AccountInfo account) throws Exception {
         try {
             CordaFuture<String> accountInfoCordaFuture = proxy.startFlowDynamic(
                     ShareAccountInfoFlow.class, otherParty, account).getReturnValue();
@@ -382,6 +390,7 @@ public class TheUtil {
             }
         }
     }
+
 
     private static InvoiceDTO getDTO(InvoiceState state) {
         InvoiceDTO invoice = new InvoiceDTO();

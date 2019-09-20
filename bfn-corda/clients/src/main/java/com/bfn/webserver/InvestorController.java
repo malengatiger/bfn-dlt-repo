@@ -1,16 +1,10 @@
 package com.bfn.webserver;
 
-import com.bfn.dto.InvoiceOfferDTO;
-import com.bfn.states.InvoiceOfferState;
-import com.bfn.util.TheUtil;
+import com.bfn.util.WorkerBee;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.corda.core.contracts.StateAndRef;
 import net.corda.core.messaging.CordaRPCOps;
 import net.corda.core.node.NodeInfo;
-import net.corda.core.node.services.Vault;
-import net.corda.core.node.services.vault.PageSpecification;
-import net.corda.core.node.services.vault.QueryCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -68,7 +61,7 @@ public class InvestorController {
     @GetMapping(value = "/buyInvoiceOffer", produces = "application/json")
     private String buyInvoiceOffer(@RequestParam String invoiceId) throws Exception {
 
-       return TheUtil.startBuyInvoiceOfferFlow(proxy,invoiceId);
+       return WorkerBee.startBuyInvoiceOfferFlow(proxy,invoiceId);
     }
 
     private class PingResult {

@@ -4,17 +4,12 @@ import com.bfn.dto.AccountInfoDTO;
 import com.bfn.dto.InvoiceDTO;
 import com.bfn.dto.InvoiceOfferDTO;
 import com.bfn.dto.NodeInfoDTO;
-import com.bfn.flows.invoices.InvoiceOfferFlow;
-import com.bfn.states.InvoiceOfferState;
-import com.bfn.states.InvoiceState;
-import com.bfn.util.TheUtil;
+import com.bfn.util.WorkerBee;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
-import net.corda.core.concurrent.CordaFuture;
 import net.corda.core.contracts.StateAndRef;
 import net.corda.core.messaging.CordaRPCOps;
-import net.corda.core.transactions.SignedTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +52,7 @@ public class SupplierController {
     @GetMapping(value = "/nodes", produces = "application/json")
     private List<NodeInfoDTO> listNodes() {
 
-        return TheUtil.listNodes(proxy);
+        return WorkerBee.listNodes(proxy);
 
     }
     @GetMapping(value = "/getAccountInfoByID", produces = "application/json")
@@ -108,7 +103,7 @@ public class SupplierController {
     public InvoiceDTO startRegisterInvoiceFlow(@RequestBody InvoiceDTO invoice) throws Exception {
 
         logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: " + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
-        return TheUtil.startRegisterInvoiceFlow(proxy,invoice);
+        return WorkerBee.startInvoiceRegistrationFlow(proxy,invoice);
     }
 
     @PostMapping(value = "startInvoiceOfferFlow")
@@ -116,7 +111,7 @@ public class SupplierController {
 
         logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceOfferDTO: " + GSON.toJson(invoiceOffer) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
         try {
-            InvoiceOfferDTO m =TheUtil.startInvoiceOfferFlow(proxy,invoiceOffer);
+            InvoiceOfferDTO m = WorkerBee.startInvoiceOfferFlow(proxy,invoiceOffer);
             logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffer: ".concat(GSON.toJson(m)));
             return m;
         } catch (Exception e) {
@@ -130,12 +125,12 @@ public class SupplierController {
 
     @GetMapping(value = "getInvoiceStates")
     public List<InvoiceDTO> getInvoiceStates() {
-        return TheUtil.getInvoiceStates(proxy);
+        return WorkerBee.getInvoiceStates(proxy);
     }
     @GetMapping(value = "getInvoiceOfferStates")
     public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam boolean consumed) {
 
-        return TheUtil.getInvoiceOfferStates(proxy, consumed);
+        return WorkerBee.getInvoiceOfferStates(proxy, consumed);
     }
 
     private class PingResult {

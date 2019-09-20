@@ -4,27 +4,19 @@ import com.bfn.dto.AccountInfoDTO;
 import com.bfn.dto.InvoiceDTO;
 import com.bfn.dto.InvoiceOfferDTO;
 import com.bfn.dto.NodeInfoDTO;
-import com.bfn.util.DemoSummary;
+import com.bfn.dto.DemoSummary;
 import com.bfn.util.DemoUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
-import net.corda.core.contracts.StateAndRef;
-import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
-import net.corda.core.node.NetworkParameters;
 import net.corda.core.node.NodeInfo;
-import net.corda.core.node.services.Vault;
-import net.corda.core.node.services.vault.PageSpecification;
-import net.corda.core.node.services.vault.QueryCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import com.bfn.util.TheUtil;
+import com.bfn.util.WorkerBee;
 
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Define your API endpoints here.
@@ -53,56 +45,30 @@ public class AdminController {
         return result;
     }
 
-    @PostMapping(value = "/startAccountRegistrationFlow", produces = "application/json")
-    private AccountInfoDTO startAccountRegistrationFlow(@RequestParam String accountName) throws Exception {
 
-        AccountInfoDTO accountInfoDTO = TheUtil.startAccountRegistrationFlow(proxy, accountName);
-        return accountInfoDTO;
+    @GetMapping(value = "/startAccountRegistrationFlow", produces = "application/json")
+    private AccountInfoDTO startAccountRegistrationFlow(@RequestParam String name,
+                                      @RequestParam String email,
+                                      @RequestParam String password,
+                                      @RequestParam String cellphone) throws Exception {
+
+        return WorkerBee.startAccountRegistrationFlow(proxy,name,email,password,cellphone);
     }
 
     @GetMapping(value = "getAccounts")
     private List<AccountInfoDTO> getAccounts() {
-        return TheUtil.getAccounts(proxy);
+        return WorkerBee.getAccounts(proxy);
     }
 
-//    @GetMapping(value = "shareAccounts")
-//    private String shareAccounts() throws Exception {
-//        List<NodeInfo> nodes = proxy.networkMapSnapshot();
-//        logger.info("\n\n\uD83E\uDDA0 \uD83E\uDDA0 shareAccounts: Nodes running: " + nodes.size());
-//        QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
-//        Vault.Page<AccountInfo> page = proxy.vaultQueryByWithPagingSpec(AccountInfo.class,
-//                criteria,new PageSpecification(1,200));
-//        String myNode = proxy.nodeInfo().getLegalIdentities().get(0).getName().toString();
-//        List<StateAndRef<AccountInfo>> list = page.getStates();
-//        logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Accounts on "+myNode+" Node: " + list.size());
-//        for (NodeInfo nodeInfo: nodes) {
-//            String name = nodeInfo.getLegalIdentities().get(0).getName().toString();
-//            Party otherParty = nodeInfo.getLegalIdentities().get(0);
-//            if (name.equalsIgnoreCase(myNode)) {
-//                logger.info("\uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node \uD83E\uDD6C ");
-//                continue;
-//            }
-//            if (name.contains("Notary")) {
-//                logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary \uD83E\uDD6C \uD83E\uDD6C ");
-//                continue;
-//            }
-//
-//            for (StateAndRef<AccountInfo> accountInfoStateAndRef: list) {
-//                String result = TheUtil.startAccountSharingFlow(proxy,otherParty,accountInfoStateAndRef.getState().getData());
-//                logger.info("\uD83C\uDF81 Result from sharing account ".concat(result));
-//            }
-//        }
-//        return "Account Sharing DONE. shared  \uD83D\uDD37 " + list.size() + "  \uD83D\uDD37 accounts";
-//    }
 
     @GetMapping(value = "getInvoiceStates")
     public List<InvoiceDTO> getInvoiceStates() {
-        return TheUtil.getInvoiceStates(proxy);
+        return WorkerBee.getInvoiceStates(proxy);
     }
 
     @GetMapping(value = "getInvoiceOfferStates")
     public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam boolean consumed) {
-        return TheUtil.getInvoiceOfferStates(proxy, consumed);
+        return WorkerBee.getInvoiceOfferStates(proxy, consumed);
     }
 
     @GetMapping(value = "/hello", produces = "text/plain")
@@ -130,17 +96,17 @@ public class AdminController {
     @GetMapping(value = "/nodes", produces = "application/json")
     private List<NodeInfoDTO> listNodes() {
 
-        return TheUtil.listNodes(proxy);
+        return WorkerBee.listNodes(proxy);
     }
 
     @GetMapping(value = "/notaries", produces = "application/json")
     private List<String> listNotaries() {
-        return TheUtil.listNotaries(proxy);
+        return WorkerBee.listNotaries(proxy);
     }
 
     @GetMapping(value = "/flows", produces = "application/json")
     private List<String> listFlows() {
-        return TheUtil.listFlows(proxy);
+        return WorkerBee.listFlows(proxy);
     }
 
 

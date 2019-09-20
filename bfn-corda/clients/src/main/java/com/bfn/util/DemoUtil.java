@@ -1,18 +1,12 @@
 package com.bfn.util;
 
 import com.bfn.dto.AccountInfoDTO;
+import com.bfn.dto.DemoSummary;
 import com.bfn.dto.InvoiceDTO;
 import com.bfn.dto.InvoiceOfferDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
-import net.corda.core.contracts.StateAndRef;
-import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
-import net.corda.core.node.NodeInfo;
-import net.corda.core.node.services.Vault;
-import net.corda.core.node.services.vault.PageSpecification;
-import net.corda.core.node.services.vault.QueryCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,9 +29,9 @@ public class DemoUtil {
         suppliers = new ArrayList<>();
         customers = new ArrayList<>();
         investors = new ArrayList<>();
-        List nodes = TheUtil.listNodes(proxy);
+        List nodes = WorkerBee.listNodes(proxy);
         demoSummary.setNumberOfNodes(nodes.size());
-        List flows = TheUtil.listFlows(proxy);
+        List flows = WorkerBee.listFlows(proxy);
         demoSummary.setNumberOfFlows(flows.size());
 
         //start data generation
@@ -47,7 +41,7 @@ public class DemoUtil {
 
         registerInvoices();
 
-        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
+        List<AccountInfoDTO> list = WorkerBee.getAccounts(proxy);
         logger.info(" \uD83C\uDF4E  \uD83C\uDF4E Total Number of Accounts on Node after sharing:" +
                 " \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
         demoSummary.setNumberOfAccounts(list.size());
@@ -90,9 +84,13 @@ public class DemoUtil {
                 "\uD83D\uDD06 \uD83D\uDD06 ");
         String key = "" + random.nextInt(100);
         String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
-        
-        AccountInfoDTO supplier1 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Supplier One".concat("#").concat(key)));
-        AccountInfoDTO supplier2 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Supplier Two".concat("#").concat(key)));
+
+        AccountInfoDTO supplier1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".SupplierOne")
+                        .concat("#").concat(key),
+                "supplier1@gmail.com","pass123","082 999 9901");
+        AccountInfoDTO supplier2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".SupplierTwo")
+                        .concat("#").concat(key),
+                "supplier2@gmail.com","pass123","082 999 9902");
 
         suppliers.add(supplier1);
         suppliers.add(supplier2);
@@ -105,9 +103,12 @@ public class DemoUtil {
         String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
         logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 ");
         String key = "" + random.nextInt(100);
-        AccountInfoDTO customer1 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Customer One LLC".concat("#").concat(key)));
-        AccountInfoDTO customer2 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Customer Two LLC".concat("#").concat(key)));
-
+        AccountInfoDTO customer1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".CustomerOne")
+                        .concat("#").concat(key),
+                "customer1@gmail.com","pass123","082 999 9903");
+        AccountInfoDTO customer2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".CustomerTwo")
+                        .concat("#").concat(key),
+                "customer2@gmail.com","pass123","082 999 9904");
         customers.add(customer1);
         customers.add(customer2);
 
@@ -121,9 +122,12 @@ public class DemoUtil {
                 " \uD83D\uDD06 \uD83D\uDD06");
         String key = "" + random.nextInt(100);
 
-        AccountInfoDTO investor1 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Investor One Inc.".concat("#").concat(key)));
-        AccountInfoDTO investor2 = TheUtil.startAccountRegistrationFlow(proxy,name.concat(".Investor Two LLC".concat("#").concat(key)));
-
+        AccountInfoDTO investor1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".InvestorOne")
+                        .concat("#").concat(key),
+                "investor1@gmail.com","pass123","082 999 9905");
+        AccountInfoDTO investor2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".InvestorTwo")
+                        .concat("#").concat(key),
+                "investor2@gmail.com","pass123","082 999 9906");
         investors.add(investor1);
         investors.add(investor2);
 
@@ -177,7 +181,7 @@ public class DemoUtil {
                 m.setDescription("Demo Invoice at ".concat(new Date().toString()));
                 m.setDateRegistered(new Date());
 
-                InvoiceDTO invoice = TheUtil.startRegisterInvoiceFlow(proxy,m);
+                InvoiceDTO invoice = WorkerBee.startInvoiceRegistrationFlow(proxy,m);
                 double discount = random.nextInt(25) * 1.0;
                 for (AccountInfoDTO investor: investors) {
                     try {
@@ -189,11 +193,11 @@ public class DemoUtil {
             }
         }
 
-        List<InvoiceDTO> invoiceStates = TheUtil.getInvoiceStates(proxy);
+        List<InvoiceDTO> invoiceStates = WorkerBee.getInvoiceStates(proxy);
         logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+invoiceStates.size()+" InvoiceStates on node ...  \uD83C\uDF4A ");
         demoSummary.setNumberOfInvoices(invoiceStates.size());
 
-        List<InvoiceOfferDTO> list2 = TheUtil.getInvoiceOfferStates(proxy, false);
+        List<InvoiceOfferDTO> list2 = WorkerBee.getInvoiceOfferStates(proxy, false);
         demoSummary.setNumberOfInvoiceOffers(list2.size());
         logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+list2.size()+" InvoiceOfferStates on node ...  \uD83C\uDF4A ");
 
@@ -216,7 +220,7 @@ public class DemoUtil {
         m.setOfferAmount(invoice.getTotalAmount() * ((100.0 - m.getDiscount()) / 100));
         m.setOriginalAmount(invoice.getTotalAmount());
 
-        TheUtil.startInvoiceOfferFlow(proxy,m);
+        WorkerBee.startInvoiceOfferFlow(proxy,m);
     }
 }
 

@@ -1,15 +1,25 @@
 package com.bfn.webserver;
 
 import com.bfn.flows.admin.ShareAccountInfoFlow;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -60,5 +70,39 @@ public class BFNWebApi {
                 + config.getAllowedHeaders().toString() + " \uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06");
 
         return new CorsFilter(source);
+    }
+    @Autowired
+    private Environment env;
+    private Dotenv getEnv() {
+        // Load configuration from the environment or a $projectRoot/.env file, if present
+        // See .env.sample for an example of what it is looking for
+        return Dotenv.load();
+    }
+    @Bean
+    public FirebaseApp firebaseBean() throws IOException {
+        logger.info("\uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06  BFNWebApi:  setting up Firebase ...." +
+                " \uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06");
+
+        try {
+            String envPath = env.getProperty("firebasePath");
+//            String path = "/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn.json";
+            logger.info("\uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06 .env PATH for Firebase Service Account: \uD83D\uDC99  ".concat(envPath));
+            FileInputStream serviceAccount =
+                    new FileInputStream(envPath);
+
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setDatabaseUrl("https://bfn-mobile-backend.firebaseio.com")
+                    .build();
+
+            FirebaseApp app =FirebaseApp.initializeApp(options);
+            logger.info(" \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9  \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
+                    "Firebase Admin Setup OK:  \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 name: "
+            .concat(app.getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("Firebase Admin setup failed");
+        }
+        return null;
     }
 }

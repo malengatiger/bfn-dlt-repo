@@ -1,4 +1,4 @@
-package com.bfn.util;
+package com.bfn.dto;
 
 public class DemoSummary {
     int numberOfAccounts, numberOfInvoices, numberOfInvoiceOffers;
