@@ -3355,3 +3355,557 @@ com.google.api.client.http.HttpResponseException: 400 Bad Request
 
 
 [INFO ] 2019-09-21T19:49:38,843 [http-nio-10416-exec-10] WorkerBee - 🌺  🌺 done listing accounts:  🌺 34
+[INFO ] 2019-09-21T20:07:15,771 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 19:47:49 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:07:15,774 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[INFO ] 2019-09-21T20:07:22,914 [main] BFNWebApi -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-21T20:07:23,904 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 49163 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-21T20:07:23,905 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-21T20:07:23,958 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 22:07:23 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:07:24,965 [main] TomcatWebServer - Tomcat initialized with port(s): 10416 (http)
+[INFO ] 2019-09-21T20:07:24,977 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10416"]
+[INFO ] 2019-09-21T20:07:24,987 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-21T20:07:24,987 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-21T20:07:24,995 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-21T20:07:25,152 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-21T20:07:25,152 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 1196 ms
+[INFO ] 2019-09-21T20:07:25,165 [localhost-startStop-1] BFNWebApi - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:07:25,167 [localhost-startStop-1] BFNWebApi -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:07:25,167 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:07:25,167 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:07:25,168 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:07:25,223 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-21T20:07:25,226 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-21T20:07:25,227 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-21T20:07:25,227 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-21T20:07:25,227 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-21T20:07:25,227 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-21T20:07:25,260 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10429  🔆
+[INFO ] 2019-09-21T20:07:26,113 [main] RPCClient - Startup took 779 msec
+[INFO ] 2019-09-21T20:07:26,114 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-21T20:07:26,333 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 Regulator  💚  💚
+[INFO ] 2019-09-21T20:07:26,383 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:07:26,390 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:07:26,396 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:07:26,402 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:07:26,408 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:07:26,410 [main] BFNWebApi - 🔆  🔆  🔆  BFNWebApi:  setting up Firebase .... 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:07:26,410 [main] BFNWebApi - 🔆  🔆  🔆 .env PATH for Firebase Service Account: 💙  /Users/aubs/WORK/CORDA/bfn.json
+[INFO ] 2019-09-21T20:07:26,460 [main] BFNWebApi -  🧩🧩🧩  🧩🧩🧩 Firebase Admin Setup OK:  🧩🧩🧩 name: [DEFAULT]
+[INFO ] 2019-09-21T20:07:26,521 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:07:26,656 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 22:07:23 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:07:26,809 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-21T20:07:26,810 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-21T20:07:26,810 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-21T20:07:26,811 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(com.bfn.dto.UserDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:07:26,811 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-21T20:07:26,812 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-21T20:07:26,813 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-21T20:07:26,813 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.AdminController.listNodes()
+[INFO ] 2019-09-21T20:07:26,814 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-21T20:07:26,814 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-21T20:07:26,816 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-21T20:07:26,817 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-21T20:07:26,817 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-21T20:07:26,820 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-21T20:07:26,821 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-21T20:07:26,822 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-21T20:07:26,822 [main] RequestMappingHandlerMapping - Mapped "{[/investor/buyInvoiceOffer],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.buyInvoiceOffer(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-21T20:07:26,823 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-21T20:07:26,826 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:07:26,826 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:07:26,828 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-21T20:07:26,829 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-21T20:07:26,829 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-21T20:07:26,829 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-21T20:07:26,830 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-21T20:07:26,830 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.SupplierController.listNodes()
+[INFO ] 2019-09-21T20:07:26,832 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-21T20:07:26,833 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-21T20:07:26,858 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:07:26,858 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:07:26,897 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-21T20:07:27,014 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-21T20:07:27,025 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10416"]
+[INFO ] 2019-09-21T20:07:27,045 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-21T20:07:27,057 [main] TomcatWebServer - Tomcat started on port(s): 10416 (http) with context path ''
+[INFO ] 2019-09-21T20:07:27,061 [main] BFNWebApi - Started BFNWebApi in 4.049 seconds (JVM running for 4.746)
+[INFO ] 2019-09-21T20:07:27,062 [main] BFNWebApi -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Sat Sep 21 22:07:27 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-21T20:08:08,296 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 10:53:53 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:08:08,311 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[INFO ] 2019-09-21T20:08:13,124 [main] BFNWebApi -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-21T20:08:14,594 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 49494 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-21T20:08:14,595 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-21T20:08:14,649 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2e8ab815: startup date [Sat Sep 21 22:08:14 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:08:15,035 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 10:54:13 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:08:15,123 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[INFO ] 2019-09-21T20:08:16,162 [main] TomcatWebServer - Tomcat initialized with port(s): 10414 (http)
+[INFO ] 2019-09-21T20:08:16,177 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10414"]
+[INFO ] 2019-09-21T20:08:16,187 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-21T20:08:16,188 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-21T20:08:16,196 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-21T20:08:16,314 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-21T20:08:16,314 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 1667 ms
+[INFO ] 2019-09-21T20:08:16,333 [localhost-startStop-1] BFNWebApi - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:16,336 [localhost-startStop-1] BFNWebApi -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:16,336 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:16,336 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:16,336 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:16,451 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-21T20:08:16,456 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:16,456 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:16,456 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:16,456 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:16,457 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:16,499 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10427  🔆
+[INFO ] 2019-09-21T20:08:17,411 [main] RPCClient - Startup took 821 msec
+[INFO ] 2019-09-21T20:08:17,412 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-21T20:08:17,612 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 CapeTown  💚  💚
+[INFO ] 2019-09-21T20:08:17,642 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1569053725943)
+[INFO ] 2019-09-21T20:08:17,651 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1569053725943)
+[INFO ] 2019-09-21T20:08:17,659 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1569053725943)
+[INFO ] 2019-09-21T20:08:17,665 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1569053725943)
+[INFO ] 2019-09-21T20:08:17,674 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10406], legalIdentitiesAndCerts=[O=CapeTown, L=Cape Town, C=ZA], platformVersion=4, serial=1569053725943)
+[INFO ] 2019-09-21T20:08:17,676 [main] BFNWebApi - 🔆  🔆  🔆  BFNWebApi:  setting up Firebase .... 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:17,677 [main] BFNWebApi - 🔆  🔆  🔆 .env PATH for Firebase Service Account: 💙  /Users/aubs/WORK/CORDA/bfn.json
+[INFO ] 2019-09-21T20:08:17,729 [main] BFNWebApi -  🧩🧩🧩  🧩🧩🧩 Firebase Admin Setup OK:  🧩🧩🧩 name: [DEFAULT]
+[INFO ] 2019-09-21T20:08:17,818 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:08:18,008 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2e8ab815: startup date [Sat Sep 21 22:08:14 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:08:18,187 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:18,189 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(com.bfn.dto.UserDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:18,190 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-21T20:08:18,190 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-21T20:08:18,191 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-21T20:08:18,191 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-21T20:08:18,191 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-21T20:08:18,192 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto <java.lang.TypeNotPresentException: Type com.bfn.dto.NodeInfoDTO not present>
+[INFO ] 2019-09-21T20:08:18,193 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-21T20:08:18,193 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-21T20:08:18,194 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-21T20:08:18,195 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-21T20:08:18,195 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-21T20:08:18,200 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-21T20:08:18,200 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-21T20:08:18,201 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-21T20:08:18,201 [main] RequestMappingHandlerMapping - Mapped "{[/investor/buyInvoiceOffer],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.buyInvoiceOffer(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:18,202 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-21T20:08:18,204 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-21T20:08:18,205 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-21T20:08:18,205 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-21T20:08:18,205 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-21T20:08:18,206 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto <java.lang.TypeNotPresentException: Type com.bfn.dto.NodeInfoDTO not present>
+[INFO ] 2019-09-21T20:08:18,206 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:18,206 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:18,207 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:18,209 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-21T20:08:18,209 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-21T20:08:18,240 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:08:18,245 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:08:18,301 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-21T20:08:18,453 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-21T20:08:18,466 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10414"]
+[INFO ] 2019-09-21T20:08:18,510 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-21T20:08:18,527 [main] TomcatWebServer - Tomcat started on port(s): 10414 (http) with context path ''
+[INFO ] 2019-09-21T20:08:18,530 [main] BFNWebApi - Started BFNWebApi in 5.295 seconds (JVM running for 6.091)
+[INFO ] 2019-09-21T20:08:18,532 [main] BFNWebApi -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Sat Sep 21 22:08:18 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-21T20:08:20,166 [main] BFNWebApi -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-21T20:08:21,197 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 49527 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-21T20:08:21,198 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-21T20:08:21,257 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 22:08:21 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:08:22,266 [main] TomcatWebServer - Tomcat initialized with port(s): 10411 (http)
+[INFO ] 2019-09-21T20:08:22,278 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10411"]
+[INFO ] 2019-09-21T20:08:22,287 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-21T20:08:22,287 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-21T20:08:22,295 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-21T20:08:22,386 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-21T20:08:22,387 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 1132 ms
+[INFO ] 2019-09-21T20:08:22,402 [localhost-startStop-1] BFNWebApi - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:22,405 [localhost-startStop-1] BFNWebApi -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:22,406 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:22,406 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:22,406 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:22,467 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-21T20:08:22,470 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:22,471 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:22,471 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:22,471 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:22,471 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-21T20:08:22,508 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10421  🔆
+[INFO ] 2019-09-21T20:08:23,357 [main] RPCClient - Startup took 775 msec
+[INFO ] 2019-09-21T20:08:23,357 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-21T20:08:23,570 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 OCT  💚  💚
+[INFO ] 2019-09-21T20:08:23,622 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1569053725907)
+[INFO ] 2019-09-21T20:08:23,630 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1569053725907)
+[INFO ] 2019-09-21T20:08:23,637 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1569053725907)
+[INFO ] 2019-09-21T20:08:23,642 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1569053725907)
+[INFO ] 2019-09-21T20:08:23,649 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10403], legalIdentitiesAndCerts=[O=OCT, L=Sandton, C=ZA], platformVersion=4, serial=1569053725907)
+[INFO ] 2019-09-21T20:08:23,651 [main] BFNWebApi - 🔆  🔆  🔆  BFNWebApi:  setting up Firebase .... 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:08:23,651 [main] BFNWebApi - 🔆  🔆  🔆 .env PATH for Firebase Service Account: 💙  /Users/aubs/WORK/CORDA/bfn.json
+[INFO ] 2019-09-21T20:08:23,706 [main] BFNWebApi -  🧩🧩🧩  🧩🧩🧩 Firebase Admin Setup OK:  🧩🧩🧩 name: [DEFAULT]
+[INFO ] 2019-09-21T20:08:23,805 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:08:23,941 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 22:08:21 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:08:24,099 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-21T20:08:24,100 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-21T20:08:24,101 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:24,101 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(com.bfn.dto.UserDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:24,102 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-21T20:08:24,102 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-21T20:08:24,102 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-21T20:08:24,103 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.AdminController.listNodes()
+[INFO ] 2019-09-21T20:08:24,103 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-21T20:08:24,103 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-21T20:08:24,104 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-21T20:08:24,105 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-21T20:08:24,105 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-21T20:08:24,108 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-21T20:08:24,108 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-21T20:08:24,108 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-21T20:08:24,109 [main] RequestMappingHandlerMapping - Mapped "{[/investor/buyInvoiceOffer],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.buyInvoiceOffer(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:24,109 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-21T20:08:24,111 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-21T20:08:24,111 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-21T20:08:24,112 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-21T20:08:24,112 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-21T20:08:24,112 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.SupplierController.listNodes()
+[INFO ] 2019-09-21T20:08:24,113 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:24,113 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:24,114 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:08:24,116 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-21T20:08:24,117 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-21T20:08:24,137 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:08:24,137 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:08:24,174 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-21T20:08:24,295 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-21T20:08:24,307 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10411"]
+[INFO ] 2019-09-21T20:08:24,326 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-21T20:08:24,337 [main] TomcatWebServer - Tomcat started on port(s): 10411 (http) with context path ''
+[INFO ] 2019-09-21T20:08:24,340 [main] BFNWebApi - Started BFNWebApi in 4.078 seconds (JVM running for 4.784)
+[INFO ] 2019-09-21T20:08:24,342 [main] BFNWebApi -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Sat Sep 21 22:08:24 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-21T20:08:53,779 [http-nio-10416-exec-3] [/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+[INFO ] 2019-09-21T20:08:53,780 [http-nio-10416-exec-3] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+[INFO ] 2019-09-21T20:08:53,792 [http-nio-10416-exec-3] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 12 ms
+[INFO ] 2019-09-21T20:08:53,829 [http-nio-10416-exec-2] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:08:54,154 [http-nio-10416-exec-3] WorkerBee - 🌺  🌺 done listing accounts:  🌺 34
+[INFO ] 2019-09-21T20:08:54,320 [http-nio-10416-exec-2] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:09:12,387 [http-nio-10416-exec-7] WorkerBee - 🌺  🌺 done listing accounts:  🌺 34
+[INFO ] 2019-09-21T20:10:59,225 [http-nio-10416-exec-9] WorkerBee - phone: 27882320664
+[INFO ] 2019-09-21T20:10:59,282 [http-nio-10416-exec-9] WorkerBee -  🦠 🦠 Accounts found on network:  🥬 34
+[INFO ] 2019-09-21T20:10:59,424 [http-nio-10416-exec-9] WorkerBee - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 Russia Inc. 🥏 🥏 
+[INFO ] 2019-09-21T20:11:02,784 [http-nio-10416-exec-9] FirebaseUtil - 👌 👌 👌 🥦  🥦 User record created in Firebase:  🥦 russkie@gmail.com
+[INFO ] 2019-09-21T20:11:02,791 [http-nio-10416-exec-9] WorkerBee - 🍎 🍎 🍎 User created on Firebase: {
+  "uid": "9fd3c0c1-9c83-4a20-ab1e-82a484aa08f2",
+  "email": "russkie@gmail.com",
+  "phoneNumber": "+27882320664",
+  "emailVerified": false,
+  "displayName": "Russia Inc.",
+  "disabled": false,
+  "providers": [
+    {
+      "uid": "+27882320664",
+      "phoneNumber": "+27882320664",
+      "providerId": "phone"
+    },
+    {
+      "uid": "russkie@gmail.com",
+      "displayName": "Russia Inc.",
+      "email": "russkie@gmail.com",
+      "providerId": "password"
+    }
+  ],
+  "tokensValidAfterTimestamp": 1569096661000,
+  "userMetadata": {
+    "creationTimestamp": 1569096661331,
+    "lastSignInTimestamp": 0
+  },
+  "customClaims": {}
+}
+[INFO ] 2019-09-21T20:11:02,791 [http-nio-10416-exec-9] WorkerBee - 🔕  🔕  ignore sharing - party on same node 🥬 
+[INFO ] 2019-09-21T20:11:02,792 [http-nio-10416-exec-9] WorkerBee - 🔕  🔕 ignore sharing - this party is a Notary 🥬 🥬 
+[INFO ] 2019-09-21T20:11:02,864 [http-nio-10416-exec-9] WorkerBee -  😎 😎 Russia Inc. shared with 👿 OCT
+[INFO ] 2019-09-21T20:11:02,943 [http-nio-10416-exec-9] WorkerBee -  😎 😎 Russia Inc. shared with 👿 CapeTown
+[INFO ] 2019-09-21T20:11:42,269 [http-nio-10414-exec-1] [/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+[INFO ] 2019-09-21T20:11:42,269 [http-nio-10414-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+[INFO ] 2019-09-21T20:11:42,283 [http-nio-10414-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 14 ms
+[INFO ] 2019-09-21T20:11:42,353 [http-nio-10414-exec-1] WorkerBee - phone: 27882320666
+[INFO ] 2019-09-21T20:11:42,655 [http-nio-10414-exec-1] WorkerBee -  🦠 🦠 Accounts found on network:  🥬 30
+[INFO ] 2019-09-21T20:11:42,800 [http-nio-10414-exec-1] WorkerBee - 🍏 🍏 🍏 🍏 Flow completed...  👌 👌 👌 accountInfo returned: 🥏 France Inc. 🥏 🥏 
+[INFO ] 2019-09-21T20:11:45,166 [http-nio-10414-exec-1] FirebaseUtil - 👌 👌 👌 🥦  🥦 User record created in Firebase:  🥦 frenchy@gmail.com
+[INFO ] 2019-09-21T20:11:45,173 [http-nio-10414-exec-1] WorkerBee - 🍎 🍎 🍎 User created on Firebase: {
+  "uid": "fc290aee-2bab-4ee3-8fcf-680ccd889cea",
+  "email": "frenchy@gmail.com",
+  "phoneNumber": "+27882320666",
+  "emailVerified": false,
+  "displayName": "France Inc.",
+  "disabled": false,
+  "providers": [
+    {
+      "uid": "+27882320666",
+      "phoneNumber": "+27882320666",
+      "providerId": "phone"
+    },
+    {
+      "uid": "frenchy@gmail.com",
+      "displayName": "France Inc.",
+      "email": "frenchy@gmail.com",
+      "providerId": "password"
+    }
+  ],
+  "tokensValidAfterTimestamp": 1569096704000,
+  "userMetadata": {
+    "creationTimestamp": 1569096704316,
+    "lastSignInTimestamp": 0
+  },
+  "customClaims": {}
+}
+[INFO ] 2019-09-21T20:11:45,173 [http-nio-10414-exec-1] WorkerBee - 🔕  🔕  ignore sharing - party on same node 🥬 
+[INFO ] 2019-09-21T20:11:45,292 [http-nio-10414-exec-1] WorkerBee -  😎 😎 France Inc. shared with 👿 Regulator
+[INFO ] 2019-09-21T20:11:45,292 [http-nio-10414-exec-1] WorkerBee - 🔕  🔕 ignore sharing - this party is a Notary 🥬 🥬 
+[INFO ] 2019-09-21T20:11:45,350 [http-nio-10414-exec-1] WorkerBee -  😎 😎 France Inc. shared with 👿 OCT
+[INFO ] 2019-09-21T20:11:56,840 [http-nio-10416-exec-10] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:11:56,881 [http-nio-10416-exec-5] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:11:56,917 [http-nio-10416-exec-5] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:12:01,412 [http-nio-10416-exec-6] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:28:46,381 [http-nio-10416-exec-10] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:28:46,424 [http-nio-10416-exec-10] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:28:46,450 [http-nio-10416-exec-3] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:30:15,387 [http-nio-10416-exec-6] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:31:31,275 [http-nio-10416-exec-8] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-098762554",
+  "description": "Invoice for Big JOB! #113",
+  "amount": 448000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "f8589cba-8945-4788-907d-a329380766a6",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-21T20:31:31,275 [http-nio-10416-exec-8] WorkerBee - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-098762554",
+  "description": "Invoice for Big JOB! #113",
+  "amount": 448000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "f8589cba-8945-4788-907d-a329380766a6",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-21T20:31:31,275 [http-nio-10416-exec-8] WorkerBee - 🍏 SUPPLIER: f8589cba-8945-4788-907d-a329380766a6  🔆    🧡 CUSTOMER: fc290aee-2bab-4ee3-8fcf-680ccd889cea
+[INFO ] 2019-09-21T20:31:31,330 [http-nio-10416-exec-8] WorkerBee - 🍏 🍏 Supplier AccountInfo found: OCT.SupplierOne#52
+[INFO ] 2019-09-21T20:31:31,331 [http-nio-10416-exec-8] WorkerBee - 🍏 🍏 Customer AccountInfo found: France Inc.
+[INFO ] 2019-09-21T20:31:31,331 [http-nio-10416-exec-8] WorkerBee - 👽 👽 SUPPLIER: OCT
+[INFO ] 2019-09-21T20:31:31,331 [http-nio-10416-exec-8] WorkerBee - 👽 👽 CUSTOMER: CapeTown
+[INFO ] 2019-09-21T20:31:31,331 [http-nio-10416-exec-8] WorkerBee - discount used: 0.1
+[INFO ] 2019-09-21T20:31:31,941 [http-nio-10416-exec-8] WorkerBee - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=7B2C1B8FD4EE94BC54CD386D83559FA51B851571537CC046B77FFB290377EBEC) 🥏 🥏 
+[INFO ] 2019-09-21T20:31:31,942 [http-nio-10416-exec-8] WorkerBee - {
+  "invoiceId": "f4f568b7-b79c-460b-964a-b9214b0d4ebb",
+  "invoiceNumber": "879-098762554",
+  "description": "Invoice for Big JOB! #113",
+  "amount": 448000.0,
+  "totalAmount": 492800.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "f8589cba-8945-4788-907d-a329380766a6",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+}
+[INFO ] 2019-09-21T20:32:08,466 [http-nio-10416-exec-3] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:32:08,491 [http-nio-10416-exec-3] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:32:08,533 [http-nio-10416-exec-4] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:32:09,544 [http-nio-10416-exec-7] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:32:09,569 [http-nio-10416-exec-7] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:32:09,616 [http-nio-10416-exec-9] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:32:18,516 [http-nio-10416-exec-4] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:32:18,552 [http-nio-10416-exec-6] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:32:18,576 [http-nio-10416-exec-6] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:34:22,961 [http-nio-10416-exec-10] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:34:23,001 [http-nio-10416-exec-10] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:34:23,033 [http-nio-10416-exec-3] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:34:36,455 [http-nio-10416-exec-2] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:35:25,108 [http-nio-10416-exec-9] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:36:41,664 [http-nio-10416-exec-10] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-098762555",
+  "description": "Invoice for Big JOB! #110",
+  "amount": 678000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "c98ed930-63df-46bc-8d99-0c7e2e96a173",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-21T20:36:41,669 [http-nio-10416-exec-10] WorkerBee - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "879-098762555",
+  "description": "Invoice for Big JOB! #110",
+  "amount": 678000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "c98ed930-63df-46bc-8d99-0c7e2e96a173",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-21T20:36:41,669 [http-nio-10416-exec-10] WorkerBee - 🍏 SUPPLIER: c98ed930-63df-46bc-8d99-0c7e2e96a173  🔆    🧡 CUSTOMER: fc290aee-2bab-4ee3-8fcf-680ccd889cea
+[INFO ] 2019-09-21T20:36:41,731 [http-nio-10416-exec-10] WorkerBee - 🍏 🍏 Supplier AccountInfo found: InvoiceBidders inc.
+[INFO ] 2019-09-21T20:36:41,731 [http-nio-10416-exec-10] WorkerBee - 🍏 🍏 Customer AccountInfo found: France Inc.
+[INFO ] 2019-09-21T20:36:41,732 [http-nio-10416-exec-10] WorkerBee - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-21T20:36:41,732 [http-nio-10416-exec-10] WorkerBee - 👽 👽 CUSTOMER: CapeTown
+[INFO ] 2019-09-21T20:36:41,732 [http-nio-10416-exec-10] WorkerBee - discount used: 0.1
+[WARN ] 2019-09-21T20:36:41,895 [Thread-65 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - A hot observable returned from an RPC was never subscribed to. This wastes server-side resources because it was queueing observations for retrieval. It is being closed now, but please adjust your code to call .notUsed() on the observable to close it explicitly. (Java users: subscribe to it then unsubscribe). If you aren't sure where the leak is coming from, set -Dnet.corda.client.rpc.trackRpcCallSites=true on the JVM command line and you will get a stack trace with this warning.
+[WARN ] 2019-09-21T20:36:41,896 [Thread-65 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - A hot observable returned from an RPC was never subscribed to. This wastes server-side resources because it was queueing observations for retrieval. It is being closed now, but please adjust your code to call .notUsed() on the observable to close it explicitly. (Java users: subscribe to it then unsubscribe). If you aren't sure where the leak is coming from, set -Dnet.corda.client.rpc.trackRpcCallSites=true on the JVM command line and you will get a stack trace with this warning.
+[WARN ] 2019-09-21T20:36:41,896 [Thread-65 (ActiveMQ-client-global-threads)] RPCClientProxyHandler - A hot observable returned from an RPC was never subscribed to. This wastes server-side resources because it was queueing observations for retrieval. It is being closed now, but please adjust your code to call .notUsed() on the observable to close it explicitly. (Java users: subscribe to it then unsubscribe). If you aren't sure where the leak is coming from, set -Dnet.corda.client.rpc.trackRpcCallSites=true on the JVM command line and you will get a stack trace with this warning.
+[INFO ] 2019-09-21T20:36:42,025 [http-nio-10416-exec-10] WorkerBee - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=790CA6D05A51C6596F94B05B5D310E2170ED7478DCC8D6E378D525B1D488BDA0) 🥏 🥏 
+[INFO ] 2019-09-21T20:36:42,026 [http-nio-10416-exec-10] WorkerBee - {
+  "invoiceId": "c1834ed8-d366-4ba1-a15e-fc51d49c315a",
+  "invoiceNumber": "879-098762555",
+  "description": "Invoice for Big JOB! #110",
+  "amount": 678000.0,
+  "totalAmount": 745800.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "c98ed930-63df-46bc-8d99-0c7e2e96a173",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+}
+[INFO ] 2019-09-21T20:40:07,286 [http-nio-10416-exec-5] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:40:07,310 [http-nio-10416-exec-5] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:40:07,344 [http-nio-10416-exec-2] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:42:09,813 [http-nio-10416-exec-4] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:42:09,835 [http-nio-10416-exec-4] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:42:09,866 [http-nio-10416-exec-10] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:43:22,875 [http-nio-10416-exec-6] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:43:22,896 [http-nio-10416-exec-6] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:43:22,918 [http-nio-10416-exec-7] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:44:11,906 [http-nio-10416-exec-10] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:44:11,940 [http-nio-10416-exec-10] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:44:11,965 [http-nio-10416-exec-1] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:44:58,616 [http-nio-10416-exec-9] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:44:58,662 [http-nio-10416-exec-3] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:44:58,680 [http-nio-10416-exec-3] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:45:39,402 [http-nio-10416-exec-1] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:45:39,667 [http-nio-10416-exec-9] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:45:39,689 [http-nio-10416-exec-9] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:47:07,485 [Thread-3] AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 22:07:23 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:47:07,487 [Thread-3] AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+[INFO ] 2019-09-21T20:47:12,962 [main] BFNWebApi -  🔆  🔆 BFNWebApi starting   🔆  🔆  🔆  🔆️
+[INFO ] 2019-09-21T20:47:13,909 [main] BFNWebApi - Starting BFNWebApi on aubreys-imac.lan with PID 62266 (/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients/build/classes/java/main started by aubs in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/clients)
+[INFO ] 2019-09-21T20:47:13,911 [main] BFNWebApi - No active profile set, falling back to default profiles: default
+[INFO ] 2019-09-21T20:47:13,956 [main] AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 22:47:13 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:47:15,033 [main] TomcatWebServer - Tomcat initialized with port(s): 10416 (http)
+[INFO ] 2019-09-21T20:47:15,045 [main] Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10416"]
+[INFO ] 2019-09-21T20:47:15,054 [main] StandardService - Starting service [Tomcat]
+[INFO ] 2019-09-21T20:47:15,054 [main] StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+[INFO ] 2019-09-21T20:47:15,062 [localhost-startStop-1] AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/aubs/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+[INFO ] 2019-09-21T20:47:15,164 [localhost-startStop-1] [/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-09-21T20:47:15,164 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 1211 ms
+[INFO ] 2019-09-21T20:47:15,178 [localhost-startStop-1] BFNWebApi - 🔆  🔆  🔆  BFNWebApi:  corsFilter started ??? .... 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:47:15,181 [localhost-startStop-1] BFNWebApi -  🔆  🔆  🔆  corsFilter: config.getAllowCredentials: true 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:47:15,181 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedMethods: [GET, POST, PUT, OPTIONS, DELETE, PATCH] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:47:15,181 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedOrigins: [*] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:47:15,182 [localhost-startStop-1] BFNWebApi -  💚 💙  💚 💙  corsFilter: config.getAllowedHeaders: [Origin, Content-Type, Accept] 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:47:15,242 [localhost-startStop-1] ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+[INFO ] 2019-09-21T20:47:15,245 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+[INFO ] 2019-09-21T20:47:15,245 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+[INFO ] 2019-09-21T20:47:15,246 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+[INFO ] 2019-09-21T20:47:15,246 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+[INFO ] 2019-09-21T20:47:15,246 [localhost-startStop-1] FilterRegistrationBean - Mapping filter: 'corsFilter' to: [/*]
+[INFO ] 2019-09-21T20:47:15,279 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: 🧡 💛 💚 host: localhost rpcPort:  🔆 10429  🔆
+[INFO ] 2019-09-21T20:47:16,084 [main] RPCClient - Startup took 736 msec
+[INFO ] 2019-09-21T20:47:16,084 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: Corda ServerProtocolVersion: 🧡 💛 💚 4
+[INFO ] 2019-09-21T20:47:16,297 [main] NodeRPCConnection - NodeRPCConnection: 🧩🧩🧩 initialiseNodeRPCConnection: getLegalIdentities: 🧡 💛 💚 Regulator  💚  💚
+[INFO ] 2019-09-21T20:47:16,328 [main] AdminController - 🌺 🌺 🌺 AdminController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:47:16,336 [main] CustomerController - 🌺 🌺 🌺 CustomerController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:47:16,343 [main] InvestorController - 🌺 🌺 🌺 InvestorController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:47:16,372 [main] AdminController - 🌺 🌺 🌺 NodeController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:47:16,378 [main] SupplierController - 🌺 🌺 🌺 SupplierController: NodeRPCConnection proxy has been injected: 🌺 NodeInfo(addresses=[localhost:10407], legalIdentitiesAndCerts=[O=Regulator, L=Johannesburg, C=ZA], platformVersion=4, serial=1569053722555)
+[INFO ] 2019-09-21T20:47:16,380 [main] BFNWebApi - 🔆  🔆  🔆  BFNWebApi:  setting up Firebase .... 🔆  🔆  🔆
+[INFO ] 2019-09-21T20:47:16,380 [main] BFNWebApi - 🔆  🔆  🔆 .env PATH for Firebase Service Account: 💙  /Users/aubs/WORK/CORDA/bfn.json
+[INFO ] 2019-09-21T20:47:16,429 [main] BFNWebApi -  🧩🧩🧩  🧩🧩🧩 Firebase Admin Setup OK:  🧩🧩🧩 name: [DEFAULT]
+[INFO ] 2019-09-21T20:47:16,493 [main] SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:47:16,632 [main] RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@d1f74b8: startup date [Sat Sep 21 22:47:13 SAST 2019]; root of context hierarchy
+[INFO ] 2019-09-21T20:47:16,784 [main] RequestMappingHandlerMapping - Mapped "{[/admin/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.AdminController.ping()
+[INFO ] 2019-09-21T20:47:16,784 [main] RequestMappingHandlerMapping - Mapped "{[/admin/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.AdminController.hello()
+[INFO ] 2019-09-21T20:47:16,785 [main] RequestMappingHandlerMapping - Mapped "{[/admin/demo],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.DemoSummary com.bfn.webserver.AdminController.buildDemo() throws java.lang.Exception
+[INFO ] 2019-09-21T20:47:16,785 [main] RequestMappingHandlerMapping - Mapped "{[/admin/startAccountRegistrationFlow],methods=[POST],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.AdminController.startAccountRegistrationFlow(com.bfn.dto.UserDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:47:16,786 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getAccounts],methods=[GET]}" onto private java.util.List<com.bfn.dto.AccountInfoDTO> com.bfn.webserver.AdminController.getAccounts()
+[INFO ] 2019-09-21T20:47:16,786 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.AdminController.getInvoiceStates()
+[INFO ] 2019-09-21T20:47:16,786 [main] RequestMappingHandlerMapping - Mapped "{[/admin/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.AdminController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-21T20:47:16,787 [main] RequestMappingHandlerMapping - Mapped "{[/admin/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.AdminController.listNodes()
+[INFO ] 2019-09-21T20:47:16,787 [main] RequestMappingHandlerMapping - Mapped "{[/admin/notaries],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listNotaries()
+[INFO ] 2019-09-21T20:47:16,787 [main] RequestMappingHandlerMapping - Mapped "{[/admin/flows],methods=[GET],produces=[application/json]}" onto private java.util.List<java.lang.String> com.bfn.webserver.AdminController.listFlows()
+[INFO ] 2019-09-21T20:47:16,788 [main] RequestMappingHandlerMapping - Mapped "{[/customer/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.ping()
+[INFO ] 2019-09-21T20:47:16,788 [main] RequestMappingHandlerMapping - Mapped "{[/customer/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.CustomerController.hello()
+[INFO ] 2019-09-21T20:47:16,789 [main] RequestMappingHandlerMapping - Mapped "{[/customer/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.CustomerController.listNodes()
+[INFO ] 2019-09-21T20:47:16,792 [main] RequestMappingHandlerMapping - Mapped "{[/investor/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.ping()
+[INFO ] 2019-09-21T20:47:16,793 [main] RequestMappingHandlerMapping - Mapped "{[/investor/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.InvestorController.hello()
+[INFO ] 2019-09-21T20:47:16,793 [main] RequestMappingHandlerMapping - Mapped "{[/investor/nodes],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.listNodes()
+[INFO ] 2019-09-21T20:47:16,793 [main] RequestMappingHandlerMapping - Mapped "{[/investor/buyInvoiceOffer],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.InvestorController.buyInvoiceOffer(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-21T20:47:16,794 [main] RequestMappingHandlerMapping - Mapped "{[/node/flows],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.NodeController.flows()
+[INFO ] 2019-09-21T20:47:16,796 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startRegisterInvoiceFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceDTO com.bfn.webserver.SupplierController.startRegisterInvoiceFlow(com.bfn.dto.InvoiceDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:47:16,796 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/startInvoiceOfferFlow],methods=[POST]}" onto public com.bfn.dto.InvoiceOfferDTO com.bfn.webserver.SupplierController.startInvoiceOfferFlow(com.bfn.dto.InvoiceOfferDTO) throws java.lang.Exception
+[INFO ] 2019-09-21T20:47:16,796 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/ping],methods=[GET],produces=[application/json]}" onto private java.lang.String com.bfn.webserver.SupplierController.ping()
+[INFO ] 2019-09-21T20:47:16,796 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/hello],methods=[GET],produces=[text/plain]}" onto private java.lang.String com.bfn.webserver.SupplierController.hello()
+[INFO ] 2019-09-21T20:47:16,797 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceDTO> com.bfn.webserver.SupplierController.getInvoiceStates()
+[INFO ] 2019-09-21T20:47:16,797 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getInvoiceOfferStates],methods=[GET]}" onto public java.util.List<com.bfn.dto.InvoiceOfferDTO> com.bfn.webserver.SupplierController.getInvoiceOfferStates(boolean)
+[INFO ] 2019-09-21T20:47:16,797 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/nodes],methods=[GET],produces=[application/json]}" onto private java.util.List<com.bfn.dto.NodeInfoDTO> com.bfn.webserver.SupplierController.listNodes()
+[INFO ] 2019-09-21T20:47:16,798 [main] RequestMappingHandlerMapping - Mapped "{[/supplier/getAccountInfoByID],methods=[GET],produces=[application/json]}" onto private com.bfn.dto.AccountInfoDTO com.bfn.webserver.SupplierController.getAccountInfoByID(java.lang.String) throws java.lang.Exception
+[INFO ] 2019-09-21T20:47:16,799 [main] RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+[INFO ] 2019-09-21T20:47:16,800 [main] RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+[INFO ] 2019-09-21T20:47:16,819 [main] SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:47:16,819 [main] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+[INFO ] 2019-09-21T20:47:16,854 [main] WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 2019-09-21T20:47:16,965 [main] AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+[INFO ] 2019-09-21T20:47:16,974 [main] Http11NioProtocol - Starting ProtocolHandler ["http-nio-10416"]
+[INFO ] 2019-09-21T20:47:16,992 [main] NioSelectorPool - Using a shared selector for servlet write/read
+[INFO ] 2019-09-21T20:47:17,005 [main] TomcatWebServer - Tomcat started on port(s): 10416 (http) with context path ''
+[INFO ] 2019-09-21T20:47:17,008 [main] BFNWebApi - Started BFNWebApi in 3.946 seconds (JVM running for 4.64)
+[INFO ] 2019-09-21T20:47:17,010 [main] BFNWebApi -  🔆  🔆  🔆  BFNWebApi:  started ....  🔆 🔆 🔆 🔆 Sat Sep 21 22:47:17 SAST 2019 🧡 💛 💚
+[INFO ] 2019-09-21T20:48:02,953 [http-nio-10416-exec-1] [/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+[INFO ] 2019-09-21T20:48:02,953 [http-nio-10416-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+[INFO ] 2019-09-21T20:48:02,968 [http-nio-10416-exec-1] DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 15 ms
+[INFO ] 2019-09-21T20:48:03,439 [http-nio-10416-exec-1] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:48:03,867 [http-nio-10416-exec-5] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:48:03,905 [http-nio-10416-exec-5] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T20:49:20,571 [http-nio-10416-exec-8] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "669-098762455",
+  "description": "Invoice for Big JOB! #111",
+  "amount": 5400000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "c98ed930-63df-46bc-8d99-0c7e2e96a173",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-21T20:49:20,572 [http-nio-10416-exec-8] WorkerBee - Input Parameters; 🍏 🍏 🍏 InvoiceDTO: {
+  "invoiceNumber": "669-098762455",
+  "description": "Invoice for Big JOB! #111",
+  "amount": 5400000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "c98ed930-63df-46bc-8d99-0c7e2e96a173",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-21T20:49:20,572 [http-nio-10416-exec-8] WorkerBee - 🍏 SUPPLIER: c98ed930-63df-46bc-8d99-0c7e2e96a173  🔆    🧡 CUSTOMER: fc290aee-2bab-4ee3-8fcf-680ccd889cea
+[INFO ] 2019-09-21T20:49:20,668 [http-nio-10416-exec-8] WorkerBee - 🍏 🍏 Supplier AccountInfo found: InvoiceBidders inc.
+[INFO ] 2019-09-21T20:49:20,668 [http-nio-10416-exec-8] WorkerBee - 🍏 🍏 Customer AccountInfo found: France Inc.
+[INFO ] 2019-09-21T20:49:20,669 [http-nio-10416-exec-8] WorkerBee - 👽 👽 SUPPLIER: Regulator
+[INFO ] 2019-09-21T20:49:20,669 [http-nio-10416-exec-8] WorkerBee - 👽 👽 CUSTOMER: CapeTown
+[INFO ] 2019-09-21T20:49:20,669 [http-nio-10416-exec-8] WorkerBee - discount used: 0.1
+[INFO ] 2019-09-21T20:49:21,127 [http-nio-10416-exec-8] WorkerBee - 🍏 🍏 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆  👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=2FD1267F95B360C70C35E4207C2FAE8A0DE6C2CAB837114180E70AD2B306209E) 🥏 🥏 
+[INFO ] 2019-09-21T20:49:21,127 [http-nio-10416-exec-8] WorkerBee - {
+  "invoiceId": "bedfaded-ff87-4687-8118-897377f693e1",
+  "invoiceNumber": "669-098762455",
+  "description": "Invoice for Big JOB! #111",
+  "amount": 5400000.0,
+  "totalAmount": 5940000.0,
+  "valueAddedTax": 10.0,
+  "supplierId": "c98ed930-63df-46bc-8d99-0c7e2e96a173",
+  "customerId": "fc290aee-2bab-4ee3-8fcf-680ccd889cea"
+}
+[INFO ] 2019-09-21T20:49:34,391 [http-nio-10416-exec-9] WorkerBee - 🌺  🌺 done listing accounts:  🌺 36
+[INFO ] 2019-09-21T20:49:34,430 [http-nio-10416-exec-3] WorkerBee -  🧡 getInvoiceOfferStates consumed:  🧡 false
+[INFO ] 2019-09-21T20:49:34,453 [http-nio-10416-exec-3] WorkerBee -  🌺  🌺  🌺  🌺 done listing InvoiceOfferStates:  🌺 8
+[INFO ] 2019-09-21T21:15:47,283 [http-nio-10416-exec-7] SupplierController - Input Parameters; 🍏 🍏 🍏 InvoiceOfferDTO: {
+  "invoiceId": "bedfaded-ff87-4687-8118-897377f693e1",
+  "offerAmount": 0.0,
+  "discount": 10.0,
+  "originalAmount": 0.0,
+  "investorId": "be0539d1-99dd-43cb-9e4b-161cb6f009e6"
+} 🍏 🍏 🍏
+[INFO ] 2019-09-21T21:15:47,284 [http-nio-10416-exec-7] WorkerBee - 🍏 INVOICE: bedfaded-ff87-4687-8118-897377f693e1  🔆    🧡 DISCOUNT: 10.0  🧡 INVESTOR: be0539d1-99dd-43cb-9e4b-161cb6f009e6
+[INFO ] 2019-09-21T21:15:47,368 [http-nio-10416-exec-7] WorkerBee - 🍏 🍏 Investor AccountInfo found: AnalyticsInvest LLC
+[INFO ] 2019-09-21T21:15:47,368 [http-nio-10416-exec-7] WorkerBee - 👽 👽 INVOICE: bedfaded-ff87-4687-8118-897377f693e1 totalAmount: 5940000.0
+[INFO ] 2019-09-21T21:15:47,368 [http-nio-10416-exec-7] WorkerBee - 👽 👽 INVESTOR: Regulator
+[INFO ] 2019-09-21T21:15:47,504 [http-nio-10416-exec-7] WorkerBee - 🍏 🍏 flow completed... 🍏 🍏 🔆 🔆 🔆 👌 👌 👌 👌  signedTransaction returned: 🥏 SignedTransaction(id=55C77F97F86B06D8F3599AFFEB216E4C5AFFD14E67CC26A1B1BA14B2377CD6CD) 🥏 🥏 
+[INFO ] 2019-09-21T21:15:49,722 [http-nio-10416-exec-7] FirebaseUtil - 😡 😡 😡 Successfully sent FCM message to topic: 😡 invoiceOffers; Response: 🥬 🥬 projects/bfn-mobile-backend/messages/5248321748479466871 🥬 🥬
+[INFO ] 2019-09-21T21:15:49,722 [http-nio-10416-exec-7] SupplierController -  🧩  🧩 Returned invoiceOffer: {
+  "invoiceId": "bedfaded-ff87-4687-8118-897377f693e1",
+  "offerAmount": 5346000.0,
+  "discount": 10.0,
+  "originalAmount": 5940000.0,
+  "supplierId": "c98ed930-63df-46bc-8d99-0c7e2e96a173",
+  "investorId": "be0539d1-99dd-43cb-9e4b-161cb6f009e6",
+  "ownerId": "c98ed930-63df-46bc-8d99-0c7e2e96a173",
+  "offerDate": "Sep 21, 2019 11:15:47 PM"
+}

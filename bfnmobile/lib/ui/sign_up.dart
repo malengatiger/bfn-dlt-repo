@@ -182,5 +182,7 @@ class _SignUpState extends State<SignUp> {
     AppSnackbar.showErrorSnackbar(scaffoldKey: _key, message: msg, actionLabel: "Err");
   }
 
-  doNothing() {}
+  Future<bool> doNothing() async {
+    return false;
+  }
 }
