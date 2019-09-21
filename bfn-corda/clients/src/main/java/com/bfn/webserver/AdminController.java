@@ -1,10 +1,6 @@
 package com.bfn.webserver;
 
-import com.bfn.dto.AccountInfoDTO;
-import com.bfn.dto.InvoiceDTO;
-import com.bfn.dto.InvoiceOfferDTO;
-import com.bfn.dto.NodeInfoDTO;
-import com.bfn.dto.DemoSummary;
+import com.bfn.dto.*;
 import com.bfn.util.DemoUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,13 +42,10 @@ public class AdminController {
     }
 
 
-    @GetMapping(value = "/startAccountRegistrationFlow", produces = "application/json")
-    private AccountInfoDTO startAccountRegistrationFlow(@RequestParam String name,
-                                      @RequestParam String email,
-                                      @RequestParam String password,
-                                      @RequestParam String cellphone) throws Exception {
+    @PostMapping(value = "/startAccountRegistrationFlow", produces = "application/json")
+    private AccountInfoDTO startAccountRegistrationFlow(@RequestBody UserDTO user) throws Exception {
 
-        return WorkerBee.startAccountRegistrationFlow(proxy,name,email,password,cellphone);
+        return WorkerBee.startAccountRegistrationFlow(proxy,user.getName(),user.getEmail(),user.getPassword(), user.getCellphone());
     }
 
     @GetMapping(value = "getAccounts")

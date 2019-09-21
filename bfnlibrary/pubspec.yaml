@@ -12,6 +12,10 @@ dependencies:
     sdk: flutter
   http: ^0.12.0+2
   crypted_preferences: ^0.0.2
+  firebase_auth: ^0.14.0+5
+  firebase_messaging: ^5.1.6
+  cloud_firestore: ^0.12.9+4
+  intl: ^0.16.0
 
 dev_dependencies:
   flutter_test:

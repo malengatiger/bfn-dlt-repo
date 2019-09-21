@@ -83,14 +83,16 @@ public class DemoUtil {
         logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts started ...  " +
                 "\uD83D\uDD06 \uD83D\uDD06 ");
         String key = "" + random.nextInt(100);
+        String phone = getPhone();
         String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
 
         AccountInfoDTO supplier1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".SupplierOne")
                         .concat("#").concat(key),
-                "supplier1@gmail.com","pass123","082 999 9901");
+                "supplier".concat(phone).concat("@gmail.com"),"pass123",phone);
+        phone = getPhone();
         AccountInfoDTO supplier2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".SupplierTwo")
                         .concat("#").concat(key),
-                "supplier2@gmail.com","pass123","082 999 9902");
+                "supplier".concat(phone).concat("@gmail.com"),"pass123",phone);
 
         suppliers.add(supplier1);
         suppliers.add(supplier2);
@@ -103,12 +105,15 @@ public class DemoUtil {
         String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
         logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 ");
         String key = "" + random.nextInt(100);
+
+        String phone = getPhone();
         AccountInfoDTO customer1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".CustomerOne")
                         .concat("#").concat(key),
-                "customer1@gmail.com","pass123","082 999 9903");
+                "customer".concat(phone).concat("@gmail.com"),"pass123",phone);
+        phone = getPhone();
         AccountInfoDTO customer2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".CustomerTwo")
                         .concat("#").concat(key),
-                "customer2@gmail.com","pass123","082 999 9904");
+                "customer".concat(phone).concat("@gmail.com"),"pass123",phone);
         customers.add(customer1);
         customers.add(customer2);
 
@@ -122,12 +127,14 @@ public class DemoUtil {
                 " \uD83D\uDD06 \uD83D\uDD06");
         String key = "" + random.nextInt(100);
 
+        String phone = getPhone();
         AccountInfoDTO investor1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".InvestorOne")
                         .concat("#").concat(key),
-                "investor1@gmail.com","pass123","082 999 9905");
+                "investor".concat(phone).concat("@gmail.com"),"pass123",phone);
+        phone = getPhone();
         AccountInfoDTO investor2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".InvestorTwo")
                         .concat("#").concat(key),
-                "investor2@gmail.com","pass123","082 999 9906");
+                "investor".concat(phone).concat("@gmail.com"),"pass123",phone);
         investors.add(investor1);
         investors.add(investor2);
 
@@ -136,6 +143,22 @@ public class DemoUtil {
 
     }
 
+    static String getPhone() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("27");
+        sb.append(random.nextInt(9));
+        sb.append(random.nextInt(9));
+
+        sb.append(random.nextInt(9));
+        sb.append(random.nextInt(9));
+        sb.append(random.nextInt(9));
+
+        sb.append(random.nextInt(9));
+        sb.append(random.nextInt(9));
+        sb.append(random.nextInt(9));
+        sb.append(random.nextInt(9));
+        return sb.toString();
+    }
     private static Random random = new Random(System.currentTimeMillis());
     private static void registerInvoices() throws Exception {
 

@@ -11,7 +11,6 @@ import com.bfn.flows.invoices.InvoiceOfferFlow;
 import com.bfn.flows.invoices.InvoiceRegistrationFlow;
 import com.bfn.states.InvoiceOfferState;
 import com.bfn.states.InvoiceState;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -32,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static jdk.nashorn.internal.objects.Global.print;
 
 public class WorkerBee {
     private final static Logger logger = LoggerFactory.getLogger(WorkerBee.class);
@@ -264,10 +265,16 @@ public class WorkerBee {
                     "\uD83D\uDC4C accountInfo returned: \uD83E\uDD4F " +
                     accountInfo.getName().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
             //create user record in firebase
-            UserRecord userRecord = AuthUtil.createUser(accountName,email,password,
-                    cellphone, accountInfo.getIdentifier().getId().toString());
-            logger.info("\uD83C\uDF4E \uD83C\uDF4E \uD83C\uDF4E User created on Firebase: "
-                    .concat(GSON.toJson(userRecord)));
+            try {
+                UserRecord userRecord = FirebaseUtil.createUser(accountName, email, password,
+                        cellphone, accountInfo.getIdentifier().getId().toString());
+                logger.info("\uD83C\uDF4E \uD83C\uDF4E \uD83C\uDF4E User created on Firebase: "
+                        .concat(GSON.toJson(userRecord)));
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                logger.error("Firebase fucked up ......");
+                throw e;
+            }
 
             String name = accountInfo.getHost().getName().getOrganisation();
             for (NodeInfo node: nodes) {
@@ -284,7 +291,7 @@ public class WorkerBee {
                 logger.info(" \uD83D\uDE0E \uD83D\uDE0E "+accountName
                         +" shared with \uD83D\uDC7F " +
                         node.getLegalIdentities().get(0).getName().getOrganisation());
-                logger.info(res);
+
             }
 
             AccountInfoDTO dto = new AccountInfoDTO();
@@ -380,6 +387,7 @@ public class WorkerBee {
                     issueTx.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
 
             InvoiceOfferDTO m = getDTO(invoiceOfferState);
+            FirebaseUtil.sendInvoiceOfferMessage(m);
 //            logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffer: ".concat(GSON.toJson(m)));
             return m;
         } catch (Exception e) {
