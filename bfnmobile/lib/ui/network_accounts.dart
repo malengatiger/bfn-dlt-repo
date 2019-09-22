@@ -5,12 +5,12 @@ import 'package:bfnlibrary/util/net.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AccountsPage extends StatefulWidget {
+class NetworkAccountsPage extends StatefulWidget {
   @override
-  _AccountsPageState createState() => _AccountsPageState();
+  _NetworkAccountsPageState createState() => _NetworkAccountsPageState();
 }
 
-class _AccountsPageState extends State<AccountsPage> {
+class _NetworkAccountsPageState extends State<NetworkAccountsPage> {
 
   var _key = GlobalKey<ScaffoldState>();
   List<AccountInfo> accounts = List(), filteredAccounts = List();
@@ -25,7 +25,8 @@ class _AccountsPageState extends State<AccountsPage> {
   }
   _getAccounts() async {
     accounts = await Net.getAccounts();
-    if (accounts.length < 21) {
+    accounts.sort((a, b) => a.name.compareTo(b.name));
+    if (accounts.length < 41) {
       showAllAccounts = true;
       filteredAccounts = accounts;
     }

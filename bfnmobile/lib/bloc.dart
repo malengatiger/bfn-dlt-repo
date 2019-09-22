@@ -5,6 +5,7 @@ import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
 import 'package:bfnlibrary/util/net.dart';
+import 'package:bfnmobile/prefs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -17,7 +18,15 @@ class BFNBloc {
   StreamController<List<InvoiceOffer>> offerController = StreamController.broadcast();
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseUser user;
+  AccountInfo account;
 
+
+  BFNBloc() {
+    initialize();
+  }
+  initialize() async {
+    account = await Prefs.getAccount();
+  }
   close() {
     acctController.close();
     invoiceController.close();
@@ -31,6 +40,7 @@ class BFNBloc {
       return false;
     } else {
       debugPrint('🥬 🥬 🥬 User authenticated already 🥬 🥬 🥬 ');
+      account = await Prefs.getAccount();
       return true;
     }
      
@@ -52,14 +62,14 @@ class BFNBloc {
     acctController.sink.add(accounts);
     return accounts;
   }
-  Future<List<Invoice>> getInvoices() async {
-    var invoices = await Net.getInvoices();
+  Future<List<Invoice>> getInvoices({String accountId}) async {
+    var invoices = await Net.getInvoices(accountId: accountId);
     print('🍏 🍏 BFNBloc: getInvoices found 🔆 ${invoices.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     invoiceController.sink.add(invoices);
     return invoices;
   }
-  Future<List<InvoiceOffer>> getInvoiceOffers() async {
-    var offers = await Net.getInvoiceOffers();
+  Future<List<InvoiceOffer>> getInvoiceOffers({String accountId}) async {
+    var offers = await Net.getInvoiceOffers(accountId: accountId);
     print('🍏 🍏 BFNBloc: getInvoiceOffers found 🔆 ${offers.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     offerController.sink.add(offers);
     return offers;

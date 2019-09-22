@@ -55,14 +55,17 @@ public class AdminController {
 
 
     @GetMapping(value = "getInvoiceStates")
-    public List<InvoiceDTO> getInvoiceStates() {
-        return WorkerBee.getInvoiceStates(proxy);
+    public List<InvoiceDTO> getInvoiceStates(@RequestParam(value = "consumed", required=false) boolean consumed,
+                                             @RequestParam(value = "accountId", required=false) String accountId) {
+        return WorkerBee.getInvoiceStates(proxy, accountId, consumed);
+    }
+    @GetMapping(value = "getInvoiceOfferStates")
+    public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam(value = "consumed", required=false) boolean consumed,
+                                                       @RequestParam(value = "accountId", required=false) String accountId) {
+
+        return WorkerBee.getInvoiceOfferStates(proxy, accountId, consumed);
     }
 
-    @GetMapping(value = "getInvoiceOfferStates")
-    public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam boolean consumed) {
-        return WorkerBee.getInvoiceOfferStates(proxy, consumed);
-    }
 
     @GetMapping(value = "/hello", produces = "text/plain")
     private String hello() {

@@ -1,25 +1,25 @@
 package com.bfn.dto;
 
-import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
-
 import java.util.Date;
-import java.util.UUID;
 
 public class InvoiceOfferDTO {
-     String invoiceId;
-     double offerAmount, discount, originalAmount;
-     String supplierId, investorId, ownerId;
-     Date offerDate, investorDate;
+    private String invoiceId;
+    private double offerAmount, discount, originalAmount;
+    private  AccountInfoDTO supplier, investor, owner;
+    private  Date offerDate, investorDate;
     private String supplierPublicKey, investorPublicKey;
 
-    public InvoiceOfferDTO(String invoiceId, double offerAmount, double discount, double originalAmount, String supplierId, String investorId, String ownerId, Date offerDate, Date investorDate, String supplierPublicKey, String investorPublicKey) {
+    public InvoiceOfferDTO(String invoiceId, double offerAmount, double discount,
+                           double originalAmount,
+                           AccountInfoDTO supplier, AccountInfoDTO investor,
+                           AccountInfoDTO owner, Date offerDate, Date investorDate, String supplierPublicKey, String investorPublicKey) {
         this.invoiceId = invoiceId;
         this.offerAmount = offerAmount;
         this.discount = discount;
         this.originalAmount = originalAmount;
-        this.supplierId = supplierId;
-        this.investorId = investorId;
-        this.ownerId = ownerId;
+        this.supplier = supplier;
+        this.investor = investor;
+        this.owner = owner;
         this.offerDate = offerDate;
         this.investorDate = investorDate;
         this.supplierPublicKey = supplierPublicKey;
@@ -27,38 +27,6 @@ public class InvoiceOfferDTO {
     }
 
     public InvoiceOfferDTO() {
-    }
-
-    public double getOriginalAmount() {
-        return originalAmount;
-    }
-
-    public void setOriginalAmount(double originalAmount) {
-        this.originalAmount = originalAmount;
-    }
-
-    public String getSupplierPublicKey() {
-        return supplierPublicKey;
-    }
-
-    public void setSupplierPublicKey(String supplierPublicKey) {
-        this.supplierPublicKey = supplierPublicKey;
-    }
-
-    public String getInvestorPublicKey() {
-        return investorPublicKey;
-    }
-
-    public void setInvestorPublicKey(String investorPublicKey) {
-        this.investorPublicKey = investorPublicKey;
-    }
-
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
     }
 
     public String getInvoiceId() {
@@ -85,20 +53,36 @@ public class InvoiceOfferDTO {
         this.discount = discount;
     }
 
-    public String getSupplierId() {
-        return supplierId;
+    public double getOriginalAmount() {
+        return originalAmount;
     }
 
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
+    public void setOriginalAmount(double originalAmount) {
+        this.originalAmount = originalAmount;
     }
 
-    public String getInvestorId() {
-        return investorId;
+    public AccountInfoDTO getSupplier() {
+        return supplier;
     }
 
-    public void setInvestorId(String investorId) {
-        this.investorId = investorId;
+    public void setSupplier(AccountInfoDTO supplier) {
+        this.supplier = supplier;
+    }
+
+    public AccountInfoDTO getInvestor() {
+        return investor;
+    }
+
+    public void setInvestor(AccountInfoDTO investor) {
+        this.investor = investor;
+    }
+
+    public AccountInfoDTO getOwner() {
+        return owner;
+    }
+
+    public void setOwner(AccountInfoDTO owner) {
+        this.owner = owner;
     }
 
     public Date getOfferDate() {
@@ -115,5 +99,21 @@ public class InvoiceOfferDTO {
 
     public void setInvestorDate(Date investorDate) {
         this.investorDate = investorDate;
+    }
+
+    public String getSupplierPublicKey() {
+        return supplierPublicKey;
+    }
+
+    public void setSupplierPublicKey(String supplierPublicKey) {
+        this.supplierPublicKey = supplierPublicKey;
+    }
+
+    public String getInvestorPublicKey() {
+        return investorPublicKey;
+    }
+
+    public void setInvestorPublicKey(String investorPublicKey) {
+        this.investorPublicKey = investorPublicKey;
     }
 }

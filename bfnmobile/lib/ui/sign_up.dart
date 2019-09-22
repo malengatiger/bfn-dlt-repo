@@ -1,4 +1,4 @@
-import 'package:bfnlibrary/util/bloc.dart';
+import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
 import 'package:bfnlibrary/util/net.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnlibrary/util/snack.dart';

@@ -162,34 +162,6 @@ public class DemoUtil {
     private static Random random = new Random(System.currentTimeMillis());
     private static void registerInvoices() throws Exception {
 
-//        List<AccountInfoDTO> list = TheUtil.getAccounts(proxy);
-//        logger.info("\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices:" +
-//                "  \uD83D\uDD06 \uD83D\uDD06 Total Number of Accounts on ALL NODES:  \uD83D\uDC8E " + list.size() + "  \uD83D\uDC8E ");
-//        suppliers.clear();
-//        for (AccountInfoDTO m: list) {
-//            if (m.getName().contains("Supplier")) {
-//                suppliers.add(m);
-//            }
-//        }
-//        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices:" +
-//                "  \uD83D\uDD06 \uD83D\uDD06 " + suppliers.size() + " suppliers");
-//        customers.clear();
-//        for (AccountInfoDTO m: list) {
-//            if (m.getName().contains("Customer")) {
-//                customers.add(m);
-//            }
-//        }
-//        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices:" +
-//                "  \uD83D\uDD06 \uD83D\uDD06 " + customers.size() + " customers");
-//        investors.clear();
-//        for (AccountInfoDTO m: list) {
-//            if (m.getName().contains("Investor")) {
-//                investors.add(m);
-//            }
-//        }
-//        logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoices:" +
-//                "  \uD83D\uDD06 \uD83D\uDD06 " + investors.size() + " investors");
-
         for (AccountInfoDTO supplier: suppliers ) {
             for (AccountInfoDTO customer: customers) {
                 InvoiceDTO m = new InvoiceDTO();
@@ -216,11 +188,11 @@ public class DemoUtil {
             }
         }
 
-        List<InvoiceDTO> invoiceStates = WorkerBee.getInvoiceStates(proxy);
+        List<InvoiceDTO> invoiceStates = WorkerBee.getInvoiceStates(proxy, null, false);
         logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+invoiceStates.size()+" InvoiceStates on node ...  \uD83C\uDF4A ");
         demoSummary.setNumberOfInvoices(invoiceStates.size());
 
-        List<InvoiceOfferDTO> list2 = WorkerBee.getInvoiceOfferStates(proxy, false);
+        List<InvoiceOfferDTO> list2 = WorkerBee.getInvoiceOfferStates(proxy, null,false);
         demoSummary.setNumberOfInvoiceOffers(list2.size());
         logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+list2.size()+" InvoiceOfferStates on node ...  \uD83C\uDF4A ");
 
@@ -232,9 +204,9 @@ public class DemoUtil {
 
         InvoiceOfferDTO m = new InvoiceOfferDTO();
         m.setInvoiceId(invoice.getInvoiceId());
-        m.setSupplierId(supplier.getIdentifier());
-        m.setOwnerId(supplier.getIdentifier());
-        m.setInvestorId(investor.getIdentifier());
+        m.setSupplier(supplier);
+        m.setOwner(supplier);
+        m.setInvestor(investor);
         m.setOfferDate(new Date());
         m.setDiscount(discount);
         if (m.getDiscount() == 0) {

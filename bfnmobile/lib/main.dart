@@ -1,5 +1,5 @@
-import 'package:bfnlibrary/util/bloc.dart';
-import 'package:bfnmobile/ui/accounts.dart';
+import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
+import 'package:bfnmobile/ui/network_accounts.dart';
 import 'package:bfnmobile/ui/dashboard.dart';
 import 'package:bfnmobile/ui/sign_up.dart';
 import 'package:flutter/material.dart';

@@ -36,7 +36,7 @@ public class InvoiceState implements ContractState {
 
     public InvoiceState(UUID invoiceId, String invoiceNumber, String description, Double amount, Double totalAmount,
                         Double valueAddedTax, AccountInfo supplierInfo, AccountInfo customerInfo,
-                        PublicKey supplierPublicKey, PublicKey customerPublicKey) {
+                        PublicKey supplierPublicKey, PublicKey customerPublicKey, Date dateRegistered) {
         this.invoiceId = invoiceId;
         this.invoiceNumber = invoiceNumber;
         this.description = description;
@@ -47,6 +47,10 @@ public class InvoiceState implements ContractState {
         this.customerInfo = customerInfo;
         this.supplierPublicKey = supplierPublicKey;
         this.customerPublicKey = customerPublicKey;
+        this.dateRegistered = dateRegistered;
+        if (dateRegistered == null) {
+            this.dateRegistered = new Date();
+        }
     }
 
 
@@ -85,10 +89,6 @@ public class InvoiceState implements ContractState {
 
     public AccountInfo getSupplierInfo() {
         return supplierInfo;
-    }
-
-    public void setDateRegistered(Date dateRegistered) {
-        this.dateRegistered = dateRegistered;
     }
 
     public PublicKey getSupplierPublicKey() {

@@ -11,7 +11,12 @@ import com.bfn.flows.invoices.InvoiceOfferFlow;
 import com.bfn.flows.invoices.InvoiceRegistrationFlow;
 import com.bfn.states.InvoiceOfferState;
 import com.bfn.states.InvoiceState;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
 import com.google.firebase.auth.UserRecord;
+import com.google.firebase.cloud.FirestoreClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
@@ -32,11 +37,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import static jdk.nashorn.internal.objects.Global.print;
-
 public class WorkerBee {
     private final static Logger logger = LoggerFactory.getLogger(WorkerBee.class);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    static final Firestore db = FirestoreClient.getFirestore();
 
     public static List<NodeInfoDTO> listNodes(CordaRPCOps proxy) {
 
@@ -79,7 +83,7 @@ public class WorkerBee {
         return list;
     }
 
-    public static List<InvoiceDTO> getInvoiceStates(CordaRPCOps proxy) {
+    public static List<InvoiceDTO> getInvoiceStates(CordaRPCOps proxy,String accountId, boolean consumed) {
         QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
         Vault.Page<InvoiceState> page = proxy.vaultQueryByWithPagingSpec(InvoiceState.class, criteria, new PageSpecification(1, 200));
 
@@ -88,27 +92,42 @@ public class WorkerBee {
         for (StateAndRef<InvoiceState> ref : page.getStates()) {
             InvoiceState m = ref.getState().getData();
             InvoiceDTO invoice = getDTO(m);
-            list.add(invoice);
+            if (accountId == null) {
+                list.add(invoice);
+            } else {
+                if (invoice.getSupplierId().equalsIgnoreCase(accountId)
+                        || invoice.getCustomerId().equalsIgnoreCase(accountId)) {
+                    list.add(invoice);
+                }
+            }
+
         }
         String m = " \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A done listing InvoiceStates:  \uD83C\uDF3A " + list.size();
 
         return list;
     }
 
-    public static List<InvoiceOfferDTO> getInvoiceOfferStates(CordaRPCOps proxy, boolean consumed) {
+    public static List<InvoiceOfferDTO> getInvoiceOfferStates(CordaRPCOps proxy, String accountId, boolean consumed) {
         logger.info(" \uD83E\uDDE1 getInvoiceOfferStates consumed:  \uD83E\uDDE1 " + consumed);
         QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(
-                consumed? Vault.StateStatus.CONSUMED : Vault.StateStatus.UNCONSUMED);
+                consumed? Vault.StateStatus.CONSUMED : Vault.StateStatus.ALL);
         Vault.Page<InvoiceOfferState> page = proxy.vaultQueryByWithPagingSpec(
                 InvoiceOfferState.class, criteria,
                 new PageSpecification(1, 200));
         List<InvoiceOfferDTO> list = new ArrayList<>();
 
-        int cnt = 0;
         for (StateAndRef<InvoiceOfferState> ref : page.getStates()) {
             InvoiceOfferState m = ref.getState().getData();
-            InvoiceOfferDTO invoice = getDTO(m);
-            list.add(invoice);
+            InvoiceOfferDTO offer = getDTO(m);
+            if (accountId == null) {
+                list.add(offer);
+            } else {
+                if (offer.getSupplier().getIdentifier().equalsIgnoreCase(accountId)
+                        || offer.getInvestor().getIdentifier().equalsIgnoreCase(accountId)) {
+                    list.add(offer);
+                }
+            }
+
         }
         String m = " \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A done listing InvoiceOfferStates:  \uD83C\uDF3A " + list.size();
         logger.info(m);
@@ -142,8 +161,8 @@ public class WorkerBee {
 
     public static InvoiceDTO startInvoiceRegistrationFlow(CordaRPCOps proxy, InvoiceDTO invoice) throws Exception {
 
-        logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: "
-                + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
+//        logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: "
+//                + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
         try {
             logger.info("\uD83C\uDF4F SUPPLIER: ".concat(invoice.getSupplierId()).concat("  \uD83D\uDD06  ")
                     .concat("  \uD83E\uDDE1 CUSTOMER: ").concat(invoice.getCustomerId()));
@@ -175,7 +194,7 @@ public class WorkerBee {
             InvoiceState invoiceState = new InvoiceState(UUID.randomUUID(),
                     invoice.getInvoiceNumber(),invoice.getDescription(),
                     invoice.getAmount(),invoice.getTotalAmount(),invoice.getValueAddedTax(),
-                    supplierInfo,customerInfo,null,null);
+                    supplierInfo,customerInfo,null,null, new Date());
 
             CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
                     InvoiceRegistrationFlow.class, invoiceState).getReturnValue();
@@ -185,9 +204,17 @@ public class WorkerBee {
                     "\uD83C\uDF4F \uD83C\uDF4F \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06  " +
                     "\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C  signedTransaction returned: \uD83E\uDD4F "
                     + issueTx.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
-            InvoiceDTO mm = getDTO(invoiceState);
-            logger.info(GSON.toJson(mm));
-            return mm;
+            InvoiceDTO dto = getDTO(invoiceState);
+            try {
+                ApiFuture<DocumentReference> reference = db.collection("invoices").add(dto);
+                logger.info(("\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
+                        "Firestore path: ").concat(reference.get().getPath()));
+
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+            logger.info(GSON.toJson(dto));
+            return dto;
         } catch (Exception e) {
             if (e.getMessage() != null) {
                 throw new Exception("Failed to register invoice. ".concat(e.getMessage()));
@@ -299,6 +326,13 @@ public class WorkerBee {
             dto.setIdentifier(accountInfo.getIdentifier().getId().toString());
             dto.setName(accountInfo.getName());
             dto.setStatus(accountInfo.getStatus().name());
+            try {
+                ApiFuture<DocumentReference> reference = db.collection("accounts").add(dto);
+                logger.info(("\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
+                        "Firestore path: ").concat(reference.get().getPath()));
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
             return dto;
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -324,7 +358,7 @@ public class WorkerBee {
         try {
             logger.info("\uD83C\uDF4F INVOICE: ".concat(invoiceOffer.getInvoiceId()).concat("  \uD83D\uDD06  ")
                     .concat("  \uD83E\uDDE1 DISCOUNT: ").concat("" + invoiceOffer.getDiscount())
-            .concat("  \uD83E\uDDE1 INVESTOR: ").concat("" + invoiceOffer.getInvestorId()));
+            .concat("  \uD83E\uDDE1 INVESTOR: ").concat("" + invoiceOffer.getInvestor()));
 
             //todo - refactor to proper query ...
             QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
@@ -347,7 +381,7 @@ public class WorkerBee {
                     new PageSpecification(1, 200));
 
             for (StateAndRef<AccountInfo> info : acctsPage.getStates()) {
-                if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoiceOffer.getInvestorId())) {
+                if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoiceOffer.getInvestor().getIdentifier())) {
                     investorInfo = info.getState().getData();
                     logger.info("\uD83C\uDF4F \uD83C\uDF4F Investor AccountInfo found: ".concat(info.getState().getData().getName()));
                 }
@@ -386,10 +420,17 @@ public class WorkerBee {
                     "\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C  signedTransaction returned: \uD83E\uDD4F " +
                     issueTx.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
 
-            InvoiceOfferDTO m = getDTO(invoiceOfferState);
-            FirebaseUtil.sendInvoiceOfferMessage(m);
-//            logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffer: ".concat(GSON.toJson(m)));
-            return m;
+            InvoiceOfferDTO offerDTO = getDTO(invoiceOfferState);
+            try {
+                ApiFuture<DocumentReference> reference = db.collection("invoiceOffers").add(offerDTO);
+                logger.info(("\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
+                        "Firestore path: ").concat(reference.get().getPath()));
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+            FirebaseUtil.sendInvoiceOfferMessage(offerDTO);
+//            logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffer: ".concat(GSON.toJson(offerDTO)));
+            return offerDTO;
         } catch (Exception e) {
             if (e.getMessage() != null) {
                 throw new Exception("Failed to register invoiceOffer. ".concat(e.getMessage()));
@@ -429,9 +470,11 @@ public class WorkerBee {
         o.setOfferAmount(state.getOfferAmount());
         o.setOriginalAmount(state.getOriginalAmount());
         o.setDiscount(state.getDiscount());
-        o.setSupplierId(state.getSupplier().getIdentifier().getId().toString());
-        o.setInvestorId(state.getInvestor().getIdentifier().getId().toString());
-        o.setOwnerId(ownerId);
+        o.setSupplier(getDTO(state.getSupplier()));
+        o.setInvestor(getDTO(state.getInvestor()));
+        if (state.getOwner() != null) {
+            o.setOwner(getDTO(state.getOwner()));
+        }
         o.setSupplierPublicKey(state.getSupplierPublicKey() == null? null : state.getSupplierPublicKey().toString());
         o.setInvestorPublicKey(state.getInvestorPublicKey() == null? null : state.getInvestorPublicKey().toString());
 
@@ -442,7 +485,14 @@ public class WorkerBee {
         if (state.getOwnerDate() != null) {
             o.setInvestorDate(state.getOwnerDate());
         }
-//        logger.info("InvoiceOffer State: ".concat(GSON.toJson(o)));
         return o;
+    }
+    private static AccountInfoDTO getDTO(AccountInfo a) {
+        AccountInfoDTO info = new AccountInfoDTO();
+        info.setHost(a.getHost().toString());
+        info.setIdentifier(a.getIdentifier().getId().toString());
+        info.setName(a.getName());
+        info.setStatus(a.getStatus().name());
+        return info;
     }
 }

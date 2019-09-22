@@ -687,7 +687,7 @@ String getFormattedDateHourMinuteSecond() {
 String getFormattedNumber(int number, BuildContext context) {
   Locale myLocale = Localizations.localeOf(context);
   var val = myLocale.languageCode + '_' + myLocale.countryCode;
-  final oCcy = new NumberFormat();
+  final oCcy = new NumberFormat("###,###,###,###,##0", val);
 
   return oCcy.format(number);
 }
@@ -695,8 +695,7 @@ String getFormattedNumber(int number, BuildContext context) {
 String getFormattedDouble(double number, BuildContext context) {
   Locale myLocale = Localizations.localeOf(context);
   var val = myLocale.languageCode + '_' + myLocale.countryCode;
-  var m = ["###,###,###,###,##0.0", val];
-  final oCcy = new NumberFormat();
+  final oCcy = new NumberFormat("###,###,###,###,##0.0", val);
 
   return oCcy.format(number);
 }
@@ -706,7 +705,7 @@ String getFormattedAmount(String amount, BuildContext context) {
   Locale myLocale = Localizations.localeOf(context);
   var val = myLocale.languageCode + '_' + myLocale.countryCode;
   //print('getFormattedAmount ----------- locale is  $val');
-  final oCcy = new NumberFormat();
+  final oCcy = new NumberFormat("###,###,###,###,##0.00", val);
   try {
     double m = double.parse(amount);
     return oCcy.format(m);

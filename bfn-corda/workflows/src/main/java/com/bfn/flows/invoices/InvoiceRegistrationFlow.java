@@ -83,7 +83,6 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         final ServiceHub serviceHub = getServiceHub();
         logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... RegisterInvoiceFlow call started ...");
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
-        invoiceState.setDateRegistered(new Date());
 
         BFNCordaService bfnCordaService = serviceHub.cordaService(BFNCordaService.class);
         bfnCordaService.getInfo();
@@ -104,7 +103,7 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         InvoiceState msState = new InvoiceState(invoiceState.getInvoiceId(), invoiceState.getInvoiceNumber(),
                 invoiceState.getDescription(), invoiceState.getAmount(), invoiceState.getTotalAmount(),
                 invoiceState.getValueAddedTax(), invoiceState.getSupplierInfo(),
-                invoiceState.getCustomerInfo(), supplierKey, customerKey);
+                invoiceState.getCustomerInfo(), supplierKey, customerKey, invoiceState.getDateRegistered());
 
 
         InvoiceContract.Register command = new InvoiceContract.Register();

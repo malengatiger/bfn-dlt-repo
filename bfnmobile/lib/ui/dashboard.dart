@@ -4,12 +4,13 @@ import 'dart:io';
 import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
-import 'package:bfnlibrary/util/bloc.dart';
+import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
 import 'package:bfnlibrary/util/functions.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnlibrary/util/snack.dart';
 import 'package:bfnmobile/prefs.dart';
-import 'package:bfnmobile/ui/accounts.dart';
+import 'package:bfnmobile/ui/invoices.dart';
+import 'package:bfnmobile/ui/network_accounts.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -93,6 +94,7 @@ class _DashboardState extends State<Dashboard> {
     contents.add(Content(
         label: 'Network Accounts',
         number: accounts.length.toString(),
+        icon: Icon(Icons.people),
         color: Colors.teal));
     setState(() {});
   }
@@ -102,6 +104,7 @@ class _DashboardState extends State<Dashboard> {
     contents.add(Content(
         label: 'Network Invoices',
         number: invoices.length.toString(),
+        icon: Icon(Icons.account_balance),
         color: Colors.blue));
     setState(() {});
   }
@@ -111,6 +114,7 @@ class _DashboardState extends State<Dashboard> {
     contents.add(Content(
         label: 'Network Offers',
         number: offers.length.toString(),
+        icon: Icon(Icons.apps),
         color: Colors.pink));
     setState(() {});
   }
@@ -133,6 +137,7 @@ class _DashboardState extends State<Dashboard> {
       child: Scaffold(
         key: _key,
         appBar: AppBar(
+          leading: Container(),
           title: Text("Business Finance Network"),
           elevation: 8,
           actions: <Widget>[
@@ -171,6 +176,10 @@ class _DashboardState extends State<Dashboard> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
+                        SizedBox(
+                          height: 24,
+                        ),
+                        contents.elementAt(index).icon,
                         SizedBox(
                           height: 24,
                         ),
@@ -215,10 +224,15 @@ class _DashboardState extends State<Dashboard> {
         Navigator.push(
             context,
             SlideRightRoute(
-              widget: AccountsPage(),
+              widget: NetworkAccountsPage(),
             ));
         break;
       case 1:
+        Navigator.push(
+            context,
+            SlideRightRoute(
+              widget: InvoicesPage(),
+            ));
         break;
       case 2:
         break;
@@ -233,6 +247,7 @@ class _DashboardState extends State<Dashboard> {
 class Content {
   String label, number;
   Color color;
+  Icon icon;
 
-  Content({this.label, this.number, this.color});
+  Content({this.label, this.number, this.color, this.icon});
 }
