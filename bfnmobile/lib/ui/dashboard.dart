@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bfnlibrary/data/account.dart';
@@ -6,6 +7,7 @@ import 'package:bfnlibrary/data/invoice_offer.dart';
 import 'package:bfnlibrary/util/bloc.dart';
 import 'package:bfnlibrary/util/functions.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
+import 'package:bfnlibrary/util/snack.dart';
 import 'package:bfnmobile/prefs.dart';
 import 'package:bfnmobile/ui/accounts.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,7 @@ class _DashboardState extends State<Dashboard> {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   List<AccountInfo> accounts = List();
   List<Invoice> invoices = List();
-  List<InvoiceOffer> offers = List();
+  List<InvoiceOffer> offers = List(), offerMessages = List();
   AccountInfo account;
 
   @override
@@ -30,17 +32,26 @@ class _DashboardState extends State<Dashboard> {
     _firebaseCloudMessaging();
     _refresh();
   }
+
   void _firebaseCloudMessaging() {
-    print('🍊 🍊 _firebaseCloudMessaging started. 🍊 Configuring messaging 🍊 🍊 🍊');
+    print(
+        '🍊 🍊 _firebaseCloudMessaging started. 🍊 Configuring messaging 🍊 🍊 🍊');
     if (Platform.isIOS) iOS_Permission();
 
-    _firebaseMessaging.getToken().then((token){
+    _firebaseMessaging.getToken().then((token) {
       print(token);
     });
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('🧩🧩🧩🧩🧩🧩 on message $message');
+        var data = message['data'];
+        var offer = json.decode(data['offer']);
+
+        var m = InvoiceOffer.fromJson(offer);
+        offerMessages.add(m);
+        _showMessage('Invoice Offer ' + m.offerAmount.toString());
+        _refresh();
       },
       onResume: (Map<String, dynamic> message) async {
         print('🧩🧩🧩🧩🧩🧩 on resume $message');
@@ -51,6 +62,16 @@ class _DashboardState extends State<Dashboard> {
     );
     _subscribe();
   }
+
+  void _showMessage(String msg) {
+    print('showing fcm message ... $msg');
+    AppSnackbar.showSnackbar(
+        scaffoldKey: _key,
+        message: msg,
+        textColor: Colors.yellow,
+        backgroundColor: Colors.black);
+  }
+
   void _subscribe() {
     _firebaseMessaging.subscribeToTopic('invoiceOffers');
     _firebaseMessaging.subscribeToTopic('invoices');
@@ -59,14 +80,13 @@ class _DashboardState extends State<Dashboard> {
 
   void iOS_Permission() {
     _firebaseMessaging.requestNotificationPermissions(
-        IosNotificationSettings(sound: true, badge: true, alert: true)
-    );
+        IosNotificationSettings(sound: true, badge: true, alert: true));
     _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings)
-    {
+        .listen((IosNotificationSettings settings) {
       print("Settings registered: $settings");
     });
   }
+
   _getAccounts() async {
     account = await Prefs.getAccount();
     accounts = await bfnBloc.getAccounts();
@@ -74,9 +94,7 @@ class _DashboardState extends State<Dashboard> {
         label: 'Network Accounts',
         number: accounts.length.toString(),
         color: Colors.teal));
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   _getInvoices() async {
@@ -85,9 +103,7 @@ class _DashboardState extends State<Dashboard> {
         label: 'Network Invoices',
         number: invoices.length.toString(),
         color: Colors.blue));
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   _getInvoiceOffers() async {
@@ -96,10 +112,9 @@ class _DashboardState extends State<Dashboard> {
         label: 'Network Offers',
         number: offers.length.toString(),
         color: Colors.pink));
-    setState(() {
-
-    });
+    setState(() {});
   }
+
   _refresh() async {
     setState(() {
       contents.clear();
@@ -121,14 +136,24 @@ class _DashboardState extends State<Dashboard> {
           title: Text("Business Finance Network"),
           elevation: 8,
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.refresh), onPressed: _refresh,),
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: _refresh,
+            ),
           ],
-          bottom: PreferredSize(child: Column(
-            children: <Widget>[
-              Text(account == null? '': account.name, style: Styles.whiteBoldMedium,),
-              SizedBox(height: 20,)
-            ],
-          ), preferredSize: Size.fromHeight(60)),
+          bottom: PreferredSize(
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    account == null ? '' : account.name,
+                    style: Styles.whiteBoldMedium,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  )
+                ],
+              ),
+              preferredSize: Size.fromHeight(60)),
         ),
         backgroundColor: Colors.brown[100],
         body: GridView.builder(
