@@ -2,6 +2,8 @@ package com.bfn.webserver;
 
 import com.bfn.dto.*;
 import com.bfn.util.DemoUtil;
+import com.bfn.util.FirebaseUtil;
+import com.google.firebase.auth.UserRecord;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.corda.core.messaging.CordaRPCOps;
@@ -64,6 +66,20 @@ public class AdminController {
                                                        @RequestParam(value = "accountId", required=false) String accountId) throws Exception {
 
         return WorkerBee.getInvoiceOfferStates(proxy, accountId, consumed);
+    }
+    @GetMapping(value = "getUser")
+    public UserRecord getUser(@RequestParam(value = "email", required=false) String email) throws Exception {
+
+        UserRecord record = FirebaseUtil.getUser(email);
+        if (record == null) {
+            throw new Exception("User not found: ".concat(email));
+        }
+        return record;
+    }
+    @GetMapping(value = "getAccount")
+    public AccountInfoDTO getAccount(@RequestParam(value = "accountId") String accountId) throws Exception {
+
+        return  WorkerBee.getAccount(proxy,accountId);
     }
 
 

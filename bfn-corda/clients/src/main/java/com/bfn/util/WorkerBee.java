@@ -86,6 +86,24 @@ public class WorkerBee {
         return list;
     }
 
+    public static AccountInfoDTO getAccount(CordaRPCOps proxy, String accountId) throws Exception {
+
+        List<AccountInfoDTO> list = getAccounts(proxy);
+        AccountInfoDTO dto = null;
+        for (AccountInfoDTO info : list) {
+            if (info.getIdentifier().equalsIgnoreCase(accountId)) {
+                dto = info;
+                break;
+            }
+        }
+        if (dto == null) {
+            logger.warn("Account not found on BFN account");
+            throw new Exception("Account not found on BFN network");
+        }
+        String msg = "\uD83C\uDF3A  \uD83C\uDF3A found account:  \uD83C\uDF3A " + GSON.toJson(dto);
+        logger.info(msg);
+        return dto;
+    }
     public static List<InvoiceDTO> getInvoiceStates(CordaRPCOps proxy,
                                                     String accountId,
                                                     boolean consumed) throws Exception {
@@ -126,7 +144,7 @@ public class WorkerBee {
         logger.info(m);
         return list;
     }
-
+//investor27743421641@gmail.com
     public static List<InvoiceOfferDTO> getInvoiceOfferStates(CordaRPCOps proxy, String accountId, boolean consumed) throws Exception {
         logger.info("...................... accountId:  \uD83D\uDC9A ".concat(accountId == null? "null": accountId)
                 .concat(" consumed:  \uD83D\uDC9A " + consumed));

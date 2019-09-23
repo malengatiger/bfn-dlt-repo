@@ -1,10 +1,12 @@
 import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
+import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/util/net.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnlibrary/util/snack.dart';
+import 'package:bfnlibrary/data/fb_user.dart';
 import 'package:bfnmobile/prefs.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'dashboard.dart';
 
 class SignUp extends StatefulWidget {
@@ -21,7 +23,7 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
 
   String name, email, cellphone, password;
-
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -77,9 +79,9 @@ class _SignUpState extends State<SignUp> {
                             keyboardType: TextInputType.text,
                             // The validator receives the text that the user has entered.
                             validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Please enter name';
-                              }
+//                              if (value.isEmpty) {
+//                                return 'Please enter name';
+//                              }
                               name = value;
                               return null;
                             },
@@ -109,9 +111,9 @@ class _SignUpState extends State<SignUp> {
                             keyboardType: TextInputType.phone,
                             // The validator receives the text that the user has entered.
                             validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Please enter cellphone number';
-                              }
+//                              if (value.isEmpty) {
+//                                return 'Please enter cellphone number';
+//                              }
                               cellphone = value;
                               return null;
                             },
@@ -161,11 +163,35 @@ class _SignUpState extends State<SignUp> {
   _validate() async {
     if (_formKey.currentState.validate()) {
       print("🍎 🍊 ready to rumble $name $email $cellphone $password");
+      UserRecord userRecord;
       try {
-        var acct = await Net.startAccountRegistrationFlow(
-            name, email, password, cellphone);
-        print('🍎 🍊 🍎 🍊 🍎 🍊 acct: ${acct.toJson()}');
-        await Prefs.saveAccount(acct);
+        userRecord = await Net.getUser(email);
+      } catch (e) {
+        print(e);
+      }
+      AccountInfo accountInfo;
+      try {
+        if (userRecord != null) {
+          AuthResult authResult = await auth.signInWithEmailAndPassword(email: email, password: password);
+          if (authResult.user != null) {
+            //get account info - using uid
+            try {
+              accountInfo = await Net.getAccount(authResult.user.uid);
+            } catch (e) {
+              print(e);
+            }
+          } else {
+            accountInfo = await Net.startAccountRegistrationFlow(
+                name, email, password, cellphone);
+          }
+          //sign IN
+        } else {
+          accountInfo = await Net.startAccountRegistrationFlow(
+              name, email, password, cellphone);
+        }
+
+        print('🍎 🍊 🍎 🍊 🍎 🍊 acct found or created: ${accountInfo.toJson()} 🍎 🍊 🍎 🍊 🍎 🍊 ');
+        await Prefs.saveAccount(accountInfo);
         var result = await bfnBloc.signIn(email, password);
         print('Signed in to Firebase: ${result.toString()}');
         Navigator.push(context, SlideRightRoute(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bfnlibrary/data/account.dart';
+import 'package:bfnlibrary/data/fb_user.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
 import 'package:bfnlibrary/util/local_storage.dart';
@@ -116,6 +117,29 @@ class Net {
       return list;
     } else {
       throw Exception(' 👿  Failed: getAccounts Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+    }
+  }
+  static Future<AccountInfo> getAccount(String accountId) async {
+    final response = await http.get(URL + 'admin/getAccount?accountId=$accountId');
+
+    if (response.statusCode == 200) {
+      print('🍎 🍊 Net: getAccount: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      AccountInfo acctInfo = AccountInfo.fromJson(json.decode(response.body));
+      print('🍎 🍊 Net: getAccount: found ${acctInfo.toJson()}');
+      return acctInfo;
+    } else {
+      throw Exception(' 👿  Failed: getAccounts Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+    }
+  }
+  static Future<UserRecord> getUser(String email) async {
+    String url = URL + 'admin/getUser?email=$email';;
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      print('🍎 🍊 Net: getInvoices: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      return UserRecord.fromJson(json.decode(response.body));
+    } else {
+      throw Exception(' 👿  Failed : getUser Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
     }
   }
   static Future<List<Invoice>> getInvoices({String accountId, bool consumed}) async {
