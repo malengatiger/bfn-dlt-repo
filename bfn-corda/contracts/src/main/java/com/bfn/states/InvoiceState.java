@@ -102,6 +102,7 @@ public class InvoiceState implements ContractState {
     @NotNull
     @Override
     public List<AbstractParty> getParticipants() {
+
         return Arrays.asList(supplierInfo.getHost(),
                 customerInfo.getHost());
     }

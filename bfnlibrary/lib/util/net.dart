@@ -118,8 +118,16 @@ class Net {
       throw Exception(' 👿  Failed: getAccounts Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
     }
   }
-  static Future<List<Invoice>> getInvoices({String accountId}) async {
-    final response = await http.get(URL + 'admin/getInvoiceStates?accountId=$accountId');
+  static Future<List<Invoice>> getInvoices({String accountId, bool consumed}) async {
+    if (consumed == null) consumed = false;
+    String url;
+    if (accountId == null) {
+      url = URL + 'admin/getInvoiceStates?consumed=$consumed';
+    } else {
+      url = URL + 'admin/getInvoiceStates?accountId=$accountId&consumed=$consumed';
+    }
+    print(url);
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       print('🍎 🍊 Net: getInvoices: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
@@ -128,14 +136,22 @@ class Net {
       m.forEach((f) {
         list.add(Invoice.fromJson(f));
       });
-      print('🍎 🍊 Net: getInvoices: found ${list.length}');
+      print('🍎 🍊 🍎 🍊 Net: getInvoices: found ${list.length}');
       return list;
     } else {
       throw Exception(' 👿  Failed : getInvoices Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
     }
   }
-  static Future<List<InvoiceOffer>> getInvoiceOffers({String accountId}) async {
-    final response = await http.get(URL + 'admin/getInvoiceOfferStates?accountId=$accountId&consumed=false');
+  static Future<List<InvoiceOffer>> getInvoiceOffers({String accountId, bool consumed}) async {
+    if (consumed == null) consumed = false;
+    String url;
+    if (accountId == null) {
+      url = URL + 'admin/getInvoiceOfferStates?consumed=$consumed';
+    } else {
+      url = URL + 'admin/getInvoiceOfferStates?accountId=$accountId&consumed=$consumed';
+    }
+    print(url);
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       print('🍎 🍊 Net: getInvoiceOffers: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
@@ -144,7 +160,7 @@ class Net {
       m.forEach((f) {
         list.add(InvoiceOffer.fromJson(f));
       });
-      print('🍎 🍊 Net: getInvoiceOffers: found ${list.length}');
+      print('🍎 🍊 🍎 🍊 Net: getInvoiceOffers: found ${list.length}');
       return list;
     } else {
       throw Exception(' 👿  Failed: getInvoiceOffers Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');

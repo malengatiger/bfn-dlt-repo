@@ -1,7 +1,11 @@
 package com.bfn.util;
 
 import com.bfn.dto.InvoiceOfferDTO;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.auth.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.messaging.FcmOptions;
@@ -60,11 +64,34 @@ public class FirebaseUtil {
         request.setUid(uid);
 
         UserRecord userRecord = auth.createUser(request);
-        logger.info("\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C \uD83E\uDD66  \uD83E\uDD66 User record created in Firebase:  \uD83E\uDD66 ".concat(userRecord.getEmail()));
+        logger.info("\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C \uD83E\uDD66 \uD83E\uDD66 User record created in Firebase:  \uD83E\uDD66 ".concat(userRecord.getEmail()));
 //        getUsers();
         return userRecord;
     }
 
+    public static void deleteUsers() throws FirebaseAuthException {
+        // Start listing users from the beginning, 1000 at a time.
+        ListUsersPage page = FirebaseAuth.getInstance().listUsers(null);
+        while (page != null) {
+            for (ExportedUserRecord user : page.getValues()) {
+                if (user.getEmail().contains("aubrey")) {
+                    continue;
+                }
+                auth.deleteUser(user.getUid());
+                logger.info("\uD83C\uDF4A \uD83C\uDF4A \uD83C\uDF4A User deleted: " + user.getEmail());
+            }
+            page = page.getNextPage();
+        }
+        page = auth.listUsers(null);
+        for (ExportedUserRecord user : page.iterateAll()) {
+            if (user.getEmail().contains("aubrey")) {
+                continue;
+            }
+            logger.info("\uD83C\uDF4A \uD83C\uDF4A \uD83C\uDF4A User deleted: " + user.getEmail());
+            auth.deleteUser(user.getUid());
+            
+        }
+    }
     public static List<UserRecord> getUsers() throws FirebaseAuthException {
 
         List<UserRecord> records = new ArrayList<>();
@@ -80,6 +107,37 @@ public class FirebaseUtil {
         }
 
         return records;
+    }
+    static void deleteCollections() {
+        Iterable<CollectionReference> m = db.listCollections();
+        for (CollectionReference reference: m) {
+            logger.info("\uD83C\uDF4A \uD83C\uDF4A Existing Firestore collection: ".concat(reference.getPath()));
+            deleteCollection(reference,200);
+        }
+    }
+    /** Delete a collection in batches to avoid out-of-memory errors.
+     * Batch size may be tuned based on document size (atmost 1MB) and application requirements.
+     */
+    private static void deleteCollection(CollectionReference collection, int batchSize) {
+        try {
+            // retrieve a small batch of documents to avoid out-of-memory errors
+            ApiFuture<QuerySnapshot> future = collection.limit(batchSize).get();
+            int deleted = 0;
+            // future.get() blocks on document retrieval
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                document.getReference().delete();
+                ++deleted;
+                logger.info(" \uD83E\uDD4F  \uD83E\uDD4F  \uD83E\uDD4F  Deleted collection: ".concat(document.getReference().getPath()));
+            }
+            if (deleted >= batchSize) {
+                // retrieve and delete another batch
+                deleteCollection(collection, batchSize);
+                logger.info(" \uD83E\uDD4F  \uD83E\uDD4F  \uD83E\uDD4F  Deleted collection: ".concat(collection.getPath()));
+            }
+        } catch (Exception e) {
+            logger.error("Error deleting collection : " + e.getMessage());
+        }
     }
 
 }

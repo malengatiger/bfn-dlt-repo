@@ -30,10 +30,10 @@ public class AdminController {
     }
 
     @GetMapping(value = "/demo", produces = "application/json")
-    private DemoSummary buildDemo() throws Exception {
+    private DemoSummary buildDemo(@RequestParam boolean deleteFirestore) throws Exception {
 
         logger.info("\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 starting DemoDataGenerator ... \uD83C\uDF4F");
-        DemoSummary result = DemoUtil.start(proxy);
+        DemoSummary result = DemoUtil.start(proxy, deleteFirestore);
         logger.info("\n\n\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 DemoUtil result: " +
                 " \uD83C\uDF4F " + GSON.toJson(result)
                 .concat("    \uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A \uD83D\uDC99 \uD83D\uDC9C\n\n"));
@@ -56,12 +56,12 @@ public class AdminController {
 
     @GetMapping(value = "getInvoiceStates")
     public List<InvoiceDTO> getInvoiceStates(@RequestParam(value = "consumed", required=false) boolean consumed,
-                                             @RequestParam(value = "accountId", required=false) String accountId) {
+                                             @RequestParam(value = "accountId", required=false) String accountId) throws Exception {
         return WorkerBee.getInvoiceStates(proxy, accountId, consumed);
     }
     @GetMapping(value = "getInvoiceOfferStates")
     public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam(value = "consumed", required=false) boolean consumed,
-                                                       @RequestParam(value = "accountId", required=false) String accountId) {
+                                                       @RequestParam(value = "accountId", required=false) String accountId) throws Exception {
 
         return WorkerBee.getInvoiceOfferStates(proxy, accountId, consumed);
     }

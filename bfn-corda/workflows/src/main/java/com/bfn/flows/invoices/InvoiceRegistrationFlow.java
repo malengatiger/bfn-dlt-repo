@@ -7,6 +7,7 @@ import com.bfn.states.InvoiceOfferState;
 import com.bfn.states.InvoiceState;
 import com.google.common.collect.ImmutableList;
 import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount;
+import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccountFlow;
 import net.corda.core.contracts.StateAndRef;
 import net.corda.core.flows.*;
 import net.corda.core.identity.AbstractParty;
@@ -71,8 +72,6 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
 
     public InvoiceRegistrationFlow(InvoiceState invoiceState) {
         this.invoiceState = invoiceState;
-        logger.info("\uD83C\uDF3A \uD83C\uDF3A RegisterInvoiceFlow constructor with invoiceState: \uD83C\uDF4F "
-                + invoiceState.getSupplierInfo().getName());
     }
 
     private static final int LOCAL_SUPPLIER = 1, LOCAL_CUSTOMER = 2, REMOTE_SUPPLIER = 3, REMOTE_CUSTOMER = 4;
@@ -81,7 +80,7 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
     @Suspendable
     public SignedTransaction call() throws FlowException {
         final ServiceHub serviceHub = getServiceHub();
-        logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... RegisterInvoiceFlow call started ...");
+        logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... InvoiceRegistrationFlow call started ...");
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
 
         BFNCordaService bfnCordaService = serviceHub.cordaService(BFNCordaService.class);
@@ -92,18 +91,18 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         Party supplierParty = invoiceState.getSupplierInfo().getHost();
         Party customerParty = invoiceState.getCustomerInfo().getHost();
 
-        PublicKey customerKey = supplierParty.getOwningKey();
-        PublicKey supplierKey = customerParty.getOwningKey();
+        PublicKey keyCustomer = supplierParty.getOwningKey();
+        PublicKey keySupplier = customerParty.getOwningKey();
 
         String customerOrg = invoiceState.getCustomerInfo().getHost().getName().getOrganisation();
-        logger.info("\uD83C\uDFC8 \uD83C\uDFC8 customerParty key: ".concat(customerKey.toString()));
+        logger.info("\uD83C\uDFC8 \uD83C\uDFC8 customerParty key: ".concat(keyCustomer.toString()));
         String supplierOrg = invoiceState.getSupplierInfo().getHost().getName().getOrganisation();
-        logger.info("\uD83C\uDFC8 \uD83C\uDFC8 supplierParty key: ".concat(supplierKey.toString()));
+        logger.info("\uD83C\uDFC8 \uD83C\uDFC8 supplierParty key: ".concat(keySupplier.toString()));
 
         InvoiceState msState = new InvoiceState(invoiceState.getInvoiceId(), invoiceState.getInvoiceNumber(),
                 invoiceState.getDescription(), invoiceState.getAmount(), invoiceState.getTotalAmount(),
                 invoiceState.getValueAddedTax(), invoiceState.getSupplierInfo(),
-                invoiceState.getCustomerInfo(), supplierKey, customerKey, invoiceState.getDateRegistered());
+                invoiceState.getCustomerInfo(), keySupplier, keyCustomer, invoiceState.getDateRegistered());
 
 
         InvoiceContract.Register command = new InvoiceContract.Register();
@@ -115,7 +114,7 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
         progressTracker.setCurrentStep(GENERATING_TRANSACTION);
         TransactionBuilder txBuilder = new TransactionBuilder(notary)
                 .addOutputState(msState, InvoiceContract.ID)
-                .addCommand(command, supplierKey, customerKey);
+                .addCommand(command, keySupplier, keyCustomer);
 
         progressTracker.setCurrentStep(VERIFYING_TRANSACTION);
         txBuilder.verify(serviceHub);

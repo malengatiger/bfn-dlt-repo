@@ -21,7 +21,7 @@ public class DemoUtil {
     private static List<AccountInfoDTO> suppliers, customers, investors;
     private static DemoSummary demoSummary = new DemoSummary();
 
-    public static DemoSummary start(CordaRPCOps mProxy) throws Exception {
+    public static DemoSummary start(CordaRPCOps mProxy, boolean deleteFirestore) throws Exception {
         proxy = mProxy;
         logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 DemoUtil started ...  \uD83D\uDD06 \uD83D\uDD06 will list network components");
         demoSummary.setStarted(new Date().toString());
@@ -34,6 +34,15 @@ public class DemoUtil {
         List flows = WorkerBee.listFlows(proxy);
         demoSummary.setNumberOfFlows(flows.size());
 
+        //delete Firestore data
+        if (deleteFirestore) {
+            try {
+                FirebaseUtil.deleteUsers();
+                FirebaseUtil.deleteCollections();
+            } catch (Exception e) {
+                logger.warn("Firebase shit bombed");
+            }
+        }
         //start data generation
         registerSupplierAccounts();
         registerCustomerAccounts();
@@ -51,33 +60,6 @@ public class DemoUtil {
         demoSummary.setElapsedSeconds((end - start)/1000);
         return demoSummary;
     }
-//    private static void shareAccounts() throws Exception {
-//        List<NodeInfo> nodes = proxy.networkMapSnapshot();
-//        logger.info("\n\n\uD83E\uDDA0 \uD83E\uDDA0 shareAccounts: Nodes running: " + nodes.size());
-//        QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
-//        Vault.Page<AccountInfo> page = proxy.vaultQueryByWithPagingSpec(AccountInfo.class,
-//                criteria,new PageSpecification(1,200));
-//        String myNode = proxy.nodeInfo().getLegalIdentities().get(0).getName().toString();
-//        List<StateAndRef<AccountInfo>> list = page.getStates();
-//        logger.info("\uD83E\uDDA0 \uD83E\uDDA0  Accounts on "+myNode+" Node: " + list.size());
-//        for (NodeInfo nodeInfo: nodes) {
-//            String name = nodeInfo.getLegalIdentities().get(0).getName().toString();
-//            Party otherParty = nodeInfo.getLegalIdentities().get(0);
-//            if (name.equalsIgnoreCase(myNode)) {
-//                logger.info("\uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node \uD83E\uDD6C ");
-//                continue;
-//            }
-//            if (name.contains("Notary")) {
-//                logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary \uD83E\uDD6C \uD83E\uDD6C ");
-//                continue;
-//            }
-//
-//            for (StateAndRef<AccountInfo> accountInfoStateAndRef: list) {
-//                String result = TheUtil.startAccountSharingFlow(proxy,otherParty,accountInfoStateAndRef);
-//                logger.info("\uD83C\uDF81 Result from sharing account: ".concat(result));
-//            }
-//        }
-//    }
 
     private static void registerSupplierAccounts() throws Exception {
         logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts started ...  " +
@@ -166,8 +148,8 @@ public class DemoUtil {
             for (AccountInfoDTO customer: customers) {
                 InvoiceDTO m = new InvoiceDTO();
                 m.setInvoiceNumber("INV_" + System.currentTimeMillis());
-                m.setSupplierId(supplier.getIdentifier());
-                m.setCustomerId(customer.getIdentifier());
+                m.setSupplier(supplier);
+                m.setCustomer(customer);
                 int num = random.nextInt(100);
                 if (num == 0) num = 92;
                 m.setAmount(num * 1000.00);

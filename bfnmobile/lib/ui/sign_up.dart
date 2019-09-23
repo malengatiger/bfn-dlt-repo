@@ -45,17 +45,17 @@ class _SignUpState extends State<SignUp> {
                   )
                 ],
               ),
-              preferredSize: Size.fromHeight(100)),
+              preferredSize: Size.fromHeight(60)),
         ),
         backgroundColor: Colors.brown[100],
         body: ListView(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                   elevation: 4,
                   child: Padding(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Form(
                       key: _formKey,
                       child: Column(

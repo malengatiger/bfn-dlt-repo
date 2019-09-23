@@ -100,6 +100,9 @@ public class InvoiceOfferFlow extends FlowLogic<SignedTransaction> {
         Party investorParty = invoiceOfferState.getInvestor().getHost();
         PublicKey investorKey = investorParty.getOwningKey();
         PublicKey supplierKey = supplierParty.getOwningKey();
+//        PublicKey investorKey = subFlow(new RequestKeyForAccount(invoiceOfferState.getInvestor())).getOwningKey();
+//        PublicKey supplierKey = subFlow(new RequestKeyForAccount(invoiceOfferState.getSupplier())).getOwningKey();
+
 
         progressTracker.setCurrentStep(GENERATING_TRANSACTION);
         TransactionBuilder txBuilder = new TransactionBuilder(notary);

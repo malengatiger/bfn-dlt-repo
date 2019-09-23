@@ -75,20 +75,17 @@ public class AccountRegistrationFlow extends FlowLogic<AccountInfo> {
     @Suspendable
     public AccountInfo call() throws FlowException {
         final ServiceHub serviceHub = getServiceHub();
+
         Party bnoParty = serviceHub.getMyInfo().getLegalIdentities().get(0);
         AccountInfo accountInfo = new AccountInfo(accountName, bnoParty,
                 new UniqueIdentifier(), AccountStatus.ACTIVE);
-
-        logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  " +
-                "... RegisterAccountFlow call started ...");
+//        //val lenderKey = subFlow(RequestKeyForAccount(lenderAccountInfo.state.data)).owningKey
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
 
         AccountCommand command = new Create();
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Notary: "
                 + notary.getName().toString()
-                + "  \uD83C\uDF4A accountName: " + accountName
-                + "  \uD83C\uDF4A bnoParty: " + bnoParty.getName().toString()
-                + " \uD83C\uDF4E publicKey: ".concat(bnoParty.getOwningKey().toString()));
+                + "  \uD83C\uDF4A accountName: " + accountName);
 
         progressTracker.setCurrentStep(GENERATING_TRANSACTION);
         TransactionBuilder txBuilder = new TransactionBuilder(notary)

@@ -125,12 +125,12 @@ public class SupplierController {
 
     @GetMapping(value = "getInvoiceStates")
     public List<InvoiceDTO> getInvoiceStates(@RequestParam(value = "consumed", required=false) boolean consumed,
-                                             @RequestParam(value = "accountId", required=false) String accountId) {
+                                             @RequestParam(value = "accountId", required=false) String accountId) throws Exception {
         return WorkerBee.getInvoiceStates(proxy, accountId, consumed);
     }
     @GetMapping(value = "getInvoiceOfferStates")
     public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam(value = "consumed", required=false) boolean consumed,
-                                                       @RequestParam(value = "accountId", required=false) String accountId) {
+                                                       @RequestParam(value = "accountId", required=false) String accountId) throws Exception {
 
         return WorkerBee.getInvoiceOfferStates(proxy, accountId, consumed);
     }

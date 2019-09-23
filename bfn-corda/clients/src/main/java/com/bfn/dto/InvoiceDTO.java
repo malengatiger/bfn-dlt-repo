@@ -9,13 +9,16 @@ public class InvoiceDTO {
 
     Double amount, totalAmount, valueAddedTax;
     private Date dateRegistered;
-    private String supplierId, customerId;
+    private AccountInfoDTO supplier, customer;
     private String supplierPublicKey, customerPublicKey;
 
     public InvoiceDTO() {
     }
 
-    public InvoiceDTO(String invoiceId, String invoiceNumber, String description, Double amount, Double totalAmount, Double valueAddedTax, Date dateRegistered, String supplierId, String customerId, String supplierPublicKey, String customerPublicKey) {
+    public InvoiceDTO(String invoiceId, String invoiceNumber,
+                      String description, Double amount, Double totalAmount,
+                      Double valueAddedTax, Date dateRegistered,
+                      AccountInfoDTO supplier, AccountInfoDTO customer, String supplierPublicKey, String customerPublicKey) {
         this.invoiceId = invoiceId;
         this.invoiceNumber = invoiceNumber;
         this.description = description;
@@ -23,25 +26,9 @@ public class InvoiceDTO {
         this.totalAmount = totalAmount;
         this.valueAddedTax = valueAddedTax;
         this.dateRegistered = dateRegistered;
-        this.supplierId = supplierId;
-        this.customerId = customerId;
+        this.supplier = supplier;
+        this.customer = customer;
         this.supplierPublicKey = supplierPublicKey;
-        this.customerPublicKey = customerPublicKey;
-    }
-
-    public String getSupplierPublicKey() {
-        return supplierPublicKey;
-    }
-
-    public String getCustomerPublicKey() {
-        return customerPublicKey;
-    }
-
-    public void setSupplierPublicKey(String supplierPublicKey) {
-        this.supplierPublicKey = supplierPublicKey;
-    }
-
-    public void setCustomerPublicKey(String customerPublicKey) {
         this.customerPublicKey = customerPublicKey;
     }
 
@@ -101,19 +88,35 @@ public class InvoiceDTO {
         this.dateRegistered = dateRegistered;
     }
 
-    public String getSupplierId() {
-        return supplierId;
+    public AccountInfoDTO getSupplier() {
+        return supplier;
     }
 
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
+    public void setSupplier(AccountInfoDTO supplier) {
+        this.supplier = supplier;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public AccountInfoDTO getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCustomer(AccountInfoDTO customer) {
+        this.customer = customer;
+    }
+
+    public String getSupplierPublicKey() {
+        return supplierPublicKey;
+    }
+
+    public void setSupplierPublicKey(String supplierPublicKey) {
+        this.supplierPublicKey = supplierPublicKey;
+    }
+
+    public String getCustomerPublicKey() {
+        return customerPublicKey;
+    }
+
+    public void setCustomerPublicKey(String customerPublicKey) {
+        this.customerPublicKey = customerPublicKey;
     }
 }
