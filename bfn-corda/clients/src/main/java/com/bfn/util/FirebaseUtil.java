@@ -133,12 +133,12 @@ public class FirebaseUtil {
             for (QueryDocumentSnapshot document : documents) {
                 document.getReference().delete();
                 ++deleted;
-                logger.info(" \uD83E\uDD4F  \uD83E\uDD4F  \uD83E\uDD4F  Deleted collection: ".concat(document.getReference().getPath()));
+                logger.info(" \uD83E\uDD4F  \uD83E\uDD4F  \uD83E\uDD4F  Deleted document:  \uD83D\uDC9C ".concat(document.getReference().getPath()));
             }
             if (deleted >= batchSize) {
                 // retrieve and delete another batch
                 deleteCollection(collection, batchSize);
-                logger.info(" \uD83E\uDD4F  \uD83E\uDD4F  \uD83E\uDD4F  Deleted collection: ".concat(collection.getPath()));
+                logger.info(" \uD83E\uDD4F  \uD83E\uDD4F  \uD83E\uDD4F  Deleted collection:  \uD83E\uDDE1 ".concat(collection.getPath()));
             }
         } catch (Exception e) {
             logger.error("Error deleting collection : " + e.getMessage());
