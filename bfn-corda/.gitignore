@@ -4,3 +4,9 @@
 /.idea
 /logs
 /out
+/clients/logs
+/contracts/logs
+/workflows/logs
+/contracts/out
+/workflows/out
+/clients/out
