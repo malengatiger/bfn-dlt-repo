@@ -1,9 +1,6 @@
 package com.bfn.util;
 
-import com.bfn.dto.AccountInfoDTO;
-import com.bfn.dto.InvoiceDTO;
-import com.bfn.dto.InvoiceOfferDTO;
-import com.bfn.dto.NodeInfoDTO;
+import com.bfn.dto.*;
 import com.bfn.flows.admin.AccountRegistrationFlow;
 import com.bfn.flows.admin.ShareAccountInfoFlow;
 import com.bfn.flows.invoices.BuyInvoiceOfferFlow;
@@ -452,38 +449,7 @@ public class WorkerBee {
             invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
                     ((100.0 - invoiceOffer.getDiscount())/100));
 
-            InvoiceOfferState invoiceOfferState = new InvoiceOfferState(
-                    invoiceState.getInvoiceId(),
-                    invoiceOffer.getOfferAmount(),
-                    invoiceOffer.getDiscount(),
-                    invoiceState.getTotalAmount(),
-                    invoiceState.getSupplierInfo(),
-                    investorInfo,
-                    invoiceState.getSupplierInfo(),
-                    new Date(proxy.currentNodeTime().toEpochMilli()),
-                    null,
-                    invoiceState.getSupplierInfo().getHost().getOwningKey(),
-                    investorInfo.getHost().getOwningKey());
-
-            CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
-                    InvoiceOfferFlow.class, invoiceOfferState)
-                    .getReturnValue();
-
-            SignedTransaction issueTx = signedTransactionCordaFuture.get();
-            logger.info("\uD83C\uDF4F \uD83C\uDF4F flow completed... " +
-                    "\uD83C\uDF4F \uD83C\uDF4F \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDC4C " +
-                    "\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C  signedTransaction returned: \uD83E\uDD4F " +
-                    issueTx.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
-
-            InvoiceOfferDTO offerDTO = getDTO(invoiceOfferState);
-            try {
-                ApiFuture<DocumentReference> reference = db.collection("invoiceOffers").add(offerDTO);
-                logger.info(("\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
-                        "Firestore path: ").concat(reference.get().getPath()));
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-            }
-            FirebaseUtil.sendInvoiceOfferMessage(offerDTO);
+            InvoiceOfferDTO offerDTO = sendInvoiceOffer(proxy, invoiceOffer, invoiceState, investorInfo);
 //            logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffer: ".concat(GSON.toJson(offerDTO)));
             return offerDTO;
         } catch (Exception e) {
@@ -493,6 +459,109 @@ public class WorkerBee {
                 throw new Exception("Failed to register invoiceOffer. Unknown cause");
             }
         }
+    }
+    public static List<InvoiceOfferDTO> startInvoiceOfferFlowToAllAccounts(CordaRPCOps proxy, InvoiceOfferAllDTO all) throws Exception {
+
+        try {
+            logger.info("\uD83C\uDF4F INVOICE: ".concat(all.getInvoiceId()).concat("  \uD83D\uDD06  ")
+                    .concat("  \uD83E\uDDE1 DISCOUNT: ").concat("" + all.getDiscount()));
+            if (all.getDiscount() == 0) {
+                throw new Exception("Discount not found");
+            }
+            //todo - refactor to proper query ...
+            QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
+            Vault.Page<InvoiceState> invoiceStatePage = proxy.vaultQueryByWithPagingSpec(
+                    InvoiceState.class, criteria,
+                    new PageSpecification(1, 200));
+            InvoiceState invoiceState = null;
+            for (StateAndRef<InvoiceState> state: invoiceStatePage.getStates()) {
+                if (state.getState().getData().getInvoiceId().toString().equalsIgnoreCase(all.getInvoiceId())) {
+                    invoiceState = state.getState().getData();
+                    break;
+                }
+            }
+            if (invoiceState == null) {
+                throw new Exception("Invoice not found");
+            }
+
+            Vault.Page<AccountInfo> accountInfoPage = proxy.vaultQueryByWithPagingSpec(
+                    AccountInfo.class, criteria,
+                    new PageSpecification(1, 200));
+
+            AccountInfoDTO m = getAccount(proxy,all.getAccountId());
+            logger.info("we have an account ... 1");
+            List<InvoiceOfferDTO> offers = new ArrayList<>();
+            //
+            InvoiceOfferDTO invoiceOffer = new InvoiceOfferDTO();
+            invoiceOffer.setInvoiceId(all.getInvoiceId());
+            invoiceOffer.setOfferAmount(all.getOfferAmount());
+            invoiceOffer.setDiscount(all.getDiscount());
+            invoiceOffer.setSupplier(m);
+            invoiceOffer.setOwner(m);
+            logger.info("we have an account ... 2");
+            invoiceOffer.setOriginalAmount(invoiceState.getTotalAmount());
+            invoiceOffer.setOfferDate(new Date());
+            logger.info("we have an account ... 3");
+            invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
+                    ((100.0 - invoiceOffer.getDiscount())/100));
+
+            logger.info("\uD83D\uDC7D \uD83D\uDC7D INVOICE: ".concat(invoiceOffer.getInvoiceId())
+                    .concat(" offerAmount: " + invoiceState.getTotalAmount()));
+            logger.info("we have to send offer  to " + (accountInfoPage.getStates().size() - 1) + " accounts");
+            for (StateAndRef<AccountInfo> info : accountInfoPage.getStates()) {
+                if (info.getState().getData().getIdentifier().getId().toString().equalsIgnoreCase(all.getAccountId())) {
+                    logger.info("\uD83D\uDE21 \uD83D\uDE21 \uD83D\uDE21 Ignore this account :: \uD83D\uDE21  ".concat(info.getState().getData().getName()));
+                    continue;
+                }
+                logger.info("\uD83D\uDC7D \uD83D\uDC7D INVESTOR: ".concat(info.getState().getData().getName()));
+                invoiceOffer.setInvestor(getDTO(info.getState().getData()));
+                InvoiceOfferDTO offerDTO = sendInvoiceOffer(proxy, invoiceOffer, invoiceState, info.getState().getData());
+                offers.add(offerDTO);
+            }
+            return offers;
+        } catch (Exception e) {
+            if (e.getMessage() != null) {
+                throw new Exception("Failed to add invoiceOffers. ".concat(e.getMessage()));
+            } else {
+                throw new Exception("Failed to add invoiceOffers. Unknown cause");
+            }
+        }
+    }
+
+    private static InvoiceOfferDTO sendInvoiceOffer(CordaRPCOps proxy, InvoiceOfferDTO invoiceOffer, InvoiceState invoiceState, AccountInfo investorInfo) throws Exception {
+        InvoiceOfferState invoiceOfferState = new InvoiceOfferState(
+                invoiceState.getInvoiceId(),
+                invoiceOffer.getOfferAmount(),
+                invoiceOffer.getDiscount(),
+                invoiceState.getTotalAmount(),
+                invoiceState.getSupplierInfo(),
+                investorInfo,
+                invoiceState.getSupplierInfo(),
+                new Date(proxy.currentNodeTime().toEpochMilli()),
+                null,
+                invoiceState.getSupplierInfo().getHost().getOwningKey(),
+                investorInfo.getHost().getOwningKey());
+
+        CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
+                InvoiceOfferFlow.class, invoiceOfferState)
+                .getReturnValue();
+
+        SignedTransaction issueTx = signedTransactionCordaFuture.get();
+        logger.info("\uD83C\uDF4F \uD83C\uDF4F flow completed... " +
+                "\uD83C\uDF4F \uD83C\uDF4F \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDC4C " +
+                "\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C  signedTransaction returned: \uD83E\uDD4F " +
+                issueTx.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
+
+        InvoiceOfferDTO offerDTO = getDTO(invoiceOfferState);
+        try {
+            ApiFuture<DocumentReference> reference = db.collection("invoiceOffers").add(offerDTO);
+            logger.info(("\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
+                    "Firestore path: ").concat(reference.get().getPath()));
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        FirebaseUtil.sendInvoiceOfferMessage(offerDTO);
+        return offerDTO;
     }
 
 

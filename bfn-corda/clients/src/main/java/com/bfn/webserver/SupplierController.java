@@ -1,9 +1,6 @@
 package com.bfn.webserver;
 
-import com.bfn.dto.AccountInfoDTO;
-import com.bfn.dto.InvoiceDTO;
-import com.bfn.dto.InvoiceOfferDTO;
-import com.bfn.dto.NodeInfoDTO;
+import com.bfn.dto.*;
 import com.bfn.util.WorkerBee;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -119,6 +116,22 @@ public class SupplierController {
                 throw new Exception("Failed to register invoiceOffer. ".concat(e.getMessage()));
             } else {
                 throw new Exception("Failed to register invoiceOffer. Unknown cause");
+            }
+        }
+    }
+    @PostMapping(value = "startInvoiceOfferFlowToAllAccounts")
+    public List<InvoiceOfferDTO> startInvoiceOfferFlowToAllAccounts(@RequestBody InvoiceOfferAllDTO offerAllDTO) throws Exception {
+
+        logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceOfferDTO: " + GSON.toJson(offerAllDTO) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
+        try {
+            List<InvoiceOfferDTO>  m = WorkerBee.startInvoiceOfferFlowToAllAccounts(proxy,offerAllDTO);
+            logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffers: ".concat("" + m.size()));
+            return m;
+        } catch (Exception e) {
+            if (e.getMessage() != null) {
+                throw new Exception("Failed to register invoiceOffers. ".concat(e.getMessage()));
+            } else {
+                throw new Exception("Failed to register invoiceOffers. Unknown cause");
             }
         }
     }
