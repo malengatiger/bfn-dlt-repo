@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.PublicKey;
+import java.util.Date;
 import java.util.List;
 
 // ************
@@ -54,11 +55,21 @@ public class InvoiceOfferContract implements Contract {
         if (invoiceState.getInvestor() == null) {
             throw new IllegalArgumentException("Investor is required");
         }
+        if (invoiceState.getCustomer() == null) {
+            throw new IllegalArgumentException("Customer is required");
+        }
         if (invoiceState.getOwner() == null) {
             throw new IllegalArgumentException("Owner is definitely required");
         }
+        if (invoiceState.getOfferDate() == null) {
+            throw new IllegalArgumentException("Offer date is required");
+        }
+        if (invoiceState.getOfferDate().getTime() > new Date().getTime()) {
+            throw new IllegalArgumentException("Offer date cannot be in the future");
+        }
 
 
+        //check signatures of all parties
         PublicKey supplierPublicKey = invoiceState.getSupplier().getHost().getOwningKey();
         logger.info(" \uD83D\uDD34 Supplier publicKey: ".concat(supplierPublicKey.toString()));
         if (!requiredSigners.contains(supplierPublicKey)) {
@@ -68,6 +79,11 @@ public class InvoiceOfferContract implements Contract {
         logger.info(" \uD83D\uDD34 Investor publicKey: ".concat(supplierPublicKey.toString()));
         if (!requiredSigners.contains(investorPublicKey)) {
             throw new IllegalArgumentException("Investor Party must sign");
+        }
+        PublicKey customerPublicKey = invoiceState.getCustomer().getHost().getOwningKey();
+        logger.info(" \uD83D\uDD34 Customer publicKey: ".concat(supplierPublicKey.toString()));
+        if (!requiredSigners.contains(customerPublicKey)) {
+            throw new IllegalArgumentException("Customer Party must sign");
         }
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 InvoiceOfferContract: verification done OK! .....\uD83E\uDD1F \uD83E\uDD1F ");
 

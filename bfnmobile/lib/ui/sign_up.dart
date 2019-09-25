@@ -1,13 +1,18 @@
-import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
 import 'package:bfnlibrary/data/account.dart';
+import 'package:bfnlibrary/data/fb_user.dart';
+import 'package:bfnlibrary/data/node_info.dart';
+import 'package:bfnlibrary/util/functions.dart';
 import 'package:bfnlibrary/util/net.dart';
+import 'package:bfnlibrary/util/prefs.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnlibrary/util/snack.dart';
-import 'package:bfnlibrary/data/fb_user.dart';
-import 'package:bfnmobile/prefs.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
+
 import 'dashboard.dart';
+import 'network_accounts.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -24,6 +29,36 @@ class _SignUpState extends State<SignUp> {
 
   String name, email, cellphone, password;
   FirebaseAuth auth = FirebaseAuth.instance;
+  List<NodeInfo> nodes = List();
+  List<DropdownMenuItem<NodeInfo>> items = List();
+  @override
+  void initState() {
+    super.initState();
+    _getNodes();
+  }
+
+  _getNodes() async {
+    nodes = await Net.listNodes();
+    nodes.forEach((n) {
+      if (n.webAPIUrl != null) {
+        print('add to dropdown ${n.webAPIUrl}');
+        items.add(DropdownMenuItem(
+            value: n,
+            child: Text(
+              n.addresses.elementAt(0),
+              style: Styles.blackBoldSmall,
+            )));
+      } else {
+        print(
+            ' 👿  👿  👿 ignore possible notary node - no webAPIUrl available');
+      }
+    });
+    print('..................dropDownItems: ${items.length}');
+//    setState(() {});
+
+//    _dropDownChanged(nodes.elementAt(0));
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -32,6 +67,12 @@ class _SignUpState extends State<SignUp> {
         appBar: AppBar(
           leading: Icon(Icons.people),
           title: Text('BFN SignUp'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.person_add),
+              onPressed: _changeAccount,
+            ),
+          ],
           bottom: PreferredSize(
               child: Column(
                 children: <Widget>[
@@ -68,7 +109,14 @@ class _SignUpState extends State<SignUp> {
                                 fontSize: 28, fontWeight: FontWeight.w900),
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 8,
+                          ),
+                          DropdownButton(
+                              items: items,
+                              hint: Text('Select Network Node'),
+                              onChanged: _dropDownChanged),
+                          SizedBox(
+                            height: 8,
                           ),
                           TextFormField(
                             key: _nameKey,
@@ -135,6 +183,26 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                           SizedBox(
+                            height: 28,
+                          ),
+                          selectedNode == null
+                              ? Text("No Network Node")
+                              : Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "Network Node",
+                                      style: Styles.greyLabelSmall,
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      selectedNode.addresses.elementAt(0),
+                                      style: Styles.tealBoldSmall,
+                                    ),
+                                  ],
+                                ),
+                          SizedBox(
                             height: 40,
                           ),
                           RaisedButton(
@@ -156,11 +224,16 @@ class _SignUpState extends State<SignUp> {
             ),
           ],
         ),
-      ), onWillPop: () => doNothing(),
+      ),
+      onWillPop: () => doNothing(),
     );
   }
 
   _validate() async {
+    if (selectedNode == null) {
+      _error('Please select Network Node');
+      return;
+    }
     if (_formKey.currentState.validate()) {
       print("🍎 🍊 ready to rumble $name $email $cellphone $password");
       UserRecord userRecord;
@@ -172,7 +245,8 @@ class _SignUpState extends State<SignUp> {
       AccountInfo accountInfo;
       try {
         if (userRecord != null) {
-          AuthResult authResult = await auth.signInWithEmailAndPassword(email: email, password: password);
+          AuthResult authResult = await auth.signInWithEmailAndPassword(
+              email: email, password: password);
           if (authResult.user != null) {
             //get account info - using uid
             try {
@@ -186,17 +260,21 @@ class _SignUpState extends State<SignUp> {
           }
           //sign IN
         } else {
+          print('🍎 🍊 🍎 🍊 🍎 🍊 ... creating account flow .....');
           accountInfo = await Net.startAccountRegistrationFlow(
               name, email, password, cellphone);
         }
-
-        print('🍎 🍊 🍎 🍊 🍎 🍊 acct found or created: ${accountInfo.toJson()} 🍎 🍊 🍎 🍊 🍎 🍊 ');
+        print(
+            '🍎 🍊 🍎 🍊 🍎 🍊 acct found or created: ${accountInfo.toJson()} 🍎 🍊 🍎 🍊 🍎 🍊 ');
         await Prefs.saveAccount(accountInfo);
         var result = await bfnBloc.signIn(email, password);
-        print('Signed in to Firebase: ${result.toString()}');
-        Navigator.push(context, SlideRightRoute(
-          widget: Dashboard(),
-        ));
+        Net.getNodeUrl();
+
+        Navigator.push(
+            context,
+            SlideRightRoute(
+              widget: Dashboard(),
+            ));
       } catch (e) {
         print(e);
         _error("Account registration failed");
@@ -205,10 +283,46 @@ class _SignUpState extends State<SignUp> {
   }
 
   _error(String msg) {
-    AppSnackbar.showErrorSnackbar(scaffoldKey: _key, message: msg, actionLabel: "Err");
+    AppSnackbar.showErrorSnackbar(
+        scaffoldKey: _key, message: msg, actionLabel: "Err");
   }
 
   Future<bool> doNothing() async {
     return false;
+  }
+
+  void _changeAccount() async {
+    var result = await Navigator.push(
+        context,
+        SlideRightRoute(
+          widget: NetworkAccountsPage(),
+        ));
+    if (result != null) {
+      print(result);
+      var account = result as AccountInfo;
+      await Prefs.saveAccount(account);
+      var auth = FirebaseAuth.instance;
+      await auth.signInAnonymously();
+      nodes.forEach((n) async {
+        if (account.name == n.addresses.elementAt(0)) {
+          await Prefs.saveNode(n);
+        }
+      });
+      print(
+          '🍊 🍊 🍊 🍊 Signed in FRESH (anonymous) to Firebase: ${result.toString()}');
+      Navigator.push(
+          context,
+          SlideRightRoute(
+            widget: Dashboard(),
+          ));
+    }
+  }
+
+  NodeInfo selectedNode;
+  void _dropDownChanged(NodeInfo value) async {
+    selectedNode = value;
+    print('🌸 🌸 🌸 Selected node: ${selectedNode.toJson()}');
+    setState(() {});
+    Prefs.saveNode(selectedNode);
   }
 }

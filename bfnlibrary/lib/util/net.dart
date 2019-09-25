@@ -4,19 +4,89 @@ import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/data/fb_user.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
-import 'package:bfnlibrary/util/local_storage.dart';
+import 'package:bfnlibrary/data/node_info.dart';
+import 'package:bfnlibrary/util/prefs.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class Net {
-  static const URL = 'http://192.168.86.240:10414/';
+  static Firestore db = Firestore.instance;
+  static FirebaseAuth auth = FirebaseAuth.instance;
   static const Map<String, String> headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
   };
 
-  static Future get(String mUrl) async {
+  static Future _getCachedURL() async {
+    var url = await Prefs.getUrl();
+    return url;
+  }
+
+  static Future<List<NodeInfo>> listNodes() async {
+    var list = List<NodeInfo>();
+    var result = await auth.currentUser();
+    if (result == null) {
+      var email = DotEnv().env['email'];
+      var pass = DotEnv().env['password'];
+      print('🌸 🌸 🌸 🌸 🌸 email from .env : 🌸  $email 🌸  pass: $pass');
+      var userResult =
+          await auth.signInWithEmailAndPassword(email: email, password: pass);
+      print(
+          '🍊 🍊 🍊 Logged into Firebase with .env credentials,  🌸 uid: ${userResult.user.uid} ... getting nodes ...');
+      list = await _getNodes(list);
+      await auth.signOut();
+      print('🍊 🍊 🍊 Logged OUT of Firebase  ${userResult.user.uid} ... ');
+    } else {
+      list = await _getNodes(list);
+    }
+    if (list.isNotEmpty) {
+      await Prefs.saveNodes(list);
+    }
+    return list;
+  }
+
+  static Future<String> getNodeUrl() async {
+    var m = await _getCachedURL();
+    if (m != null) {
+      return m;
+    }
+    var acct = await Prefs.getAccount();
+    if (acct == null) {
+      throw Exception("Account not available yet");
+    }
+    var list = await listNodes();
+    String url;
+    print('  🔆  🔆  🔆 local account:  💚 ${acct.toJson()}');
+    list.forEach((node) {
+      var host = node.addresses.elementAt(0);
+      print('  🔆  🔆  🔆 host of node:  💚 $host');
+      if (host == acct.host) {
+        url = node.webAPIUrl;
+      }
+    });
+    if (url == null) {
+      throw Exception("Url not found");
+    }
+    Prefs.setUrl(url);
+    return url;
+  }
+
+  static Future _getNodes(List<NodeInfo> list) async {
+    var snapshot = await db.collection("nodes").getDocuments();
+    print('nodes found on network: ${snapshot.documents.length}');
+    snapshot.documents.forEach((doc) {
+      var data = doc.data;
+      print('data from Firestore: $data');
+      var node = NodeInfo.fromJson(data);
+      list.add(node);
+    });
+    return list;
+  }
+
+  static Future<String> get(String mUrl) async {
     var start = DateTime.now();
     var client = new http.Client();
     var resp = await client
@@ -40,7 +110,6 @@ class Net {
       debugPrint(msg);
       throw Exception(msg);
     }
-    return resp;
   }
 
   static Future post(String mUrl, Map bag) async {
@@ -85,78 +154,71 @@ class Net {
       "cellphone": cellphone
     };
     debugPrint('🍊🍊🍊🍊🍊 startAccountRegistrationFlow starting the call ...');
+    var node = await Prefs.getNode();
     final response =
-        await post(URL + 'admin/startAccountRegistrationFlow', bag);
+        await post(node.webAPIUrl + 'admin/startAccountRegistrationFlow', bag);
     var m = json.decode(response);
     var acct = AccountInfo.fromJson(m);
     return acct;
   }
 
   static Future<Invoice> startRegisterInvoiceFlow(Invoice invoice) async {
-    final response =
-        await post(URL + 'supplier/startRegisterInvoiceFlow', invoice.toJson());
+    var node = await Prefs.getNode();
+    final response = await post(
+        node.webAPIUrl + 'supplier/startRegisterInvoiceFlow', invoice.toJson());
     var m = json.decode(response);
     var acct = Invoice.fromJson(m);
     return acct;
   }
 
-  static FirebaseAuth auth = FirebaseAuth.instance;
   static Future<String> buyInvoiceOffer(String invoiceId) async {
     var user = await auth.currentUser();
     var bag = {"invoiceId": invoiceId, "investorId": user.uid};
-    final response = await post(URL + 'investor/buyInvoiceOffer', bag);
+    var node = await Prefs.getNode();
+    final response =
+        await post(node.webAPIUrl + 'investor/buyInvoiceOffer', bag);
     return response;
   }
 
   static Future<InvoiceOffer> startInvoiceOfferFlow(
       InvoiceOffer invoiceOffer) async {
+    var node = await Prefs.getNode();
     final response = await post(
-        URL + 'supplier/startInvoiceOfferFlow', invoiceOffer.toJson());
+        node.webAPIUrl + 'supplier/startInvoiceOfferFlow',
+        invoiceOffer.toJson());
     var m = json.decode(response);
     var acct = InvoiceOffer.fromJson(m);
     return acct;
   }
 
   static Future<List<AccountInfo>> getAccounts() async {
-    final response = await http.get(URL + 'admin/getAccounts');
+    var prefix = await getNodeUrl();
+    final response = await get(prefix + 'admin/getAccounts');
 
-    if (response.statusCode == 200) {
-      debugPrint(
-          '🍎 🍊 Net: getAccounts: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-      List<AccountInfo> list = List();
-      List m = json.decode(response.body);
-      m.forEach((f) {
-        list.add(AccountInfo.fromJson(f));
-      });
-      debugPrint('🍎 🍊 Net: getAccounts: found ${list.length}');
-      return list;
-    } else {
-      throw Exception(
-          ' 👿  Failed: getAccounts Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-    }
+    List<AccountInfo> list = List();
+    List m = json.decode(response);
+    m.forEach((f) {
+      list.add(AccountInfo.fromJson(f));
+    });
+    debugPrint('🍎 🍊 Net: getAccounts: found ${list.length}');
+    return list;
   }
 
   static Future<AccountInfo> getAccount(String accountId) async {
+    var node = await Prefs.getNode();
     final response =
-        await http.get(URL + 'admin/getAccount?accountId=$accountId');
+        await get(node.webAPIUrl + 'admin/getAccount?accountId=$accountId');
 
-    if (response.statusCode == 200) {
-      debugPrint(
-          '🍎 🍊 Net: getAccount: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-      AccountInfo acctInfo = AccountInfo.fromJson(json.decode(response.body));
-      debugPrint('🍎 🍊 Net: getAccount: found ${acctInfo.toJson()}');
-      return acctInfo;
-    } else {
-      throw Exception(
-          ' 👿  Failed: getAccounts Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-    }
+    AccountInfo acctInfo = AccountInfo.fromJson(json.decode(response));
+    debugPrint('🍎 🍊 Net: getAccount: found ${acctInfo.toJson()}');
+    return acctInfo;
   }
 
   static Future<UserRecord> getUser(String email) async {
-    String url = URL + 'admin/getUser?email=$email';
+    var node = await Prefs.getNode();
+    String url = node.webAPIUrl + 'admin/getUser?email=$email';
     ;
     final response = await http.get(url);
-
     if (response.statusCode == 200) {
       debugPrint(
           '🍎 🍊 Net: getInvoices: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
@@ -169,65 +231,53 @@ class Net {
 
   static Future<List<Invoice>> getInvoices(
       {String accountId, bool consumed}) async {
+    var node = await Prefs.getNode();
     if (consumed == null) consumed = false;
     String url;
     if (accountId == null) {
-      url = URL + 'admin/getInvoiceStates?consumed=$consumed';
+      url = node.webAPIUrl + 'admin/getInvoiceStates?consumed=$consumed';
     } else {
-      url = URL +
+      url = node.webAPIUrl +
           'admin/getInvoiceStates?accountId=$accountId&consumed=$consumed';
     }
     debugPrint(url);
-    final response = await http.get(url);
+    final response = await get(url);
 
-    if (response.statusCode == 200) {
-      debugPrint(
-          '🍎 🍊 Net: getInvoices: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-      List<Invoice> list = List();
-      List m = json.decode(response.body);
-      m.forEach((f) {
-        list.add(Invoice.fromJson(f));
-      });
-      debugPrint('🍎 🍊 🍎 🍊 Net: getInvoices: found ${list.length}');
-      return list;
-    } else {
-      throw Exception(
-          ' 👿  Failed : getInvoices Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-    }
+    List<Invoice> list = List();
+    List m = json.decode(response);
+    m.forEach((f) {
+      list.add(Invoice.fromJson(f));
+    });
+    debugPrint('🍎 🍊 🍎 🍊 Net: getInvoices: found ${list.length}');
+    return list;
   }
 
   static Future<List<InvoiceOffer>> getInvoiceOffers(
       {String accountId, bool consumed}) async {
+    var node = await Prefs.getNode();
     if (consumed == null) consumed = false;
     String url;
     if (accountId == null) {
-      url = URL + 'admin/getInvoiceOfferStates?consumed=$consumed';
+      url = node.webAPIUrl + 'admin/getInvoiceOfferStates?consumed=$consumed';
     } else {
-      url = URL +
+      url = node.webAPIUrl +
           'admin/getInvoiceOfferStates?accountId=$accountId&consumed=$consumed';
     }
     debugPrint(url);
-    final response = await http.get(url);
+    final response = await get(url);
 
-    if (response.statusCode == 200) {
-      debugPrint(
-          '🍎 🍊 Net: getInvoiceOffers: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-      List<InvoiceOffer> list = List();
-      List m = json.decode(response.body);
-      m.forEach((f) {
-        list.add(InvoiceOffer.fromJson(f));
-      });
-      debugPrint('🍎 🍊 🍎 🍊 Net: getInvoiceOffers: found ${list.length}');
-      return list;
-    } else {
-      throw Exception(
-          ' 👿  Failed: getInvoiceOffers Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-    }
+    List<InvoiceOffer> list = List();
+    List m = json.decode(response);
+    m.forEach((f) {
+      list.add(InvoiceOffer.fromJson(f));
+    });
+    debugPrint('🍎 🍊 🍎 🍊 Net: getInvoiceOffers: found ${list.length}');
+    return list;
   }
 
   static Future<String> ping() async {
-    final response = await http.get(URL + 'admin/ping');
-
+    var node = await Prefs.getNode();
+    final response = await http.get(node.webAPIUrl + 'admin/ping');
     if (response.statusCode == 200) {
       debugPrint(
           '🍎 🍊 Net: ping: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
@@ -236,17 +286,17 @@ class Net {
       throw Exception(' 👿  Failed ping');
     }
   }
-
-  static Future<String> startDemoDataGeneration() async {
-    final response = await http.get(URL + 'admin/demo');
-
-    if (response.statusCode == 200) {
-      debugPrint(
-          '🍎 🍊 Net: startDemoDataGeneration: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
-      Prefs.setDemoString('DEMO DATA COMPLETE');
-      return response.body;
-    } else {
-      throw Exception(' 👿  Failed: startDemoDataGeneration');
-    }
-  }
+//
+//  static Future<String> startDemoDataGeneration() async {
+//    final response = await http.get(URL + 'admin/demo');
+//
+//    if (response.statusCode == 200) {
+//      debugPrint(
+//          '🍎 🍊 Net: startDemoDataGeneration: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+//      Prefs.setDemoString('DEMO DATA COMPLETE');
+//      return response.body;
+//    } else {
+//      throw Exception(' 👿  Failed: startDemoDataGeneration');
+//    }
+//  }
 }

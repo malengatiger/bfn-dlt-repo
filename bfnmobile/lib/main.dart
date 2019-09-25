@@ -1,11 +1,13 @@
-import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
-import 'package:bfnmobile/ui/network_accounts.dart';
+import 'package:bfnlibrary/util/slide_right.dart';
+import 'package:bfnmobile/bloc.dart';
 import 'package:bfnmobile/ui/dashboard.dart';
 import 'package:bfnmobile/ui/sign_up.dart';
 import 'package:flutter/material.dart';
-import 'package:bfnlibrary/util/slide_right.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -40,17 +42,26 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _startData() async {
+    await DotEnv().load('.env');
+//    var email = DotEnv().env['email'];
+//    var pass = DotEnv().env['password'];
+//    print('🌸 🌸 🌸 🌸 🌸 email from .env : 🌸  $email 🌸  pass: $pass');
     var isAuthed = await bfnBloc.isUserAuthenticated();
     if (!isAuthed) {
-      Navigator.push(context, SlideRightRoute(
-        widget: SignUp(),
-      ));
+      Navigator.push(
+          context,
+          SlideRightRoute(
+            widget: SignUp(),
+          ));
     } else {
-      Navigator.push(context, SlideRightRoute(
-        widget: Dashboard(),
-      ));
+      Navigator.push(
+          context,
+          SlideRightRoute(
+            widget: Dashboard(),
+          ));
     }
   }
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -65,7 +76,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(

@@ -89,14 +89,16 @@ public class FirebaseUtil {
             }
             logger.info("\uD83C\uDF4A \uD83C\uDF4A \uD83C\uDF4A User deleted: " + user.getEmail());
             auth.deleteUser(user.getUid());
-            
+
         }
     }
+
     public static UserRecord getUser(String email) throws FirebaseAuthException {
 
         UserRecord record = auth.getUserByEmail(email);
         return record;
     }
+
     public static List<UserRecord> getUsers() throws FirebaseAuthException {
 
         List<UserRecord> records = new ArrayList<>();
@@ -113,14 +115,17 @@ public class FirebaseUtil {
 
         return records;
     }
+
     static void deleteCollections() {
         Iterable<CollectionReference> m = db.listCollections();
-        for (CollectionReference reference: m) {
+        for (CollectionReference reference : m) {
             logger.info("\uD83C\uDF4A \uD83C\uDF4A Existing Firestore collection: ".concat(reference.getPath()));
-            deleteCollection(reference,200);
+            deleteCollection(reference, 200);
         }
     }
-    /** Delete a collection in batches to avoid out-of-memory errors.
+
+    /**
+     * Delete a collection in batches to avoid out-of-memory errors.
      * Batch size may be tuned based on document size (atmost 1MB) and application requirements.
      */
     private static void deleteCollection(CollectionReference collection, int batchSize) {
@@ -145,4 +150,25 @@ public class FirebaseUtil {
         }
     }
 
+    private static int BATCH_SIZE = 2000;
+
+    public static void deleteCollection(String collectionName) throws ExecutionException, InterruptedException {
+        // retrieve a small batch of documents to avoid out-of-memory errors
+        CollectionReference collection = db.collection(collectionName);
+        ApiFuture<QuerySnapshot> future = collection.limit(BATCH_SIZE).get();
+        int deleted = 0;
+        // future.get() blocks on document retrieval
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        for (QueryDocumentSnapshot document : documents) {
+            document.getReference().delete();
+            ++deleted;
+            logger.info(" \uD83E\uDD4F  \uD83E\uDD4F  \uD83E\uDD4F  Deleted document:  \uD83D\uDC9C ".concat(document.getReference().getPath()));
+        }
+        if (deleted >= BATCH_SIZE) {
+            // retrieve and delete another batch
+            deleteCollection(collectionName);
+            logger.info(" \uD83E\uDD4F  \uD83E\uDD4F  \uD83E\uDD4F  Deleted collection:  \uD83E\uDDE1 ".concat(collection.getPath()));
+        }
+
+    }
 }

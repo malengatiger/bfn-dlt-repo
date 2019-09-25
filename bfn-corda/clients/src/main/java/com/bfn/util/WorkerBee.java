@@ -11,6 +11,8 @@ import com.bfn.states.InvoiceState;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.auth.UserRecord;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.gson.Gson;
@@ -29,6 +31,8 @@ import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -36,6 +40,7 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class WorkerBee {
     private final static Logger logger = LoggerFactory.getLogger(WorkerBee.class);
@@ -63,6 +68,66 @@ public class WorkerBee {
                 + nodeList.size() + " \uD83D\uDC9A ");
         return nodeList;
     }
+    public static List<NodeInfoDTO> listFirestoreNodes() throws ExecutionException, InterruptedException {
+        List<NodeInfoDTO> nodeList = new ArrayList();
+        ApiFuture<QuerySnapshot> future = db.collection("nodes").get();
+        QuerySnapshot snapshots = future.get();
+        List<QueryDocumentSnapshot> list = snapshots.getDocuments();
+        for (QueryDocumentSnapshot snapshot: list) {
+            Map<String,Object> map = snapshot.getData();
+            NodeInfoDTO node = new NodeInfoDTO();
+            node.setWebAPIUrl((String) map.get("webAPIUrl"));
+            node.setSerial((Long) map.get("serial"));
+            node.setPlatformVersion((Long) map.get("platformVersion"));
+            node.setAddresses(new ArrayList());
+            node.getAddresses().add(map.get("addresses"));
+            nodeList.add(node);
+        }
+
+        return nodeList;
+    }
+
+    public static List<NodeInfoDTO> writeNodesToFirestore(CordaRPCOps proxy, Environment env) throws Exception {
+
+        List<NodeInfo> nodes = proxy.networkMapSnapshot();
+        List<NodeInfoDTO> nodeList = new ArrayList<>();
+        FirebaseUtil.deleteCollection("nodes");
+        for (NodeInfo info : nodes) {
+            NodeInfoDTO dto = new NodeInfoDTO();
+            dto.setSerial(info.getSerial());
+            dto.setPlatformVersion(info.getPlatformVersion());
+            for (Party party : info.getLegalIdentities()) {
+                dto.setAddresses(new ArrayList());
+                dto.getAddresses().add(party.getName().toString());
+            }
+            switch (info.getLegalIdentities().get(0).getName().getOrganisation()) {
+                case "OCT":
+                    String octURL = env.getProperty("OCT");
+                    dto.setWebAPIUrl(octURL);
+                    break;
+                case "CapeTown":
+                    String ctURL = env.getProperty("CapeTown");
+                    dto.setWebAPIUrl(ctURL);
+                    break;
+                case "Regulator":
+                    String regURL = env.getProperty("Regulator");
+                    dto.setWebAPIUrl(regURL);
+                    break;
+            }
+            ApiFuture<DocumentReference> future = db.collection("nodes").add(dto);
+            nodeList.add(dto);
+            logger.info("\uD83C\uDF3A \uD83C\uDF3A Node written to Firestore: \uD83C\uDF3A "
+                    + info.getLegalIdentities().get(0).getName().getOrganisation()
+                    .concat(" -  \uD83D\uDD06 path: ".concat(future.get().getPath())));
+        }
+        if (nodeList.isEmpty()) {
+            throw new Exception("Nodes not found");
+        }
+        logger.info(" \uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A Corda NetworkNodes written: \uD83D\uDC9A "
+                + nodeList.size() + " \uD83D\uDC9A ");
+        return nodeList;
+    }
+
 
     public static List<AccountInfoDTO> getAccounts(CordaRPCOps proxy) {
 
@@ -494,6 +559,7 @@ public class WorkerBee {
             //
             InvoiceOfferDTO invoiceOffer = new InvoiceOfferDTO();
             invoiceOffer.setInvoiceId(all.getInvoiceId());
+            invoiceOffer.setInvoiceNumber(invoiceState.getInvoiceNumber());
             invoiceOffer.setOfferAmount(all.getOfferAmount());
             invoiceOffer.setDiscount(all.getDiscount());
             invoiceOffer.setSupplier(m);
@@ -540,7 +606,8 @@ public class WorkerBee {
                 new Date(proxy.currentNodeTime().toEpochMilli()),
                 null,
                 invoiceState.getSupplierInfo().getHost().getOwningKey(),
-                investorInfo.getHost().getOwningKey());
+                investorInfo.getHost().getOwningKey(), invoiceState.getInvoiceNumber(),
+                invoiceState.getCustomerInfo());
 
         CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
                 InvoiceOfferFlow.class, invoiceOfferState)
@@ -592,18 +659,31 @@ public class WorkerBee {
     }
 
     private static InvoiceOfferDTO getDTO(InvoiceOfferState state) throws Exception {
-        AccountInfo owner = state.getOwner();
-        String ownerId = null;
-        if (owner != null) {
-            ownerId = owner.getIdentifier().getId().toString();
+        if (state.getSupplier() == null) {
+            throw new Exception("Supplier missing from state");
+        } else {
+            logger.warn("Supplier is: ".concat(state.getSupplier().getName()));
         }
+        if (state.getInvestor() == null) {
+            throw new Exception("Investor missing from state");
+        }else {
+            logger.warn("Investor is: ".concat(state.getInvestor().getName()));
+        }
+        if (state.getCustomer() == null) {
+            throw new Exception("Customer missing from state");
+        }else {
+            logger.warn("Customer is: ".concat(state.getCustomer().getName()));
+        }
+
         InvoiceOfferDTO o = new InvoiceOfferDTO();
         o.setInvoiceId(state.getInvoiceId().toString());
+        o.setInvoiceNumber(state.getInvoiceNumber());
         o.setOfferAmount(state.getOfferAmount());
         o.setOriginalAmount(state.getOriginalAmount());
         o.setDiscount(state.getDiscount());
         o.setSupplier(getDTO(state.getSupplier()));
         o.setInvestor(getDTO(state.getInvestor()));
+        o.setCustomer(getDTO(state.getCustomer()));
         if (state.getOwner() != null) {
             o.setOwner(getDTO(state.getOwner()));
         }
@@ -625,6 +705,7 @@ public class WorkerBee {
         if (state.getOwnerDate() != null) {
             o.setInvestorDate(state.getOwnerDate());
         }
+        logger.info(GSON.toJson(o));
         return o;
     }
 

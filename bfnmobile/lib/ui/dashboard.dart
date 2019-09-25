@@ -4,15 +4,19 @@ import 'dart:io';
 import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
-import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
+import 'package:bfnlibrary/data/node_info.dart';
 import 'package:bfnlibrary/util/functions.dart';
+import 'package:bfnlibrary/util/net.dart';
+import 'package:bfnlibrary/util/prefs.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnlibrary/util/snack.dart';
-import 'package:bfnmobile/prefs.dart';
-import 'package:bfnmobile/ui/invoices.dart';
+import 'package:bfnmobile/ui/list_tabs.dart';
 import 'package:bfnmobile/ui/network_accounts.dart';
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+
+import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -26,12 +30,18 @@ class _DashboardState extends State<Dashboard> {
   List<Invoice> invoices = List();
   List<InvoiceOffer> offers = List(), offerMessages = List();
   AccountInfo account;
+  List<NodeInfo> nodes = List();
 
   @override
   void initState() {
     super.initState();
     _firebaseCloudMessaging();
+    _getNodes();
     _refresh();
+  }
+
+  _getNodes() async {
+    nodes = await Net.listNodes();
   }
 
   void _firebaseCloudMessaging() {
@@ -145,6 +155,10 @@ class _DashboardState extends State<Dashboard> {
               icon: Icon(Icons.refresh),
               onPressed: _refresh,
             ),
+            IconButton(
+              icon: Icon(Icons.person_add),
+              onPressed: _changeAccount,
+            ),
           ],
           bottom: PreferredSize(
               child: Column(
@@ -241,6 +255,29 @@ class _DashboardState extends State<Dashboard> {
 
   Future<bool> doNothing() async {
     return false;
+  }
+
+  void _changeAccount() async {
+    var result = await Navigator.push(
+        context,
+        SlideRightRoute(
+          widget: NetworkAccountsPage(),
+        ));
+    if (result != null) {
+      print(result);
+      account = result as AccountInfo;
+      await Prefs.saveAccount(account);
+      var auth = FirebaseAuth.instance;
+      await auth.signInAnonymously();
+      nodes.forEach((n) async {
+        if (account.name == n.addresses.elementAt(0)) {
+          await Prefs.saveNode(n);
+        }
+      });
+      print(
+          '🍊 🍊 🍊 🍊 Signed in FRESH (anonymous) to Firebase: ${result.toString()}');
+      _refresh();
+    }
   }
 }
 

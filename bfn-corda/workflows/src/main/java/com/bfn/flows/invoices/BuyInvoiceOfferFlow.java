@@ -104,7 +104,10 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
                 oldState.getInvestor(),
                 oldState.getInvestor(),
                 oldState.getOfferDate(),
-                new Date(), oldState.getSupplierPublicKey(), oldState.getInvestorPublicKey());
+                new Date(), oldState.getSupplierPublicKey(),
+                oldState.getInvestorPublicKey(),
+                oldState.getInvoiceNumber(),
+                oldState.getCustomer());
 
         Party supplierParty = invoiceOfferState.getState().getData().getSupplier().getHost();
         Party investorParty = invoiceOfferState.getState().getData().getInvestor().getHost();;

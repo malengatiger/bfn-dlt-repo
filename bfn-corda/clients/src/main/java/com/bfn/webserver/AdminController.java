@@ -10,11 +10,14 @@ import net.corda.core.messaging.CordaRPCOps;
 import net.corda.core.node.NodeInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 import com.bfn.util.WorkerBee;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Define your API endpoints here.
@@ -25,6 +28,9 @@ public class AdminController {
     private final CordaRPCOps proxy;
     private final static Logger logger = LoggerFactory.getLogger(AdminController.class);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
+    @Autowired
+    private Environment env;
 
     public AdminController(NodeRPCConnection rpc) {
         this.proxy = rpc.proxy;
@@ -55,6 +61,11 @@ public class AdminController {
         return WorkerBee.getAccounts(proxy);
     }
 
+    @GetMapping(value = "listFirestoreNodes")
+    private List<NodeInfoDTO> listFirestoreNodes() throws ExecutionException, InterruptedException {
+        return WorkerBee.listFirestoreNodes();
+    }
+
 
     @GetMapping(value = "getInvoiceStates")
     public List<InvoiceDTO> getInvoiceStates(@RequestParam(value = "consumed", required=false) boolean consumed,
@@ -80,6 +91,16 @@ public class AdminController {
     public AccountInfoDTO getAccount(@RequestParam(value = "accountId") String accountId) throws Exception {
 
         return  WorkerBee.getAccount(proxy,accountId);
+    }
+    @GetMapping(value = "writeNodesToFirestore")
+    public List<NodeInfoDTO> writeNodesToFirestore() throws Exception {
+        if (env == null) {
+            throw new Exception("Environment variables not available");
+        } else {
+            logger.info("\uD83C\uDF40 \uD83C\uDF40 \uD83C\uDF40 " +
+                    "Environment variables available \uD83C\uDF40 ");
+        }
+        return  WorkerBee.writeNodesToFirestore(proxy, env);
     }
 
 

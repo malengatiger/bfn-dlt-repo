@@ -29,11 +29,16 @@ public class InvoiceOfferState implements ContractState {
     private final static Logger logger = LoggerFactory.getLogger(InvoiceContract.class);
     private final UUID invoiceId;
     private final double offerAmount, discount, originalAmount;
-    private final AccountInfo supplier, investor, owner;
+    private final AccountInfo supplier, investor, owner, customer;
     private final Date offerDate, ownerDate;
     private final PublicKey supplierPublicKey, investorPublicKey;
+    private final String invoiceNumber;
 
-    public InvoiceOfferState(UUID invoiceId, double offerAmount, double discount, double originalAmount, AccountInfo supplier, AccountInfo investor, AccountInfo owner, Date offerDate, Date ownerDate, PublicKey supplierPublicKey, PublicKey investorPublicKey) {
+    public InvoiceOfferState(UUID invoiceId, double offerAmount, double discount,
+                             double originalAmount, AccountInfo supplier,
+                             AccountInfo investor, AccountInfo owner, Date offerDate,
+                             Date ownerDate, PublicKey supplierPublicKey,
+                             PublicKey investorPublicKey, String invoiceNumber, AccountInfo customer) {
         this.invoiceId = invoiceId;
         this.offerAmount = offerAmount;
         this.discount = discount;
@@ -45,13 +50,19 @@ public class InvoiceOfferState implements ContractState {
         this.ownerDate = ownerDate;
         this.supplierPublicKey = supplierPublicKey;
         this.investorPublicKey = investorPublicKey;
+        this.invoiceNumber = invoiceNumber;
+        this.customer = customer;
     }
 
     @NotNull
     @Override
     public List<AbstractParty> getParticipants() {
         return ImmutableList.of(supplier.getHost(),
-                investor.getHost());
+                investor.getHost(), customer.getHost());
+    }
+
+    public AccountInfo getCustomer() {
+        return customer;
     }
 
     public PublicKey getSupplierPublicKey() {
@@ -64,6 +75,10 @@ public class InvoiceOfferState implements ContractState {
 
     public double getOriginalAmount() {
         return originalAmount;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
     }
 
     public AccountInfo getOwner() {

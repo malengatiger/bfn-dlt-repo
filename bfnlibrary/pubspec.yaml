@@ -16,15 +16,14 @@ dependencies:
   firebase_messaging: ^5.1.6
   cloud_firestore: ^0.12.9+4
   intl: ^0.16.0
+  shared_preferences: ^0.5.3+4
+  flutter_dotenv: ^2.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 
-  # To add assets to your package, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see

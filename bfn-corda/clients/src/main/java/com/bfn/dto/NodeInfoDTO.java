@@ -4,8 +4,10 @@ import java.util.List;
 
 public class NodeInfoDTO {
     List addresses;
-    int  platformVersion;
+    long  platformVersion;
     long serial;
+    String webAPIUrl;
+
 
     public List getAddresses() {
         return addresses;
@@ -15,12 +17,19 @@ public class NodeInfoDTO {
         this.addresses = addresses;
     }
 
+    public String getWebAPIUrl() {
+        return webAPIUrl;
+    }
 
-    public int getPlatformVersion() {
+    public void setWebAPIUrl(String webAPIUrl) {
+        this.webAPIUrl = webAPIUrl;
+    }
+
+    public long getPlatformVersion() {
         return platformVersion;
     }
 
-    public void setPlatformVersion(int platformVersion) {
+    public void setPlatformVersion(long platformVersion) {
         this.platformVersion = platformVersion;
     }
 

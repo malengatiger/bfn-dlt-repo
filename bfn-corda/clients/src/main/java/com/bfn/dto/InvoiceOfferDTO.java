@@ -3,16 +3,18 @@ package com.bfn.dto;
 import java.util.Date;
 
 public class InvoiceOfferDTO {
-    private String invoiceId;
+    private String invoiceId, invoiceNumber;
     private double offerAmount, discount, originalAmount;
-    private  AccountInfoDTO supplier, investor, owner;
+    private  AccountInfoDTO supplier, investor, owner, customer;
     private  Date offerDate, investorDate;
     private String supplierPublicKey, investorPublicKey;
 
-    public InvoiceOfferDTO(String invoiceId, double offerAmount, double discount,
+    public InvoiceOfferDTO(String invoiceId, String invoiceNumber,
+                           double offerAmount, double discount,
                            double originalAmount,
                            AccountInfoDTO supplier, AccountInfoDTO investor,
-                           AccountInfoDTO owner, Date offerDate, Date investorDate, String supplierPublicKey, String investorPublicKey) {
+                           AccountInfoDTO owner, Date offerDate, Date investorDate,
+                           String supplierPublicKey, String investorPublicKey, AccountInfoDTO customer) {
         this.invoiceId = invoiceId;
         this.offerAmount = offerAmount;
         this.discount = discount;
@@ -24,9 +26,27 @@ public class InvoiceOfferDTO {
         this.investorDate = investorDate;
         this.supplierPublicKey = supplierPublicKey;
         this.investorPublicKey = investorPublicKey;
+        this.invoiceNumber = invoiceNumber;
+        this.customer = customer;
     }
 
     public InvoiceOfferDTO() {
+    }
+
+    public AccountInfoDTO getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(AccountInfoDTO customer) {
+        this.customer = customer;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
     public String getInvoiceId() {
