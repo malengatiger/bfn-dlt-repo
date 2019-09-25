@@ -190,7 +190,7 @@ class _SignUpState extends State<SignUp> {
                               : Row(
                                   children: <Widget>[
                                     Text(
-                                      "Network Node",
+                                      "Node",
                                       style: Styles.greyLabelSmall,
                                     ),
                                     SizedBox(
