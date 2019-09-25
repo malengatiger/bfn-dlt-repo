@@ -57,7 +57,7 @@ public class DemoUtil {
 
         long end = System.currentTimeMillis();
         demoSummary.setEnded(new Date().toString());
-        demoSummary.setElapsedSeconds((end - start)/1000);
+        demoSummary.setElapsedSeconds((end - start) / 1000);
         return demoSummary;
     }
 
@@ -68,41 +68,87 @@ public class DemoUtil {
         String phone = getPhone();
         String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
 
-        AccountInfoDTO supplier1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".SupplierOne")
-                        .concat("#").concat(key),
-                "supplier".concat(phone).concat("@gmail.com"),"pass123",phone);
+        try {
+            AccountInfoDTO supplier1 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "supplier".concat(phone).concat("@gmail.com"), "pass123", phone);
+            suppliers.add(supplier1);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
         phone = getPhone();
-        AccountInfoDTO supplier2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".SupplierTwo")
-                        .concat("#").concat(key),
-                "supplier".concat(phone).concat("@gmail.com"),"pass123",phone);
+        try {
+            AccountInfoDTO supplier2 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "supplier".concat(phone).concat("@gmail.com"), "pass123", phone);
+            suppliers.add(supplier2);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
+        phone = getPhone();
+        try {
+            AccountInfoDTO supplier3 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "supplier".concat(phone).concat("@gmail.com"), "pass123", phone);
+            suppliers.add(supplier3);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
+        phone = getPhone();
+        try {
+            AccountInfoDTO supplier4 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "supplier".concat(phone).concat("@gmail.com"), "pass123", phone);
+            suppliers.add(supplier4);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
 
-        suppliers.add(supplier1);
-        suppliers.add(supplier2);
 
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerSupplierAccounts complete ..." +
-                "  \uD83D\uDD06 \uD83D\uDD06 added "+suppliers.size()+" accounts");
+                "  \uD83D\uDD06 \uD83D\uDD06 added " + suppliers.size() + " accounts");
 
     }
+
     private static void registerCustomerAccounts() throws Exception {
         String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
         logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts started ...  \uD83D\uDD06 \uD83D\uDD06 ");
         String key = "" + random.nextInt(100);
 
         String phone = getPhone();
-        AccountInfoDTO customer1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".CustomerOne")
-                        .concat("#").concat(key),
-                "customer".concat(phone).concat("@gmail.com"),"pass123",phone);
+        try {
+            AccountInfoDTO customer1 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "customer".concat(phone).concat("@gmail.com"), "pass123", phone);
+            customers.add(customer1);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
         phone = getPhone();
-        AccountInfoDTO customer2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".CustomerTwo")
-                        .concat("#").concat(key),
-                "customer".concat(phone).concat("@gmail.com"),"pass123",phone);
-        customers.add(customer1);
-        customers.add(customer2);
+        try {
+            AccountInfoDTO customer2 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "customer".concat(phone).concat("@gmail.com"), "pass123", phone);
+            customers.add(customer2);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
+        phone = getPhone();
+        try {
+            AccountInfoDTO customer3 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "customer".concat(phone).concat("@gmail.com"), "pass123", phone);
+            customers.add(customer3);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
+        phone = getPhone();
+        try {
+            AccountInfoDTO customer4 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "customer".concat(phone).concat("@gmail.com"), "pass123", phone);
+            customers.add(customer4);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
 
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 registerCustomerAccounts complete ...  " +
-                "\uD83D\uDD06 \uD83D\uDD06 added "+customers.size()+" accounts");
+                "\uD83D\uDD06 \uD83D\uDD06 added " + customers.size() + " accounts");
 
     }
+
     private static void registerInvestorAccounts() throws Exception {
         String name = proxy.nodeInfo().getLegalIdentities().get(0).getName().getOrganisation();
         logger.info("\n\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvestorAccounts started ... " +
@@ -110,18 +156,40 @@ public class DemoUtil {
         String key = "" + random.nextInt(100);
 
         String phone = getPhone();
-        AccountInfoDTO investor1 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".InvestorOne")
-                        .concat("#").concat(key),
-                "investor".concat(phone).concat("@gmail.com"),"pass123",phone);
+        try {
+            AccountInfoDTO investor1 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "investor".concat(phone).concat("@gmail.com"), "pass123", phone);
+            investors.add(investor1);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
         phone = getPhone();
-        AccountInfoDTO investor2 = WorkerBee.startAccountRegistrationFlow(proxy,name.concat(".InvestorTwo")
-                        .concat("#").concat(key),
-                "investor".concat(phone).concat("@gmail.com"),"pass123",phone);
-        investors.add(investor1);
-        investors.add(investor2);
+        try {
+            AccountInfoDTO investor2 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "investor".concat(phone).concat("@gmail.com"), "pass123", phone);
+            investors.add(investor2);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
+        phone = getPhone();
+        try {
+            AccountInfoDTO investor3 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "investor".concat(phone).concat("@gmail.com"), "pass123", phone);
+            investors.add(investor3);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
+        phone = getPhone();
+        try {
+            AccountInfoDTO investor4 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "investor".concat(phone).concat("@gmail.com"), "pass123", phone);
+            investors.add(investor4);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
 
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 registerInvestorAccounts complete ...  " +
-                "\uD83D\uDD06 \uD83D\uDD06 added "+investors.size()+"  accounts");
+                "\uD83D\uDD06 \uD83D\uDD06 added " + investors.size() + "  accounts");
 
     }
 
@@ -141,16 +209,18 @@ public class DemoUtil {
         sb.append(random.nextInt(9));
         return sb.toString();
     }
+
     private static Random random = new Random(System.currentTimeMillis());
+
     private static void registerInvoices() throws Exception {
 
-        for (AccountInfoDTO supplier: suppliers ) {
-            for (AccountInfoDTO customer: customers) {
+        for (AccountInfoDTO supplier : suppliers) {
+            for (AccountInfoDTO customer : customers) {
                 InvoiceDTO m = new InvoiceDTO();
                 m.setInvoiceNumber("INV_" + System.currentTimeMillis());
                 m.setSupplier(supplier);
                 m.setCustomer(customer);
-                int num = random.nextInt(100);
+                int num = random.nextInt(500);
                 if (num == 0) num = 92;
                 m.setAmount(num * 1000.00);
                 m.setValueAddedTax(10.0);
@@ -158,9 +228,9 @@ public class DemoUtil {
                 m.setDescription("Demo Invoice at ".concat(new Date().toString()));
                 m.setDateRegistered(new Date());
 
-                InvoiceDTO invoice = WorkerBee.startInvoiceRegistrationFlow(proxy,m);
+                InvoiceDTO invoice = WorkerBee.startInvoiceRegistrationFlow(proxy, m);
                 double discount = random.nextInt(25) * 1.0;
-                for (AccountInfoDTO investor: investors) {
+                for (AccountInfoDTO investor : investors) {
                     try {
                         registerInvoiceOffer(invoice, supplier, investor, discount);
                     } catch (Exception e) {
@@ -171,14 +241,15 @@ public class DemoUtil {
         }
 
         List<InvoiceDTO> invoiceStates = WorkerBee.getInvoiceStates(proxy, null, false);
-        logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+invoiceStates.size()+" InvoiceStates on node ...  \uD83C\uDF4A ");
+        logger.info(" \uD83C\uDF4A  \uD83C\uDF4A " + invoiceStates.size() + " InvoiceStates on node ...  \uD83C\uDF4A ");
         demoSummary.setNumberOfInvoices(invoiceStates.size());
 
-        List<InvoiceOfferDTO> list2 = WorkerBee.getInvoiceOfferStates(proxy, null,false);
+        List<InvoiceOfferDTO> list2 = WorkerBee.getInvoiceOfferStates(proxy, null, false);
         demoSummary.setNumberOfInvoiceOffers(list2.size());
-        logger.info(" \uD83C\uDF4A  \uD83C\uDF4A "+list2.size()+" InvoiceOfferStates on node ...  \uD83C\uDF4A ");
+        logger.info(" \uD83C\uDF4A  \uD83C\uDF4A " + list2.size() + " InvoiceOfferStates on node ...  \uD83C\uDF4A ");
 
     }
+
     private static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier,
                                              AccountInfoDTO investor, double discount) throws Exception {
         logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoiceOffer started ..." +
@@ -197,7 +268,93 @@ public class DemoUtil {
         m.setOfferAmount(invoice.getTotalAmount() * ((100.0 - m.getDiscount()) / 100));
         m.setOriginalAmount(invoice.getTotalAmount());
 
-        WorkerBee.startInvoiceOfferFlow(proxy,m);
+        WorkerBee.startInvoiceOfferFlow(proxy, m);
+    }
+
+    static List<String> names = new ArrayList<>();
+    static HashMap<String, String> map = new HashMap<>();
+
+    static String getRandomName() {
+        names.add("Jones Pty Ltd");
+        names.add("Nkosi Associates");
+        names.add("Maddow Enterprises");
+        names.add("Xavier Inc.");
+        names.add("House Inc.");
+        names.add("Washington Brookes LLC");
+        names.add("Johnson Associates Pty Ltd");
+        names.add("Khulula Ltd");
+        names.add("Innovation Partners");
+        names.add("Peach Enterprises");
+        names.add("Petersen Ventures Inc");
+        names.add("Nixon Associates LLC");
+        names.add("Pelosi PAC LLC");
+        names.add("Blackridge Inc.");
+        names.add("BlackStone Parners Ltd");
+        names.add("Constitution Associates LLC");
+        names.add("Gauteng Manufacturers Ltd");
+        names.add("Bidenstock Pty Ltd");
+        names.add("Innovation Solutions Pty Ltd");
+        names.add("Schiff Ventures Ltd");
+        names.add("Process Innovation Partners");
+        names.add("Trendspotter Inc.");
+        names.add("Flickenburg Associates Pty Ltd");
+        names.add("Cyber Operations Ltd");
+        names.add("WorkerBees Inc.");
+        names.add("Peachtree Solutions Ltd");
+        names.add("InnovateSpecialists Inc");
+        names.add("DealMakers Pty Ltd");
+        names.add("Clarity Solutions Inc");
+        names.add("UK Holdings Ltd");
+        names.add("Laussane Pty Ltd");
+        names.add("Paradigm Partners Inc");
+        names.add("Washington Partners LLC");
+        names.add("Motion Specialists Inc");
+        names.add("OpenFlights Pty Ltd");
+        names.add("ProServices Pty Ltd");
+        names.add("TechnoServices Inc.");
+        names.add("BrokerBoy Inc.");
+        names.add("GermanTree Services Ltd");
+        names.add("ShiftyRules Inc");
+        names.add("BrookesBrothers Inc");
+        names.add("PresiServices Pty Ltd");
+        names.add("LawBook LLC");
+        names.add("CampaignTech LLC");
+        names.add("Tutankhamen Ventures Ltd");
+        names.add("CrookesAndTugs Inc.");
+        names.add("Coolidge Enterprises Inc");
+        names.add("ProGuards Pty Ltd");
+        names.add("BullFinch Ventures Ltd");
+        names.add("ProGears Pty Ltd");
+        names.add("HoverClint Ltd");
+        names.add("KrugerBuild Pty Ltd");
+        names.add("Treasure Hunters Inc");
+        names.add("Kilimanjaro Consultants Ltd");
+        names.add("Communications Brokers Ltd");
+        names.add("VisualArts Inc");
+        names.add("TownshipBusiness Ltd");
+        names.add("HealthServices Pty Ltd");
+        names.add("Macoute Professionals Ltd");
+        names.add("Melber Pro Brokers Inc");
+        names.add("Bronkies Park Pty Ltd");
+        names.add("WhistleBlowers Inc.");
+        names.add("Charles Mignon Pty Ltd");
+        names.add("IntelligenceMaker Inc.");
+        names.add("CroMagnon Industries");
+        names.add("Status Enterprises LLC");
+        names.add("Things Inc.");
+        names.add("Rainmakers Ltd");
+        names.add("Forensic Labs Ltd");
+        names.add("DLT TechStars Inc");
+        names.add("CordaBrokers Pty Ltd");
+
+        String name = names.get(random.nextInt(names.size() - 1));
+        if (map.containsKey(name)) {
+            name = getRandomName();
+        } else {
+            map.put(name, name);
+        }
+
+        return name;
     }
 }
 

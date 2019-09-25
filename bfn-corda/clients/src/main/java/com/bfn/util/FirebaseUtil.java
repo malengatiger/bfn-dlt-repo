@@ -1,5 +1,7 @@
 package com.bfn.util;
 
+import com.bfn.dto.AccountInfoDTO;
+import com.bfn.dto.InvoiceDTO;
 import com.bfn.dto.InvoiceOfferDTO;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
@@ -33,18 +35,56 @@ public class FirebaseUtil {
 
         String topic = "invoiceOffers";
         // See documentation on defining a message payload.
-        Notification m = new Notification("Invoice Offer", GSON.toJson(offer));
+        Notification m = new Notification("New Invoice Offer", GSON.toJson(offer));
         Message message = Message.builder()
-                .putData("offer", GSON.toJson(offer))
+                .putData("invoiceOffer", GSON.toJson(offer))
                 .setNotification(m)
                 .setTopic(topic)
                 .build();
 
         // Send a message to the devices subscribed to the provided topic.
-        String response = FirebaseMessaging.getInstance().sendAsync(message).get();
+        String response = messaging.sendAsync(message).get();
         // Response is a message ID string.
         logger.info(("\uD83D\uDE21 \uD83D\uDE21 \uD83D\uDE21 " +
-                "Successfully sent FCM message to topic: \uD83D\uDE21 ").concat(topic)
+                "Successfully sent FCM INVOICE OFFER message to topic: \uD83D\uDE21 ").concat(topic)
+                .concat("; Response: \uD83E\uDD6C \uD83E\uDD6C ").concat(response)
+                .concat(" \uD83E\uDD6C \uD83E\uDD6C"));
+    }
+    public static void sendInvoiceMessage(InvoiceDTO offer) throws ExecutionException, InterruptedException {
+
+        String topic = "invoices";
+        // See documentation on defining a message payload.
+        Notification m = new Notification("New Invoice", GSON.toJson(offer));
+        Message message = Message.builder()
+                .putData("invoice", GSON.toJson(offer))
+                .setNotification(m)
+                .setTopic(topic)
+                .build();
+
+        // Send a message to the devices subscribed to the provided topic.
+        String response = messaging.sendAsync(message).get();
+        // Response is a message ID string.
+        logger.info(("\uD83D\uDE21 \uD83D\uDE21 \uD83D\uDE21 " +
+                "Successfully sent FCM INVOICE message to topic: \uD83D\uDE21 ").concat(topic)
+                .concat("; Response: \uD83E\uDD6C \uD83E\uDD6C ").concat(response)
+                .concat(" \uD83E\uDD6C \uD83E\uDD6C"));
+    }
+    public static void sendAccountMessage(AccountInfoDTO account) throws ExecutionException, InterruptedException {
+
+        String topic = "accounts";
+        // See documentation on defining a message payload.
+        Notification m = new Notification("New BFN Account", GSON.toJson(account));
+        Message message = Message.builder()
+                .putData("account", GSON.toJson(account))
+                .setNotification(m)
+                .setTopic(topic)
+                .build();
+
+        // Send a message to the devices subscribed to the provided topic.
+        String response = messaging.sendAsync(message).get();
+        // Response is a message ID string.
+        logger.info(("\uD83D\uDE21 \uD83D\uDE21 \uD83D\uDE21 " +
+                "Successfully sent FCM ACCOUNT message to topic: \uD83D\uDE21 ").concat(topic)
                 .concat("; Response: \uD83E\uDD6C \uD83E\uDD6C ").concat(response)
                 .concat(" \uD83E\uDD6C \uD83E\uDD6C"));
     }

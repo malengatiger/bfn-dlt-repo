@@ -267,8 +267,8 @@ public class WorkerBee {
 
     public static InvoiceDTO startInvoiceRegistrationFlow(CordaRPCOps proxy, InvoiceDTO invoice) throws Exception {
 
-        logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: "
-                + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
+//        logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: "
+//                + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
         try {
             logger.info("\uD83C\uDF4F SUPPLIER: ".concat(invoice.getSupplier().getName()).concat("  \uD83D\uDD06  ")
                     .concat("  \uD83E\uDDE1 CUSTOMER: ").concat(invoice.getCustomer().getName()));
@@ -321,6 +321,7 @@ public class WorkerBee {
                     + issueTx.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
             InvoiceDTO dto = getDTO(invoiceState);
             try {
+                FirebaseUtil.sendInvoiceMessage(dto);
                 ApiFuture<DocumentReference> reference = db.collection("invoices").add(dto);
                 logger.info(("\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
                         "Firestore path: ").concat(reference.get().getPath()));
@@ -442,6 +443,7 @@ public class WorkerBee {
             dto.setName(accountInfo.getName());
             dto.setStatus(accountInfo.getStatus().name());
             try {
+                FirebaseUtil.sendAccountMessage(dto);
                 ApiFuture<DocumentReference> reference = db.collection("accounts").add(dto);
                 logger.info(("\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
                         "Firestore path: ").concat(reference.get().getPath()));
@@ -659,21 +661,6 @@ public class WorkerBee {
     }
 
     private static InvoiceOfferDTO getDTO(InvoiceOfferState state) throws Exception {
-        if (state.getSupplier() == null) {
-            throw new Exception("Supplier missing from state");
-        } else {
-            logger.warn("Supplier is: ".concat(state.getSupplier().getName()));
-        }
-        if (state.getInvestor() == null) {
-            throw new Exception("Investor missing from state");
-        }else {
-            logger.warn("Investor is: ".concat(state.getInvestor().getName()));
-        }
-        if (state.getCustomer() == null) {
-            throw new Exception("Customer missing from state");
-        }else {
-            logger.warn("Customer is: ".concat(state.getCustomer().getName()));
-        }
 
         InvoiceOfferDTO o = new InvoiceOfferDTO();
         o.setInvoiceId(state.getInvoiceId().toString());
@@ -705,7 +692,6 @@ public class WorkerBee {
         if (state.getOwnerDate() != null) {
             o.setInvestorDate(state.getOwnerDate());
         }
-        logger.info(GSON.toJson(o));
         return o;
     }
 

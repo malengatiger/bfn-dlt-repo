@@ -26,11 +26,12 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   var _key = GlobalKey<ScaffoldState>();
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  List<AccountInfo> accounts = List();
-  List<Invoice> invoices = List();
+  List<AccountInfo> accounts = List(), accountMessages = List();
+  List<Invoice> invoices = List(), invoiceMessages = List();
   List<InvoiceOffer> offers = List(), offerMessages = List();
   AccountInfo account;
   List<NodeInfo> nodes = List();
+  NodeInfo nodeInfo;
 
   @override
   void initState() {
@@ -42,6 +43,8 @@ class _DashboardState extends State<Dashboard> {
 
   _getNodes() async {
     nodes = await Net.listNodes();
+    nodeInfo = await Prefs.getNode();
+    setState(() {});
   }
 
   void _firebaseCloudMessaging() {
@@ -57,11 +60,25 @@ class _DashboardState extends State<Dashboard> {
       onMessage: (Map<String, dynamic> message) async {
         print('🧩🧩🧩🧩🧩🧩 on message $message');
         var data = message['data'];
-        var offer = json.decode(data['offer']);
-
-        var m = InvoiceOffer.fromJson(offer);
-        offerMessages.add(m);
-        _showMessage('Invoice Offer ' + m.offerAmount.toString());
+        if (data['invoiceOffer'] != null) {
+          var offer = json.decode(data['invoiceOffer']);
+          var m = InvoiceOffer.fromJson(offer);
+          offerMessages.add(m);
+          _showMessage(
+              'New Invoice Offer, amount: ' + m.offerAmount.toString());
+        }
+        if (data['invoice'] != null) {
+          var offer = json.decode(data['invoice']);
+          var m = Invoice.fromJson(offer);
+          invoiceMessages.add(m);
+          _showMessage('New Invoice, amount: ' + m.totalAmount.toString());
+        }
+        if (data['account'] != null) {
+          var offer = json.decode(data['account']);
+          var m = AccountInfo.fromJson(offer);
+          accountMessages.add(m);
+          _showMessage('New Account, name: ' + m.name.toString());
+        }
         _refresh();
       },
       onResume: (Map<String, dynamic> message) async {
@@ -86,7 +103,9 @@ class _DashboardState extends State<Dashboard> {
   void _subscribe() {
     _firebaseMessaging.subscribeToTopic('invoiceOffers');
     _firebaseMessaging.subscribeToTopic('invoices');
-    print('🧩🧩🧩🧩🧩🧩 subscribed to FCM topics 🍊 invoiceOffers 🍊 invoices');
+    _firebaseMessaging.subscribeToTopic('accounts');
+    print(
+        '🧩🧩🧩🧩🧩🧩 subscribed to FCM topics 🍊 invoiceOffers 🍊 invoices 🍊 accounts');
   }
 
   void iOS_Permission() {
@@ -168,11 +187,18 @@ class _DashboardState extends State<Dashboard> {
                     style: Styles.whiteBoldMedium,
                   ),
                   SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    nodeInfo == null ? '' : nodeInfo.addresses.elementAt(0),
+                    style: Styles.whiteSmall,
+                  ),
+                  SizedBox(
                     height: 20,
-                  )
+                  ),
                 ],
               ),
-              preferredSize: Size.fromHeight(60)),
+              preferredSize: Size.fromHeight(80)),
         ),
         backgroundColor: Colors.brown[100],
         body: GridView.builder(
