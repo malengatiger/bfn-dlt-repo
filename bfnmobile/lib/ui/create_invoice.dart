@@ -5,6 +5,7 @@ import 'package:bfnlibrary/util/net.dart';
 import 'package:bfnlibrary/util/prefs.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnlibrary/util/snack.dart';
+import 'package:bfnmobile/ui/buy_offer.dart';
 import 'package:bfnmobile/ui/network_accounts.dart';
 import 'package:flutter/material.dart';
 
@@ -59,6 +60,22 @@ class _CreateInvoiceState extends State<CreateInvoice>
       key: _key,
       appBar: AppBar(
         title: Text('Create Invoice'),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(80),
+          child: Column(
+            children: <Widget>[
+              NameBadge(
+                account: account,
+                nodeStyle: Styles.whiteSmall,
+                nameStyle: Styles.blackBoldMedium,
+                elevation: 2,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
       ),
       backgroundColor: Colors.brown[50],
       body: ListView(
@@ -179,7 +196,7 @@ class _CreateInvoiceState extends State<CreateInvoice>
                               Row(
                                 children: <Widget>[
                                   Text(
-                                    'Total Amount:',
+                                    'Total:',
                                     style: Styles.greyLabelSmall,
                                   ),
                                   SizedBox(

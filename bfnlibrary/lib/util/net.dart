@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bfnlibrary/data/account.dart';
+import 'package:bfnlibrary/data/dashboard_data.dart';
 import 'package:bfnlibrary/data/fb_user.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
@@ -273,6 +274,17 @@ class Net {
     });
     debugPrint('🍎 🍊 🍎 🍊 Net: getInvoiceOffers: found ${list.length}');
     return list;
+  }
+
+  static Future<DashboardData> getDashboardData() async {
+    var node = await Prefs.getNode();
+    String url = node.webAPIUrl + 'admin/getDashboardData';
+
+    debugPrint(url);
+    final response = await get(url);
+    var data = DashboardData.fromJson(json.decode(response));
+    debugPrint('🍎 🍊 🍎 🍊 Net: getDashboardData: found ${data.toJson()}');
+    return data;
   }
 
   static Future<String> ping() async {

@@ -11,6 +11,8 @@ import 'package:bfnmobile/ui/network_accounts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'buy_offer.dart';
+
 class CreateOffer extends StatefulWidget {
   final Invoice invoice;
 
@@ -25,6 +27,17 @@ TextEditingController _controller = TextEditingController();
 class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
   var _key = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
+  AccountInfo account;
+  @override
+  initState() {
+    super.initState();
+    _getAccount();
+  }
+
+  _getAccount() async {
+    account = await Prefs.getAccount();
+    setState(() {});
+  }
 
   String discount;
   @override
@@ -33,6 +46,22 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
       key: _key,
       appBar: AppBar(
         title: Text('Create Offer'),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(80),
+          child: Column(
+            children: <Widget>[
+              NameBadge(
+                account: account,
+                nodeStyle: Styles.whiteSmall,
+                nameStyle: Styles.blackBoldMedium,
+                elevation: 2,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
       ),
       backgroundColor: Colors.brown[50],
       body: ListView(

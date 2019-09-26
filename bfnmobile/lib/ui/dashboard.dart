@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bfnlibrary/data/account.dart';
+import 'package:bfnlibrary/data/dashboard_data.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
 import 'package:bfnlibrary/data/node_info.dart';
@@ -10,13 +11,13 @@ import 'package:bfnlibrary/util/net.dart';
 import 'package:bfnlibrary/util/prefs.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnlibrary/util/snack.dart';
+import 'package:bfnmobile/bloc.dart';
+import 'package:bfnmobile/ui/buy_offer.dart';
 import 'package:bfnmobile/ui/list_tabs.dart';
 import 'package:bfnmobile/ui/network_accounts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-
-import 'file:///Users/aubs/WORK/CORDA/bfn-dlt-repo/bfnmobile/lib/bloc.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -26,14 +27,13 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   var _key = GlobalKey<ScaffoldState>();
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  List<AccountInfo> accounts = List(), accountMessages = List();
-  List<Invoice> invoices = List(),
-      invoiceMessages = List(),
-      myInvoices = List();
-  List<InvoiceOffer> offers = List(), offerMessages = List(), myOffers = List();
+  List<AccountInfo> accountMessages = List();
+  List<Invoice> invoiceMessages = List(), myInvoices = List();
+  List<InvoiceOffer> offerMessages = List(), myOffers = List();
   AccountInfo account;
   List<NodeInfo> nodes = List();
   NodeInfo nodeInfo;
+  DashboardData data;
 
   @override
   void initState() {
@@ -41,6 +41,29 @@ class _DashboardState extends State<Dashboard> {
     _firebaseCloudMessaging();
     _getNodes();
     _refresh();
+  }
+
+  _getDashboardData() async {
+    data = await bfnBloc.getDashboardData();
+    contents.add(Content(
+        label: 'Node Invoices',
+        number: data.invoices,
+        icon: Icon(Icons.account_balance),
+        backgroundColor: Colors.grey[300],
+        textColor: Colors.black));
+    contents.add(Content(
+        label: 'Node Offers',
+        number: data.offers,
+        icon: Icon(Icons.apps),
+        backgroundColor: Colors.grey[300],
+        textColor: Colors.black));
+    contents.add(Content(
+        label: 'Network Accounts',
+        number: data.accounts,
+        icon: Icon(Icons.people),
+        backgroundColor: Colors.grey[300],
+        textColor: Colors.teal[700]));
+    setState(() {});
   }
 
   _getNodes() async {
@@ -119,18 +142,6 @@ class _DashboardState extends State<Dashboard> {
     });
   }
 
-  _getAccounts() async {
-    account = await Prefs.getAccount();
-    accounts = await bfnBloc.getAccounts();
-    contents.add(Content(
-        label: 'Network Accounts',
-        number: accounts.length,
-        icon: Icon(Icons.people),
-        backgroundColor: Colors.grey[300],
-        textColor: Colors.teal[700]));
-    setState(() {});
-  }
-
   _getMyData() async {
     account = await Prefs.getAccount();
     myInvoices = await bfnBloc.getInvoices(accountId: account.identifier);
@@ -148,31 +159,15 @@ class _DashboardState extends State<Dashboard> {
     setState(() {});
   }
 
-  _getNodeData() async {
-    invoices = await bfnBloc.getInvoices();
-    contents.add(Content(
-        label: 'Node Invoices',
-        number: invoices.length,
-        icon: Icon(Icons.account_balance),
-        backgroundColor: Colors.grey[300],
-        textColor: Colors.black));
-    offers = await bfnBloc.getInvoiceOffers();
-    contents.add(Content(
-        label: 'Node Offers',
-        number: offers.length,
-        icon: Icon(Icons.apps),
-        backgroundColor: Colors.grey[300],
-        textColor: Colors.black));
-    setState(() {});
-  }
-
   _refresh() async {
+    if (account == null) {
+      account = await Prefs.getAccount();
+    }
     setState(() {
       contents.clear();
     });
     await _getMyData();
-    await _getNodeData();
-    await _getAccounts();
+    data = await _getDashboardData();
   }
 
   List<Content> contents = List();
@@ -200,19 +195,14 @@ class _DashboardState extends State<Dashboard> {
           bottom: PreferredSize(
               child: Column(
                 children: <Widget>[
-                  Text(
-                    account == null ? '' : account.name,
-                    style: Styles.whiteBoldMedium,
+                  NameBadge(
+                    account: account,
+                    nameStyle: Styles.blackBoldMedium,
+                    nodeStyle: Styles.whiteSmall,
+                    elevation: 2,
                   ),
                   SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    nodeInfo == null ? '' : nodeInfo.addresses.elementAt(0),
-                    style: Styles.whiteSmall,
-                  ),
-                  SizedBox(
-                    height: 20,
+                    height: 12,
                   ),
                 ],
               ),

@@ -20,6 +20,8 @@ import com.google.gson.GsonBuilder;
 import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
 import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount;
 import net.corda.core.concurrent.CordaFuture;
+import net.corda.core.contracts.Contract;
+import net.corda.core.contracts.ContractState;
 import net.corda.core.contracts.StateAndRef;
 import net.corda.core.identity.AnonymousParty;
 import net.corda.core.identity.Party;
@@ -242,6 +244,131 @@ public class WorkerBee {
         String m = "\uD83D\uDCA6  done listing InvoiceOfferStates:  \uD83C\uDF3A " + list.size();
         logger.info(m);
         return list;
+    }
+
+    //todo extend paing query where appropriate
+    private static final int PAGE_SIZE = 200;
+
+    public static DashboardData getDashboardData(CordaRPCOps proxy) {
+        int pageNumber = 1;
+        List<StateAndRef<ContractState>> states = new ArrayList<>();
+        DashboardData data = new DashboardData();
+        long totalResults;
+        do {
+            logger.info("\uD83E\uDDE9 \uD83E\uDDE9 \uD83E\uDDE9 \uD83E\uDDE9 \uD83E\uDDE9 " +
+                    "processing page " + pageNumber);
+            PageSpecification pageSpec = new PageSpecification(pageNumber, PAGE_SIZE);
+            QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
+            Vault.Page<ContractState> results = proxy.vaultQueryByWithPagingSpec(
+                    ContractState.class, criteria, pageSpec);
+            totalResults = results.getTotalStatesAvailable();
+            List<StateAndRef<ContractState>> newStates = results.getStates();
+            logger.info("\uD83D\uDCA6 \uD83D\uDCA6 Number of States \uD83C\uDF4E " + newStates.size());
+            states.addAll(results.getStates());
+            pageNumber++;
+        } while ((PAGE_SIZE * (pageNumber - 1) <= totalResults));
+
+        int accts = 0, invoices = 0, offers = 0;
+        int acctsp = 0, invoicesp = 0, offersp = 0;
+
+        List<String> mList = new ArrayList<>();
+        for (StateAndRef<ContractState> ref : states) {
+            ContractState state = ref.getState().getData();
+            String m = "\uD83E\uDDE9 \uD83E\uDDE9 " +
+                    "State class: ".concat(state.getClass().getName())
+                            .concat(" participants: " + state.getParticipants().size());
+            if (m.contains("AccountInfo")) {
+                accts++;
+                acctsp = state.getParticipants().size();
+            }
+            if (m.contains("InvoiceState")) {
+                invoices++;
+                invoicesp = state.getParticipants().size();
+            }
+            if (m.contains("InvoiceOfferState ")) {
+                offers++;
+                offersp = state.getParticipants().size();
+            }
+        }
+        NodeInfo info = proxy.nodeInfo();
+        data.setNode(info.getLegalIdentities().get(0).getName().toString());
+        data.setAccounts(accts);
+        data.setInvoices(invoices);
+        data.setOffers(offers);
+
+        String t1 = "\n\n\uD83E\uDDE9 \uD83E\uDDE9 List of States on ".concat(info.getLegalIdentities().get(0).getName().toString()
+        .concat(" \uD83E\uDDE9 \uD83E\uDDE9 "));
+        String a1 = "\uD83E\uDDE9 \uD83E\uDDE9 AccountInfo found on node: \uD83C\uDF4E " + accts + " \uD83C\uDF4E partcipants:  \uD83E\uDDE1 " + acctsp;
+        String a2 = "\uD83E\uDDE9 \uD83E\uDDE9 InvoiceStates found on node: \uD83C\uDF4E " + invoices + " \uD83C\uDF4E  partcipants:  \uD83E\uDDE1 " + invoicesp;
+        String a3 = "\uD83E\uDDE9 \uD83E\uDDE9 InvoiceOfferStates found on node: \uD83C\uDF4E " + offers + " \uD83C\uDF4E  partcipants:  \uD83E\uDDE1 " + offersp;
+        mList.add(t1);
+        mList.add(a1);
+        mList.add(a2);
+        mList.add(a3);
+        mList.add("\uD83E\uDDE9 \uD83E\uDDE9 Total states found:  \uD83E\uDDE1 " + (accts + invoices + offers) + "  \uD83E\uDDE1 \n\n");
+        for (String m: mList) {
+            logger.info(m);
+        }
+        return data;
+
+    }
+
+    public static List<String> getStates(CordaRPCOps proxy) {
+        int pageNumber = 1;
+        List<StateAndRef<ContractState>> states = new ArrayList<>();
+        long totalResults;
+        do {
+            logger.info("\uD83E\uDDE9 \uD83E\uDDE9 \uD83E\uDDE9 \uD83E\uDDE9 \uD83E\uDDE9 " +
+                    "processing page " + pageNumber);
+            PageSpecification pageSpec = new PageSpecification(pageNumber, PAGE_SIZE);
+            QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
+            Vault.Page<ContractState> results = proxy.vaultQueryByWithPagingSpec(
+                    ContractState.class, criteria, pageSpec);
+            totalResults = results.getTotalStatesAvailable();
+            List<StateAndRef<ContractState>> newStates = results.getStates();
+            logger.info("\uD83D\uDCA6 \uD83D\uDCA6 Number of States \uD83C\uDF4E " + newStates.size());
+            states.addAll(results.getStates());
+            pageNumber++;
+        } while ((PAGE_SIZE * (pageNumber - 1) <= totalResults));
+
+        int accts = 0, invoices = 0, offers = 0;
+        int acctsp = 0, invoicesp = 0, offersp = 0;
+
+        List<String> mList = new ArrayList<>();
+        for (StateAndRef<ContractState> ref : states) {
+            ContractState state = ref.getState().getData();
+            String m = "\uD83E\uDDE9 \uD83E\uDDE9 " +
+                    "State class: ".concat(state.getClass().getName())
+                            .concat(" participants: " + state.getParticipants().size());
+            if (m.contains("AccountInfo")) {
+                accts++;
+                acctsp = state.getParticipants().size();
+            }
+            if (m.contains("InvoiceState")) {
+                invoices++;
+                invoicesp = state.getParticipants().size();
+            }
+            if (m.contains("InvoiceOfferState ")) {
+                offers++;
+                offersp = state.getParticipants().size();
+            }
+        }
+        NodeInfo info = proxy.nodeInfo();
+        String t1 = "\n\n\uD83E\uDDE9 \uD83E\uDDE9 List of States on ".concat(info.getLegalIdentities().get(0).getName().toString()
+                .concat(" \uD83E\uDDE9 \uD83E\uDDE9 "));
+        String a1 = "\uD83E\uDDE9 \uD83E\uDDE9 AccountInfo found on node: \uD83C\uDF4E " + accts + " \uD83C\uDF4E partcipants:  \uD83E\uDDE1 " + acctsp;
+        String a2 = "\uD83E\uDDE9 \uD83E\uDDE9 InvoiceStates found on node: \uD83C\uDF4E " + invoices + " \uD83C\uDF4E  partcipants:  \uD83E\uDDE1 " + invoicesp;
+        String a3 = "\uD83E\uDDE9 \uD83E\uDDE9 InvoiceOfferStates found on node: \uD83C\uDF4E " + offers + " \uD83C\uDF4E  partcipants:  \uD83E\uDDE1 " + offersp;
+        mList.add(t1);
+        mList.add(a1);
+        mList.add(a2);
+        mList.add(a3);
+        mList.add("\uD83E\uDDE9 \uD83E\uDDE9 Total states found:  \uD83E\uDDE1 " + (accts + invoices + offers) + "  \uD83E\uDDE1 \n\n");
+        for (String m: mList) {
+            logger.info(m);
+        }
+        return mList;
+
     }
 
     public static List<String> listFlows(CordaRPCOps proxy) {

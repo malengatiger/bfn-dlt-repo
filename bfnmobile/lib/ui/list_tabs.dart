@@ -4,6 +4,7 @@ import 'package:bfnlibrary/data/invoice_offer.dart';
 import 'package:bfnlibrary/util/functions.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnmobile/bloc.dart';
+import 'package:bfnmobile/ui/buy_offer.dart';
 import 'package:bfnmobile/ui/create_invoice.dart';
 import 'package:bfnmobile/ui/create_offer.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +32,9 @@ class _InvoicesPageState extends State<InvoicesPage>
     offers =
         await bfnBloc.getInvoiceOffers(accountId: bfnBloc.account.identifier);
     invoices = await bfnBloc.getInvoices(accountId: bfnBloc.account.identifier);
+    offers.sort((a, b) => b.offerDate.compareTo(a.offerDate));
+    invoices.sort((a, b) => b.dateRegistered.compareTo(a.dateRegistered));
     setState(() {});
-//    offers.forEach((o) {
-//      print(o.toJson());
-//    });
   }
 
   @override
@@ -52,24 +52,39 @@ class _InvoicesPageState extends State<InvoicesPage>
                 Navigator.pop(context);
               },
             ),
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.list),
-                  text: 'Offers',
+            bottom: PreferredSize(
+                child: Column(
+                  children: <Widget>[
+                    account == null
+                        ? Container()
+                        : NameBadge(
+                            account: account,
+                            nodeStyle: Styles.whiteSmall,
+                            backgroundColor: Colors.orange[500],
+                            elevation: 8,
+                          ),
+                    TabBar(
+                      tabs: [
+                        Tab(
+                          icon: Icon(Icons.list),
+                          text: 'Offers',
+                        ),
+                        Tab(
+                          icon: Icon(Icons.apps),
+                          text: 'Invoices',
+                        ),
+                        Tab(
+                          icon: Icon(Icons.history),
+                          text: 'Journal',
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                Tab(
-                  icon: Icon(Icons.apps),
-                  text: 'Invoices',
-                ),
-                Tab(
-                  icon: Icon(Icons.history),
-                  text: 'Journal',
-                ),
-              ],
-            ),
+                preferredSize: Size.fromHeight(160)),
             title: Text('Invoices & Offers'),
           ),
+          backgroundColor: Colors.brown[100],
           body: TabBarView(
             children: [
               OfferList(offers),
@@ -109,7 +124,8 @@ class OfferList extends StatelessWidget {
         ListView.builder(
             itemCount: offers.length,
             itemBuilder: (context, index) {
-              var color = Colors.pink[700];
+              var color = Colors.blue[700];
+              Color backColor = Colors.white;
               var offer = offers.elementAt(index);
               if (bfnBloc.account.identifier == offer.supplier.identifier) {
                 color = Colors.black;
@@ -117,110 +133,126 @@ class OfferList extends StatelessWidget {
               if (bfnBloc.account.identifier == offer.customer.identifier) {
                 color = Colors.grey[400];
               }
+              if (bfnBloc.account.identifier == offer.investor.identifier) {
+                color = Colors.pink[800];
+                backColor = Colors.pink[50];
+              }
               return Padding(
-                padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
-                child: Card(
-                  elevation: 4,
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.apps,
-                      color: color,
-                    ),
-                    title: Text(
-                      getCurrency(offer.offerAmount, context),
-                      style: TextStyle(
-                          color: color,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 20),
-                    ),
-                    subtitle: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Customer',
-                              style: Styles.greyLabelSmall,
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(offer.customer.name),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Supplier',
-                              style: Styles.greyLabelSmall,
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(offer.supplier.name),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Buyer',
-                              style: Styles.greyLabelSmall,
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(
-                              offer.investor.name,
-                              style: Styles.blackBoldSmall,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Invoice Amount',
-                              style: Styles.greyLabelSmall,
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(getCurrency(offer.originalAmount, context)),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Discount',
-                              style: Styles.greyLabelSmall,
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(
-                              '${getCurrency(offer.discount, context)} %',
-                              style: Styles.tealBoldSmall,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Offered',
-                              style: Styles.greyLabelSmall,
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(getFormattedDateShortWithTime(
-                                offer.offerDate, context)),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                      ],
+                padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
+                child: GestureDetector(
+                  onTap: () {
+                    _onOfferTapped(offer, context);
+                  },
+                  child: Card(
+                    elevation: 4,
+                    color: backColor,
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.apps,
+                        color: color,
+                      ),
+                      title: Text(
+                        getCurrency(offer.offerAmount, context),
+                        style: TextStyle(
+                            color: color,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20),
+                      ),
+                      subtitle: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Customer',
+                                style: Styles.greyLabelSmall,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(offer.customer.name),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Supplier',
+                                style: Styles.greyLabelSmall,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(offer.supplier.name),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Buyer',
+                                style: Styles.greyLabelSmall,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                offer.investor.name,
+                                style: Styles.blackBoldSmall,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Invoice Amount',
+                                style: Styles.greyLabelSmall,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(getCurrency(offer.originalAmount, context)),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Discount',
+                                style: Styles.greyLabelSmall,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                '${getCurrency(offer.discount, context)} %',
+                                style: Styles.tealBoldSmall,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Offered',
+                                style: Styles.greyLabelSmall,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                getFormattedDateShortWithTime(
+                                    offer.offerDate, context),
+                                style: Styles.blackBoldSmall,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -246,6 +278,24 @@ class OfferList extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _onOfferTapped(InvoiceOffer offer, BuildContext context) async {
+    //check what action to take ...
+    if (bfnBloc.account.identifier == offer.supplier.identifier) {
+      //just observing ...
+    }
+    if (bfnBloc.account.identifier == offer.customer.identifier) {
+      //just observing ...
+    }
+    if (bfnBloc.account.identifier == offer.investor.identifier) {
+      //a buyInvoice is possible ...
+      Navigator.push(
+          context,
+          SlideRightRoute(
+            widget: BuyOffer(offer),
+          ));
+    }
   }
 
   String getCurrency(double amt, BuildContext context) {

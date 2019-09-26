@@ -52,6 +52,14 @@ public class SupplierController {
         return WorkerBee.listNodes(proxy);
 
     }
+
+    @GetMapping(value = "/getDashboardData", produces = "application/json")
+    private DashboardData getDashboardData() {
+
+        return WorkerBee.getDashboardData(proxy);
+
+    }
+
     @GetMapping(value = "/getAccountInfoByID", produces = "application/json")
     private AccountInfoDTO getAccountInfoByID(@RequestParam String id) throws Exception {
         //todo - learn how to use criteria or SQL queries
@@ -71,7 +79,7 @@ public class SupplierController {
             }
             logger.info("\uD83D\uDC99 \uD83D\uDC99 \uD83D\uDC99 AccountInfo's found: " + results.size() + " \uD83D\uDC99");
             AccountInfo info = null;
-            for (StateAndRef<AccountInfo> ref: results) {
+            for (StateAndRef<AccountInfo> ref : results) {
                 if (ref.getState().getData().getIdentifier().getId().toString().equalsIgnoreCase(id)) {
                     info = ref.getState().getData();
                 }
@@ -100,7 +108,7 @@ public class SupplierController {
     public InvoiceDTO startRegisterInvoiceFlow(@RequestBody InvoiceDTO invoice) throws Exception {
 
         logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: " + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
-        return WorkerBee.startInvoiceRegistrationFlow(proxy,invoice);
+        return WorkerBee.startInvoiceRegistrationFlow(proxy, invoice);
     }
 
     @PostMapping(value = "startInvoiceOfferFlow")
@@ -108,7 +116,7 @@ public class SupplierController {
 
         logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceOfferDTO: " + GSON.toJson(invoiceOffer) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
         try {
-            InvoiceOfferDTO m = WorkerBee.startInvoiceOfferFlow(proxy,invoiceOffer);
+            InvoiceOfferDTO m = WorkerBee.startInvoiceOfferFlow(proxy, invoiceOffer);
             logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffer: ".concat(GSON.toJson(m)));
             return m;
         } catch (Exception e) {
@@ -119,12 +127,13 @@ public class SupplierController {
             }
         }
     }
+
     @PostMapping(value = "startInvoiceOfferFlowToAllAccounts")
     public List<InvoiceOfferDTO> startInvoiceOfferFlowToAllAccounts(@RequestBody InvoiceOfferAllDTO offerAllDTO) throws Exception {
 
         logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceOfferDTO: " + GSON.toJson(offerAllDTO) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
         try {
-            List<InvoiceOfferDTO>  m = WorkerBee.startInvoiceOfferFlowToAllAccounts(proxy,offerAllDTO);
+            List<InvoiceOfferDTO> m = WorkerBee.startInvoiceOfferFlowToAllAccounts(proxy, offerAllDTO);
             logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffers: ".concat("" + m.size()));
             return m;
         } catch (Exception e) {
@@ -137,13 +146,14 @@ public class SupplierController {
     }
 
     @GetMapping(value = "getInvoiceStates")
-    public List<InvoiceDTO> getInvoiceStates(@RequestParam(value = "consumed", required=false) boolean consumed,
-                                             @RequestParam(value = "accountId", required=false) String accountId) throws Exception {
+    public List<InvoiceDTO> getInvoiceStates(@RequestParam(value = "consumed", required = false) boolean consumed,
+                                             @RequestParam(value = "accountId", required = false) String accountId) throws Exception {
         return WorkerBee.getInvoiceStates(proxy, accountId, consumed);
     }
+
     @GetMapping(value = "getInvoiceOfferStates")
-    public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam(value = "consumed", required=false) boolean consumed,
-                                                       @RequestParam(value = "accountId", required=false) String accountId) throws Exception {
+    public List<InvoiceOfferDTO> getInvoiceOfferStates(@RequestParam(value = "consumed", required = false) boolean consumed,
+                                                       @RequestParam(value = "accountId", required = false) String accountId) throws Exception {
 
         return WorkerBee.getInvoiceOfferStates(proxy, accountId, consumed);
     }

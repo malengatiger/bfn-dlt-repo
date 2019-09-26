@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bfnlibrary/data/account.dart';
+import 'package:bfnlibrary/data/dashboard_data.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
 import 'package:bfnlibrary/util/net.dart';
@@ -17,6 +18,8 @@ class BFNBloc {
       StreamController.broadcast();
   StreamController<List<InvoiceOffer>> offerController =
       StreamController.broadcast();
+  StreamController<DashboardData> dashController = StreamController.broadcast();
+
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseUser user;
   AccountInfo account;
@@ -33,6 +36,7 @@ class BFNBloc {
     acctController.close();
     invoiceController.close();
     offerController.close();
+    dashController.close();
   }
 
   Future<bool> isUserAuthenticated() async {
@@ -85,5 +89,13 @@ class BFNBloc {
         '🍏 🍏 BFNBloc: getInvoiceOffers found 🔆 ${offers.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     offerController.sink.add(offers);
     return offers;
+  }
+
+  Future<DashboardData> getDashboardData() async {
+    var data = await Net.getDashboardData();
+    print(
+        '🍏 🍏 BFNBloc: getDashboardData found 🔆 ${data.toJson()} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
+    dashController.sink.add(data);
+    return data;
   }
 }

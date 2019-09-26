@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.corda.core.messaging.CordaRPCOps;
 import net.corda.core.node.NodeInfo;
+import net.corda.core.node.services.vault.CriteriaExpression;
+import net.corda.core.node.services.vault.QueryCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +67,17 @@ public class AdminController {
     private List<NodeInfoDTO> listFirestoreNodes() throws ExecutionException, InterruptedException {
         return WorkerBee.listFirestoreNodes();
     }
-
-
+/*
+@GetMapping(value = "/states", produces = arrayOf("text/plain"))
+    private fun states() = proxy.vaultQueryBy<ContractState>().states.toString()
+ */
+@GetMapping(value = "/getStates", produces = "application/json")
+private List<String>  getStates() {
+    String msg = "\uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A AdminController:BFN Web API pinged: " + new Date().toString()
+            + " \uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A";
+    logger.info(msg);
+   return WorkerBee.getStates(proxy);
+}
     @GetMapping(value = "getInvoiceStates")
     public List<InvoiceDTO> getInvoiceStates(@RequestParam(value = "consumed", required=false) boolean consumed,
                                              @RequestParam(value = "accountId", required=false) String accountId) throws Exception {
@@ -125,7 +136,12 @@ public class AdminController {
                 " \uD83C\uDF3A \uD83C\uDF3A \uD83C\uDF3A \uD83C\uDF3A " +
                 proxy.getNetworkParameters().toString();
     }
+    @GetMapping(value = "/getDashboardData", produces = "application/json")
+    private DashboardData getDashboardData() {
 
+        return WorkerBee.getDashboardData(proxy);
+
+    }
     @GetMapping(value = "/nodes", produces = "application/json")
     private List<NodeInfoDTO> listNodes() {
 
