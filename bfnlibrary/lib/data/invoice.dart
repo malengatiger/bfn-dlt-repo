@@ -1,27 +1,34 @@
+import 'package:bfnlibrary/data/account.dart';
+
 class Invoice {
   String invoiceId;
   String invoiceNumber;
   String description;
-  String supplierId, customerId, dateRegistered;
+  AccountInfo supplier, customer;
+  String dateRegistered;
   double amount, valueAddedTax, totalAmount;
 
   Invoice(
-      this.invoiceId,
+      {this.invoiceId,
       this.invoiceNumber,
       this.description,
-      this.supplierId,
-      this.customerId,
+      this.supplier,
+      this.customer,
       this.dateRegistered,
       this.amount,
       this.valueAddedTax,
-      this.totalAmount);
+      this.totalAmount});
 
   Invoice.fromJson(Map data) {
     this.invoiceId = data['invoiceId'];
     this.invoiceNumber = data['invoiceNumber'];
     this.description = data['description'];
-    this.supplierId = data['supplierId'];
-    this.customerId = data['customerId'];
+    if (data['supplier'] != null) {
+      this.supplier = AccountInfo.fromJson(data['supplier']);
+    }
+    if (data['customer'] != null) {
+      this.customer = AccountInfo.fromJson(data['customer']);
+    }
     this.dateRegistered = data['dateRegistered'];
     if (data['amount'] is int) {
       this.amount = data['amount'] * 1.00;
@@ -47,11 +54,11 @@ class Invoice {
         'invoiceId': invoiceId,
         'invoiceNumber': invoiceNumber,
         'description': description,
-        'supplierId': supplierId,
+        'supplier': supplier.toJson(),
         'amount': amount,
         'valueAddedTax': valueAddedTax,
         'totalAmount': totalAmount,
         'dateRegistered': dateRegistered,
-        'customerId': customerId,
+        'customer': customer.toJson(),
       };
 }

@@ -274,7 +274,7 @@ public class DemoUtil {
     static List<String> names = new ArrayList<>();
     static HashMap<String, String> map = new HashMap<>();
 
-    static String getRandomName() {
+    static String getRandomName() throws Exception {
         names.add("Jones Pty Ltd");
         names.add("Nkosi Associates");
         names.add("Maddow Enterprises");
@@ -287,8 +287,21 @@ public class DemoUtil {
         names.add("Peach Enterprises");
         names.add("Petersen Ventures Inc");
         names.add("Nixon Associates LLC");
+        names.add("NamibianCool Inc.");
+        names.add("BrothersFX Inc");
+        names.add("Jabula Associates Pty Ltd");
+        names.add("Graystone Khambule Ltd");
+        names.add("Craighall Investments Ltd");
+        names.add("Robert Grayson Associates");
+        names.add("KZN Wildlife Pty Ltd");
+        names.add("Kumar Enterprises Ltd");
+        names.add("KrugerX Steel");
+        names.add("TrainServices Pros Ltd");
+        names.add("Topper PanelBeaters Ltd");
         names.add("Pelosi PAC LLC");
         names.add("Blackridge Inc.");
+        names.add("Soweto Engineering Works Pty Ltd");
+        names.add("Soweto Bakeries Ltd");
         names.add("BlackStone Parners Ltd");
         names.add("Constitution Associates LLC");
         names.add("Gauteng Manufacturers Ltd");
@@ -300,6 +313,8 @@ public class DemoUtil {
         names.add("Flickenburg Associates Pty Ltd");
         names.add("Cyber Operations Ltd");
         names.add("WorkerBees Inc.");
+        names.add("Mamelodi Hustlers Pty Ltd");
+        names.add("Wallace Incorporated");
         names.add("Peachtree Solutions Ltd");
         names.add("InnovateSpecialists Inc");
         names.add("DealMakers Pty Ltd");
@@ -349,12 +364,13 @@ public class DemoUtil {
 
         String name = names.get(random.nextInt(names.size() - 1));
         if (map.containsKey(name)) {
-            name = getRandomName();
+            throw new Exception("Random name collision");
         } else {
             map.put(name, name);
         }
 
         return name;
     }
+    static int randomCount;
 }
 

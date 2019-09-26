@@ -24,8 +24,9 @@ class BFNBloc {
   BFNBloc() {
     getMyAccount();
   }
-  getMyAccount() async {
+  Future<AccountInfo> getMyAccount() async {
     account = await Prefs.getAccount();
+    return account;
   }
 
   close() {

@@ -27,8 +27,10 @@ class _DashboardState extends State<Dashboard> {
   var _key = GlobalKey<ScaffoldState>();
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   List<AccountInfo> accounts = List(), accountMessages = List();
-  List<Invoice> invoices = List(), invoiceMessages = List();
-  List<InvoiceOffer> offers = List(), offerMessages = List();
+  List<Invoice> invoices = List(),
+      invoiceMessages = List(),
+      myInvoices = List();
+  List<InvoiceOffer> offers = List(), offerMessages = List(), myOffers = List();
   AccountInfo account;
   List<NodeInfo> nodes = List();
   NodeInfo nodeInfo;
@@ -122,29 +124,45 @@ class _DashboardState extends State<Dashboard> {
     accounts = await bfnBloc.getAccounts();
     contents.add(Content(
         label: 'Network Accounts',
-        number: accounts.length.toString(),
+        number: accounts.length,
         icon: Icon(Icons.people),
-        color: Colors.teal));
+        backgroundColor: Colors.grey[300],
+        textColor: Colors.teal[700]));
     setState(() {});
   }
 
-  _getInvoices() async {
+  _getMyData() async {
+    account = await Prefs.getAccount();
+    myInvoices = await bfnBloc.getInvoices(accountId: account.identifier);
+    contents.add(Content(
+        label: 'My Invoices',
+        number: myInvoices.length,
+        icon: Icon(Icons.account_balance),
+        textColor: Colors.blue));
+    myOffers = await bfnBloc.getInvoiceOffers(accountId: account.identifier);
+    contents.add(Content(
+        label: 'My Offers',
+        number: myOffers.length,
+        icon: Icon(Icons.apps),
+        textColor: Colors.pink));
+    setState(() {});
+  }
+
+  _getNodeData() async {
     invoices = await bfnBloc.getInvoices();
     contents.add(Content(
-        label: 'Network Invoices',
-        number: invoices.length.toString(),
+        label: 'Node Invoices',
+        number: invoices.length,
         icon: Icon(Icons.account_balance),
-        color: Colors.blue));
-    setState(() {});
-  }
-
-  _getInvoiceOffers() async {
+        backgroundColor: Colors.grey[300],
+        textColor: Colors.black));
     offers = await bfnBloc.getInvoiceOffers();
     contents.add(Content(
-        label: 'Network Offers',
-        number: offers.length.toString(),
+        label: 'Node Offers',
+        number: offers.length,
         icon: Icon(Icons.apps),
-        color: Colors.pink));
+        backgroundColor: Colors.grey[300],
+        textColor: Colors.black));
     setState(() {});
   }
 
@@ -152,9 +170,9 @@ class _DashboardState extends State<Dashboard> {
     setState(() {
       contents.clear();
     });
+    await _getMyData();
+    await _getNodeData();
     await _getAccounts();
-    await _getInvoices();
-    await _getInvoiceOffers();
   }
 
   List<Content> contents = List();
@@ -206,12 +224,16 @@ class _DashboardState extends State<Dashboard> {
               crossAxisCount: 2, mainAxisSpacing: 2, crossAxisSpacing: 2),
           itemCount: contents.length,
           itemBuilder: (BuildContext context, int index) {
+            var content = contents.elementAt(index);
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(4.0),
               child: Container(
                 height: 80,
                 width: 160,
                 child: Card(
+                  color: content.backgroundColor == null
+                      ? Colors.white
+                      : content.backgroundColor,
                   elevation: 4,
                   child: Center(
                     child: Column(
@@ -219,21 +241,21 @@ class _DashboardState extends State<Dashboard> {
                         SizedBox(
                           height: 24,
                         ),
-                        contents.elementAt(index).icon,
+                        content.icon,
                         SizedBox(
                           height: 24,
                         ),
                         Text(
-                          '${contents.elementAt(index).number}',
+                          '${content.number}',
                           style: TextStyle(
-                              fontSize: 44,
+                              fontSize: content.number > 1000 ? 36 : 44,
                               fontWeight: FontWeight.w900,
-                              color: contents.elementAt(index).color),
+                              color: content.textColor),
                         ),
                         SizedBox(
                           height: 8,
                         ),
-                        Text(contents.elementAt(index).label),
+                        Text(content.label),
                       ],
                     ),
                   ),
@@ -295,9 +317,14 @@ class _DashboardState extends State<Dashboard> {
       await Prefs.saveAccount(account);
       var auth = FirebaseAuth.instance;
       await auth.signInAnonymously();
+      print('account name: ${account.host} vs ');
       nodes.forEach((n) async {
-        if (account.name == n.addresses.elementAt(0)) {
+        print('compare to: ${n.addresses.elementAt(0)}');
+        if (account.host == n.addresses.elementAt(0)) {
           await Prefs.saveNode(n);
+          setState(() {
+            nodeInfo = n;
+          });
         }
       });
       print(
@@ -308,9 +335,15 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class Content {
-  String label, number;
-  Color color;
+  String label;
+  int number;
+  Color textColor, backgroundColor;
   Icon icon;
 
-  Content({this.label, this.number, this.color, this.icon});
+  Content(
+      {this.label,
+      this.number,
+      this.textColor,
+      this.icon,
+      this.backgroundColor});
 }

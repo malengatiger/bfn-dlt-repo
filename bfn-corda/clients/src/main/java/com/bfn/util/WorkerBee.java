@@ -68,13 +68,14 @@ public class WorkerBee {
                 + nodeList.size() + " \uD83D\uDC9A ");
         return nodeList;
     }
+
     public static List<NodeInfoDTO> listFirestoreNodes() throws ExecutionException, InterruptedException {
         List<NodeInfoDTO> nodeList = new ArrayList();
         ApiFuture<QuerySnapshot> future = db.collection("nodes").get();
         QuerySnapshot snapshots = future.get();
         List<QueryDocumentSnapshot> list = snapshots.getDocuments();
-        for (QueryDocumentSnapshot snapshot: list) {
-            Map<String,Object> map = snapshot.getData();
+        for (QueryDocumentSnapshot snapshot : list) {
+            Map<String, Object> map = snapshot.getData();
             NodeInfoDTO node = new NodeInfoDTO();
             node.setWebAPIUrl((String) map.get("webAPIUrl"));
             node.setSerial((Long) map.get("serial"));
@@ -166,14 +167,15 @@ public class WorkerBee {
         logger.info(msg);
         return dto;
     }
+
     public static List<InvoiceDTO> getInvoiceStates(CordaRPCOps proxy,
                                                     String accountId,
                                                     boolean consumed) throws Exception {
 
-        logger.info("........................ accountId:  \uD83D\uDC9A ".concat(accountId == null? "null": accountId)
-        .concat(" consumed:  \uD83D\uDC9A " + consumed));
+        logger.info("........................ accountId:  \uD83D\uDC9A ".concat(accountId == null ? "null" : accountId)
+                .concat(" consumed:  \uD83D\uDC9A " + consumed));
         QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(
-                consumed? Vault.StateStatus.CONSUMED : Vault.StateStatus.UNCONSUMED);
+                consumed ? Vault.StateStatus.CONSUMED : Vault.StateStatus.UNCONSUMED);
         Vault.Page<InvoiceState> page = proxy.vaultQueryByWithPagingSpec(
                 InvoiceState.class, criteria,
                 new PageSpecification(1, 200));
@@ -206,12 +208,13 @@ public class WorkerBee {
         logger.info(m);
         return list;
     }
-//investor27743421641@gmail.com
+
+    //investor27743421641@gmail.com
     public static List<InvoiceOfferDTO> getInvoiceOfferStates(CordaRPCOps proxy, String accountId, boolean consumed) throws Exception {
-        logger.info("...................... accountId:  \uD83D\uDC9A ".concat(accountId == null? "null": accountId)
+        logger.info("...................... accountId:  \uD83D\uDC9A ".concat(accountId == null ? "null" : accountId)
                 .concat(" consumed:  \uD83D\uDC9A " + consumed));
         QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(
-                consumed? Vault.StateStatus.CONSUMED : Vault.StateStatus.ALL);
+                consumed ? Vault.StateStatus.CONSUMED : Vault.StateStatus.ALL);
         Vault.Page<InvoiceOfferState> page = proxy.vaultQueryByWithPagingSpec(
                 InvoiceOfferState.class, criteria,
                 new PageSpecification(1, 200));
@@ -229,7 +232,8 @@ public class WorkerBee {
 //                logger.warn("\uD83D\uDCA6 \uD83D\uDCA6 \uD83D\uDCA6 accountId == null, list: " + list.size());
             } else {
                 if (offer.getSupplier().getIdentifier().equalsIgnoreCase(accountId)
-                        || offer.getInvestor().getIdentifier().equalsIgnoreCase(accountId)) {
+                        || offer.getInvestor().getIdentifier().equalsIgnoreCase(accountId)
+                        || offer.getCustomer().getIdentifier().equalsIgnoreCase(accountId)) {
                     list.add(offer);
                 }
             }
@@ -307,9 +311,9 @@ public class WorkerBee {
 
             invoice.setTotalAmount(invoice.getAmount() + (m * invoice.getAmount()));
             InvoiceState invoiceState = new InvoiceState(UUID.randomUUID(),
-                    invoice.getInvoiceNumber(),invoice.getDescription(),
-                    invoice.getAmount(),invoice.getTotalAmount(),invoice.getValueAddedTax(),
-                    supplierInfo,customerInfo,supplierKey,customerKey, new Date());
+                    invoice.getInvoiceNumber(), invoice.getDescription(),
+                    invoice.getAmount(), invoice.getTotalAmount(), invoice.getValueAddedTax(),
+                    supplierInfo, customerInfo, supplierKey, customerKey, new Date());
 
             CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
                     InvoiceRegistrationFlow.class, invoiceState).getReturnValue();
@@ -342,26 +346,26 @@ public class WorkerBee {
 
     public static String startBuyInvoiceOfferFlow(CordaRPCOps proxy, String invoiceId) throws Exception {
 
-         try {
+        try {
 
-             QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
-             Vault.Page<InvoiceOfferState> page = proxy.vaultQueryByWithPagingSpec(
-                     InvoiceOfferState.class, criteria,
-                     new PageSpecification(1, 200));
-             List<StateAndRef<InvoiceOfferState>> refs = page.getStates();
-             logger.info("\uD83C\uDF4F InvoiceOffers on Node: \uD83C\uDF4F \uD83C\uDF4F " + refs.size());
-             StateAndRef<InvoiceOfferState> refToBuy = null;
-             for (StateAndRef<InvoiceOfferState> ref : refs) {
-                 InvoiceOfferState state = ref.getState().getData();
-                 if (state.getInvoiceId().toString().equalsIgnoreCase(invoiceId)) {
-                     refToBuy = ref;
-                     break;
-                 }
-             }
-             if (refToBuy == null) {
-                 throw new Exception("InvoiceOffer to buy not found");
-             }
-             logger.info(GSON.toJson(refToBuy.getState().getData().getSupplier().getName()));
+            QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
+            Vault.Page<InvoiceOfferState> page = proxy.vaultQueryByWithPagingSpec(
+                    InvoiceOfferState.class, criteria,
+                    new PageSpecification(1, 200));
+            List<StateAndRef<InvoiceOfferState>> refs = page.getStates();
+            logger.info("\uD83C\uDF4F InvoiceOffers on Node: \uD83C\uDF4F \uD83C\uDF4F " + refs.size());
+            StateAndRef<InvoiceOfferState> refToBuy = null;
+            for (StateAndRef<InvoiceOfferState> ref : refs) {
+                InvoiceOfferState state = ref.getState().getData();
+                if (state.getInvoiceId().toString().equalsIgnoreCase(invoiceId)) {
+                    refToBuy = ref;
+                    break;
+                }
+            }
+            if (refToBuy == null) {
+                throw new Exception("InvoiceOffer to buy not found");
+            }
+            logger.info(GSON.toJson(refToBuy.getState().getData().getSupplier().getName()));
             CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
                     BuyInvoiceOfferFlow.class, refToBuy).getReturnValue();
 
@@ -390,10 +394,10 @@ public class WorkerBee {
                     AccountInfo.class, criteria,
                     new PageSpecification(1, 200));
             logger.info(" \uD83E\uDDA0 \uD83E\uDDA0 Accounts found on network:  \uD83E\uDD6C " + page.getStates().size());
-            for (StateAndRef<AccountInfo> ref: page.getStates()) {
+            for (StateAndRef<AccountInfo> ref : page.getStates()) {
                 AccountInfo info = ref.getState().getData();
                 if (info.getName().equalsIgnoreCase(accountName)) {
-                    logger.info("Account "+accountName+" \uD83D\uDC7F \uD83D\uDC7F already exists on the network");
+                    logger.info("Account " + accountName + " \uD83D\uDC7F \uD83D\uDC7F already exists on the network");
                     throw new Exception("Account already exists on the network");
                 }
             }
@@ -420,7 +424,7 @@ public class WorkerBee {
             }
 
             String name = accountInfo.getHost().getName().getOrganisation();
-            for (NodeInfo node: nodes) {
+            for (NodeInfo node : nodes) {
                 Party otherParty = node.getLegalIdentities().get(0);
                 if (name.equalsIgnoreCase(otherParty.getName().getOrganisation())) {
                     logger.info("\uD83D\uDD15  \uD83D\uDD15  ignore sharing - party on same node \uD83E\uDD6C ");
@@ -430,9 +434,9 @@ public class WorkerBee {
                     logger.info("\uD83D\uDD15  \uD83D\uDD15 ignore sharing - this party is a Notary \uD83E\uDD6C \uD83E\uDD6C ");
                     continue;
                 }
-                String res = startAccountSharingFlow(proxy,otherParty,accountInfo);
-                logger.info(" \uD83D\uDE0E \uD83D\uDE0E "+accountName
-                        +" shared with \uD83D\uDC7F " +
+                String res = startAccountSharingFlow(proxy, otherParty, accountInfo);
+                logger.info(" \uD83D\uDE0E \uD83D\uDE0E " + accountName
+                        + " shared with \uD83D\uDC7F " +
                         node.getLegalIdentities().get(0).getName().getOrganisation());
 
             }
@@ -475,7 +479,7 @@ public class WorkerBee {
         try {
             logger.info("\uD83C\uDF4F INVOICE: ".concat(invoiceOffer.getInvoiceId()).concat("  \uD83D\uDD06  ")
                     .concat("  \uD83E\uDDE1 DISCOUNT: ").concat("" + invoiceOffer.getDiscount())
-            .concat("  \uD83E\uDDE1 INVESTOR: ").concat("" + invoiceOffer.getInvestor().getName()));
+                    .concat("  \uD83E\uDDE1 INVESTOR: ").concat("" + invoiceOffer.getInvestor().getName()));
 
             //todo - refactor to proper query ...
             QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
@@ -483,7 +487,7 @@ public class WorkerBee {
                     InvoiceState.class, criteria,
                     new PageSpecification(1, 200));
             InvoiceState invoiceState = null;
-            for (StateAndRef<InvoiceState> state: invoiceStatePage.getStates()) {
+            for (StateAndRef<InvoiceState> state : invoiceStatePage.getStates()) {
                 if (state.getState().getData().getInvoiceId().toString().equalsIgnoreCase(invoiceOffer.getInvoiceId())) {
                     invoiceState = state.getState().getData();
                     break;
@@ -510,11 +514,11 @@ public class WorkerBee {
                 throw new Exception("Discount not found");
             }
             logger.info("\uD83D\uDC7D \uD83D\uDC7D INVOICE: ".concat(invoiceOffer.getInvoiceId())
-            .concat(" totalAmount: " + invoiceState.getTotalAmount()));
+                    .concat(" totalAmount: " + invoiceState.getTotalAmount()));
             logger.info("\uD83D\uDC7D \uD83D\uDC7D INVESTOR: ".concat(investorInfo.getHost().getName().getOrganisation()));
 
             invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
-                    ((100.0 - invoiceOffer.getDiscount())/100));
+                    ((100.0 - invoiceOffer.getDiscount()) / 100));
 
             InvoiceOfferDTO offerDTO = sendInvoiceOffer(proxy, invoiceOffer, invoiceState, investorInfo);
 //            logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffer: ".concat(GSON.toJson(offerDTO)));
@@ -527,6 +531,7 @@ public class WorkerBee {
             }
         }
     }
+
     public static List<InvoiceOfferDTO> startInvoiceOfferFlowToAllAccounts(CordaRPCOps proxy, InvoiceOfferAllDTO all) throws Exception {
 
         try {
@@ -541,7 +546,7 @@ public class WorkerBee {
                     InvoiceState.class, criteria,
                     new PageSpecification(1, 200));
             InvoiceState invoiceState = null;
-            for (StateAndRef<InvoiceState> state: invoiceStatePage.getStates()) {
+            for (StateAndRef<InvoiceState> state : invoiceStatePage.getStates()) {
                 if (state.getState().getData().getInvoiceId().toString().equalsIgnoreCase(all.getInvoiceId())) {
                     invoiceState = state.getState().getData();
                     break;
@@ -555,7 +560,7 @@ public class WorkerBee {
                     AccountInfo.class, criteria,
                     new PageSpecification(1, 200));
 
-            AccountInfoDTO m = getAccount(proxy,all.getAccountId());
+            AccountInfoDTO m = getAccount(proxy, all.getAccountId());
             logger.info("we have an account ... 1");
             List<InvoiceOfferDTO> offers = new ArrayList<>();
             //
@@ -571,7 +576,7 @@ public class WorkerBee {
             invoiceOffer.setOfferDate(new Date());
             logger.info("we have an account ... 3");
             invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
-                    ((100.0 - invoiceOffer.getDiscount())/100));
+                    ((100.0 - invoiceOffer.getDiscount()) / 100));
 
             logger.info("\uD83D\uDC7D \uD83D\uDC7D INVOICE: ".concat(invoiceOffer.getInvoiceId())
                     .concat(" offerAmount: " + invoiceState.getTotalAmount()));
@@ -651,11 +656,13 @@ public class WorkerBee {
         if (state.getCustomerPublicKey() == null) {
             throw new Exception("Customer Public Key is null");
         }
-        String supplierString = Base64.getEncoder().encodeToString(state.getSupplierPublicKey().getEncoded());;
-        String customerString = Base64.getEncoder().encodeToString(state.getCustomerPublicKey().getEncoded());;
+        String supplierString = Base64.getEncoder().encodeToString(state.getSupplierPublicKey().getEncoded());
+        ;
+        String customerString = Base64.getEncoder().encodeToString(state.getCustomerPublicKey().getEncoded());
+        ;
 
-        invoice.setSupplierPublicKey(state.getSupplierPublicKey() == null? null : supplierString);
-        invoice.setCustomerPublicKey(state.getCustomerPublicKey() == null? null : customerString);
+        invoice.setSupplierPublicKey(state.getSupplierPublicKey() == null ? null : supplierString);
+        invoice.setCustomerPublicKey(state.getCustomerPublicKey() == null ? null : customerString);
         invoice.setDateRegistered(state.getDateRegistered());
         return invoice;
     }
@@ -680,10 +687,12 @@ public class WorkerBee {
         if (state.getInvestorPublicKey() == null) {
             throw new Exception("Investor Public Key is null");
         }
-        String supplierString = Base64.getEncoder().encodeToString(state.getSupplierPublicKey().getEncoded());;
-        String investorString = Base64.getEncoder().encodeToString(state.getInvestorPublicKey().getEncoded());;
-        o.setSupplierPublicKey(state.getSupplierPublicKey() == null? null : supplierString);
-        o.setInvestorPublicKey(state.getInvestorPublicKey() == null? null : investorString);
+        String supplierString = Base64.getEncoder().encodeToString(state.getSupplierPublicKey().getEncoded());
+        ;
+        String investorString = Base64.getEncoder().encodeToString(state.getInvestorPublicKey().getEncoded());
+        ;
+        o.setSupplierPublicKey(state.getSupplierPublicKey() == null ? null : supplierString);
+        o.setInvestorPublicKey(state.getInvestorPublicKey() == null ? null : investorString);
 
 
         if (state.getOfferDate() != null) {
