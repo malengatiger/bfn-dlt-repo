@@ -18,6 +18,7 @@ dependencies:
   intl: ^0.16.0
   shared_preferences: ^0.5.3+4
   flutter_dotenv: ^2.0.3
+  dynamic_theme: 1.0.1
 
 dev_dependencies:
   flutter_test:

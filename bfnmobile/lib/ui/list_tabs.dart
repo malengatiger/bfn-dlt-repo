@@ -3,6 +3,7 @@ import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
 import 'package:bfnlibrary/util/functions.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
+import 'package:bfnlibrary/util/theme_bloc.dart';
 import 'package:bfnmobile/bloc.dart';
 import 'package:bfnmobile/ui/buy_offer.dart';
 import 'package:bfnmobile/ui/create_invoice.dart';
@@ -15,15 +16,24 @@ class InvoicesPage extends StatefulWidget {
 }
 
 class _InvoicesPageState extends State<InvoicesPage>
+    with SingleTickerProviderStateMixin
     implements InvoiceListener {
   List<InvoiceOffer> offers = List();
   List<Invoice> invoices = List();
   AccountInfo account;
+  TabController tabController;
 
   @override
   void initState() {
     super.initState();
+    tabController = TabController(length: 3, vsync: this);
     _getInvoicesAndOffers();
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   _getInvoicesAndOffers() async {
@@ -39,69 +49,84 @@ class _InvoicesPageState extends State<InvoicesPage>
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.orange[600],
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            bottom: PreferredSize(
-                child: Column(
-                  children: <Widget>[
-                    account == null
-                        ? Container()
-                        : NameBadge(
-                            account: account,
-                            nodeStyle: Styles.whiteSmall,
-                            backgroundColor: Colors.orange[500],
-                            elevation: 8,
+    return StreamBuilder<int>(
+        initialData: themeBloc.themeIndex,
+        stream: themeBloc.newThemeStream,
+        builder: (context, snapshot) {
+          print(
+              '👽 👽 👽 👽 main.dart;  snapShot theme index: 👽  ${snapshot.data} 👽 ');
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: snapshot.data == null
+                ? ThemeUtil.getTheme(themeIndex: 0)
+                : ThemeUtil.getTheme(themeIndex: snapshot.data),
+            home: DefaultTabController(
+              length: 3,
+              child: Scaffold(
+                appBar: AppBar(
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.refresh),
+                      onPressed: _getInvoicesAndOffers,
+                    ),
+                  ],
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  bottom: PreferredSize(
+                      child: Column(
+                        children: <Widget>[
+                          account == null
+                              ? Container()
+                              : NameBadge(
+                                  account: account,
+                                  nodeStyle: Styles.whiteSmall,
+                                  nameStyle: Styles.whiteBoldMedium,
+                                  elevation: 3,
+                                ),
+                          TabBar(
+                            tabs: [
+                              Tab(
+                                icon: Icon(Icons.list),
+                                text: 'Offers',
+                              ),
+                              Tab(
+                                icon: Icon(Icons.apps),
+                                text: 'Invoices',
+                              ),
+                              Tab(
+                                icon: Icon(Icons.history),
+                                text: 'Journal',
+                              ),
+                            ],
                           ),
-                    TabBar(
-                      tabs: [
-                        Tab(
-                          icon: Icon(Icons.list),
-                          text: 'Offers',
-                        ),
-                        Tab(
-                          icon: Icon(Icons.apps),
-                          text: 'Invoices',
-                        ),
-                        Tab(
-                          icon: Icon(Icons.history),
-                          text: 'Journal',
-                        ),
-                      ],
+                        ],
+                      ),
+                      preferredSize: Size.fromHeight(160)),
+                  title: Text('Invoices & Offers'),
+                ),
+                backgroundColor: Colors.brown[100],
+                body: TabBarView(
+                  children: [
+                    OfferList(offers),
+                    InvoiceList(
+                      account: account,
+                      context: context,
+                      invoices: invoices,
+                      invoiceListener: this,
+                    ),
+                    Card(
+                      child: CreateMenu(),
                     ),
                   ],
                 ),
-                preferredSize: Size.fromHeight(160)),
-            title: Text('Invoices & Offers'),
-          ),
-          backgroundColor: Colors.brown[100],
-          body: TabBarView(
-            children: [
-              OfferList(offers),
-              InvoiceList(
-                account: account,
-                context: context,
-                invoices: invoices,
-                invoiceListener: this,
               ),
-              Card(
-                child: CreateMenu(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 
   @override
@@ -376,6 +401,7 @@ class InvoiceList extends StatelessWidget {
   final BuildContext context;
   final AccountInfo account;
   final InvoiceListener invoiceListener;
+
   InvoiceList(
       {this.invoices, this.context, this.account, this.invoiceListener});
 

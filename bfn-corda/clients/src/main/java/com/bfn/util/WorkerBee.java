@@ -475,6 +475,7 @@ public class WorkerBee {
 
         try {
 
+            //is the investor on their own node ???
             QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
             Vault.Page<InvoiceOfferState> page = proxy.vaultQueryByWithPagingSpec(
                     InvoiceOfferState.class, criteria,
@@ -490,6 +491,7 @@ public class WorkerBee {
                 }
             }
             if (refToBuy == null) {
+                logger.error("\uD83D\uDC7F \uD83D\uDC7F \uD83D\uDC7F BuyInvoice failed. offer not found");
                 throw new Exception("InvoiceOffer to buy not found");
             }
             logger.info(GSON.toJson(refToBuy.getState().getData().getSupplier().getName()));

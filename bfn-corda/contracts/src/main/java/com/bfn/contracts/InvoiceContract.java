@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.security.PublicKey;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 // ************
@@ -45,7 +46,8 @@ public class InvoiceContract implements Contract {
         List<PublicKey> requiredSigners = command.getSigners();
         logger.info(" \uD83D\uDD34  \uD83D\uDD34 Required signers: " + requiredSigners.size());
         for (PublicKey key: requiredSigners) {
-            logger.info(" \uD83D\uDD34 Required signer: publicKey: ".concat(key.toString()));
+            String sKey = Base64.getEncoder().encodeToString(key.getEncoded());
+            logger.info(" \uD83D\uDD34 Required signer: publicKey: ".concat(sKey));
         }
         ContractState contractState = tx.getOutput(0);
         if (!(contractState instanceof InvoiceState)) {

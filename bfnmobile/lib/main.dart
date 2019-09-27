@@ -1,4 +1,6 @@
+import 'package:bfnlibrary/util/prefs.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
+import 'package:bfnlibrary/util/theme_bloc.dart';
 import 'package:bfnmobile/bloc.dart';
 import 'package:bfnmobile/ui/dashboard.dart';
 import 'package:bfnmobile/ui/sign_up.dart';
@@ -6,35 +8,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(BFNMobileApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class BFNMobileApp extends StatefulWidget {
+  @override
+  _BFNMobileAppState createState() => _BFNMobileAppState();
+}
+
+class _BFNMobileAppState extends State<BFNMobileApp> {
+  int themeIndex;
+  void _getTheme() async {
+    themeIndex = await Prefs.getThemeIndex();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getTheme();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'BFNApp',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    return StreamBuilder<int>(
+        initialData: themeIndex == null ? 0 : themeIndex,
+        stream: themeBloc.newThemeStream,
+        builder: (context, snapShot) {
+          print(
+              '👽 👽 👽 👽 main.dart;  snapShot theme index: 👽  ${snapShot.data} 👽 ');
+          return MaterialApp(
+            title: 'BFNapp',
+            debugShowCheckedModeBanner: false,
+            theme: snapShot.data == null
+                ? ThemeUtil.getTheme(themeIndex: themeIndex)
+                : ThemeUtil.getTheme(themeIndex: snapShot.data),
+            home: new ControllerPage(),
+          );
+        });
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+class ControllerPage extends StatefulWidget {
+  ControllerPage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ControllerPageState createState() => _ControllerPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
+class _ControllerPageState extends State<ControllerPage> {
   @override
   void initState() {
     super.initState();
@@ -62,37 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    return Container();
   }
 }

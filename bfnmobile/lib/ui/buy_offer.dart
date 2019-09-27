@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
 import 'package:bfnlibrary/util/functions.dart';
+import 'package:bfnlibrary/util/net.dart';
 import 'package:bfnlibrary/util/prefs.dart';
+import 'package:bfnlibrary/util/snack.dart';
 import 'package:flutter/material.dart';
 
 class BuyOffer extends StatefulWidget {
@@ -15,7 +17,7 @@ class BuyOffer extends StatefulWidget {
   _BuyOfferState createState() => _BuyOfferState();
 }
 
-class _BuyOfferState extends State<BuyOffer> {
+class _BuyOfferState extends State<BuyOffer> implements SnackBarListener {
   AccountInfo account;
   var _key = GlobalKey<ScaffoldState>();
   @override
@@ -63,17 +65,272 @@ class _BuyOfferState extends State<BuyOffer> {
                   ),
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 20,
                 ),
               ],
             ),
-            preferredSize: Size.fromHeight(60)),
+            preferredSize: Size.fromHeight(100)),
+      ),
+      backgroundColor: Colors.brown[100],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: <Widget>[
+//            Text(
+//              'Buy Invoice Offer',
+//              style: Styles.blackBoldLarge,
+//            ),
+            SizedBox(
+              height: 20,
+            ),
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Customer',
+                            style: Styles.greyLabelSmall,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            widget.offer.customer.name,
+                            style: Styles.blackBoldMedium,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Supplier',
+                            style: Styles.greyLabelSmall,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            widget.offer.supplier.name,
+                            style: Styles.blackBoldMedium,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Buyer',
+                            style: Styles.greyLabelSmall,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            widget.offer.investor.name,
+                            style: Styles.blueBoldSmall,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Invoice Amount',
+                            style: Styles.greyLabelSmall,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(getCurrency(
+                              widget.offer.originalAmount, context)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 28,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Discount',
+                            style: Styles.greyLabelSmall,
+                          ),
+                          SizedBox(
+                            width: 24,
+                          ),
+                          Text(
+                            '${getCurrency(widget.offer.discount, context)} %',
+                            style: Styles.tealBoldLarge,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Amount',
+                            style: Styles.greyLabelSmall,
+                          ),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            getCurrency(widget.offer.offerAmount, context),
+                            style: Styles.blackBoldLarge,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Offered',
+                            style: Styles.greyLabelSmall,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            getFormattedDateShortWithTime(
+                                widget.offer.offerDate, context),
+                            style: Styles.blueSmall,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      RaisedButton(
+                        onPressed: _confirm,
+                        elevation: 8,
+                        color: Theme.of(context).primaryColor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            "Submit Buy Instruction",
+                            style: Styles.whiteSmall,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
+  String getCurrency(double amt, BuildContext context) {
+    return getFormattedAmount(amt.toString(), context);
+  }
+
   _exit() {
     Navigator.pop(context);
+  }
+
+  void _confirm() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Purchase Confirmation'),
+            content: Container(
+              height: 180,
+              child: Column(
+                children: <Widget>[
+                  Text(
+                      'Please confirm your purchase instruction. You will be notified when the transaction is sucessful. Sometimes someone else may have bought this offer just before you did'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    getCurrency(widget.offer.offerAmount, context),
+                    style: Styles.blackBoldLarge,
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Cancel',
+                  style: Styles.blueBoldSmall,
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _submitOffer();
+                },
+                child: Text(
+                  'CONFIRM',
+                  style: Styles.pinkBoldMedium,
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  _submitOffer() async {
+    AppSnackbar.showSnackbarWithProgressIndicator(
+        scaffoldKey: _key,
+        message: 'Submitting Buy Instruction',
+        textColor: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor);
+    try {
+      var result = await Net.buyInvoiceOffer(widget.offer.invoiceId);
+      print('👽 👽 👽 👽 👽  result of buyOffer call: $result');
+
+      AppSnackbar.showSnackbarWithAction(
+          scaffoldKey: _key,
+          message: 'Submission completed OK',
+          textColor: Colors.white,
+          action: 1,
+          actionLabel: 'OK',
+          listener: this,
+          backgroundColor: Colors.teal[900]);
+    } catch (e) {
+      AppSnackbar.showErrorSnackbar(
+          scaffoldKey: _key, message: 'Submission failed', actionLabel: '');
+    }
+  }
+
+  @override
+  onActionPressed(int action) {
+    switch (action) {
+      case 1:
+        Navigator.pop(context);
+    }
+    return null;
   }
 }
 

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.PublicKey;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -40,9 +41,10 @@ public class InvoiceOfferContract implements Contract {
             throw new IllegalArgumentException("Only MakeOffer or BuyOffer command allowed");
         }
         List<PublicKey> requiredSigners = command.getSigners();
-        logger.info(" \uD83D\uDD34  \uD83D\uDD34 Required signers: " + requiredSigners.size());
+        logger.info(" \uD83E\uDD8B \uD83E\uDD8B \uD83E\uDD8B  Required signers: " + requiredSigners.size());
         for (PublicKey key: requiredSigners) {
-            logger.info(" \uD83D\uDD34 Required signer publicKey: ".concat(key.toString()));
+            String sKey = Base64.getEncoder().encodeToString(key.getEncoded());
+            logger.info(" \uD83E\uDD8B  Required signer publicKey: ".concat(sKey));
         }
         ContractState contractState = tx.getOutput(0);
         if (!(contractState instanceof InvoiceOfferState)) {
@@ -67,23 +69,33 @@ public class InvoiceOfferContract implements Contract {
         if (invoiceState.getOfferDate().getTime() > new Date().getTime()) {
             throw new IllegalArgumentException("Offer date cannot be in the future");
         }
-
-
         //check signatures of all parties
         PublicKey supplierPublicKey = invoiceState.getSupplier().getHost().getOwningKey();
-        logger.info(" \uD83D\uDD34 Supplier publicKey: ".concat(supplierPublicKey.toString()));
+        String sKey = Base64.getEncoder().encodeToString(supplierPublicKey.getEncoded());
+        logger.info(" \uD83D\uDD34 Supplier publicKey: ".concat(sKey).concat(" ☘️ Node: ")
+                .concat(invoiceState.getSupplier().getName())
+                .concat(" - ").concat(invoiceState.getSupplier().getHost().getName().getOrganisation()));
         if (!requiredSigners.contains(supplierPublicKey)) {
             throw new IllegalArgumentException("Supplier Party must sign");
         }
+
         PublicKey investorPublicKey = invoiceState.getInvestor().getHost().getOwningKey();
-        logger.info(" \uD83D\uDD34 Investor publicKey: ".concat(supplierPublicKey.toString()));
+        String iKey = Base64.getEncoder().encodeToString(investorPublicKey.getEncoded());
+        logger.info(" \uD83D\uDD34 Investor publicKey: ".concat(iKey).concat(" ☘️ Node: ")
+                .concat(invoiceState.getInvestor().getName())
+                .concat(" - ").concat(invoiceState.getInvestor().getHost().getName().getOrganisation()));
         if (!requiredSigners.contains(investorPublicKey)) {
             throw new IllegalArgumentException("Investor Party must sign");
         }
+
         PublicKey customerPublicKey = invoiceState.getCustomer().getHost().getOwningKey();
-        logger.info(" \uD83D\uDD34 Customer publicKey: ".concat(supplierPublicKey.toString()));
+        String cKey = Base64.getEncoder().encodeToString(supplierPublicKey.getEncoded());
+        logger.info(" \uD83D\uDD34 Customer publicKey: ".concat(cKey).concat(" ☘️ Node: ")
+                .concat(invoiceState.getCustomer().getName())
+                .concat(" - ").concat(invoiceState.getCustomer().getHost().getName().getOrganisation()));
+
         if (!requiredSigners.contains(customerPublicKey)) {
-            throw new IllegalArgumentException("Customer Party must sign");
+            throw new IllegalArgumentException("Customer Party must definitely sign");
         }
         logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 InvoiceOfferContract: verification done OK! .....\uD83E\uDD1F \uD83E\uDD1F ");
 

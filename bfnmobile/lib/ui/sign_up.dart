@@ -54,9 +54,7 @@ class _SignUpState extends State<SignUp> {
       }
     });
     print('..................dropDownItems: ${items.length}');
-//    setState(() {});
-
-//    _dropDownChanged(nodes.elementAt(0));
+    setState(() {});
   }
 
   @override

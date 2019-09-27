@@ -92,7 +92,10 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
                   RaisedButton(
                     onPressed: _getTradingAccount,
                     elevation: 2,
-                    child: Text('Select Investor'),
+                    child: Text(
+                      'Select Investor',
+                      style: Styles.whiteSmall,
+                    ),
                   ),
                   tradingAccount == null
                       ? Container()
@@ -169,7 +172,7 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
       investor: tradingAccount,
       supplier: widget.invoice.supplier,
       customer: widget.invoice.customer,
-      owner: acct,
+      owner: widget.invoice.supplier,
       originalAmount: widget.invoice.totalAmount,
       invoiceId: widget.invoice.invoiceId,
     );

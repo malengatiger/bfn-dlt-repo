@@ -120,7 +120,7 @@ class Net {
     if (bag != null) {
       body = json.encode(bag);
     }
-    debugPrint('🍊 🍊 🍊 Net: post ... calling with bag: $bag');
+    debugPrint('🍊 🍊 🍊 Net: post ... calling with bag: $body');
     var resp = await client
         .post(
       mUrl,
@@ -131,7 +131,7 @@ class Net {
       debugPrint('🍊 🍊 🍊 Net: post whenComplete ');
       client.close();
     });
-    print(resp);
+    print(resp.body);
     var end = DateTime.now();
     debugPrint(
         '🍎 🍊 Net: post  ##################### elapsed: ${end.difference(start).inSeconds} seconds\n\n');
@@ -173,11 +173,10 @@ class Net {
   }
 
   static Future<String> buyInvoiceOffer(String invoiceId) async {
-    var user = await auth.currentUser();
-    var bag = {"invoiceId": invoiceId, "investorId": user.uid};
+    var user = await Prefs.getAccount();
     var node = await Prefs.getNode();
-    final response =
-        await post(node.webAPIUrl + 'investor/buyInvoiceOffer', bag);
+    final response = await get(node.webAPIUrl +
+        'investor/buyInvoiceOffer?invoiceId=$invoiceId&investorId=${user.identifier}');
     return response;
   }
 

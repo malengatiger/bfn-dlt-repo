@@ -5,16 +5,11 @@ import com.bfn.contracts.InvoiceOfferContract;
 import com.bfn.flows.admin.BFNCordaService;
 import com.bfn.states.InvoiceOfferState;
 import com.google.common.collect.ImmutableList;
-import com.r3.corda.lib.accounts.workflows.flows.RequestKeyForAccount;
-import com.r3.corda.lib.accounts.workflows.services.AccountService;
-import com.r3.corda.lib.accounts.workflows.services.KeyManagementBackedAccountService;
 import net.corda.core.contracts.StateAndRef;
 import net.corda.core.flows.*;
-import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
 import net.corda.core.node.NodeInfo;
 import net.corda.core.node.ServiceHub;
-import net.corda.core.node.services.KeyManagementService;
 import net.corda.core.node.services.Vault;
 import net.corda.core.node.services.vault.PageSpecification;
 import net.corda.core.node.services.vault.QueryCriteria;
@@ -25,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +29,7 @@ import java.util.List;
 public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
     private final static Logger logger = LoggerFactory.getLogger(BuyInvoiceOfferFlow.class);
 
-    final StateAndRef<InvoiceOfferState> invoiceOfferState;
+    private final StateAndRef<InvoiceOfferState> invoiceOfferState;
     private final ProgressTracker.Step SENDING_TRANSACTION = new ProgressTracker.Step("Sending transaction to counterParty");
     private final ProgressTracker.Step GENERATING_TRANSACTION = new ProgressTracker.Step("Generating transaction based on new IOU.");
     private final ProgressTracker.Step VERIFYING_TRANSACTION = new ProgressTracker.Step("Verifying contract constraints.");
@@ -72,27 +68,29 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
     public BuyInvoiceOfferFlow(StateAndRef<InvoiceOfferState> invoiceOfferState) {
         this.invoiceOfferState = invoiceOfferState;
     }
-    private static final int LOCAL_SUPPLIER = 1, LOCAL_INVESTOR = 2, REMOTE_SUPPLIER = 3, REMOTE_INVESTOR = 4;
 
     @Override
     @Suspendable
     public SignedTransaction call() throws FlowException {
-        // We retrieve the notary identity from the network map.
         final ServiceHub serviceHub = getServiceHub();
         logger.info(" \uD83E\uDD1F \uD83E\uDD1F  \uD83E\uDD1F \uD83E\uDD1F  ... BuyInvoiceOfferFlow call started ...");
         Party notary = serviceHub.getNetworkMapCache().getNotaryIdentities().get(0);
 
         checkIfAlreadyConsumed(serviceHub);
+        //todo - just a CordaService test ..no-op
         BFNCordaService bfnCordaService = serviceHub.cordaService(BFNCordaService.class);
         bfnCordaService.getInfo();
 
         InvoiceOfferContract.BuyOffer command = new InvoiceOfferContract.BuyOffer();
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Notary: " + notary.getName().toString()
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 InvoiceOfferContract.BuyOffer Notary: " + notary.getName().toString()
                 + "  \uD83C\uDF4A supplierParty: " + invoiceOfferState.getState().getData().getSupplier().getName()
-                + "  \uD83C\uDF4AinvestorParty: "+ invoiceOfferState.getState().getData().getInvestor().getName()
-                +" \uD83C\uDF4E  discount: " + invoiceOfferState.getState().getData().getDiscount()
+                + "  \uD83C\uDF4AinvestorParty: " + invoiceOfferState.getState().getData().getInvestor().getName()
+                + " \uD83C\uDF4E  discount: " + invoiceOfferState.getState().getData().getDiscount()
                 + "  \uD83D\uDC9A offerAmount" + invoiceOfferState.getState().getData().getOfferAmount());
 
+        logger.info("\uD83D\uDC38 Ref State: txHash: ".concat(invoiceOfferState.getRef().getTxhash().toString()
+                .concat(" \uD83D\uDC38 index: ")
+                .concat("" + invoiceOfferState.getRef().getIndex())));
         progressTracker.setCurrentStep(GENERATING_TRANSACTION);
         InvoiceOfferState oldState = invoiceOfferState.getState().getData();
         InvoiceOfferState offerState = new InvoiceOfferState(
@@ -110,16 +108,18 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
                 oldState.getCustomer());
 
         Party supplierParty = invoiceOfferState.getState().getData().getSupplier().getHost();
-        Party investorParty = invoiceOfferState.getState().getData().getInvestor().getHost();;
+        Party investorParty = invoiceOfferState.getState().getData().getInvestor().getHost();
+        Party customerParty = invoiceOfferState.getState().getData().getCustomer().getHost();
 
         PublicKey investorKey = investorParty.getOwningKey();
         PublicKey supplierKey = supplierParty.getOwningKey();
+        PublicKey customerKey = customerParty.getOwningKey();
 
         TransactionBuilder txBuilder = new TransactionBuilder(notary);
         txBuilder.addInputState(invoiceOfferState);
         txBuilder.addOutputState(offerState, InvoiceOfferContract.ID);
 
-        txBuilder.addCommand(command, supplierKey, investorKey);
+        txBuilder.addCommand(command, supplierKey, investorKey, customerKey);
 
         progressTracker.setCurrentStep(VERIFYING_TRANSACTION);
         txBuilder.verify(serviceHub);
@@ -131,53 +131,57 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
         NodeInfo nodeInfo = serviceHub.getMyInfo();
         String investorOrg = offerState.getInvestor().getHost().getName().getOrganisation();
         String supplierOrg = offerState.getSupplier().getHost().getName().getOrganisation();
+        String customerOrg = offerState.getCustomer().getHost().getName().getOrganisation();
 
         String thisNodeOrg = nodeInfo.getLegalIdentities().get(0).getName().getOrganisation();
-        int supplierStatus, investorStatus;
-        if (supplierOrg.equalsIgnoreCase(thisNodeOrg)) {
-            supplierStatus = LOCAL_SUPPLIER;
-        } else {
-            supplierStatus = REMOTE_SUPPLIER;
-        }
-        if (investorOrg.equalsIgnoreCase(thisNodeOrg)) {
-            investorStatus = LOCAL_INVESTOR;
-        } else {
-            investorStatus = REMOTE_INVESTOR;
-        }
-        if (supplierStatus == LOCAL_SUPPLIER && investorStatus == LOCAL_INVESTOR) {
-            logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Supplier and Customer are on the same node ...");
-            logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Registration: signInitialTransaction executed ...");
+        Matrix matrix = new Matrix();
+
+        matrix.supplierIsRemote = !supplierOrg.equalsIgnoreCase(thisNodeOrg);
+        matrix.investorIsRemote = !investorOrg.equalsIgnoreCase(thisNodeOrg);
+        matrix.customerIsRemote = !customerOrg.equalsIgnoreCase(thisNodeOrg);
+
+        if (!matrix.supplierIsRemote && !matrix.customerIsRemote && !matrix.investorIsRemote) {
+            logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 All participants are LOCAL ...");
             SignedTransaction mSignedTransactionDone = subFlow(
                     new FinalityFlow(signedTx, ImmutableList.of(), FINALISING_TRANSACTION.childProgressTracker()));
             logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  SAME NODE ==> " +
                     "FinalityFlow has been executed ... \uD83E\uDD66 \uD83E\uDD66");
             return mSignedTransactionDone;
         }
-        logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 Supplier and Customer are NOT on the same node ..." +
-                "  \uD83D\uDE21 flowSession(s) required");
 
         FlowSession supplierSession;
         FlowSession investorSession;
-        SignedTransaction signedTransaction = null;
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 Invoice Registration: signInitialTransaction executed ...");
+        FlowSession customerSession;
+        SignedTransaction signedTransaction;
 
-        if (supplierStatus == LOCAL_SUPPLIER && investorStatus == REMOTE_INVESTOR) {
-            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 LOCAL_SUPPLIER and REMOTE_CUSTOMER ...");
+        if (matrix.supplierIsRemote && matrix.customerIsRemote && matrix.investorIsRemote) {
+            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 All participants are REMOTE");
             investorSession = initiateFlow(investorParty);
-            signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(investorSession));
-        }
-        if (supplierStatus == REMOTE_SUPPLIER && investorStatus == LOCAL_INVESTOR) {
-            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 REMOTE_SUPPLIER and LOCAL_CUSTOMER ...");
             supplierSession = initiateFlow(supplierParty);
-            signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(supplierSession));
+            customerSession = initiateFlow(customerParty);
+            signedTransaction = getSignedTransaction(signedTx,
+                    ImmutableList.of(investorSession, supplierSession, customerSession));
+            return signedTransaction;
         }
-        if (supplierStatus == REMOTE_SUPPLIER && investorStatus == REMOTE_INVESTOR) {
-            logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 REMOTE_SUPPLIER and REMOTE_CUSTOMER ...");
+        logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 Some participants are REMOTE and some are LOCAL");
+        List<FlowSession> flowSessions = new ArrayList<>();
+        if (matrix.customerIsRemote) {
+            customerSession = initiateFlow(customerParty);
+            flowSessions.add(customerSession);
+        }
+        if (matrix.supplierIsRemote) {
             supplierSession = initiateFlow(supplierParty);
-            investorSession = initiateFlow(investorParty);
-            signedTransaction = getSignedTransaction(signedTx, ImmutableList.of(supplierSession, investorSession));
-        }
+            flowSessions.add(supplierSession);
 
+        }
+        if (matrix.investorIsRemote) {
+            investorSession = initiateFlow(investorParty);
+            flowSessions.add(investorSession);
+        }
+        logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 Number of Flow Sessions for REMOTE participants: "
+                + flowSessions.size()
+                + " - signing transactions on different nodes");
+        signedTransaction = getSignedTransaction(signedTx, flowSessions);
         return signedTransaction;
 
     }
@@ -186,14 +190,14 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
     private void checkIfAlreadyConsumed(ServiceHub serviceHub) throws FlowException {
         QueryCriteria.VaultQueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(
                 Vault.StateStatus.CONSUMED);
-        Vault.Page page = serviceHub.getVaultService().queryBy(InvoiceOfferState.class,criteria,
-                new PageSpecification(1,200));
+        Vault.Page page = serviceHub.getVaultService().queryBy(InvoiceOfferState.class, criteria,
+                new PageSpecification(1, 200));
         List<StateAndRef<InvoiceOfferState>> refs = page.getStates();
         boolean isFound = false;
         logger.info(" \uD83D\uDCA6 \uD83D\uDCA6 Number of consumed InvoiceOfferStates: " +
                 "\uD83D\uDCA6 " + refs.size() + "  \uD83D\uDCA6");
 
-        for (StateAndRef<InvoiceOfferState> ref: refs) {
+        for (StateAndRef<InvoiceOfferState> ref : refs) {
             InvoiceOfferState state = ref.getState().getData();
             if (invoiceOfferState.getState().getData().getInvoiceId().toString()
                     .equalsIgnoreCase(state.getInvoiceId().toString())) {
@@ -201,7 +205,9 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
             }
         }
         if (isFound) {
-            throw new FlowException("InvoiceOfferState is already CONSUMED");
+            logger.warn(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 " +
+                    "Attempt to consume state ALREADY consumed  \uD83D\uDE21  \uD83D\uDE21 ");
+            throw new FlowException("InvoiceOfferState is already  \uD83D\uDE21 CONSUMED");
         }
     }
 
@@ -223,8 +229,13 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
                 new FinalityFlow(signedTransaction, sessions,
                         FINALISING_TRANSACTION.childProgressTracker()));
         logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  " +
-                " \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C OTHER NODE(S): FinalityFlow has been executed ... " +
+                " \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C MULTIPLE NODE(S): FinalityFlow has been executed ... " +
                 "\uD83E\uDD66 \uD83E\uDD66");
         return mSignedTransactionDone;
     }
+
+    private class Matrix {
+        boolean supplierIsRemote, customerIsRemote, investorIsRemote;
+    }
 }
+

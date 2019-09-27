@@ -11,10 +11,13 @@ import 'package:bfnlibrary/util/net.dart';
 import 'package:bfnlibrary/util/prefs.dart';
 import 'package:bfnlibrary/util/slide_right.dart';
 import 'package:bfnlibrary/util/snack.dart';
+import 'package:bfnlibrary/util/theme_bloc.dart';
+import 'package:bfnlibrary/util/theme_util.dart';
 import 'package:bfnmobile/bloc.dart';
 import 'package:bfnmobile/ui/buy_offer.dart';
 import 'package:bfnmobile/ui/list_tabs.dart';
 import 'package:bfnmobile/ui/network_accounts.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +29,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   var _key = GlobalKey<ScaffoldState>();
+  ThemeChanger themeChanger;
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   List<AccountInfo> accountMessages = List();
   List<Invoice> invoiceMessages = List(), myInvoices = List();
@@ -41,6 +45,19 @@ class _DashboardState extends State<Dashboard> {
     _firebaseCloudMessaging();
     _getNodes();
     _refresh();
+
+    //
+  }
+
+  void changeBrightness() {
+    DynamicTheme.of(context).setBrightness(
+        Theme.of(context).brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark);
+  }
+
+  void _changeTheme() {
+    themeBloc.changeToRandomTheme();
   }
 
   _getDashboardData() async {
@@ -163,9 +180,10 @@ class _DashboardState extends State<Dashboard> {
     if (account == null) {
       account = await Prefs.getAccount();
     }
-    setState(() {
-      contents.clear();
-    });
+//    setState(() {
+//
+//    });
+    contents.clear();
     await _getMyData();
     data = await _getDashboardData();
   }
@@ -179,8 +197,11 @@ class _DashboardState extends State<Dashboard> {
       child: Scaffold(
         key: _key,
         appBar: AppBar(
-          leading: Container(),
-          title: Text("Business Finance Network"),
+          leading: IconButton(
+            icon: Icon(Icons.brightness_7),
+            onPressed: _changeTheme,
+          ),
+          title: Text("BFN"),
           elevation: 8,
           actions: <Widget>[
             IconButton(
@@ -189,18 +210,22 @@ class _DashboardState extends State<Dashboard> {
             ),
             IconButton(
               icon: Icon(Icons.person_add),
-              onPressed: _changeAccount,
+              onPressed: () {
+                _changeAccount();
+              },
             ),
           ],
           bottom: PreferredSize(
               child: Column(
                 children: <Widget>[
-                  NameBadge(
-                    account: account,
-                    nameStyle: Styles.blackBoldMedium,
-                    nodeStyle: Styles.whiteSmall,
-                    elevation: 2,
-                  ),
+                  account == null
+                      ? Container()
+                      : NameBadge(
+                          account: account,
+                          nameStyle: Styles.whiteBoldMedium,
+                          nodeStyle: Styles.whiteSmall,
+                          elevation: 2,
+                        ),
                   SizedBox(
                     height: 12,
                   ),

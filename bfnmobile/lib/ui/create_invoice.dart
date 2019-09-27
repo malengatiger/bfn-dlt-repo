@@ -33,6 +33,7 @@ class _CreateInvoiceState extends State<CreateInvoice>
 
   _init() async {
     account = await Prefs.getAccount();
+    setState(() {});
   }
 
   _setTotalAmount() {
@@ -64,12 +65,14 @@ class _CreateInvoiceState extends State<CreateInvoice>
           preferredSize: Size.fromHeight(80),
           child: Column(
             children: <Widget>[
-              NameBadge(
-                account: account,
-                nodeStyle: Styles.whiteSmall,
-                nameStyle: Styles.blackBoldMedium,
-                elevation: 2,
-              ),
+              account == null
+                  ? Container()
+                  : NameBadge(
+                      account: account,
+                      nodeStyle: Styles.whiteSmall,
+                      nameStyle: Styles.blackBoldMedium,
+                      elevation: 2,
+                    ),
               SizedBox(
                 height: 20,
               ),
@@ -93,7 +96,10 @@ class _CreateInvoiceState extends State<CreateInvoice>
                   elevation: 2,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Select Supplier'),
+                    child: Text(
+                      'Select Supplier',
+                      style: Styles.whiteSmall,
+                    ),
                   ),
                   onPressed: _onAccountRequested,
                 ),
