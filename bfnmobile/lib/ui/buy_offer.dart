@@ -8,6 +8,8 @@ import 'package:bfnlibrary/util/prefs.dart';
 import 'package:bfnlibrary/util/snack.dart';
 import 'package:flutter/material.dart';
 
+import '../bloc.dart';
+
 class BuyOffer extends StatefulWidget {
   final InvoiceOffer offer;
 
@@ -43,6 +45,7 @@ class _BuyOfferState extends State<BuyOffer> implements SnackBarListener {
     setState(() {});
   }
 
+  String message;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +70,20 @@ class _BuyOfferState extends State<BuyOffer> implements SnackBarListener {
                 SizedBox(
                   height: 20,
                 ),
+                StreamBuilder<String>(
+                    stream: bfnBloc.fcmStream,
+                    initialData: 'No network message yet',
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        debugPrint(
+                            ' 😡  😡  😡  😡  FCM message arrived on Stream: ${snapshot.data}  😡  😡  😡  😡 ');
+                        message = snapshot.data;
+                      }
+                      return Text(
+                        '$message',
+                        style: Styles.whiteSmall,
+                      );
+                    }),
               ],
             ),
             preferredSize: Size.fromHeight(100)),
@@ -350,6 +367,13 @@ class NameBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StringBuffer loc = StringBuffer();
+    var mList = account.host.split(',');
+    mList.forEach((m) {
+      var xList = m.split('=');
+      loc.write(xList.elementAt(1) + ' ');
+    });
+    var node = loc.toString();
     return Card(
       elevation: elevation == null ? 0 : elevation,
       color: backgroundColor == null
@@ -367,7 +391,7 @@ class NameBadge extends StatelessWidget {
               height: 4,
             ),
             Text(
-              account.host,
+              node,
               style: nodeStyle == null ? Styles.blackSmall : nodeStyle,
             ),
             SizedBox(

@@ -11,6 +11,7 @@ import 'package:bfnmobile/ui/network_accounts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../bloc.dart';
 import 'buy_offer.dart';
 
 class CreateOffer extends StatefulWidget {
@@ -39,7 +40,7 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
     setState(() {});
   }
 
-  String discount;
+  String discount, message;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +48,7 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
       appBar: AppBar(
         title: Text('Create Offer'),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(80),
+          preferredSize: Size.fromHeight(120),
           child: Column(
             children: <Widget>[
               NameBadge(
@@ -56,6 +57,23 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
                 nameStyle: Styles.blackBoldMedium,
                 elevation: 2,
               ),
+              SizedBox(
+                height: 20,
+              ),
+              StreamBuilder<String>(
+                  stream: bfnBloc.fcmStream,
+                  initialData: 'No network message yet',
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      debugPrint(
+                          '😡  😡  😡  😡  CreateOffer: FCM message arrived on Stream: ${snapshot.data}  😡  😡  😡  😡 ');
+                      message = snapshot.data;
+                    }
+                    return Text(
+                      '$message',
+                      style: Styles.whiteSmall,
+                    );
+                  }),
               SizedBox(
                 height: 20,
               ),

@@ -39,13 +39,15 @@ class _InvoicesPageState extends State<InvoicesPage>
   _getInvoicesAndOffers() async {
     account = await bfnBloc.getMyAccount();
     print("My account: 🍊 🍊 🍊 ${account.toJson()} 🍊 🍊 🍊 ");
-    offers =
-        await bfnBloc.getInvoiceOffers(accountId: bfnBloc.account.identifier);
+    offers = await bfnBloc.getInvoiceOffers(
+        accountId: bfnBloc.account.identifier, consumed: false);
     invoices = await bfnBloc.getInvoices(accountId: bfnBloc.account.identifier);
     offers.sort((a, b) => b.offerDate.compareTo(a.offerDate));
     invoices.sort((a, b) => b.dateRegistered.compareTo(a.dateRegistered));
     setState(() {});
   }
+
+  String message;
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +89,26 @@ class _InvoicesPageState extends State<InvoicesPage>
                                   nameStyle: Styles.whiteBoldMedium,
                                   elevation: 3,
                                 ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          StreamBuilder<String>(
+                              stream: bfnBloc.fcmStream,
+                              initialData: 'No network message yet',
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  debugPrint(
+                                      '😡  😡  😡  😡  FCM message arrived on Stream: ${snapshot.data}  😡  😡  😡  😡 ');
+                                  message = snapshot.data;
+                                }
+                                return Text(
+                                  '$message',
+                                  style: Styles.whiteSmall,
+                                );
+                              }),
+                          SizedBox(
+                            height: 20,
+                          ),
                           TabBar(
                             tabs: [
                               Tab(
@@ -105,7 +127,7 @@ class _InvoicesPageState extends State<InvoicesPage>
                           ),
                         ],
                       ),
-                      preferredSize: Size.fromHeight(160)),
+                      preferredSize: Size.fromHeight(200)),
                   title: Text('Invoices & Offers'),
                 ),
                 backgroundColor: Colors.brown[100],

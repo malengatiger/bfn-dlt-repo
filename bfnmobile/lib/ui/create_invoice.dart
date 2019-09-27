@@ -9,6 +9,8 @@ import 'package:bfnmobile/ui/buy_offer.dart';
 import 'package:bfnmobile/ui/network_accounts.dart';
 import 'package:flutter/material.dart';
 
+import '../bloc.dart';
+
 class CreateInvoice extends StatefulWidget {
   @override
   _CreateInvoiceState createState() => _CreateInvoiceState();
@@ -55,6 +57,7 @@ class _CreateInvoiceState extends State<CreateInvoice>
     return getFormattedAmount(amt.toString(), context);
   }
 
+  String message;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +65,7 @@ class _CreateInvoiceState extends State<CreateInvoice>
       appBar: AppBar(
         title: Text('Create Invoice'),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(80),
+          preferredSize: Size.fromHeight(120),
           child: Column(
             children: <Widget>[
               account == null
@@ -73,6 +76,23 @@ class _CreateInvoiceState extends State<CreateInvoice>
                       nameStyle: Styles.blackBoldMedium,
                       elevation: 2,
                     ),
+              SizedBox(
+                height: 20,
+              ),
+              StreamBuilder<String>(
+                  stream: bfnBloc.fcmStream,
+                  initialData: 'No network message yet',
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      debugPrint(
+                          '😡  😡  😡  😡  CreateInvoice: FCM message arrived on Stream: ${snapshot.data}  😡  😡  😡  😡 ');
+                      message = snapshot.data;
+                    }
+                    return Text(
+                      '$message',
+                      style: Styles.whiteSmall,
+                    );
+                  }),
               SizedBox(
                 height: 20,
               ),
@@ -218,7 +238,7 @@ class _CreateInvoiceState extends State<CreateInvoice>
                                 height: 24,
                               ),
                               RaisedButton(
-                                color: Colors.indigo,
+//                                color: Colors.indigo,
                                 elevation: 8,
                                 onPressed: _onInvoiceSubmitRequested,
                                 child: Padding(

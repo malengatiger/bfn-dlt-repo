@@ -95,7 +95,7 @@ class _DashboardState extends State<Dashboard> {
     if (Platform.isIOS) iOS_Permission();
 
     _firebaseMessaging.getToken().then((token) {
-      print(token);
+      print("FCM user token :: $token");
     });
 
     _firebaseMessaging.configure(
@@ -108,18 +108,21 @@ class _DashboardState extends State<Dashboard> {
           offerMessages.add(m);
           _showMessage(
               'New Invoice Offer, amount: ' + m.offerAmount.toString());
+          bfnBloc.addFCMInvoiceOffer(m, context);
         }
         if (data['invoice'] != null) {
-          var offer = json.decode(data['invoice']);
-          var m = Invoice.fromJson(offer);
+          var invJson = json.decode(data['invoice']);
+          var m = Invoice.fromJson(invJson);
           invoiceMessages.add(m);
           _showMessage('New Invoice, amount: ' + m.totalAmount.toString());
+          bfnBloc.addFCMInvoice(m, context);
         }
         if (data['account'] != null) {
           var offer = json.decode(data['account']);
           var m = AccountInfo.fromJson(offer);
           accountMessages.add(m);
           _showMessage('New Account, name: ' + m.name.toString());
+          bfnBloc.addFCMAccount(m, context);
         }
         _refresh();
       },
@@ -180,15 +183,13 @@ class _DashboardState extends State<Dashboard> {
     if (account == null) {
       account = await Prefs.getAccount();
     }
-//    setState(() {
-//
-//    });
     contents.clear();
     await _getMyData();
     data = await _getDashboardData();
   }
 
   List<Content> contents = List();
+  String message;
 
   @override
   Widget build(BuildContext context) {
@@ -216,22 +217,52 @@ class _DashboardState extends State<Dashboard> {
             ),
           ],
           bottom: PreferredSize(
-              child: Column(
-                children: <Widget>[
-                  account == null
-                      ? Container()
-                      : NameBadge(
-                          account: account,
-                          nameStyle: Styles.whiteBoldMedium,
-                          nodeStyle: Styles.whiteSmall,
-                          elevation: 2,
-                        ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8),
+                child: Column(
+                  children: <Widget>[
+                    account == null
+                        ? Container()
+                        : NameBadge(
+                            account: account,
+                            nameStyle: Styles.whiteBoldMedium,
+                            nodeStyle: Styles.whiteSmall,
+                            elevation: 2,
+                          ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 8,
+                          ),
+                          StreamBuilder<String>(
+                              stream: bfnBloc.fcmStream,
+                              initialData: 'No network message yet',
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  debugPrint(
+                                      ' 😡  😡  😡  😡  FCM message arrived on Stream: ${snapshot.data}  😡  😡  😡  😡 ');
+                                  message = snapshot.data;
+                                }
+                                return Text(
+                                  '$message',
+                                  style: Styles.whiteSmall,
+                                );
+                              }),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                  ],
+                ),
               ),
-              preferredSize: Size.fromHeight(80)),
+              preferredSize: Size.fromHeight(120)),
         ),
         backgroundColor: Colors.brown[100],
         body: GridView.builder(

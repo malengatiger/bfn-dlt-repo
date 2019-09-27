@@ -4,6 +4,7 @@ import 'package:bfnlibrary/data/account.dart';
 import 'package:bfnlibrary/data/dashboard_data.dart';
 import 'package:bfnlibrary/data/invoice.dart';
 import 'package:bfnlibrary/data/invoice_offer.dart';
+import 'package:bfnlibrary/util/functions.dart';
 import 'package:bfnlibrary/util/net.dart';
 import 'package:bfnlibrary/util/prefs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,8 +19,15 @@ class BFNBloc {
       StreamController.broadcast();
   StreamController<List<InvoiceOffer>> offerController =
       StreamController.broadcast();
+
+  StreamController<String> fcmController = StreamController.broadcast();
+  StreamController<Invoice> invoiceFCMController = StreamController.broadcast();
+  StreamController<InvoiceOffer> offerFCMController =
+      StreamController.broadcast();
+
   StreamController<DashboardData> dashController = StreamController.broadcast();
 
+  Stream get fcmStream => fcmController.stream;
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseUser user;
   AccountInfo account;
@@ -37,6 +45,32 @@ class BFNBloc {
     invoiceController.close();
     offerController.close();
     dashController.close();
+    fcmController.close();
+    invoiceFCMController.close();
+    offerFCMController.close();
+  }
+
+  void addFCMInvoice(Invoice invoice, BuildContext context) {
+    debugPrint(
+        '🥬 🥬 🥬 Putting arrived FCM message on stream: 🥬 invoice: ${invoice.invoiceNumber}');
+    var msg =
+        '🥬 Invoice added to Network ${getFormattedDateShortWithTime(invoice.dateRegistered, context)}';
+    fcmController.sink.add(msg);
+  }
+
+  void addFCMInvoiceOffer(InvoiceOffer invoiceOffer, BuildContext context) {
+    debugPrint(
+        '🥬 🥬 🥬 Putting arrived FCM message on stream: 🥬 invoiceOffer: ${invoiceOffer.invoiceId}');
+    var msg =
+        '🍎 Offer added to Network ${getFormattedDateShortWithTime(invoiceOffer.offerDate, context)}';
+    fcmController.sink.add(msg);
+  }
+
+  void addFCMAccount(AccountInfo account, BuildContext context) {
+    debugPrint(
+        '🥬 🥬 🥬 Putting arrived FCM message on stream: 🥬 account: ${account.name}');
+    var msg = '🧩 Account added to Network: ${account.name}';
+    fcmController.sink.add(msg);
   }
 
   Future<bool> isUserAuthenticated() async {
@@ -83,8 +117,10 @@ class BFNBloc {
     return invoices;
   }
 
-  Future<List<InvoiceOffer>> getInvoiceOffers({String accountId}) async {
-    var offers = await Net.getInvoiceOffers(accountId: accountId);
+  Future<List<InvoiceOffer>> getInvoiceOffers(
+      {String accountId, bool consumed}) async {
+    var offers =
+        await Net.getInvoiceOffers(accountId: accountId, consumed: consumed);
     print(
         '🍏 🍏 BFNBloc: getInvoiceOffers found 🔆 ${offers.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     offerController.sink.add(offers);

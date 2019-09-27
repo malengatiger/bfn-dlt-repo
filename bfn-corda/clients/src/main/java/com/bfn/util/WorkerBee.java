@@ -211,7 +211,6 @@ public class WorkerBee {
         return list;
     }
 
-    //investor27743421641@gmail.com
     public static List<InvoiceOfferDTO> getInvoiceOfferStates(CordaRPCOps proxy, String accountId, boolean consumed) throws Exception {
         logger.info("...................... accountId:  \uD83D\uDC9A ".concat(accountId == null ? "null" : accountId)
                 .concat(" consumed:  \uD83D\uDC9A " + consumed));
@@ -227,11 +226,8 @@ public class WorkerBee {
             InvoiceOfferState offerState = ref.getState().getData();
             cnt++;
             InvoiceOfferDTO offer = getDTO(offerState);
-//            logger.info("\uD83D\uDCA6 \uD83D\uDCA6 \uD83D\uDCA6 Offer #"
-//                    +cnt+" from stateAndRef, before check: " + GSON.toJson(offer));
             if (accountId == null) {
                 list.add(offer);
-//                logger.warn("\uD83D\uDCA6 \uD83D\uDCA6 \uD83D\uDCA6 accountId == null, list: " + list.size());
             } else {
                 if (offer.getSupplier().getIdentifier().equalsIgnoreCase(accountId)
                         || offer.getInvestor().getIdentifier().equalsIgnoreCase(accountId)
