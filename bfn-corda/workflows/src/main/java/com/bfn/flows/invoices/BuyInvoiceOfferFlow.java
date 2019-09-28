@@ -182,6 +182,7 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
                 + flowSessions.size()
                 + " - signing transactions on different nodes");
         signedTransaction = getSignedTransaction(signedTx, flowSessions);
+
         return signedTransaction;
 
     }

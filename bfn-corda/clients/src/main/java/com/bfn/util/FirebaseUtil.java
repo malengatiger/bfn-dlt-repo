@@ -134,8 +134,12 @@ public class FirebaseUtil {
     }
 
     public static UserRecord getUser(String email) throws FirebaseAuthException {
+        UserRecord record = null;
+        try {
+             record = auth.getUserByEmail(email);
+        } catch (Exception e) {
 
-        UserRecord record = auth.getUserByEmail(email);
+        }
         return record;
     }
 

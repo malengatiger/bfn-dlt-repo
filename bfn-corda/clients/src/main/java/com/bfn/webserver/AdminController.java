@@ -93,9 +93,9 @@ private List<String>  getStates() {
     public UserRecord getUser(@RequestParam(value = "email", required=false) String email) throws Exception {
 
         UserRecord record = FirebaseUtil.getUser(email);
-        if (record == null) {
-            throw new Exception("User not found: ".concat(email));
-        }
+//        if (record == null) {
+//            throw new Exception("User not found: ".concat(email));
+//        }
         return record;
     }
     @GetMapping(value = "getAccount")

@@ -1,6 +1,7 @@
 package com.bfn.flows.invoices;
 
 import co.paralleluniverse.fibers.Suspendable;
+import com.bfn.flows.regulator.ReportToRegulatorFlow;
 import net.corda.core.flows.*;
 import net.corda.core.identity.Party;
 import net.corda.core.node.ServiceHub;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
+import java.util.Set;
 
 @InitiatedBy(InvoiceOfferFlow.class)
 public class InvoiceOfferFlowResponder extends FlowLogic<SignedTransaction> {
@@ -43,6 +44,20 @@ public class InvoiceOfferFlowResponder extends FlowLogic<SignedTransaction> {
         SignedTransaction signedTransaction = subFlow(new ReceiveFinalityFlow(counterPartySession));
         logger.info("\uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A \uD83D\uDC99 \uD83D\uDC9C ReceiveFinalityFlow executed \uD83E\uDD1F");
         logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  Responder Transaction finalized \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C \uD83E\uDD1F \uD83C\uDF4F \uD83C\uDF4E ".concat(signedTransaction.toString()));
+
+        //todo - talk to the regulator ....
+        logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  Talking to the Regulator, Senor! ... ...");
+        Set<Party> parties = serviceHub.getIdentityService().partiesFromName("Regulator",false);
+        Party regulator = parties.iterator().next();
+        try {
+            subFlow(new ReportToRegulatorFlow(regulator,signedTransaction));
+            logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  DONE talking to the Regulator, Phew!");
+
+        } catch (Exception e) {
+            logger.error(" \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F Regulator fell down.  \uD83D\uDC7F IGNORED  \uD83D\uDC7F ", e);
+            throw new FlowException("Regulator fell down!");
+        }
+
         return signedTransaction;
 
     }

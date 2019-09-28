@@ -222,10 +222,14 @@ class Net {
     if (response.statusCode == 200) {
       debugPrint(
           '🍎 🍊 Net: getInvoices: Network Response Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      if (response.body == null) {
+        return null;
+      }
       return UserRecord.fromJson(json.decode(response.body));
     } else {
-      throw Exception(
+      print(
           ' 👿  Failed : getUser Status Code: 🥬  🥬 ${response.statusCode} 🥬 ');
+      return null;
     }
   }
 

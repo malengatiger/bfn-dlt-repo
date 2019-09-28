@@ -1,6 +1,5 @@
 package com.bfn.webserver;
 
-import com.bfn.flows.admin.ShareAccountInfoFlow;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -16,14 +15,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.springframework.boot.WebApplicationType.SERVLET;

@@ -1,0 +1,4 @@
+Corda on GCP
+
+To restart Corda run: sudo /opt/corda/run-corda.sh WEBSERVER=true
+Note: If you restart your VM you will need to restart Corda

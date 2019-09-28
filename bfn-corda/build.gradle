@@ -151,6 +151,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
 
     node {
         name "O=OCT,L=Sandton,C=ZA"
+//        webPort 10005
+//        webserverJar "clients/build/libs/clients-0.1.jar"
         p2pPort 10403
         rpcSettings {
             address("localhost:10421")
