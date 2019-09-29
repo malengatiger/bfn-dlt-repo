@@ -20,7 +20,10 @@ buildscript {
         accounts_release_group = 'com.r3.corda.lib.accounts'
         accounts_release_version = '1.0-RC01'
     }
-
+/*
+cordaVersion=5.0-SNAPSHOT
+gradlePluginsVersion=5.0.2
+*/
     repositories {
         mavenLocal()
         mavenCentral()
@@ -116,6 +119,10 @@ dependencies {
     cordaCompile "$accounts_release_group:accounts-contracts:$accounts_release_version"
     cordaCompile "$accounts_release_group:accounts-flows:$accounts_release_version"
 
+    // CorDapp dependencies.
+    cordapp "$corda_release_group:corda-finance-contracts:$corda_release_version"
+    cordapp "$corda_release_group:corda-finance-workflows:$corda_release_version"
+    cordapp "$corda_release_group:corda-confidential-identities:$corda_release_version"
 
     // Logging
     cordaCompile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j_version}"
@@ -138,6 +145,12 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
 
         cordapp("$accounts_release_group:accounts-contracts:$accounts_release_version")
         cordapp("$accounts_release_group:accounts-flows:$accounts_release_version")
+
+        cordapp("$corda_release_group:corda-finance-contracts:$corda_release_version")
+        cordapp("$corda_release_group:corda-finance-workflows:$corda_release_version")
+        cordapp("$corda_release_group:corda-confidential-identities:$corda_release_version")
+
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
     node {
         name "O=Notary,L=Pretoria,C=ZA"
@@ -150,7 +163,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
     }
 
     node {
-        name "O=OCT,L=Sandton,C=ZA"
+        name "O=OCTMainOffice,L=Sandton,C=ZA"
 //        webPort 10005
 //        webserverJar "clients/build/libs/clients-0.1.jar"
         p2pPort 10403
@@ -158,37 +171,34 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             address("localhost:10421")
             adminAddress("localhost:10422")
         }
-        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+
 
     }
-//    node {
-//        name "O=London,L=London,C=GB"
-//        p2pPort 10404
-//        rpcSettings {
-//            address("localhost:10423")
-//            adminAddress("localhost:10424")
-//        }
-//        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
-//
-//    }
-//    node {
-//        name "O=NewYork,L=New York,C=US"
-//        p2pPort 10405
-//        rpcSettings {
-//            address("localhost:10425")
-//            adminAddress("localhost:10426")
-//        }
-//        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
-//
-//    }
     node {
-        name "O=CapeTown,L=Cape Town,C=ZA"
+        name "O=OCTLondon,L=London,C=GB"
+        p2pPort 10404
+        rpcSettings {
+            address("localhost:10423")
+            adminAddress("localhost:10424")
+        }
+
+    }
+    node {
+        name "O=OCTNewYork,L=New York,C=US"
+        p2pPort 10405
+        rpcSettings {
+            address("localhost:10425")
+            adminAddress("localhost:10426")
+        }
+
+    }
+    node {
+        name "O=OCTCapeTown,L=Cape Town,C=ZA"
         p2pPort 10406
         rpcSettings {
             address("localhost:10427")
             adminAddress("localhost:10428")
         }
-        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
 
     }
     node {
@@ -198,7 +208,6 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             address("localhost:10429")
             adminAddress("localhost:10430")
         }
-        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
 
 }

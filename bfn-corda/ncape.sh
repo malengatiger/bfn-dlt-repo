@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-cd build/nodes/CapeTown
+cd build/nodes/OCTCapeTown
 java -jar corda.jar

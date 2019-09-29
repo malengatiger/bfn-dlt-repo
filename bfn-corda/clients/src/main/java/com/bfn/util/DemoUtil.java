@@ -1,15 +1,20 @@
 package com.bfn.util;
 
-import com.bfn.dto.AccountInfoDTO;
-import com.bfn.dto.DemoSummary;
-import com.bfn.dto.InvoiceDTO;
-import com.bfn.dto.InvoiceOfferDTO;
+import com.bfn.dto.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javafx.print.Collation;
 import net.corda.core.messaging.CordaRPCOps;
+import net.corda.core.node.NodeInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.CollationKey;
 import java.util.*;
 
 public class DemoUtil {
@@ -21,19 +26,22 @@ public class DemoUtil {
     private static List<AccountInfoDTO> suppliers, customers, investors;
     private static DemoSummary demoSummary = new DemoSummary();
 
-    public static DemoSummary start(CordaRPCOps mProxy, boolean deleteFirestore) throws Exception {
+    public static DemoSummary generateLocalNodeData(CordaRPCOps mProxy,
+                                                    boolean deleteFirestore) throws Exception {
         proxy = mProxy;
         logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 DemoUtil started ...  \uD83D\uDD06 \uD83D\uDD06 will list network components");
-        demoSummary.setStarted(new Date().toString());
-        long start = System.currentTimeMillis();
+        NodeInfo myNode = proxy.nodeInfo();
+        if (myNode.getLegalIdentities().get(0).getName().getOrganisation().contains("Notary")) {
+            throw new Exception("Cannot add demo data to Notary");
+        }
+        if (myNode.getLegalIdentities().get(0).getName().getOrganisation().contains("Regulator")) {
+            throw new Exception("Cannot add demo data to Regulator");
+        }
         suppliers = new ArrayList<>();
         customers = new ArrayList<>();
         investors = new ArrayList<>();
-        List nodes = WorkerBee.listNodes(proxy);
-        demoSummary.setNumberOfNodes(nodes.size());
-        List flows = WorkerBee.listFlows(proxy);
-        demoSummary.setNumberOfFlows(flows.size());
 
+        DemoSummary summary = new DemoSummary();
         //delete Firestore data
         if (deleteFirestore) {
             try {
@@ -53,12 +61,160 @@ public class DemoUtil {
         List<AccountInfoDTO> list = WorkerBee.getAccounts(proxy);
         logger.info(" \uD83C\uDF4E  \uD83C\uDF4E Total Number of Accounts on Node after sharing:" +
                 " \uD83C\uDF4E  \uD83C\uDF4E " + list.size());
-        demoSummary.setNumberOfAccounts(list.size());
+        summary.setNumberOfAccounts(list.size());
+        summary.setNodeInvoiceOffers(nodeInvoiceOffers);
 
+        return summary;
+    }
+    static List<NodeInfoDTO> nodes;
+    static List<AccountInfoDTO> accounts;
+    public static DemoSummary startNodes(CordaRPCOps mProxy) throws Exception {
+        proxy = mProxy;
+        long start = System.currentTimeMillis();
+        demoSummary.setStarted(new Date().toString());
+        nodes = WorkerBee.listFirestoreNodes();
+        demoSummary.setNumberOfNodes(nodes.size());
+        List flows = WorkerBee.listFlows(proxy);
+        demoSummary.setNumberOfFlows(flows.size());
+        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E " + nodes.size()
+                + " BFN Nodes");
+        logger.info(" \uD83C\uDF4E  \uD83C\uDF4E " + flows.size()
+                + " BFN Flows");
+
+        //run demo data HERE ...
+        demoSummary = generateLocalNodeData(proxy, true);
+        //run demo data THERE and THERE ...
+        NodeInfo nodeInfo = mProxy.nodeInfo();
+        for (NodeInfoDTO dto : nodes) {
+            String name = dto.getAddresses().get(0);
+            if (nodeInfo.getLegalIdentities().get(0).getName().toString()
+                    .equalsIgnoreCase(name)) {
+                logger.info("\n\uD83C\uDF36 \uD83C\uDF36 Ignoring Local Node - no data to generate");
+                continue;
+            }
+            if (((String) dto.getAddresses().get(0)).contains("Notary")) {
+                logger.info("\n\uD83C\uDF36 \uD83C\uDF36 Ignoring Notary Node - no data to generate");
+                continue;
+            }
+            if (((String) dto.getAddresses().get(0)).contains("Regulator")) {
+                logger.info("\n\uD83C\uDF36 \uD83C\uDF36 Ignoring Regulator Node - no data to generate");
+                continue;
+            }
+            try {
+                DemoSummary summary = executeForeignNodeDemoData(dto);
+                demoSummary.setNumberOfInvoiceOffers(demoSummary.getNumberOfInvoiceOffers() + summary.getNumberOfInvoiceOffers());
+                demoSummary.setNumberOfInvoices(demoSummary.getNumberOfInvoices() + summary.getNumberOfInvoices());
+                if (demoSummary.getNodeInvoiceOffers() == null)
+                    demoSummary.setNodeInvoiceOffers(new ArrayList<>());
+                demoSummary.getNodeInvoiceOffers().addAll(summary.getNodeInvoiceOffers());
+                logger.info("\uD83C\uDF30 \uD83C\uDF30 \uD83C\uDF30 Total offers generated: \uD83C\uDF30 "
+                        + demoSummary.getNodeInvoiceOffers().size());
+            } catch (Exception e) {
+                logger.error(" \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F Foreign demo data failed", e);
+            }
+        }
         long end = System.currentTimeMillis();
         demoSummary.setEnded(new Date().toString());
         demoSummary.setElapsedSeconds((end - start) / 1000);
+
+        offersToForeigners();
         return demoSummary;
+    }
+
+    private static void offersToForeigners() {
+        logger.info("\n\n\uD83C\uDF3C \uD83C\uDF3C \uD83C\uDF3C ....... \uD83C\uDF4E offersToForeigners: "
+        + demoSummary.getNodeInvoiceOffers().size() + " \uD83C\uDF4E \n");
+        accounts = WorkerBee.getAccounts(proxy);
+        HashMap<String, InvoiceOfferDTO> map = new HashMap<>();
+        for (InvoiceOfferDTO offer: demoSummary.getNodeInvoiceOffers()) {
+            if (!map.containsKey(offer.getInvoiceId())) {
+                map.put(offer.getInvoiceId(),offer);
+            }
+        }
+        Collection<InvoiceOfferDTO> list = map.values();
+        List<AccountInfoDTO> accts = WorkerBee.getAccounts(proxy);
+        for (AccountInfoDTO x: accts) {
+            for (InvoiceOfferDTO m : list) {
+                if (x.getIdentifier().equalsIgnoreCase(m.getSupplier().getIdentifier())) {
+                    sendOfferToOtherNodes(m,x);
+                }
+            }
+        }
+    }
+    private static void sendOfferToOtherNodes(InvoiceOfferDTO offer, AccountInfoDTO account) {
+        logger.info("\uD83C\uDF3C \uD83C\uDF3C \uD83C\uDF3C ️ sendOfferToOtherNodes ".concat(account.getName()).concat(" invoiceId: ")
+        .concat(offer.getInvoiceId()).concat(" amt: ").concat("" + offer.getOfferAmount()));
+        for (NodeInfoDTO node: nodes) {
+            if (node.getAddresses().get(0).contains(account.getHost())) {
+                continue;
+            }
+            if (node.getAddresses().get(0).contains("Regulator")) {
+                continue;
+            }
+            if (node.getAddresses().get(0).contains("Notary")) {
+                continue;
+            }
+            logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D Processing accounts on Node: "
+                    + node.getAddresses() + " " + node.getWebAPIUrl());
+            //get accounts for just this node
+            List<AccountInfoDTO> list = new ArrayList<>();
+            for (AccountInfoDTO m: accounts) {
+                if (!m.getHost().equalsIgnoreCase(account.getHost())) {
+                    list.add(m);
+                }
+            }
+            for (AccountInfoDTO m: list) {
+                if (m.getIdentifier().equalsIgnoreCase(offer.getInvestor().getIdentifier())) {
+                    continue;
+                }
+                InvoiceOfferDTO dto = offer;
+                dto.setInvestor(m);
+                dto.setOfferDate(new Date());
+                try {
+                    WorkerBee.startInvoiceOfferFlow(proxy, dto);
+                    logger.info(" \uD83C\uDF3A  \uD83C\uDF3A " + account.getName() + " from " +
+                            account.getHost() + (" \uD83C\uDF3C \uD83C\uDF3C \uD83C\uDF3C ️" +
+                            "Offer sent to \uD83C\uDF4E ")
+                            .concat(m.getName()).concat(" at ").concat(m.getHost())
+                            .concat("  \uD83E\uDD6C invoiceId: ")
+                            .concat("" + offer.getOfferAmount()));
+
+                } catch (Exception e) {
+                    logger.error(" \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F Failed to send offer to remote investor", e);
+                }
+            }
+        }
+    }
+    private static DemoSummary executeForeignNodeDemoData(NodeInfoDTO node) throws IOException {
+        logger.info("\n\n\uD83E\uDD1F \uD83E\uDD1F \uD83E\uDD1F " +
+                "Node Demo Data to Generate: " + node.getWebAPIUrl());
+        String nodeUrl = node.getWebAPIUrl() + "admin/demo?deleteFirestore=false";
+        URL url = new URL(nodeUrl);
+
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        con.setRequestProperty("Content-Type", "application/json; utf-8");
+        con.setRequestProperty("Accept", "*/*");
+
+        con.setDoOutput(true);
+
+        int code = con.getResponseCode();
+        logger.info("\uD83E\uDD1F \uD83E\uDD1F \uD83E\uDD1F " +
+                "Node Demo response code: \uD83D\uDE21 " + code + " \uD83D\uDE21  - " + nodeUrl);
+        DemoSummary summary;
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            summary = GSON.fromJson(response.toString(), DemoSummary.class);
+            logger.info("\uD83E\uDD1F \uD83E\uDD1F \uD83E\uDD1F " +
+                    "Response from Demo: \uD83E\uDD1F getNodeInvoiceOffers: "
+                    + summary.getNodeInvoiceOffers().size() + "\n\n");
+        }
+        return summary;
     }
 
     private static void registerSupplierAccounts() throws Exception {
@@ -80,14 +236,14 @@ public class DemoUtil {
         } catch (Exception e1) {
             logger.warn("Unable to add account - probable duplicate name");
         }
-//        phone = getPhone();
-//        try {
-//            AccountInfoDTO supplier3 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
-//                    "supplier".concat(phone).concat("@gmail.com"), "pass123", phone);
-//            suppliers.add(supplier3);
-//        } catch (Exception e1) {
-//            logger.warn("Unable to add account - probable duplicate name");
-//        }
+        phone = getPhone();
+        try {
+            AccountInfoDTO supplier3 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
+                    "supplier".concat(phone).concat("@gmail.com"), "pass123", phone);
+            suppliers.add(supplier3);
+        } catch (Exception e1) {
+            logger.warn("Unable to add account - probable duplicate name");
+        }
 //        phone = getPhone();
 //        try {
 //            AccountInfoDTO supplier4 = WorkerBee.startAccountRegistrationFlow(proxy, getRandomName(),
@@ -243,8 +399,10 @@ public class DemoUtil {
 
     }
 
-    private static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier,
-                                             AccountInfoDTO investor, double discount) throws Exception {
+    private static List<InvoiceOfferDTO> nodeInvoiceOffers = new ArrayList<>();
+
+    private static InvoiceOfferDTO registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier,
+                                                        AccountInfoDTO investor, double discount) throws Exception {
         logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoiceOffer started ..." +
                 "  \uD83D\uDD06 \uD83D\uDD06 ");
 
@@ -261,11 +419,14 @@ public class DemoUtil {
         m.setOfferAmount(invoice.getTotalAmount() * ((100.0 - m.getDiscount()) / 100));
         m.setOriginalAmount(invoice.getTotalAmount());
 
-        WorkerBee.startInvoiceOfferFlow(proxy, m);
+        InvoiceOfferDTO offer = WorkerBee.startInvoiceOfferFlow(proxy, m);
+        nodeInvoiceOffers.add(offer);
+        return offer;
     }
 
     static List<String> names = new ArrayList<>();
     static HashMap<String, String> map = new HashMap<>();
+
 
     static String getRandomName() throws Exception {
         names.add("Jones Pty Ltd");
@@ -364,6 +525,7 @@ public class DemoUtil {
 
         return name;
     }
+
     static int randomCount;
 }
 

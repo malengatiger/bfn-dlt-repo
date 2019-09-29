@@ -105,7 +105,6 @@ public class FirebaseUtil {
 
         UserRecord userRecord = auth.createUser(request);
         logger.info("\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C \uD83E\uDD66 \uD83E\uDD66 User record created in Firebase:  \uD83E\uDD66 ".concat(userRecord.getEmail()));
-//        getUsers();
         return userRecord;
     }
 

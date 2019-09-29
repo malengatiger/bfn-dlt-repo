@@ -55,6 +55,10 @@ dependencies {
 
     // CorDapp dependencies.
     cordapp project(":contracts")
+    // CorDapp dependencies.
+    cordapp "$corda_release_group:corda-finance-contracts:$corda_release_version"
+    cordapp "$corda_release_group:corda-finance-workflows:$corda_release_version"
+    cordapp "$corda_release_group:corda-confidential-identities:$corda_release_version"
 }
 
 task integrationTest(type: Test, dependsOn: []) {

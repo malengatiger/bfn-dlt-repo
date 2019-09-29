@@ -1,15 +1,21 @@
 package com.bfn.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DemoSummary {
     int numberOfAccounts, numberOfInvoices, numberOfInvoiceOffers;
     int numberOfNodes, numberOfFlows;
     String started, ended;
     double elapsedSeconds;
-
+    List<InvoiceOfferDTO> nodeInvoiceOffers = new ArrayList<>();
     public DemoSummary() {
     }
 
-    public DemoSummary(int numberOfAccounts, int numberOfInvoices, int numberOfInvoiceOffers, int numberOfNodes, int numberOfFlows, String started, String ended, double elapsedSeconds) {
+    public DemoSummary(int numberOfAccounts, int numberOfInvoices,
+                       int numberOfInvoiceOffers, int numberOfNodes,
+                       int numberOfFlows, String started,
+                       String ended, double elapsedSeconds) {
         this.numberOfAccounts = numberOfAccounts;
         this.numberOfInvoices = numberOfInvoices;
         this.numberOfInvoiceOffers = numberOfInvoiceOffers;
@@ -18,6 +24,14 @@ public class DemoSummary {
         this.started = started;
         this.ended = ended;
         this.elapsedSeconds = elapsedSeconds;
+    }
+
+    public List<InvoiceOfferDTO> getNodeInvoiceOffers() {
+        return nodeInvoiceOffers;
+    }
+
+    public void setNodeInvoiceOffers(List<InvoiceOfferDTO> nodeInvoiceOffers) {
+        this.nodeInvoiceOffers = nodeInvoiceOffers;
     }
 
     public double getElapsedSeconds() {

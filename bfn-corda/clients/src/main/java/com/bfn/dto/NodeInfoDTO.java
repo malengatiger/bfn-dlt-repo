@@ -3,17 +3,17 @@ package com.bfn.dto;
 import java.util.List;
 
 public class NodeInfoDTO {
-    List addresses;
+    List<String> addresses;
     long  platformVersion;
     long serial;
     String webAPIUrl;
 
 
-    public List getAddresses() {
+    public List<String>  getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List addresses) {
+    public void setAddresses(List<String>  addresses) {
         this.addresses = addresses;
     }
 

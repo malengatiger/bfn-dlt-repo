@@ -8,8 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.corda.core.messaging.CordaRPCOps;
 import net.corda.core.node.NodeInfo;
-import net.corda.core.node.services.vault.CriteriaExpression;
-import net.corda.core.node.services.vault.QueryCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +37,11 @@ public class AdminController {
         logger.info("\uD83C\uDF3A \uD83C\uDF3A \uD83C\uDF3A AdminController: NodeRPCConnection proxy has been injected: \uD83C\uDF3A " + proxy.nodeInfo().toString());
     }
 
-    @GetMapping(value = "/demo", produces = "application/json")
-    private DemoSummary buildDemo(@RequestParam boolean deleteFirestore) throws Exception {
+    @GetMapping(value = "/gen", produces = "application/json")
+    private DemoSummary generateData() throws Exception {
 
-        logger.info("\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 starting DemoDataGenerator ... \uD83C\uDF4F");
-        DemoSummary result = DemoUtil.start(proxy, deleteFirestore);
+        logger.info("\n\n\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 starting DemoDataGenerator ... \uD83C\uDF4F");
+        DemoSummary result = DemoUtil.startNodes(proxy);
         logger.info("\n\n\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 DemoUtil result: " +
                 " \uD83C\uDF4F " + GSON.toJson(result)
                 .concat("    \uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A \uD83D\uDC99 \uD83D\uDC9C\n\n"));
@@ -51,6 +49,17 @@ public class AdminController {
         return result;
     }
 
+    @GetMapping(value = "/demo", produces = "application/json")
+    private DemoSummary buildDemo(@RequestParam boolean deleteFirestore) throws Exception {
+
+        logger.info("\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 starting DemoDataGenerator ... \uD83C\uDF4F");
+        DemoSummary result = DemoUtil.generateLocalNodeData(proxy, deleteFirestore);
+        logger.info("\n\n\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 DemoUtil result: " +
+                " \uD83C\uDF4F " + GSON.toJson(result)
+                .concat("    \uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A \uD83D\uDC99 \uD83D\uDC9C\n\n"));
+
+        return result;
+    }
 
     @PostMapping(value = "/startAccountRegistrationFlow", produces = "application/json")
     private AccountInfoDTO startAccountRegistrationFlow(@RequestBody UserDTO user) throws Exception {

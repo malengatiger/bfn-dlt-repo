@@ -83,7 +83,7 @@ public class WorkerBee {
             node.setSerial((Long) map.get("serial"));
             node.setPlatformVersion((Long) map.get("platformVersion"));
             node.setAddresses(new ArrayList());
-            node.getAddresses().add(map.get("addresses"));
+            node.getAddresses().add(String.valueOf(map.get("addresses")));
             nodeList.add(node);
         }
 
@@ -104,13 +104,21 @@ public class WorkerBee {
                 dto.getAddresses().add(party.getName().toString());
             }
             switch (info.getLegalIdentities().get(0).getName().getOrganisation()) {
-                case "OCT":
+                case "OCTMainOffice":
                     String octURL = env.getProperty("OCT");
                     dto.setWebAPIUrl(octURL);
                     break;
-                case "CapeTown":
+                case "OCTCapeTown":
                     String ctURL = env.getProperty("CapeTown");
                     dto.setWebAPIUrl(ctURL);
+                    break;
+                case "OCTLondon":
+                    String lonURL = env.getProperty("London");
+                    dto.setWebAPIUrl(lonURL);
+                    break;
+                case "OCTNewYork":
+                    String nyURL = env.getProperty("NewYork");
+                    dto.setWebAPIUrl(nyURL);
                     break;
                 case "Regulator":
                     String regURL = env.getProperty("Regulator");
@@ -397,8 +405,8 @@ public class WorkerBee {
 //        logger.info("Input Parameters; \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F InvoiceDTO: "
 //                + GSON.toJson(invoice) + " \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F");
         try {
-            logger.info("\uD83C\uDF4F SUPPLIER: ".concat(invoice.getSupplier().getName()).concat("  \uD83D\uDD06  ")
-                    .concat("  \uD83E\uDDE1 CUSTOMER: ").concat(invoice.getCustomer().getName()));
+//            logger.info("\uD83C\uDF4F SUPPLIER: ".concat(invoice.getSupplier().getName()).concat("  \uD83D\uDD06  ")
+//                    .concat("  \uD83E\uDDE1 CUSTOMER: ").concat(invoice.getCustomer().getName()));
 
             List<StateAndRef<AccountInfo>> accounts = proxy.vaultQuery(AccountInfo.class).getStates();
             AccountInfo supplierInfo = null, customerInfo = null;
@@ -406,11 +414,9 @@ public class WorkerBee {
 
                 if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoice.getCustomer().getIdentifier())) {
                     customerInfo = info.getState().getData();
-                    logger.info("\uD83C\uDF4F \uD83C\uDF4F Customer AccountInfo found: ".concat(info.getState().getData().getName()));
                 }
                 if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoice.getSupplier().getIdentifier())) {
                     supplierInfo = info.getState().getData();
-                    logger.info("\uD83C\uDF4F \uD83C\uDF4F Supplier AccountInfo found: ".concat(info.getState().getData().getName()));
                 }
             }
             if (supplierInfo == null) {
@@ -419,10 +425,7 @@ public class WorkerBee {
             if (customerInfo == null) {
                 throw new Exception("Customer is bloody missing");
             }
-            logger.info("\uD83D\uDC7D \uD83D\uDC7D SUPPLIER: ".concat(supplierInfo.getHost().getName().getOrganisation()));
-            logger.info("\uD83D\uDC7D \uD83D\uDC7D CUSTOMER: ".concat(customerInfo.getHost().getName().getOrganisation()));
             double m = invoice.getValueAddedTax() / 100;
-            logger.info("discount used: " + m);
 
             CordaFuture<AnonymousParty> anonymousPartyCordaFuture = proxy.startTrackedFlowDynamic(
                     RequestKeyForAccount.class, customerInfo).getReturnValue();
@@ -456,7 +459,6 @@ public class WorkerBee {
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }
-            logger.info(GSON.toJson(dto));
             return dto;
         } catch (Exception e) {
             if (e.getMessage() != null) {
@@ -477,7 +479,6 @@ public class WorkerBee {
                     InvoiceOfferState.class, criteria,
                     new PageSpecification(1, 200));
             List<StateAndRef<InvoiceOfferState>> refs = page.getStates();
-            logger.info("\uD83C\uDF4F InvoiceOffers on Node: \uD83C\uDF4F \uD83C\uDF4F " + refs.size());
             StateAndRef<InvoiceOfferState> refToBuy = null;
             for (StateAndRef<InvoiceOfferState> ref : refs) {
                 InvoiceOfferState state = ref.getState().getData();
@@ -490,7 +491,6 @@ public class WorkerBee {
                 logger.error("\uD83D\uDC7F \uD83D\uDC7F \uD83D\uDC7F BuyInvoice failed. offer not found");
                 throw new Exception("InvoiceOffer to buy not found");
             }
-            logger.info(GSON.toJson(refToBuy.getState().getData().getSupplier().getName()));
             CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
                     BuyInvoiceOfferFlow.class, refToBuy).getReturnValue();
 
@@ -513,7 +513,6 @@ public class WorkerBee {
                                                               String accountName, String email, String password,
                                                               String cellphone) throws Exception {
         try {
-            logger.info("phone: ".concat(cellphone));
             QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
             Vault.Page<AccountInfo> page = proxy.vaultQueryByWithPagingSpec(
                     AccountInfo.class, criteria,
@@ -541,7 +540,7 @@ public class WorkerBee {
                 UserRecord userRecord = FirebaseUtil.createUser(accountName, email, password,
                         cellphone, accountInfo.getIdentifier().getId().toString());
                 logger.info("\uD83C\uDF4E \uD83C\uDF4E \uD83C\uDF4E User created on Firebase: "
-                        .concat(GSON.toJson(userRecord)));
+                        .concat(userRecord.getDisplayName().concat(" - ").concat(userRecord.getEmail())));
             } catch (Exception e) {
                 logger.error(e.getMessage());
                 logger.error("Firebase fucked up ......");
@@ -602,10 +601,6 @@ public class WorkerBee {
     public static InvoiceOfferDTO startInvoiceOfferFlow(CordaRPCOps proxy, InvoiceOfferDTO invoiceOffer) throws Exception {
 
         try {
-            logger.info("\uD83C\uDF4F INVOICE: ".concat(invoiceOffer.getInvoiceId()).concat("  \uD83D\uDD06  ")
-                    .concat("  \uD83E\uDDE1 DISCOUNT: ").concat("" + invoiceOffer.getDiscount())
-                    .concat("  \uD83E\uDDE1 INVESTOR: ").concat("" + invoiceOffer.getInvestor().getName()));
-
             //todo - refactor to proper query ...
             QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.UNCONSUMED);
             Vault.Page<InvoiceState> invoiceStatePage = proxy.vaultQueryByWithPagingSpec(
@@ -629,7 +624,6 @@ public class WorkerBee {
             for (StateAndRef<AccountInfo> info : acctsPage.getStates()) {
                 if (info.getState().getData().getIdentifier().toString().equalsIgnoreCase(invoiceOffer.getInvestor().getIdentifier())) {
                     investorInfo = info.getState().getData();
-                    logger.info("\uD83C\uDF4F \uD83C\uDF4F Investor AccountInfo found: ".concat(info.getState().getData().getName()));
                 }
             }
             if (investorInfo == null) {
@@ -638,19 +632,15 @@ public class WorkerBee {
             if (invoiceOffer.getDiscount() == 0) {
                 throw new Exception("Discount not found");
             }
-            logger.info("\uD83D\uDC7D \uD83D\uDC7D INVOICE: ".concat(invoiceOffer.getInvoiceId())
-                    .concat(" totalAmount: " + invoiceState.getTotalAmount()));
-            logger.info("\uD83D\uDC7D \uD83D\uDC7D INVESTOR: ".concat(investorInfo.getHost().getName().getOrganisation()));
 
             invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
                     ((100.0 - invoiceOffer.getDiscount()) / 100));
 
             InvoiceOfferDTO offerDTO = sendInvoiceOffer(proxy, invoiceOffer, invoiceState, investorInfo);
-//            logger.info(" \uD83E\uDDE9  \uD83E\uDDE9 Returned invoiceOffer: ".concat(GSON.toJson(offerDTO)));
             return offerDTO;
         } catch (Exception e) {
             if (e.getMessage() != null) {
-                throw new Exception("Failed to register invoiceOffer. ".concat(e.getMessage()));
+                throw new Exception("Failed to register invoiceOffer.  \uD83D\uDC7F possibly invoice not found");
             } else {
                 throw new Exception("Failed to register invoiceOffer. Unknown cause");
             }
@@ -660,8 +650,6 @@ public class WorkerBee {
     public static List<InvoiceOfferDTO> startInvoiceOfferFlowToAllAccounts(CordaRPCOps proxy, InvoiceOfferAllDTO all) throws Exception {
 
         try {
-            logger.info("\uD83C\uDF4F INVOICE: ".concat(all.getInvoiceId()).concat("  \uD83D\uDD06  ")
-                    .concat("  \uD83E\uDDE1 DISCOUNT: ").concat("" + all.getDiscount()));
             if (all.getDiscount() == 0) {
                 throw new Exception("Discount not found");
             }
@@ -711,7 +699,6 @@ public class WorkerBee {
                     logger.info("\uD83D\uDE21 \uD83D\uDE21 \uD83D\uDE21 Ignore this account :: \uD83D\uDE21  ".concat(info.getState().getData().getName()));
                     continue;
                 }
-                logger.info("\uD83D\uDC7D \uD83D\uDC7D INVESTOR: ".concat(info.getState().getData().getName()));
                 invoiceOffer.setInvestor(getDTO(info.getState().getData()));
                 InvoiceOfferDTO offerDTO = sendInvoiceOffer(proxy, invoiceOffer, invoiceState, info.getState().getData());
                 offers.add(offerDTO);

@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-cd build/nodes/OCTMainOffice
+cd build/nodes/OCTLondon
 java -jar corda.jar
-
