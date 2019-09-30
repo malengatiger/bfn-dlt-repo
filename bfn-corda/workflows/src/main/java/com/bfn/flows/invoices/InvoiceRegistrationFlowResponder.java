@@ -46,7 +46,7 @@ public class InvoiceRegistrationFlowResponder extends FlowLogic<SignedTransactio
         logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  Transaction finalized! \uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C \uD83E\uDD1F \uD83C\uDF4F \uD83C\uDF4E ".concat(signedTransaction.toString()));
 
         //todo - talk to the regulator ....
-        logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  Talking to the Regulator, Senor! .............");
+        logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  Talking to the Regulator, for compliance, Senor! .............");
         Set<Party> parties = serviceHub.getIdentityService().partiesFromName("Regulator",false);
         Party regulator = parties.iterator().next();
         try {

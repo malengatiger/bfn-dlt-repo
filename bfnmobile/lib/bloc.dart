@@ -110,7 +110,13 @@ class BFNBloc {
   }
 
   Future<List<Invoice>> getInvoices({String accountId}) async {
-    var invoices = await Net.getInvoices(accountId: accountId);
+    List<Invoice> invoices = List();
+    if (accountId == null) {
+      invoices = await Net.getInvoices();
+    } else {
+      invoices = await Net.getInvoices(accountId: accountId);
+    }
+
     print(
         '🍏 🍏 BFNBloc: getInvoices found 🔆 ${invoices.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     invoiceController.sink.add(invoices);
@@ -119,8 +125,14 @@ class BFNBloc {
 
   Future<List<InvoiceOffer>> getInvoiceOffers(
       {String accountId, bool consumed}) async {
-    var offers =
-        await Net.getInvoiceOffers(accountId: accountId, consumed: consumed);
+    List<InvoiceOffer> offers = List();
+    if (accountId == null) {
+      offers = await Net.getInvoiceOffers();
+    } else {
+      offers =
+          await Net.getInvoiceOffers(accountId: accountId, consumed: consumed);
+    }
+
     print(
         '🍏 🍏 BFNBloc: getInvoiceOffers found 🔆 ${offers.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
     offerController.sink.add(offers);

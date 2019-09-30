@@ -39,9 +39,15 @@ class _InvoicesPageState extends State<InvoicesPage>
   _getInvoicesAndOffers() async {
     account = await bfnBloc.getMyAccount();
     print("My account: 🍊 🍊 🍊 ${account.toJson()} 🍊 🍊 🍊 ");
-    offers = await bfnBloc.getInvoiceOffers(
-        accountId: bfnBloc.account.identifier, consumed: false);
-    invoices = await bfnBloc.getInvoices(accountId: bfnBloc.account.identifier);
+    if (account.host.contains('Regulator')) {
+      offers = await bfnBloc.getInvoiceOffers(consumed: false);
+      invoices = await bfnBloc.getInvoices();
+    } else {
+      offers = await bfnBloc.getInvoiceOffers(
+          accountId: bfnBloc.account.identifier, consumed: false);
+      invoices =
+          await bfnBloc.getInvoices(accountId: bfnBloc.account.identifier);
+    }
     offers.sort((a, b) => b.offerDate.compareTo(a.offerDate));
     invoices.sort((a, b) => b.dateRegistered.compareTo(a.dateRegistered));
     setState(() {});
@@ -188,7 +194,10 @@ class OfferList extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
                 child: GestureDetector(
                   onTap: () {
-                    _onOfferTapped(offer, context);
+                    if (bfnBloc.account.host.contains('Regulator')) {
+                    } else {
+                      _onOfferTapped(offer, context);
+                    }
                   },
                   child: Card(
                     elevation: 4,
@@ -499,7 +508,10 @@ class InvoiceList extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
                 child: GestureDetector(
                   onTap: () {
-                    _displayDialog(invoices.elementAt(index));
+                    if (bfnBloc.account.host.contains('Regulator')) {
+                    } else {
+                      _displayDialog(invoices.elementAt(index));
+                    }
                   },
                   child: Card(
                     elevation: 4,

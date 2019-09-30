@@ -25,7 +25,7 @@ class _NetworkAccountsPageState extends State<NetworkAccountsPage> {
   _getAccounts() async {
     accounts = await Net.getAccounts();
     accounts.sort((a, b) => a.name.compareTo(b.name));
-    if (accounts.length < 41) {
+    if (accounts.length < 101) {
       showAllAccounts = true;
       filteredAccounts = accounts;
     }

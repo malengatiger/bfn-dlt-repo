@@ -3,6 +3,7 @@ package com.bfn.flows.invoices;
 import co.paralleluniverse.fibers.Suspendable;
 import com.bfn.contracts.InvoiceContract;
 import com.bfn.flows.admin.BFNCordaService;
+import com.bfn.flows.regulator.ReportToRegulatorFlow;
 import com.bfn.states.InvoiceOfferState;
 import com.bfn.states.InvoiceState;
 import com.google.common.collect.ImmutableList;
@@ -28,6 +29,7 @@ import java.security.PublicKey;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @InitiatingFlow
 @StartableByRPC
@@ -142,6 +144,18 @@ public class InvoiceRegistrationFlow extends FlowLogic<SignedTransaction> {
             SignedTransaction mSignedTransactionDone = subFlow(
                     new FinalityFlow(signedTx, ImmutableList.of(), FINALISING_TRANSACTION.childProgressTracker()));
             logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  SAME NODE ==> FinalityFlow has been executed ... \uD83E\uDD66 \uD83E\uDD66");
+            //todo - talk to the regulator ....
+            logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  Talking to the Regulator, for compliance, Senor! .............");
+            Set<Party> parties = serviceHub.getIdentityService().partiesFromName("Regulator",false);
+            Party regulator = parties.iterator().next();
+            try {
+                subFlow(new ReportToRegulatorFlow(regulator,mSignedTransactionDone));
+                logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  DONE talking to the Regulator, Phew!");
+
+            } catch (Exception e) {
+                logger.error(" \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F Regulator fell down.  \uD83D\uDC7F IGNORED  \uD83D\uDC7F ", e);
+                throw new FlowException("Regulator fell down!");
+            }
             return mSignedTransactionDone;
         }
         logger.info(" \uD83D\uDE21  \uD83D\uDE21  \uD83D\uDE21 Supplier and Customer are NOT on the same node ..." +

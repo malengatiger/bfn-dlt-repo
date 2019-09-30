@@ -164,6 +164,9 @@ class _DashboardState extends State<Dashboard> {
 
   _getMyData() async {
     account = await Prefs.getAccount();
+    if (account.host.contains('Regulator')) {
+      return;
+    }
     myInvoices = await bfnBloc.getInvoices(accountId: account.identifier);
     contents.add(Content(
         label: 'My Invoices',

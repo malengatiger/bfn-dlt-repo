@@ -614,7 +614,8 @@ public class WorkerBee {
                 }
             }
             if (invoiceState == null) {
-                throw new Exception("Invoice not found");
+                logger.warn("InvoiceState not found, \uD83D\uDC7F offer probably made on foreign node");
+//                throw new Exception("Invoice not found");
             }
             AccountInfo investorInfo = null;
             Vault.Page<AccountInfo> acctsPage = proxy.vaultQueryByWithPagingSpec(

@@ -3,7 +3,6 @@ package com.bfn.util;
 import com.bfn.dto.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.print.Collation;
 import net.corda.core.messaging.CordaRPCOps;
 import net.corda.core.node.NodeInfo;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.CollationKey;
 import java.util.*;
 
 public class DemoUtil {
@@ -117,33 +115,13 @@ public class DemoUtil {
         demoSummary.setEnded(new Date().toString());
         demoSummary.setElapsedSeconds((end - start) / 1000);
 
-        offersToForeigners();
         return demoSummary;
     }
 
-    private static void offersToForeigners() {
-        logger.info("\n\n\uD83C\uDF3C \uD83C\uDF3C \uD83C\uDF3C ....... \uD83C\uDF4E offersToForeigners: "
-        + demoSummary.getNodeInvoiceOffers().size() + " \uD83C\uDF4E \n");
-        accounts = WorkerBee.getAccounts(proxy);
-        HashMap<String, InvoiceOfferDTO> map = new HashMap<>();
-        for (InvoiceOfferDTO offer: demoSummary.getNodeInvoiceOffers()) {
-            if (!map.containsKey(offer.getInvoiceId())) {
-                map.put(offer.getInvoiceId(),offer);
-            }
-        }
-        Collection<InvoiceOfferDTO> list = map.values();
-        List<AccountInfoDTO> accts = WorkerBee.getAccounts(proxy);
-        for (AccountInfoDTO x: accts) {
-            for (InvoiceOfferDTO m : list) {
-                if (x.getIdentifier().equalsIgnoreCase(m.getSupplier().getIdentifier())) {
-                    sendOfferToOtherNodes(m,x);
-                }
-            }
-        }
-    }
     private static void sendOfferToOtherNodes(InvoiceOfferDTO offer, AccountInfoDTO account) {
-        logger.info("\uD83C\uDF3C \uD83C\uDF3C \uD83C\uDF3C ️ sendOfferToOtherNodes ".concat(account.getName()).concat(" invoiceId: ")
+        logger.info("\uD83C\uDF3C \uD83C\uDF3C \uD83C\uDF3C ️.... sendOfferToOtherNodes ".concat(account.getName()).concat(" invoiceId: ")
         .concat(offer.getInvoiceId()).concat(" amt: ").concat("" + offer.getOfferAmount()));
+        accounts = WorkerBee.getAccounts(proxy);
         for (NodeInfoDTO node: nodes) {
             if (node.getAddresses().get(0).contains(account.getHost())) {
                 continue;
@@ -165,6 +143,10 @@ public class DemoUtil {
             }
             for (AccountInfoDTO m: list) {
                 if (m.getIdentifier().equalsIgnoreCase(offer.getInvestor().getIdentifier())) {
+                    continue;
+                }
+                int x = random.nextInt(10);
+                if (x > 5) {
                     continue;
                 }
                 InvoiceOfferDTO dto = offer;
@@ -401,8 +383,8 @@ public class DemoUtil {
 
     private static List<InvoiceOfferDTO> nodeInvoiceOffers = new ArrayList<>();
 
-    private static InvoiceOfferDTO registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier,
-                                                        AccountInfoDTO investor, double discount) throws Exception {
+    private static void registerInvoiceOffer(InvoiceDTO invoice, AccountInfoDTO supplier,
+                                             AccountInfoDTO investor, double discount) throws Exception {
         logger.info("\n\uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 registerInvoiceOffer started ..." +
                 "  \uD83D\uDD06 \uD83D\uDD06 ");
 
@@ -421,7 +403,7 @@ public class DemoUtil {
 
         InvoiceOfferDTO offer = WorkerBee.startInvoiceOfferFlow(proxy, m);
         nodeInvoiceOffers.add(offer);
-        return offer;
+        sendOfferToOtherNodes(offer, supplier);
     }
 
     static List<String> names = new ArrayList<>();
