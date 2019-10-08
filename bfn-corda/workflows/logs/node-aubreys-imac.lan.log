@@ -1,3 +1,851 @@
-[INFO ] 2019-07-30T10:05:22,356Z [Test worker] cordapp.JarScanningCordappLoader.<init> - Loading CorDapps from RestrictedURL(url=file:/Users/aubs/WORK/CORDA/cordapp-template-java/workflows/build/generated-custom-cordapps/20190730-100501.124/custom-cordapp_1_4_76273612-4710-49e2-b5b0-db1509304208.jar, rootPackageName=null) {}
-[INFO ] 2019-07-30T10:05:25,091Z [Test worker] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/cordapp-template-java/workflows/build/generated-custom-cordapps/20190730-100501.124/custom-cordapp_1_4_76273612-4710-49e2-b5b0-db1509304208.jar {}
-[INFO ] 2019-07-30T10:05:27,003Z [Test worker] cordapp.JarScanningCordappLoader.findNotaryService - Found notary service CorDapp implementations:  {}
+[INFO ] 2019-10-06T07:22:02,691Z [Test worker] cordapp.JarScanningCordappLoader.<init> - Loading CorDapps from RestrictedURL(url=file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/generated-custom-cordapps/20191006-072201.191/custom-cordapp_1_4_995d6ec4-15af-49f7-9e7d-7f30ec81567f.jar, rootPackageName=null) {}
+[INFO ] 2019-10-06T07:22:02,787Z [Test worker] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/generated-custom-cordapps/20191006-072201.191/custom-cordapp_1_4_995d6ec4-15af-49f7-9e7d-7f30ec81567f.jar {}
+[INFO ] 2019-10-06T07:22:07,236Z [Test worker] internal.TestCordappImpl.apply - Generating CorDapp jar from local project in /Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows ... {}
+[INFO ] 2019-10-06T07:22:07,533Z [Connection worker] internal.TestCordappImpl.statusChanged - Build {}
+[INFO ] 2019-10-06T07:22:08,919Z [Connection worker] internal.TestCordappImpl.statusChanged - Starting Gradle Daemon {}
+[INFO ] 2019-10-06T07:22:09,844Z [Connection worker] internal.TestCordappImpl.statusChanged - Connecting to Gradle Daemon {}
+[INFO ] 2019-10-06T07:22:09,893Z [Connection worker] internal.TestCordappImpl.statusChanged - Starting Gradle Daemon {}
+[INFO ] 2019-10-06T07:22:09,894Z [Connection worker] internal.TestCordappImpl.statusChanged - Build {}
+[INFO ] 2019-10-06T07:22:10,680Z [Connection worker] internal.TestCordappImpl.statusChanged - Run build {}
+[INFO ] 2019-10-06T07:22:10,692Z [Connection worker] internal.TestCordappImpl.statusChanged - Initializing build {}
+[INFO ] 2019-10-06T07:22:10,692Z [Connection worker] internal.TestCordappImpl.statusChanged - Load build {}
+[INFO ] 2019-10-06T07:22:10,703Z [Connection worker] internal.TestCordappImpl.statusChanged - Evaluate settings {}
+[INFO ] 2019-10-06T07:22:10,919Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script settings.gradle to settings 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:11,115Z [Connection worker] internal.TestCordappImpl.statusChanged - Evaluate settings {}
+[INFO ] 2019-10-06T07:22:11,116Z [Connection worker] internal.TestCordappImpl.statusChanged - Finalize build cache configuration {}
+[INFO ] 2019-10-06T07:22:11,127Z [Connection worker] internal.TestCordappImpl.statusChanged - Evaluate settings {}
+[INFO ] 2019-10-06T07:22:11,127Z [Connection worker] internal.TestCordappImpl.statusChanged - Load build {}
+[INFO ] 2019-10-06T07:22:11,127Z [Connection worker] internal.TestCordappImpl.statusChanged - Initializing build {}
+[INFO ] 2019-10-06T07:22:11,127Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure build {}
+[INFO ] 2019-10-06T07:22:11,127Z [Connection worker] internal.TestCordappImpl.statusChanged - Load projects {}
+[INFO ] 2019-10-06T07:22:11,320Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure build {}
+[INFO ] 2019-10-06T07:22:11,320Z [Connection worker] internal.TestCordappImpl.statusChanged - Initializing build {}
+[INFO ] 2019-10-06T07:22:11,320Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring projects {}
+[INFO ] 2019-10-06T07:22:11,320Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute 'rootProject {}' action {}
+[INFO ] 2019-10-06T07:22:11,320Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project : {}
+[INFO ] 2019-10-06T07:22:11,321Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute 'rootProject {}' action {}
+[INFO ] 2019-10-06T07:22:11,321Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring projects {}
+[INFO ] 2019-10-06T07:22:11,343Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure project : {}
+[INFO ] 2019-10-06T07:22:11,343Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring root project {}
+[INFO ] 2019-10-06T07:22:11,399Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.help-tasks to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:11,410Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring root project {}
+[INFO ] 2019-10-06T07:22:11,410Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:11,774Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :classpath {}
+[INFO ] 2019-10-06T07:22:12,069Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,069Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :classpath {}
+[INFO ] 2019-10-06T07:22:12,092Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve cordapp.jar (net.corda.plugins:cordapp:4.0.45) {}
+[INFO ] 2019-10-06T07:22:12,092Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve cordformation.jar (net.corda.plugins:cordformation:4.0.45) {}
+[INFO ] 2019-10-06T07:22:12,092Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve quasar-utils.jar (net.corda.plugins:quasar-utils:4.0.45) {}
+[INFO ] 2019-10-06T07:22:12,092Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve cordapp.jar (net.corda.plugins:cordapp:4.0.45) {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve quasar-utils.jar (net.corda.plugins:quasar-utils:4.0.45) {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve cordformation.jar (net.corda.plugins:cordformation:4.0.45) {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve cordapp.jar (net.corda.plugins:cordapp:4.0.45) {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :classpath {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve spring-boot-gradle-plugin.jar (org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :classpath {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-io.jar (commons-io:commons-io:2.6) {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :classpath {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve config.jar (com.typesafe:config:1.3.1) {}
+[INFO ] 2019-10-06T07:22:12,093Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :classpath {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve snakeyaml.jar (org.yaml:snakeyaml:1.19) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :classpath {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve spring-boot-loader-tools.jar (org.springframework.boot:spring-boot-loader-tools:2.0.4.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependency-management-plugin.jar (io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-compress.jar (org.apache.commons:commons-compress:1.14) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependency-management-plugin.jar (io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve spring-core.jar (org.springframework:spring-core:5.0.8.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependency-management-plugin.jar (io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve spring-boot-loader-tools.jar (org.springframework.boot:spring-boot-loader-tools:2.0.4.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve spring-jcl.jar (org.springframework:spring-jcl:5.0.8.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,094Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve spring-boot-loader-tools.jar (org.springframework.boot:spring-boot-loader-tools:2.0.4.RELEASE) {}
+[INFO ] 2019-10-06T07:22:12,095Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :classpath {}
+[INFO ] 2019-10-06T07:22:12,095Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,095Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :classpath {}
+[INFO ] 2019-10-06T07:22:12,095Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,313Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute 'allprojects {}' action {}
+[INFO ] 2019-10-06T07:22:12,313Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project : {}
+[INFO ] 2019-10-06T07:22:12,313Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.java to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,346Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,403Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.BasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,403Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LifecycleBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,414Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.BasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,459Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,460Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.ReportingBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,470Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,470Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LanguageBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,470Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.platform.base.plugins.ComponentBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,535Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LanguageBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,535Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,535Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.platform.base.plugins.BinaryBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,664Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,697Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.java to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:12,951Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project : {}
+[INFO ] 2019-10-06T07:22:13,010Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute 'allprojects {}' action {}
+[INFO ] 2019-10-06T07:22:13,020Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project :clients {}
+[INFO ] 2019-10-06T07:22:13,020Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.java to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,020Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,020Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.BasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LifecycleBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.BasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.ReportingBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LanguageBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.platform.base.plugins.ComponentBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LanguageBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,021Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.platform.base.plugins.BinaryBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,022Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,022Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.java to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,046Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project :clients {}
+[INFO ] 2019-10-06T07:22:13,046Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute 'allprojects {}' action {}
+[INFO ] 2019-10-06T07:22:13,046Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project :contracts {}
+[INFO ] 2019-10-06T07:22:13,046Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.java to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,046Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,047Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.BasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,047Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LifecycleBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,047Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.BasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,047Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,047Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.ReportingBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,047Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,047Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LanguageBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,047Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.platform.base.plugins.ComponentBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,048Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LanguageBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,048Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,048Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.platform.base.plugins.BinaryBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,048Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,048Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.java to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,057Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project :contracts {}
+[INFO ] 2019-10-06T07:22:13,057Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute 'allprojects {}' action {}
+[INFO ] 2019-10-06T07:22:13,057Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project :workflows {}
+[INFO ] 2019-10-06T07:22:13,057Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.java to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,057Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,057Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.BasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LifecycleBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.BasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.ReportingBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LanguageBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.platform.base.plugins.ComponentBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.language.base.plugins.LanguageBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,058Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.platform.base.plugins.BinaryBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,059Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.api.plugins.JavaBasePlugin to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,059Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.java to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,069Z [Connection worker] internal.TestCordappImpl.statusChanged - Cross-configure project :workflows {}
+[INFO ] 2019-10-06T07:22:13,069Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute 'allprojects {}' action {}
+[INFO ] 2019-10-06T07:22:13,069Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:13,080Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin net.corda.plugins.cordapp to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:13,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:13,137Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin net.corda.plugins.cordformation to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:13,137Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:13,137Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin net.corda.plugins.quasar-utils to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:13,227Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to root project 'bfn-corda' {}
+[INFO ] 2019-10-06T07:22:13,422Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring root project {}
+[INFO ] 2019-10-06T07:22:13,422Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure project : {}
+[INFO ] 2019-10-06T07:22:13,423Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring projects {}
+[INFO ] 2019-10-06T07:22:13,423Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure project :clients {}
+[INFO ] 2019-10-06T07:22:13,423Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :clients {}
+[INFO ] 2019-10-06T07:22:13,423Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.help-tasks to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,423Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :clients {}
+[INFO ] 2019-10-06T07:22:13,423Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,446Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.springframework.boot to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,481Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,481Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin io.spring.dependency-management to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,504Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':clients' {}
+[INFO ] 2019-10-06T07:22:13,538Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :clients {}
+[INFO ] 2019-10-06T07:22:13,539Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure project :clients {}
+[INFO ] 2019-10-06T07:22:13,539Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring projects {}
+[INFO ] 2019-10-06T07:22:13,539Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure project :contracts {}
+[INFO ] 2019-10-06T07:22:13,539Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :contracts {}
+[INFO ] 2019-10-06T07:22:13,539Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.help-tasks to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,539Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :contracts {}
+[INFO ] 2019-10-06T07:22:13,539Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,549Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin net.corda.plugins.cordapp to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,549Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,550Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin net.corda.plugins.cordformation to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,550Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':contracts' {}
+[INFO ] 2019-10-06T07:22:13,573Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :contracts {}
+[INFO ] 2019-10-06T07:22:13,573Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure project :contracts {}
+[INFO ] 2019-10-06T07:22:13,573Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring projects {}
+[INFO ] 2019-10-06T07:22:13,574Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure project :workflows {}
+[INFO ] 2019-10-06T07:22:13,574Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :workflows {}
+[INFO ] 2019-10-06T07:22:13,574Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin org.gradle.help-tasks to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,574Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :workflows {}
+[INFO ] 2019-10-06T07:22:13,574Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,619Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin net.corda.plugins.cordapp to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,619Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,619Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin net.corda.plugins.cordformation to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,619Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,619Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply plugin net.corda.plugins.quasar-utils to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,619Z [Connection worker] internal.TestCordappImpl.statusChanged - Apply script build.gradle to project ':workflows' {}
+[INFO ] 2019-10-06T07:22:13,654Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring :workflows {}
+[INFO ] 2019-10-06T07:22:13,654Z [Connection worker] internal.TestCordappImpl.statusChanged - Configure project :workflows {}
+[INFO ] 2019-10-06T07:22:13,655Z [Connection worker] internal.TestCordappImpl.statusChanged - Configuring projects {}
+[INFO ] 2019-10-06T07:22:13,655Z [Connection worker] internal.TestCordappImpl.statusChanged - Initializing build {}
+[INFO ] 2019-10-06T07:22:13,655Z [Connection worker] internal.TestCordappImpl.statusChanged - Calculate task graph {}
+[INFO ] 2019-10-06T07:22:13,783Z [Connection worker] internal.TestCordappImpl.statusChanged - Initializing build {}
+[INFO ] 2019-10-06T07:22:13,783Z [Connection worker] internal.TestCordappImpl.statusChanged - Run tasks {}
+[INFO ] 2019-10-06T07:22:13,783Z [Connection worker] internal.TestCordappImpl.statusChanged - Initializing build {}
+[INFO ] 2019-10-06T07:22:13,783Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:13,910Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:compileJava {}
+[INFO ] 2019-10-06T07:22:13,911Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:compileJava {}
+[INFO ] 2019-10-06T07:22:13,942Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:13,955Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.apache.commons:commons-jexl3:3.0 {}
+[INFO ] 2019-10-06T07:22:13,955Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.reactivex:rxjava:1.3.8 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.code.findbugs:jsr305:3.0.2 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcprov-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcpkix-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:13,956Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.persistence:javax.persistence-api:2.2 {}
+[INFO ] 2019-10-06T07:22:13,957Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:13,957Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.github.classgraph:classgraph:4.6.12 {}
+[INFO ] 2019-10-06T07:22:13,957Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:13,957Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-reflect:1.2.71 {}
+[INFO ] 2019-10-06T07:22:13,957Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:13,975Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-reflect:1.2.71 {}
+[INFO ] 2019-10-06T07:22:13,975Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:13,976Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.reactivex:rxjava:1.3.8 {}
+[INFO ] 2019-10-06T07:22:13,987Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:13,987Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.apache.commons:commons-jexl3:3.0 {}
+[INFO ] 2019-10-06T07:22:13,999Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:13,999Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib:1.2.71 {}
+[INFO ] 2019-10-06T07:22:13,999Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,011Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,011Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,032Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve antlr:antlr:2.7.7 {}
+[INFO ] 2019-10-06T07:22:14,032Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,032Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.1.1.Final {}
+[INFO ] 2019-10-06T07:22:14,033Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,043Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss:jandex:2.0.5.Final {}
+[INFO ] 2019-10-06T07:22:14,043Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.activation:javax.activation-api:1.2.0 {}
+[INFO ] 2019-10-06T07:22:14,043Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss:jandex:2.0.5.Final {}
+[INFO ] 2019-10-06T07:22:14,043Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hibernate.common:hibernate-commons-annotations:5.0.4.Final {}
+[INFO ] 2019-10-06T07:22:14,053Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss:jandex:2.0.5.Final {}
+[INFO ] 2019-10-06T07:22:14,054Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,054Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve antlr:antlr:2.7.7 {}
+[INFO ] 2019-10-06T07:22:14,054Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,054Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hdrhistogram:HdrHistogram:2.1.9 {}
+[INFO ] 2019-10-06T07:22:14,054Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.latencyutils:LatencyUtils:2.0.3 {}
+[INFO ] 2019-10-06T07:22:14,054Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:kryo:4.0.0 {}
+[INFO ] 2019-10-06T07:22:14,054Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve de.javakaffee:kryo-serializers:0.42 {}
+[INFO ] 2019-10-06T07:22:14,065Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:kryo:4.0.0 {}
+[INFO ] 2019-10-06T07:22:14,065Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.latencyutils:LatencyUtils:2.0.3 {}
+[INFO ] 2019-10-06T07:22:14,065Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hdrhistogram:HdrHistogram:2.1.9 {}
+[INFO ] 2019-10-06T07:22:14,065Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,075Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,087Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,087Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,087Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains:annotations:13.0 {}
+[INFO ] 2019-10-06T07:22:14,087Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,088Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,100Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.objenesis:objenesis:2.2 {}
+[INFO ] 2019-10-06T07:22:14,100Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:minlog:1.3.0 {}
+[INFO ] 2019-10-06T07:22:14,100Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:reflectasm:1.11.3 {}
+[INFO ] 2019-10-06T07:22:14,100Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:minlog:1.3.0 {}
+[INFO ] 2019-10-06T07:22:14,100Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.objenesis:objenesis:2.2 {}
+[INFO ] 2019-10-06T07:22:14,100Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,110Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:compileJava {}
+[INFO ] 2019-10-06T07:22:14,110Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,110Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve accounts-flows.jar (com.r3.corda.lib.accounts:accounts-flows:1.0-RC01) {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-core.jar (net.corda:corda-core:4.1) {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve accounts-flows.jar (com.r3.corda.lib.accounts:accounts-flows:1.0-RC01) {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve tokens-contracts.jar (com.r3.corda.lib.tokens:tokens-contracts:1.0) {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve accounts-flows.jar (com.r3.corda.lib.accounts:accounts-flows:1.0-RC01) {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-stdlib-jdk8.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve accounts-contracts.jar (com.r3.corda.lib.accounts:accounts-contracts:1.0-RC01) {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-stdlib-jdk8.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,111Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-reflect.jar (org.jetbrains.kotlin:kotlin-reflect:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jsr305.jar (com.google.code.findbugs:jsr305:3.0.2) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jcl-over-slf4j.jar (org.slf4j:jcl-over-slf4j:1.7.25) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve caffeine.jar (com.github.ben-manes.caffeine:caffeine:2.6.2) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve rxjava.jar (io.reactivex:rxjava:1.3.8) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-jexl3.jar (org.apache.commons:commons-jexl3:3.0) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve slf4j-api.jar (org.slf4j:slf4j-api:1.7.25) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-jexl3.jar (org.apache.commons:commons-jexl3:3.0) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang.jar (commons-lang:commons-lang:2.6) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-jexl3.jar (org.apache.commons:commons-jexl3:3.0) {}
+[INFO ] 2019-10-06T07:22:14,112Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve eddsa.jar (net.i2p.crypto:eddsa:0.2.0) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-jexl3.jar (org.apache.commons:commons-jexl3:3.0) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve rxjava.jar (io.reactivex:rxjava:1.3.8) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve bcprov-jdk15on.jar (org.bouncycastle:bcprov-jdk15on:1.60) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve bcpkix-jdk15on.jar (org.bouncycastle:bcpkix-jdk15on:1.60) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve bcprov-jdk15on.jar (org.bouncycastle:bcprov-jdk15on:1.60) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve hibernate-core.jar (org.hibernate:hibernate-core:5.3.6.Final) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve bcprov-jdk15on.jar (org.bouncycastle:bcprov-jdk15on:1.60) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.persistence-api.jar (javax.persistence:javax.persistence-api:2.2) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve bcprov-jdk15on.jar (org.bouncycastle:bcprov-jdk15on:1.60) {}
+[INFO ] 2019-10-06T07:22:14,113Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve rxjava.jar (io.reactivex:rxjava:1.3.8) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve caffeine.jar (com.github.ben-manes.caffeine:caffeine:2.6.2) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jcl-over-slf4j.jar (org.slf4j:jcl-over-slf4j:1.7.25) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jsr305.jar (com.google.code.findbugs:jsr305:3.0.2) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve classgraph.jar (io.github.classgraph:classgraph:4.6.12) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve quasar-core-jdk8.jar (co.paralleluniverse:quasar-core:0.7.10) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve classgraph.jar (io.github.classgraph:classgraph:4.6.12) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-stdlib-jdk7.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve classgraph.jar (io.github.classgraph:classgraph:4.6.12) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-stdlib.jar (org.jetbrains.kotlin:kotlin-stdlib:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-logging.jar (commons-logging:commons-logging:1.2) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-stdlib.jar (org.jetbrains.kotlin:kotlin-stdlib:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve hibernate-commons-annotations.jar (org.hibernate.common:hibernate-commons-annotations:5.0.4.Final) {}
+[INFO ] 2019-10-06T07:22:14,114Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-stdlib.jar (org.jetbrains.kotlin:kotlin-stdlib:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,115Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve classgraph.jar (io.github.classgraph:classgraph:4.6.12) {}
+[INFO ] 2019-10-06T07:22:14,115Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jsr305.jar (com.google.code.findbugs:jsr305:3.0.2) {}
+[INFO ] 2019-10-06T07:22:14,115Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,115Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javassist.jar (org.javassist:javassist:3.23.1-GA) {}
+[INFO ] 2019-10-06T07:22:14,115Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jboss-logging.jar (org.jboss.logging:jboss-logging:3.3.2.Final) {}
+[INFO ] 2019-10-06T07:22:14,115Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javassist.jar (org.javassist:javassist:3.23.1-GA) {}
+[INFO ] 2019-10-06T07:22:14,115Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,122Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve byte-buddy.jar (net.bytebuddy:byte-buddy:1.8.17) {}
+[INFO ] 2019-10-06T07:22:14,122Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve antlr.jar (antlr:antlr:2.7.7) {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jboss-transaction-api_1.2_spec.jar (org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.1.1.Final) {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jandex.jar (org.jboss:jandex:2.0.5.Final) {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve classmate.jar (com.fasterxml:classmate:1.3.4) {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.activation-api.jar (javax.activation:javax.activation-api:1.2.0) {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,123Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dom4j.jar (dom4j:dom4j:1.6.1) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve metrics-core.jar (io.dropwizard.metrics:metrics-core:3.2.3) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve guava.jar (com.google.guava:guava:20.0) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve metrics-core.jar (io.dropwizard.metrics:metrics-core:3.2.3) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve HdrHistogram.jar (org.hdrhistogram:HdrHistogram:2.1.9) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve metrics-core.jar (io.dropwizard.metrics:metrics-core:3.2.3) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dom4j.jar (dom4j:dom4j:1.6.1) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kryo.jar (com.esotericsoftware:kryo:4.0.0) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kryo-serializers.jar (de.javakaffee:kryo-serializers:0.42) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kryo.jar (com.esotericsoftware:kryo:4.0.0) {}
+[INFO ] 2019-10-06T07:22:14,124Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve LatencyUtils.jar (org.latencyutils:LatencyUtils:2.0.3) {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-stdlib-common.jar (org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve annotations.jar (org.jetbrains:annotations:13.0) {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve kotlin-stdlib-common.jar (org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71) {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve reflectasm.jar (com.esotericsoftware:reflectasm:1.11.3) {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve minlog.jar (com.esotericsoftware:minlog:1.3.0) {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve reflectasm.jar (com.esotericsoftware:reflectasm:1.11.3) {}
+[INFO ] 2019-10-06T07:22:14,125Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,126Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve objenesis.jar (org.objenesis:objenesis:2.2) {}
+[INFO ] 2019-10-06T07:22:14,126Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,134Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:compileJava {}
+[INFO ] 2019-10-06T07:22:14,156Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:annotationProcessor {}
+[INFO ] 2019-10-06T07:22:14,156Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:compileJava {}
+[INFO ] 2019-10-06T07:22:14,166Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,166Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:compileJava {}
+[INFO ] 2019-10-06T07:22:14,208Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:compileJava {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:processResources {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:processResources {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:processResources {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:classes {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:classes {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:classes {}
+[INFO ] 2019-10-06T07:22:14,209Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.apache.commons:commons-jexl3:3.0 {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.reactivex:rxjava:1.3.8 {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,219Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.apache.commons:commons-jexl3:3.0 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcprov-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcpkix-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.persistence:javax.persistence-api:2.2 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcpkix-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.github.classgraph:classgraph:4.6.12 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:14,220Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:14,221Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,221Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.code.findbugs:jsr305:3.0.2 {}
+[INFO ] 2019-10-06T07:22:14,221Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-reflect:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,221Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.code.findbugs:jsr305:3.0.2 {}
+[INFO ] 2019-10-06T07:22:14,221Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,230Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,230Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,230Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,230Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,230Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,230Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve antlr:antlr:2.7.7 {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.1.1.Final {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve antlr:antlr:2.7.7 {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.activation:javax.activation-api:1.2.0 {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hibernate.common:hibernate-commons-annotations:5.0.4.Final {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss:jandex:2.0.5.Final {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hibernate.common:hibernate-commons-annotations:5.0.4.Final {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,231Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hdrhistogram:HdrHistogram:2.1.9 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:kryo:4.0.0 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve de.javakaffee:kryo-serializers:0.42 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:kryo:4.0.0 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hdrhistogram:HdrHistogram:2.1.9 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.latencyutils:LatencyUtils:2.0.3 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains:annotations:13.0 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,232Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:reflectasm:1.11.3 {}
+[INFO ] 2019-10-06T07:22:14,233Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:minlog:1.3.0 {}
+[INFO ] 2019-10-06T07:22:14,233Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.objenesis:objenesis:2.2 {}
+[INFO ] 2019-10-06T07:22:14,233Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:minlog:1.3.0 {}
+[INFO ] 2019-10-06T07:22:14,233Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:reflectasm:1.11.3 {}
+[INFO ] 2019-10-06T07:22:14,233Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,233Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,233Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,240Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve quasar-core-jdk8.jar (co.paralleluniverse:quasar-core:0.7.10) {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda.jar (net.corda:corda:4.1) {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,241Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,242Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jolokia-jvm-agent.jar (org.jolokia:jolokia-jvm:1.6.0) {}
+[INFO ] 2019-10-06T07:22:14,242Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :contracts:runtime {}
+[INFO ] 2019-10-06T07:22:14,242Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,242Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,242Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,242Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,242Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:jar {}
+[INFO ] 2019-10-06T07:22:14,242Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :contracts:jar {}
+[INFO ] 2019-10-06T07:22:14,251Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :contracts:jar {}
+[INFO ] 2019-10-06T07:22:14,252Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,252Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:compileJava {}
+[INFO ] 2019-10-06T07:22:14,252Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:compileJava {}
+[INFO ] 2019-10-06T07:22:14,252Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,263Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-reflect:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.code.findbugs:jsr305:3.0.2 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.reactivex:rxjava:1.3.8 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.code.findbugs:jsr305:3.0.2 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-reflect:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,264Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.apache.commons:commons-jexl3:3.0 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcprov-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcpkix-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcprov-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.apache.commons:commons-jexl3:3.0 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.github.classgraph:classgraph:4.6.12 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,265Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.persistence:javax.persistence-api:2.2 {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hibernate.common:hibernate-commons-annotations:5.0.4.Final {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.activation:javax.activation-api:1.2.0 {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss:jandex:2.0.5.Final {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.1.1.Final {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve antlr:antlr:2.7.7 {}
+[INFO ] 2019-10-06T07:22:14,266Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.1.1.Final {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss:jandex:2.0.5.Final {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.activation:javax.activation-api:1.2.0 {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.activation:javax.activation-api:1.2.0 {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hibernate.common:hibernate-commons-annotations:5.0.4.Final {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains:annotations:13.0 {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hdrhistogram:HdrHistogram:2.1.9 {}
+[INFO ] 2019-10-06T07:22:14,267Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.latencyutils:LatencyUtils:2.0.3 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:kryo:4.0.0 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.latencyutils:LatencyUtils:2.0.3 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hdrhistogram:HdrHistogram:2.1.9 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve de.javakaffee:kryo-serializers:0.42 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:reflectasm:1.11.3 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:minlog:1.3.0 {}
+[INFO ] 2019-10-06T07:22:14,268Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,269Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.objenesis:objenesis:2.2 {}
+[INFO ] 2019-10-06T07:22:14,269Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,275Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:compileJava {}
+[INFO ] 2019-10-06T07:22:14,275Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,275Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve tokens-workflows.jar (com.r3.corda.lib.tokens:tokens-workflows:1.0) {}
+[INFO ] 2019-10-06T07:22:14,275Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve tokens-money.jar (com.r3.corda.lib.tokens:tokens-money:1.0) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve contracts.jar (project :contracts) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-contracts.jar (net.corda:corda-finance-contracts:4.1) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-confidential-identities.jar (net.corda:corda-confidential-identities:4.1) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve membership-service-contracts-and-states.jar (com.r3.businessnetworks:membership-service-contracts-and-states:2.0) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve quasar-core-jdk8.jar (co.paralleluniverse:quasar-core:0.7.11_r3) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve quasar-core-jdk8.jar (co.paralleluniverse:quasar-core:0.7.11_r3) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jolokia-jvm-agent.jar (org.jolokia:jolokia-jvm:1.6.0) {}
+[INFO ] 2019-10-06T07:22:14,276Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve asm-analysis.jar (org.ow2.asm:asm-analysis:5.2) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve asm-commons.jar (org.ow2.asm:asm-commons:5.2) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve asm-util.jar (org.ow2.asm:asm-util:5.2) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve asm-tree.jar (org.ow2.asm:asm-tree:5.2) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-workflows.jar (net.corda:corda-finance-workflows:4.1) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-contracts.jar (net.corda:corda-finance-contracts:4.1) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve asm.jar (org.ow2.asm:asm:5.2) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-contracts.jar (net.corda:corda-finance-contracts:4.1) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve membership-service.jar (com.r3.businessnetworks:membership-service:2.0) {}
+[INFO ] 2019-10-06T07:22:14,277Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve corda-finance-contracts.jar (net.corda:corda-finance-contracts:4.1) {}
+[INFO ] 2019-10-06T07:22:14,278Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve contracts.jar (project :contracts) {}
+[INFO ] 2019-10-06T07:22:14,278Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve tokens-money.jar (com.r3.corda.lib.tokens:tokens-money:1.0) {}
+[INFO ] 2019-10-06T07:22:14,278Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve tokens-workflows.jar (com.r3.corda.lib.tokens:tokens-workflows:1.0) {}
+[INFO ] 2019-10-06T07:22:14,278Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,278Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:compileJava {}
+[INFO ] 2019-10-06T07:22:14,507Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:annotationProcessor {}
+[INFO ] 2019-10-06T07:22:14,507Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:compileJava {}
+[INFO ] 2019-10-06T07:22:14,507Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:compileClasspath {}
+[INFO ] 2019-10-06T07:22:14,508Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:compileJava {}
+[INFO ] 2019-10-06T07:22:14,530Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:compileJava {}
+[INFO ] 2019-10-06T07:22:14,531Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,531Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:processResources {}
+[INFO ] 2019-10-06T07:22:14,531Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:processResources {}
+[INFO ] 2019-10-06T07:22:14,531Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:processResources {}
+[INFO ] 2019-10-06T07:22:14,531Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,542Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:classes {}
+[INFO ] 2019-10-06T07:22:14,542Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:classes {}
+[INFO ] 2019-10-06T07:22:14,542Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:classes {}
+[INFO ] 2019-10-06T07:22:14,542Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,542Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-reflect:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.code.findbugs:jsr305:3.0.2 {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.github.ben-manes.caffeine:caffeine:2.6.2 {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.code.findbugs:jsr305:3.0.2 {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-reflect:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.reactivex:rxjava:1.3.8 {}
+[INFO ] 2019-10-06T07:22:14,543Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.apache.commons:commons-jexl3:3.0 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve net.i2p.crypto:eddsa:0.2.0 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve commons-lang:commons-lang:2.6 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.reactivex:rxjava:1.3.8 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcprov-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcpkix-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.persistence:javax.persistence-api:2.2 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve io.github.classgraph:classgraph:4.6.12 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.persistence:javax.persistence-api:2.2 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcpkix-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.bouncycastle:bcprov-jdk15on:1.60 {}
+[INFO ] 2019-10-06T07:22:14,544Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss:jandex:2.0.5.Final {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.activation:javax.activation-api:1.2.0 {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.1.1.Final {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hibernate.common:hibernate-commons-annotations:5.0.4.Final {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve antlr:antlr:2.7.7 {}
+[INFO ] 2019-10-06T07:22:14,545Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hibernate.common:hibernate-commons-annotations:5.0.4.Final {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.1.1.Final {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve javax.activation:javax.activation-api:1.2.0 {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss:jandex:2.0.5.Final {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jboss.logging:jboss-logging:3.3.2.Final {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains:annotations:13.0 {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71 {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.jetbrains:annotations:13.0 {}
+[INFO ] 2019-10-06T07:22:14,546Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,553Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,553Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hdrhistogram:HdrHistogram:2.1.9 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.latencyutils:LatencyUtils:2.0.3 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.hdrhistogram:HdrHistogram:2.1.9 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.google.guava:guava:20.0 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve de.javakaffee:kryo-serializers:0.42 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:kryo:4.0.0 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve de.javakaffee:kryo-serializers:0.42 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:reflectasm:1.11.3 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:minlog:1.3.0 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve org.objenesis:objenesis:2.2 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:minlog:1.3.0 {}
+[INFO ] 2019-10-06T07:22:14,554Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve com.esotericsoftware:reflectasm:1.11.3 {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve dependencies of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jolokia-jvm-agent.jar (org.jolokia:jolokia-jvm:1.6.0) {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jolokia-jvm-agent.jar (org.jolokia:jolokia-jvm:1.6.0) {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve quasar-core-jdk8.jar (co.paralleluniverse:quasar-core:0.7.11_r3) {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jolokia-jvm-agent.jar (org.jolokia:jolokia-jvm:1.6.0) {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve jolokia-jvm-agent.jar (org.jolokia:jolokia-jvm:1.6.0) {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,555Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,556Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,565Z [Connection worker] internal.TestCordappImpl.statusChanged - Resolve files of :workflows:runtime {}
+[INFO ] 2019-10-06T07:22:14,566Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute doLast {} action for :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,566Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,566Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:configureCordappFatJar {}
+[INFO ] 2019-10-06T07:22:14,566Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,566Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:jar {}
+[INFO ] 2019-10-06T07:22:14,566Z [Connection worker] internal.TestCordappImpl.statusChanged - Execute :workflows:jar {}
+[INFO ] 2019-10-06T07:22:14,566Z [Connection worker] internal.TestCordappImpl.statusChanged - Task :workflows:jar {}
+[INFO ] 2019-10-06T07:22:14,566Z [Connection worker] internal.TestCordappImpl.statusChanged - Executing tasks {}
+[INFO ] 2019-10-06T07:22:14,577Z [Connection worker] internal.TestCordappImpl.statusChanged - Initializing build {}
+[INFO ] 2019-10-06T07:22:14,577Z [Connection worker] internal.TestCordappImpl.statusChanged - Run build {}
+[INFO ] 2019-10-06T07:22:14,577Z [Connection worker] internal.TestCordappImpl.statusChanged - Build {}
+[INFO ] 2019-10-06T07:22:14,625Z [Connection worker] internal.TestCordappImpl.statusChanged -  {}
+[INFO ] 2019-10-06T07:22:14,834Z [Test worker] cordapp.JarScanningCordappLoader.fromDirectories - Looking for CorDapps in [build/mock-network/20191006-072204.899/nodes/0/cordapps] {}
+[INFO ] 2019-10-06T07:22:14,836Z [Test worker] cordapp.JarScanningCordappLoader.<init> - Loading CorDapps from RestrictedURL(url=file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/0/cordapps/contracts-0.1.jar, rootPackageName=null), RestrictedURL(url=file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/0/cordapps/workflows-0.1.jar, rootPackageName=null) {}
+[INFO ] 2019-10-06T07:22:14,839Z [Test worker] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/0/cordapps/contracts-0.1.jar {}
+[INFO ] 2019-10-06T07:22:14,862Z [Test worker] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/0/cordapps/workflows-0.1.jar {}
+[WARN ] 2019-10-06T07:22:14,888Z [Test worker] cordapp.CordappResolver.warnOnce - More than one CorDapp registered for contract com.bfn.contracts.InvoiceContract. {}
+[WARN ] 2019-10-06T07:22:14,888Z [Test worker] cordapp.CordappResolver.warnOnce - More than one CorDapp registered for contract com.bfn.contracts.InvoiceTokenTypeContract. {}
+[WARN ] 2019-10-06T07:22:14,888Z [Test worker] cordapp.CordappResolver.warnOnce - More than one CorDapp registered for contract com.bfn.contracts.InvoiceOfferContract. {}
+[WARN ] 2019-10-06T07:22:14,888Z [Test worker] cordapp.CordappResolver.warnOnce - More than one CorDapp registered for contract com.bfn.contracts.ObligationContract. {}
+[INFO ] 2019-10-06T07:22:15,480Z [Test worker] internal.InternalMockNetwork$MockNode.start - Node starting up ... {}
+[INFO ] 2019-10-06T07:22:15,535Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.BuyInvoiceOfferFlow to initiate com.bfn.flows.invoices.BuyInvoiceOfferFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:15,537Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.InvoiceOfferFlow to initiate com.bfn.flows.invoices.InvoiceOfferFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:15,539Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.InvoiceRegistrationFlow to initiate com.bfn.flows.invoices.InvoiceRegistrationFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:15,541Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.IdentitySyncFlowWrapper$Initiator to initiate com.bfn.flows.obligation.IdentitySyncFlowWrapper$Receive (version 1) {}
+[INFO ] 2019-10-06T07:22:15,542Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.IssueObligation$Initiator to initiate com.bfn.flows.obligation.IssueObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:15,543Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.SettleObligation$Initiator to initiate com.bfn.flows.obligation.SettleObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:15,545Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.TransferObligation$Initiator to initiate com.bfn.flows.obligation.TransferObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:15,548Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.regulator.ReportToRegulatorFlow to initiate com.bfn.flows.regulator.ReceiveRegulatoryReportFlow (version 1) {}
+[INFO ] 2019-10-06T07:22:15,995Z [Test worker] internal.InternalMockNetwork$MockNode.start - Loaded network parameters: NetworkParameters {
+      minimumPlatformVersion=1
+      notaries=[NotaryInfo(identity=O=Notary Service, L=Zurich, C=CH, validating=true)]
+      maxMessageSize=10485760
+      maxTransactionSize=524288000
+      whitelistedContractImplementations {
+        
+      }
+      eventHorizon=PT720H
+      packageOwnership {
+        
+      }
+      modifiedTime=2019-10-06T07:22:04.865Z
+      epoch=1
+  } {}
+[INFO ] 2019-10-06T07:22:19,665Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Start executing... {}
+[INFO ] 2019-10-06T07:22:19,669Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Attachment version creation from whitelisted JARs using network parameters from build/mock-network/20191006-072204.899/nodes/0/network-parameters, whitelistedContractImplementations: {}. {}
+[INFO ] 2019-10-06T07:22:19,669Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Attachment version creation from whitelisted JARs skipped, no attachments not found. {}
+[INFO ] 2019-10-06T07:22:19,671Z [Test worker] migration.VaultStateMigration.execute - Migrating vault state data to V4 tables {}
+[INFO ] 2019-10-06T07:22:19,778Z [Test worker] persistence.HibernateConfiguration.<init> - Init HibernateConfiguration for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:19,781Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Creating session factory for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:22,176Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Created session factory for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:22,966Z [Test worker] migration.VaultStateMigration.execute - Finished performing vault state data migration for 0 states {}
+[INFO ] 2019-10-06T07:22:23,038Z [Test worker] internal.InternalMockNetwork$MockNode.invoke - Connected to H2 database. {}
+[INFO ] 2019-10-06T07:22:23,059Z [Test worker] persistence.HibernateConfiguration.<init> - Init HibernateConfiguration for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1), NodeNotarySchemaV1(name=net.corda.node.services.transactions.NodeNotarySchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:23,059Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Creating session factory for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1), NodeNotarySchemaV1(name=net.corda.node.services.transactions.NodeNotarySchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:23,298Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Created session factory for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1), NodeNotarySchemaV1(name=net.corda.node.services.transactions.NodeNotarySchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:23,306Z [Test worker] internal.InternalMockNetwork$MockNode.updateNodeInfo - Node-info has changed so submitting update. Old node-info was null {}
+[INFO ] 2019-10-06T07:22:23,307Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Notary Service, L=Zurich, C=CH], platformVersion=4, serial=1570346543307) {}
+[INFO ] 2019-10-06T07:22:23,311Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:23,457Z [Test worker] internal.InternalMockNetwork$MockNode.updateNodeInfo - New node-info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Notary Service, L=Zurich, C=CH], platformVersion=4, serial=1570346543307) {}
+[INFO ] 2019-10-06T07:22:23,514Z [Test worker] network.NetworkMapUpdater.apply - Auto-accept enabled for network parameter changes which modify only: [epoch, modifiedTime, packageOwnership, whitelistedContractImplementations] {}
+[INFO ] 2019-10-06T07:22:23,530Z [MockNode-1-2] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Notary Service, L=Zurich, C=CH], platformVersion=4, serial=1570346543307) {}
+[INFO ] 2019-10-06T07:22:23,570Z [MockNode-1-2] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}
+[INFO ] 2019-10-06T07:22:23,604Z [Test worker] persistence.NodeAttachmentService.invoke - Stored new attachment: id=E599401F42B0700B5EC2C6BC175EA7AD16424BC5C34A2FE618C8356556F47A84 uploader=app filename=null {}
+[INFO ] 2019-10-06T07:22:23,608Z [Test worker] utilities.NotaryLoader.loadService - Starting notary service: class net.corda.node.services.transactions.SimpleNotaryService {}
+[INFO ] 2019-10-06T07:22:23,611Z [Test worker] notary.SinglePartyNotaryService.<init> - Starting notary in validating mode {}
+[INFO ] 2019-10-06T07:22:23,628Z [Test worker] internal.InternalMockNetwork$MockNode.installCordaService - Installed com.bfn.flows.admin.BFNCordaService Corda service {}
+[INFO ] 2019-10-06T07:22:24,007Z [Test worker] statemachine.SingleThreadedStateMachineManager.invoke - Node ready, info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Notary Service, L=Zurich, C=CH], platformVersion=4, serial=1570346543307) {}
+[INFO ] 2019-10-06T07:22:24,029Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Notary Service, L=Zurich, C=CH], platformVersion=4, serial=1570346543307) {}
+[INFO ] 2019-10-06T07:22:24,030Z [Test worker] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}
+[INFO ] 2019-10-06T07:22:24,030Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Notary Service, L=Zurich, C=CH], platformVersion=4, serial=1570346543307) {}
+[INFO ] 2019-10-06T07:22:24,030Z [Test worker] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}
+[INFO ] 2019-10-06T07:22:24,037Z [Test worker] cordapp.JarScanningCordappLoader.fromDirectories - Looking for CorDapps in [build/mock-network/20191006-072204.899/nodes/1/cordapps] {}
+[INFO ] 2019-10-06T07:22:24,037Z [Test worker] cordapp.JarScanningCordappLoader.<init> - Loading CorDapps from RestrictedURL(url=file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/1/cordapps/contracts-0.1.jar, rootPackageName=null), RestrictedURL(url=file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/1/cordapps/workflows-0.1.jar, rootPackageName=null) {}
+[INFO ] 2019-10-06T07:22:24,037Z [Test worker] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/1/cordapps/contracts-0.1.jar {}
+[INFO ] 2019-10-06T07:22:24,060Z [Test worker] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/1/cordapps/workflows-0.1.jar {}
+[INFO ] 2019-10-06T07:22:24,085Z [Test worker] internal.InternalMockNetwork$MockNode.start - Node starting up ... {}
+[INFO ] 2019-10-06T07:22:24,111Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.BuyInvoiceOfferFlow to initiate com.bfn.flows.invoices.BuyInvoiceOfferFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,111Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.InvoiceOfferFlow to initiate com.bfn.flows.invoices.InvoiceOfferFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,112Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.InvoiceRegistrationFlow to initiate com.bfn.flows.invoices.InvoiceRegistrationFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,112Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.IdentitySyncFlowWrapper$Initiator to initiate com.bfn.flows.obligation.IdentitySyncFlowWrapper$Receive (version 1) {}
+[INFO ] 2019-10-06T07:22:24,112Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.IssueObligation$Initiator to initiate com.bfn.flows.obligation.IssueObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,112Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.SettleObligation$Initiator to initiate com.bfn.flows.obligation.SettleObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,112Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.TransferObligation$Initiator to initiate com.bfn.flows.obligation.TransferObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,112Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.regulator.ReportToRegulatorFlow to initiate com.bfn.flows.regulator.ReceiveRegulatoryReportFlow (version 1) {}
+[INFO ] 2019-10-06T07:22:24,118Z [Test worker] internal.InternalMockNetwork$MockNode.start - Loaded network parameters: NetworkParameters {
+      minimumPlatformVersion=1
+      notaries=[NotaryInfo(identity=O=Notary Service, L=Zurich, C=CH, validating=true)]
+      maxMessageSize=10485760
+      maxTransactionSize=524288000
+      whitelistedContractImplementations {
+        
+      }
+      eventHorizon=PT720H
+      packageOwnership {
+        
+      }
+      modifiedTime=2019-10-06T07:22:04.865Z
+      epoch=1
+  } {}
+[INFO ] 2019-10-06T07:22:24,494Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Start executing... {}
+[INFO ] 2019-10-06T07:22:24,498Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Attachment version creation from whitelisted JARs using network parameters from build/mock-network/20191006-072204.899/nodes/1/network-parameters, whitelistedContractImplementations: {}. {}
+[INFO ] 2019-10-06T07:22:24,498Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Attachment version creation from whitelisted JARs skipped, no attachments not found. {}
+[INFO ] 2019-10-06T07:22:24,500Z [Test worker] migration.VaultStateMigration.execute - Migrating vault state data to V4 tables {}
+[INFO ] 2019-10-06T07:22:24,502Z [Test worker] persistence.HibernateConfiguration.<init> - Init HibernateConfiguration for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:24,503Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Creating session factory for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:24,573Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Created session factory for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:24,584Z [Test worker] migration.VaultStateMigration.execute - Finished performing vault state data migration for 0 states {}
+[INFO ] 2019-10-06T07:22:24,586Z [Test worker] internal.InternalMockNetwork$MockNode.invoke - Connected to H2 database. {}
+[INFO ] 2019-10-06T07:22:24,587Z [Test worker] internal.InternalMockNetwork$MockNode.obtainIdentity - identity-private-key not found in key store, generating fresh key! {}
+[INFO ] 2019-10-06T07:22:24,624Z [Test worker] persistence.HibernateConfiguration.<init> - Init HibernateConfiguration for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1)] {}
+[INFO ] 2019-10-06T07:22:24,624Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Creating session factory for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1)] {}
+[INFO ] 2019-10-06T07:22:24,746Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Created session factory for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1)] {}
+[INFO ] 2019-10-06T07:22:24,751Z [Test worker] internal.InternalMockNetwork$MockNode.updateNodeInfo - Node-info has changed so submitting update. Old node-info was null {}
+[INFO ] 2019-10-06T07:22:24,751Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 1, L=London, C=GB], platformVersion=4, serial=1570346544751) {}
+[INFO ] 2019-10-06T07:22:24,753Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:24,760Z [Test worker] internal.InternalMockNetwork$MockNode.updateNodeInfo - New node-info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 1, L=London, C=GB], platformVersion=4, serial=1570346544751) {}
+[INFO ] 2019-10-06T07:22:24,770Z [Test worker] network.NetworkMapUpdater.apply - Auto-accept enabled for network parameter changes which modify only: [epoch, modifiedTime, packageOwnership, whitelistedContractImplementations] {}
+[INFO ] 2019-10-06T07:22:24,772Z [MockNode-2-2] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 1, L=London, C=GB], platformVersion=4, serial=1570346544751) {}
+[INFO ] 2019-10-06T07:22:24,776Z [MockNode-2-2] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}
+[INFO ] 2019-10-06T07:22:24,811Z [Test worker] persistence.NodeAttachmentService.invoke - Stored new attachment: id=E599401F42B0700B5EC2C6BC175EA7AD16424BC5C34A2FE618C8356556F47A84 uploader=app filename=null {}
+[INFO ] 2019-10-06T07:22:24,813Z [Test worker] internal.InternalMockNetwork$MockNode.installCordaService - Installed com.bfn.flows.admin.BFNCordaService Corda service {}
+[INFO ] 2019-10-06T07:22:24,820Z [Test worker] statemachine.SingleThreadedStateMachineManager.invoke - Node ready, info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 1, L=London, C=GB], platformVersion=4, serial=1570346544751) {}
+[INFO ] 2019-10-06T07:22:24,823Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Notary Service, L=Zurich, C=CH], platformVersion=4, serial=1570346543307) {}
+[INFO ] 2019-10-06T07:22:24,824Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:24,832Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 1, L=London, C=GB], platformVersion=4, serial=1570346544751) {}
+[INFO ] 2019-10-06T07:22:24,834Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:24,842Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 1, L=London, C=GB], platformVersion=4, serial=1570346544751) {}
+[INFO ] 2019-10-06T07:22:24,842Z [Test worker] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}
+[INFO ] 2019-10-06T07:22:24,842Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 1, L=London, C=GB], platformVersion=4, serial=1570346544751) {}
+[INFO ] 2019-10-06T07:22:24,842Z [Test worker] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}
+[INFO ] 2019-10-06T07:22:24,846Z [Test worker] cordapp.JarScanningCordappLoader.fromDirectories - Looking for CorDapps in [build/mock-network/20191006-072204.899/nodes/2/cordapps] {}
+[INFO ] 2019-10-06T07:22:24,846Z [Test worker] cordapp.JarScanningCordappLoader.<init> - Loading CorDapps from RestrictedURL(url=file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/2/cordapps/contracts-0.1.jar, rootPackageName=null), RestrictedURL(url=file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/2/cordapps/workflows-0.1.jar, rootPackageName=null) {}
+[INFO ] 2019-10-06T07:22:24,846Z [Test worker] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/2/cordapps/contracts-0.1.jar {}
+[INFO ] 2019-10-06T07:22:24,870Z [Test worker] cordapp.JarScanningCordappLoader.scanCordapp - Scanning CorDapp in file:/Users/aubs/WORK/CORDA/bfn-dlt-repo/bfn-corda/workflows/build/mock-network/20191006-072204.899/nodes/2/cordapps/workflows-0.1.jar {}
+[INFO ] 2019-10-06T07:22:24,896Z [Test worker] internal.InternalMockNetwork$MockNode.start - Node starting up ... {}
+[INFO ] 2019-10-06T07:22:24,914Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.BuyInvoiceOfferFlow to initiate com.bfn.flows.invoices.BuyInvoiceOfferFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,914Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.InvoiceOfferFlow to initiate com.bfn.flows.invoices.InvoiceOfferFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,914Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.invoices.InvoiceRegistrationFlow to initiate com.bfn.flows.invoices.InvoiceRegistrationFlowResponder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,914Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.IdentitySyncFlowWrapper$Initiator to initiate com.bfn.flows.obligation.IdentitySyncFlowWrapper$Receive (version 1) {}
+[INFO ] 2019-10-06T07:22:24,914Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.IssueObligation$Initiator to initiate com.bfn.flows.obligation.IssueObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,914Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.SettleObligation$Initiator to initiate com.bfn.flows.obligation.SettleObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,915Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.obligation.TransferObligation$Initiator to initiate com.bfn.flows.obligation.TransferObligation$Responder (version 1) {}
+[INFO ] 2019-10-06T07:22:24,915Z [Test worker] internal.NodeFlowManager.registerInitiatedFlow - Registered com.bfn.flows.regulator.ReportToRegulatorFlow to initiate com.bfn.flows.regulator.ReceiveRegulatoryReportFlow (version 1) {}
+[INFO ] 2019-10-06T07:22:24,919Z [Test worker] internal.InternalMockNetwork$MockNode.start - Loaded network parameters: NetworkParameters {
+      minimumPlatformVersion=1
+      notaries=[NotaryInfo(identity=O=Notary Service, L=Zurich, C=CH, validating=true)]
+      maxMessageSize=10485760
+      maxTransactionSize=524288000
+      whitelistedContractImplementations {
+        
+      }
+      eventHorizon=PT720H
+      packageOwnership {
+        
+      }
+      modifiedTime=2019-10-06T07:22:04.865Z
+      epoch=1
+  } {}
+[INFO ] 2019-10-06T07:22:25,278Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Start executing... {}
+[INFO ] 2019-10-06T07:22:25,280Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Attachment version creation from whitelisted JARs using network parameters from build/mock-network/20191006-072204.899/nodes/2/network-parameters, whitelistedContractImplementations: {}. {}
+[INFO ] 2019-10-06T07:22:25,280Z [Test worker] persistence.AttachmentVersionNumberMigration.execute - Attachment version creation from whitelisted JARs skipped, no attachments not found. {}
+[INFO ] 2019-10-06T07:22:25,281Z [Test worker] migration.VaultStateMigration.execute - Migrating vault state data to V4 tables {}
+[INFO ] 2019-10-06T07:22:25,283Z [Test worker] persistence.HibernateConfiguration.<init> - Init HibernateConfiguration for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:25,284Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Creating session factory for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:25,340Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Created session factory for schemas: [VaultMigrationSchemaV1(name=net.corda.node.migration.VaultMigrationSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1)] {}
+[INFO ] 2019-10-06T07:22:25,347Z [Test worker] migration.VaultStateMigration.execute - Finished performing vault state data migration for 0 states {}
+[INFO ] 2019-10-06T07:22:25,348Z [Test worker] internal.InternalMockNetwork$MockNode.invoke - Connected to H2 database. {}
+[INFO ] 2019-10-06T07:22:25,350Z [Test worker] internal.InternalMockNetwork$MockNode.obtainIdentity - identity-private-key not found in key store, generating fresh key! {}
+[INFO ] 2019-10-06T07:22:25,365Z [Test worker] persistence.HibernateConfiguration.<init> - Init HibernateConfiguration for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1)] {}
+[INFO ] 2019-10-06T07:22:25,366Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Creating session factory for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1)] {}
+[INFO ] 2019-10-06T07:22:25,460Z [Test worker] persistence.HibernateConfiguration.makeSessionFactoryForSchemas - Created session factory for schemas: [CommonSchemaV1(name=net.corda.core.schemas.CommonSchema, version=1), VaultSchemaV1(name=net.corda.node.services.vault.VaultSchema, version=1), NodeInfoSchemaV1(name=net.corda.node.internal.schemas.NodeInfoSchema, version=1), NodeCoreV1(name=net.corda.node.services.schema.NodeSchemaService$NodeCore, version=1)] {}
+[INFO ] 2019-10-06T07:22:25,464Z [Test worker] internal.InternalMockNetwork$MockNode.updateNodeInfo - Node-info has changed so submitting update. Old node-info was null {}
+[INFO ] 2019-10-06T07:22:25,464Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 2, L=London, C=GB], platformVersion=4, serial=1570346545464) {}
+[INFO ] 2019-10-06T07:22:25,466Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:25,472Z [Test worker] internal.InternalMockNetwork$MockNode.updateNodeInfo - New node-info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 2, L=London, C=GB], platformVersion=4, serial=1570346545464) {}
+[INFO ] 2019-10-06T07:22:25,479Z [Test worker] network.NetworkMapUpdater.apply - Auto-accept enabled for network parameter changes which modify only: [epoch, modifiedTime, packageOwnership, whitelistedContractImplementations] {}
+[INFO ] 2019-10-06T07:22:25,481Z [MockNode-3-2] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 2, L=London, C=GB], platformVersion=4, serial=1570346545464) {}
+[INFO ] 2019-10-06T07:22:25,485Z [MockNode-3-2] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}
+[INFO ] 2019-10-06T07:22:25,523Z [Test worker] persistence.NodeAttachmentService.invoke - Stored new attachment: id=E599401F42B0700B5EC2C6BC175EA7AD16424BC5C34A2FE618C8356556F47A84 uploader=app filename=null {}
+[INFO ] 2019-10-06T07:22:25,524Z [Test worker] internal.InternalMockNetwork$MockNode.installCordaService - Installed com.bfn.flows.admin.BFNCordaService Corda service {}
+[INFO ] 2019-10-06T07:22:25,529Z [Test worker] statemachine.SingleThreadedStateMachineManager.invoke - Node ready, info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 2, L=London, C=GB], platformVersion=4, serial=1570346545464) {}
+[INFO ] 2019-10-06T07:22:25,531Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Notary Service, L=Zurich, C=CH], platformVersion=4, serial=1570346543307) {}
+[INFO ] 2019-10-06T07:22:25,534Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:25,542Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 2, L=London, C=GB], platformVersion=4, serial=1570346545464) {}
+[INFO ] 2019-10-06T07:22:25,543Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:25,552Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 1, L=London, C=GB], platformVersion=4, serial=1570346544751) {}
+[INFO ] 2019-10-06T07:22:25,553Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:25,559Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 2, L=London, C=GB], platformVersion=4, serial=1570346545464) {}
+[INFO ] 2019-10-06T07:22:25,560Z [Test worker] network.PersistentNetworkMapCache.addNode - No previous node found {}
+[INFO ] 2019-10-06T07:22:25,566Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 2, L=London, C=GB], platformVersion=4, serial=1570346545464) {}
+[INFO ] 2019-10-06T07:22:25,566Z [Test worker] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}
+[INFO ] 2019-10-06T07:22:25,566Z [Test worker] network.PersistentNetworkMapCache.addNode - Adding node with info: NodeInfo(addresses=[mock.node:1000], legalIdentitiesAndCerts=[O=Mock Company 2, L=London, C=GB], platformVersion=4, serial=1570346545464) {}
+[INFO ] 2019-10-06T07:22:25,566Z [Test worker] network.PersistentNetworkMapCache.addNode - Previous node was identical to incoming one - doing nothing {}

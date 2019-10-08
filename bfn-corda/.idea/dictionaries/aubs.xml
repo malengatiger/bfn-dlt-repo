@@ -4,12 +4,15 @@
       <w>accts</w>
       <w>cntry</w>
       <w>corda</w>
+      <w>cordapp</w>
       <w>cust</w>
       <w>firebase</w>
       <w>firestore</w>
       <w>flickenburg</w>
       <w>parm</w>
+      <w>postgresql</w>
       <w>sandton</w>
+      <w>webserver</w>
     </words>
   </dictionary>
 </component>

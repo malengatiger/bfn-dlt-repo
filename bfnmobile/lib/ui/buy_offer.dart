@@ -84,19 +84,16 @@ class _BuyOfferState extends State<BuyOffer> implements SnackBarListener {
                         style: Styles.whiteSmall,
                       );
                     }),
+                SizedBox(height: 20),
               ],
             ),
-            preferredSize: Size.fromHeight(100)),
+            preferredSize: Size.fromHeight(140)),
       ),
       backgroundColor: Colors.brown[100],
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: <Widget>[
-//            Text(
-//              'Buy Invoice Offer',
-//              style: Styles.blackBoldLarge,
-//            ),
             SizedBox(
               height: 20,
             ),
@@ -127,7 +124,7 @@ class _BuyOfferState extends State<BuyOffer> implements SnackBarListener {
                         ],
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       Row(
                         children: <Widget>[
@@ -145,7 +142,7 @@ class _BuyOfferState extends State<BuyOffer> implements SnackBarListener {
                         ],
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       Row(
                         children: <Widget>[
@@ -174,8 +171,10 @@ class _BuyOfferState extends State<BuyOffer> implements SnackBarListener {
                           SizedBox(
                             width: 4,
                           ),
-                          Text(getCurrency(
-                              widget.offer.originalAmount, context)),
+                          Text(
+                            getCurrency(widget.offer.originalAmount, context),
+                            style: Styles.blackBoldSmall,
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -215,7 +214,7 @@ class _BuyOfferState extends State<BuyOffer> implements SnackBarListener {
                         ],
                       ),
                       SizedBox(
-                        height: 24,
+                        height: 8,
                       ),
                       Row(
                         children: <Widget>[
@@ -374,31 +373,25 @@ class NameBadge extends StatelessWidget {
       loc.write(xList.elementAt(1) + ' ');
     });
     var node = loc.toString();
-    return Card(
-      elevation: elevation == null ? 0 : elevation,
-      color: backgroundColor == null
-          ? Theme.of(context).primaryColor
-          : backgroundColor,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 12, bottom: 8),
-        child: Column(
-          children: <Widget>[
-            Text(
-              account.name,
-              style: nameStyle == null ? Styles.blackBoldSmall : nameStyle,
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Text(
-              node,
-              style: nodeStyle == null ? Styles.blackSmall : nodeStyle,
-            ),
-            SizedBox(
-              height: 4,
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 12, bottom: 8),
+      child: Column(
+        children: <Widget>[
+          Text(
+            account.name,
+            style: nameStyle == null ? Styles.blackBoldSmall : nameStyle,
+          ),
+          SizedBox(
+            height: 4,
+          ),
+          Text(
+            node,
+            style: nodeStyle == null ? Styles.blackSmall : nodeStyle,
+          ),
+          SizedBox(
+            height: 4,
+          ),
+        ],
       ),
     );
   }

@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.Date;
@@ -28,14 +29,14 @@ import java.util.UUID;
 public class InvoiceOfferState implements ContractState {
     private final static Logger logger = LoggerFactory.getLogger(InvoiceContract.class);
     private final UUID invoiceId;
-    private final double offerAmount, discount, originalAmount;
+    private final BigDecimal offerAmount, discount, originalAmount;
     private final AccountInfo supplier, investor, owner, customer;
     private final Date offerDate, ownerDate;
     private final PublicKey supplierPublicKey, investorPublicKey;
     private final String invoiceNumber;
 
-    public InvoiceOfferState(UUID invoiceId, double offerAmount, double discount,
-                             double originalAmount, AccountInfo supplier,
+    public InvoiceOfferState(UUID invoiceId, BigDecimal offerAmount, BigDecimal discount,
+                             BigDecimal originalAmount, AccountInfo supplier,
                              AccountInfo investor, AccountInfo owner, Date offerDate,
                              Date ownerDate, PublicKey supplierPublicKey,
                              PublicKey investorPublicKey, String invoiceNumber, AccountInfo customer) {
@@ -73,7 +74,7 @@ public class InvoiceOfferState implements ContractState {
         return investorPublicKey;
     }
 
-    public double getOriginalAmount() {
+    public BigDecimal getOriginalAmount() {
         return originalAmount;
     }
 
@@ -89,11 +90,11 @@ public class InvoiceOfferState implements ContractState {
         return invoiceId;
     }
 
-    public double getOfferAmount() {
+    public BigDecimal getOfferAmount() {
         return offerAmount;
     }
 
-    public double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 

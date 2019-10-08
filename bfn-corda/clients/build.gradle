@@ -31,39 +31,46 @@ dependencies {
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
 // https://mvnrepository.com/artifact/com.google.firebase/firebase-admin
     compile group: 'com.google.firebase', name: 'firebase-admin', version: '6.10.0'
-// https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv
-    compile group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.1.2'
+//// https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv
+//    compile group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.1.2'
 
     springBoot {
         mainClassName = "com.bfn.webserver.BFNWebApi"
     }
 
 
+    def profile = 'dev'
+
     task runOCTNetworkOperator(type: JavaExec, dependsOn: assemble) {
         classpath = sourceSets.main.runtimeClasspath
         main = 'com.bfn.webserver.BFNWebApi'
+        systemProperty 'spring.profiles.active', profile
         args '--server.port=10411', '--config.rpc.host=localhost', '--config.rpc.port=10421', '--config.rpc.username=user1', '--config.rpc.password=test'
     }
     task runLondonInvestorServer(type: JavaExec, dependsOn: assemble) {
         classpath = sourceSets.main.runtimeClasspath
         main = 'com.bfn.webserver.BFNWebApi'
+        systemProperty 'spring.profiles.active', profile
         args '--server.port=10412', '--config.rpc.host=localhost', '--config.rpc.port=10423', '--config.rpc.username=user1', '--config.rpc.password=test'
     }
     task runNewYorkInvestorServer(type: JavaExec, dependsOn: assemble) {
         classpath = sourceSets.main.runtimeClasspath
         main = 'com.bfn.webserver.BFNWebApi'
+        systemProperty 'spring.profiles.active', profile
         args '--server.port=10413', '--config.rpc.host=localhost', '--config.rpc.port=10425', '--config.rpc.username=user1', '--config.rpc.password=test'
     }
 
     task runCapeTownCustomerServer(type: JavaExec, dependsOn: assemble) {
         classpath = sourceSets.main.runtimeClasspath
         main = 'com.bfn.webserver.BFNWebApi'
+        systemProperty 'spring.profiles.active', profile
         args '--server.port=10414', '--config.rpc.host=localhost', '--config.rpc.port=10427', '--config.rpc.username=user1', '--config.rpc.password=test'
     }
 
     task runRegulatorServer(type: JavaExec, dependsOn: assemble) {
         classpath = sourceSets.main.runtimeClasspath
         main = 'com.bfn.webserver.BFNWebApi'
+        systemProperty 'spring.profiles.active', profile
         args '--server.port=10416', '--config.rpc.host=localhost', '--config.rpc.port=10429', '--config.rpc.username=user1', '--config.rpc.password=test'
     }
 

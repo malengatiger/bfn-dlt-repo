@@ -203,6 +203,7 @@ class _SignUpState extends State<SignUp> {
                           SizedBox(
                             height: 40,
                           ),
+                          SizedBox(height: 0),
                           RaisedButton(
                             color: Colors.indigo,
                             elevation: 8,

@@ -1,7 +1,11 @@
 apply plugin: 'net.corda.plugins.cordapp'
 apply plugin: 'net.corda.plugins.cordformation'
 apply plugin: 'net.corda.plugins.quasar-utils'
-
+repositories {
+    maven {
+        url 'https://ci-artifactory.corda.r3cev.com/artifactory/corda-solutions-releases'
+    }
+}
 cordapp {
     targetPlatformVersion corda_platform_version.toInteger()
     minimumPlatformVersion corda_platform_version.toInteger()
@@ -59,6 +63,9 @@ dependencies {
     cordapp "$corda_release_group:corda-finance-contracts:$corda_release_version"
     cordapp "$corda_release_group:corda-finance-workflows:$corda_release_version"
     cordapp "$corda_release_group:corda-confidential-identities:$corda_release_version"
+
+    cordapp "com.r3.businessnetworks:membership-service:2.0"
+    cordapp "com.r3.businessnetworks:membership-service-contracts-and-states:2.0"
 }
 
 task integrationTest(type: Test, dependsOn: []) {

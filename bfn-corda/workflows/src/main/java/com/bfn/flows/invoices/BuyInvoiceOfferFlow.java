@@ -2,6 +2,7 @@ package com.bfn.flows.invoices;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.bfn.contracts.InvoiceOfferContract;
+import com.bfn.contracts.InvoiceTokenType;
 import com.bfn.flows.admin.BFNCordaService;
 import com.bfn.flows.regulator.ReportToRegulatorFlow;
 import com.bfn.states.InvoiceOfferState;
@@ -148,18 +149,7 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
                     new FinalityFlow(signedTx, ImmutableList.of(), FINALISING_TRANSACTION.childProgressTracker()));
             logger.info("\uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D \uD83D\uDC7D  SAME NODE ==> " +
                     "FinalityFlow has been executed ... \uD83E\uDD66 \uD83E\uDD66");
-            //todo - talk to the regulator ....
-            logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  Talking to the Regulator, for compliance, Senor! .............");
-            Set<Party> parties = serviceHub.getIdentityService().partiesFromName("Regulator",false);
-            Party regulator = parties.iterator().next();
-            try {
-                subFlow(new ReportToRegulatorFlow(regulator,mSignedTransactionDone));
-                logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  DONE talking to the Regulator, Phew!");
-
-            } catch (Exception e) {
-                logger.error(" \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F Regulator fell down.  \uD83D\uDC7F IGNORED  \uD83D\uDC7F ", e);
-                throw new FlowException("Regulator fell down!");
-            }
+            reportToRegulator(serviceHub, mSignedTransactionDone);
             return mSignedTransactionDone;
         }
 
@@ -196,10 +186,26 @@ public class BuyInvoiceOfferFlow extends FlowLogic<SignedTransaction> {
                 + flowSessions.size()
                 + " - signing transactions on different nodes");
         signedTransaction = getSignedTransaction(signedTx, flowSessions);
-
+        reportToRegulator(serviceHub,signedTransaction);
         return signedTransaction;
 
     }
+
+    @Suspendable
+    private void reportToRegulator(ServiceHub serviceHub, SignedTransaction mSignedTransactionDone) throws FlowException {
+        logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  Talking to the Regulator, for compliance, Senor! .............");
+        Set<Party> parties = serviceHub.getIdentityService().partiesFromName("Regulator",false);
+        Party regulator = parties.iterator().next();
+        try {
+            subFlow(new ReportToRegulatorFlow(regulator,mSignedTransactionDone));
+            logger.info("\uD83D\uDCCC \uD83D\uDCCC \uD83D\uDCCC  DONE talking to the Regulator, Phew!");
+
+        } catch (Exception e) {
+            logger.error(" \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F Regulator fell down.  \uD83D\uDC7F IGNORED  \uD83D\uDC7F ", e);
+            throw new FlowException("Regulator fell down!");
+        }
+    }
+
 
     @Suspendable
     private void checkIfAlreadyConsumed(ServiceHub serviceHub) throws FlowException {

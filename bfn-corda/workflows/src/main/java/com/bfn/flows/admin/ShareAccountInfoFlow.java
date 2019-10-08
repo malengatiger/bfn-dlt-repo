@@ -5,18 +5,14 @@ import com.r3.corda.lib.accounts.contracts.states.AccountInfo;
 import com.r3.corda.lib.accounts.workflows.services.AccountService;
 import com.r3.corda.lib.accounts.workflows.services.KeyManagementBackedAccountService;
 import kotlin.Unit;
-import net.corda.core.concurrent.CordaFuture;
-import net.corda.core.contracts.StateAndRef;
 import net.corda.core.flows.FlowException;
 import net.corda.core.flows.FlowLogic;
 import net.corda.core.flows.StartableByRPC;
 import net.corda.core.identity.Party;
-import net.corda.core.node.NodeInfo;
 import net.corda.core.node.ServiceHub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -34,6 +30,7 @@ public class ShareAccountInfoFlow extends FlowLogic<String> {
     @Override
     @Suspendable
     public String call() throws FlowException {
+
         ServiceHub hub = getServiceHub();
         AccountService accountService = hub.cordaService(KeyManagementBackedAccountService.class);
         try {
@@ -48,10 +45,10 @@ public class ShareAccountInfoFlow extends FlowLogic<String> {
 
         } catch (InterruptedException e) {
             logger.error("\uD83D\uDC7F \uD83D\uDC7F InterruptedException: ".concat(e.getMessage()));
-            throw new FlowException("InterruptedException: Unable to share accounts");
+            throw new FlowException("InterruptedException: Unable to share account");
         } catch (ExecutionException e) {
             logger.error("\uD83D\uDC7F \uD83D\uDC7F ExecutionException: ".concat(e.getMessage()));
-            throw new FlowException("ExecutionException: Unable to share accounts");
+            throw new FlowException("ExecutionException: Unable to share account");
         }
 
         return "\uD83C\uDFC8 \uD83C\uDFC8 Account shared: "

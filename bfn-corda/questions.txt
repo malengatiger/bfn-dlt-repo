@@ -1,0 +1,56 @@
+
+###################################################################################################################################
+################################### 2nd October 2019 Office Hour
+Questions for R3:
+
+1. Accounts SDK - how do the account signing work? Doc says use PublicKey instead of Party - the signing falls down
+2. Differences between local dev and azure/aws/etc. - node.conf looks different, how do the certs work?
+3. Error Messages:
+
+   on node startup:
+
+   AMQ214000: Failed to call onMessage
+   java.lang.NumberFormatException: For input string: "6432b729-2b85-430c-ad16-8b1638c7c78d"
+   	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65) ~[?:1.8.0_222]
+
+   AMQ212063: Unable to handle connection failure
+    java.lang.IllegalMonitorStateException: null
+    	at java.util.concurrent.locks.ReentrantLock$Sync.tryRelease(ReentrantLock.java:151) ~[?:1.8.0_222]
+    	at java.util.concurrent.locks.AbstractQueuedSynchronizer.release(AbstractQueuedSynchronizer.java:1261) ~[?:1.8.0_222]
+    	at java.util.concurrent.locks.ReentrantLock.unlock(ReentrantLock.java:457) ~[?:1.8.0_222]
+
+    	*********************************************
+
+   on webserver startup
+    - hangs trying to set up SpringBoot NodeRPCConnection -
+
+            NetworkHostAndPort rpcAddress = new NetworkHostAndPort(host, rpcPort);
+            CordaRPCClient rpcClient = new CordaRPCClient(rpcAddress);
+
+            rpcConnection = rpcClient.start(username, password); // hangs on this statement .....
+            proxy = rpcConnection.getProxy();
+
+        ################################################
+
+
+ 3. Finance Cordapp vs CordaSettler - are they used together? is the Finance Cordapp necessary?
+ 3a. How do we integrate corda-settler.jar into our IntelliJ project?
+ 4. Azure Marketplace - (Single Network) how does implementation connect to the Corda Testnet
+ 5. Do we have to implement Postgresql/SQL Server etc. on the Azure platform or stick with H2?
+
+ 5a. How do we integrate Network Membership Service NMS - into our own projects?
+ 5b. How do the NMS and Account SDK work together? Or do they?
+
+ 6. Not a question: We are using off-site database already (Firestore/MongoDB)
+ 6a. What's with reports of engineers vs managers at R3?
+
+ 7. #IMPORTANT# - the way the webserver + corda combination works on Azure is confusing. How does one cleanly start the webserver?
+ 7a. The differences between local node.conf vs on Azure or other cloud provider?
+ 7b. When would we need to migrate to Corda Enterprise? Cost?
+
+ 8. Possibility of meeting @ CordaCpn 2019 in London
+
+ ##############################
+ Pet Peeve:
+ Corda docs suck!!
+ ##############################

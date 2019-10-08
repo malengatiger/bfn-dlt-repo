@@ -107,26 +107,7 @@ public class AccountRegistrationFlow extends FlowLogic<AccountInfo> {
                 "FinalityFlow has been executed").concat(" txId: ")
                 .concat(mSignedTransactionDone.getId().toString()));
 
-//        shareAccount(serviceHub, accountInfo);
-
         return accountInfo;
     }
 
-//    @Suspendable
-//    private void shareAccount(ServiceHub serviceHub, AccountInfo accountInfo) throws FlowException {
-//        //share account with all parties on network
-//        List<NodeInfo> nodes = serviceHub.getNetworkMapCache().getAllNodes();
-//        int cnt = 0;
-//        for (NodeInfo node : nodes) {
-//            Party party = node.getLegalIdentities().get(0);
-//            if (party.getName().getOrganisation().contains("Notary")) {
-//                continue;
-//            }
-//            cnt++;
-//            subFlow(new ShareAccountInfoFlow(party, accountInfo));
-//        }
-//
-//        logger.info(" \uD83C\uDF3A \uD83C\uDF3A \uD83C\uDF3A \uD83C\uDF3A Shared this account with "
-//                + cnt + " nodes");
-//    }
 }

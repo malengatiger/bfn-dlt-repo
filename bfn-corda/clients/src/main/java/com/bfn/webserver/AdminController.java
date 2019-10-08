@@ -39,9 +39,14 @@ public class AdminController {
 
     @GetMapping(value = "/gen", produces = "application/json")
     private DemoSummary generateData() throws Exception {
-
+        if (env == null) {
+            throw new Exception("Environment variables not available");
+        } else {
+            logger.info("\uD83C\uDF40 \uD83C\uDF40 \uD83C\uDF40 " +
+                    "Environment variables available \uD83C\uDF40 ");
+        }
         logger.info("\n\n\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 starting DemoDataGenerator ... \uD83C\uDF4F");
-        DemoSummary result = DemoUtil.startNodes(proxy);
+        DemoSummary result = DemoUtil.startNodes(proxy, env);
         logger.info("\n\n\uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35 DemoUtil result: " +
                 " \uD83C\uDF4F " + GSON.toJson(result)
                 .concat("    \uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A \uD83D\uDC99 \uD83D\uDC9C\n\n"));

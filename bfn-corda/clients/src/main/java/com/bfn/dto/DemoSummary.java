@@ -8,14 +8,15 @@ public class DemoSummary {
     int numberOfNodes, numberOfFlows;
     String started, ended;
     double elapsedSeconds;
-    List<InvoiceOfferDTO> nodeInvoiceOffers = new ArrayList<>();
+    DashboardData dashboardData;
     public DemoSummary() {
     }
 
     public DemoSummary(int numberOfAccounts, int numberOfInvoices,
                        int numberOfInvoiceOffers, int numberOfNodes,
                        int numberOfFlows, String started,
-                       String ended, double elapsedSeconds) {
+                       String ended, double elapsedSeconds,
+                       DashboardData dashboardData) {
         this.numberOfAccounts = numberOfAccounts;
         this.numberOfInvoices = numberOfInvoices;
         this.numberOfInvoiceOffers = numberOfInvoiceOffers;
@@ -23,15 +24,16 @@ public class DemoSummary {
         this.numberOfFlows = numberOfFlows;
         this.started = started;
         this.ended = ended;
+        this.dashboardData = dashboardData;
         this.elapsedSeconds = elapsedSeconds;
     }
 
-    public List<InvoiceOfferDTO> getNodeInvoiceOffers() {
-        return nodeInvoiceOffers;
+    public DashboardData getDashboardData() {
+        return dashboardData;
     }
 
-    public void setNodeInvoiceOffers(List<InvoiceOfferDTO> nodeInvoiceOffers) {
-        this.nodeInvoiceOffers = nodeInvoiceOffers;
+    public void setDashboardData(DashboardData dashboardData) {
+        this.dashboardData = dashboardData;
     }
 
     public double getElapsedSeconds() {

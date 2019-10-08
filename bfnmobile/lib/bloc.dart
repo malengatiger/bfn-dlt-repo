@@ -13,23 +13,29 @@ import 'package:flutter/cupertino.dart';
 BFNBloc bfnBloc = BFNBloc();
 
 class BFNBloc {
-  StreamController<List<AccountInfo>> acctController =
+  StreamController<List<AccountInfo>> _acctController =
       StreamController.broadcast();
-  StreamController<List<Invoice>> invoiceController =
+  StreamController<List<Invoice>> _invoiceController =
       StreamController.broadcast();
-  StreamController<List<InvoiceOffer>> offerController =
-      StreamController.broadcast();
-
-  StreamController<String> fcmController = StreamController.broadcast();
-  StreamController<Invoice> invoiceFCMController = StreamController.broadcast();
-  StreamController<InvoiceOffer> offerFCMController =
+  StreamController<List<InvoiceOffer>> _offerController =
       StreamController.broadcast();
 
-  StreamController<DashboardData> dashController = StreamController.broadcast();
+  StreamController<String> _fcmController = StreamController.broadcast();
+  StreamController<Invoice> _invoiceFCMController =
+      StreamController.broadcast();
+  StreamController<InvoiceOffer> _offerFCMController =
+      StreamController.broadcast();
 
-  Stream get fcmStream => fcmController.stream;
+  StreamController<DashboardData> _dashController =
+      StreamController.broadcast();
+
+  Stream get fcmStream => _fcmController.stream;
+  Stream get accountStream => _acctController.stream;
+  Stream get invoiceStream => _invoiceFCMController.stream;
+  Stream get offerStream => _offerFCMController.stream;
+  Stream get dashboardStream => _dashController.stream;
   FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseUser user;
+  FirebaseUser _user;
   AccountInfo account;
 
   BFNBloc() {
@@ -41,13 +47,13 @@ class BFNBloc {
   }
 
   close() {
-    acctController.close();
-    invoiceController.close();
-    offerController.close();
-    dashController.close();
-    fcmController.close();
-    invoiceFCMController.close();
-    offerFCMController.close();
+    _acctController.close();
+    _invoiceController.close();
+    _offerController.close();
+    _dashController.close();
+    _fcmController.close();
+    _invoiceFCMController.close();
+    _offerFCMController.close();
   }
 
   void addFCMInvoice(Invoice invoice, BuildContext context) {
@@ -55,7 +61,8 @@ class BFNBloc {
         '🥬 🥬 🥬 Putting arrived FCM message on stream: 🥬 invoice: ${invoice.invoiceNumber}');
     var msg =
         '🥬 Invoice added to Network ${getFormattedDateShortWithTime(invoice.dateRegistered, context)}';
-    fcmController.sink.add(msg);
+    _fcmController.sink.add(msg);
+    _invoiceFCMController.sink.add(invoice);
   }
 
   void addFCMInvoiceOffer(InvoiceOffer invoiceOffer, BuildContext context) {
@@ -63,14 +70,17 @@ class BFNBloc {
         '🥬 🥬 🥬 Putting arrived FCM message on stream: 🥬 invoiceOffer: ${invoiceOffer.invoiceId}');
     var msg =
         '🍎 Offer added to Network ${getFormattedDateShortWithTime(invoiceOffer.offerDate, context)}';
-    fcmController.sink.add(msg);
+    _fcmController.sink.add(msg);
+    _offerFCMController.sink.add(invoiceOffer);
   }
 
   void addFCMAccount(AccountInfo account, BuildContext context) {
     debugPrint(
         '🥬 🥬 🥬 Putting arrived FCM message on stream: 🥬 account: ${account.name}');
     var msg = '🧩 Account added to Network: ${account.name}';
-    fcmController.sink.add(msg);
+    _fcmController.sink.add(msg);
+    _accounts.add(account);
+    _acctController.sink.add(_accounts);
   }
 
   Future<bool> isUserAuthenticated() async {
@@ -92,17 +102,18 @@ class BFNBloc {
       throw Exception('User sigin failed');
     }
     print('🥬 🥬 🥬 User successfully signed in: 🍎 🍊 ${result.user.uid}');
-    user = result.user;
-    return user;
+    _user = result.user;
+    return _user;
   }
 
+  List<AccountInfo> _accounts = List();
   Future<List<AccountInfo>> getAccounts() async {
     try {
-      var accounts = await Net.getAccounts();
+      _accounts = await Net.getAccounts();
       print(
-          '🍏 🍏 BFNBloc: getAccounts found 🔆 ${accounts.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
-      acctController.sink.add(accounts);
-      return accounts;
+          '🍏 🍏 BFNBloc: getAccounts found 🔆 ${_accounts.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
+      _acctController.sink.add(_accounts);
+      return _accounts;
     } catch (e) {
       print(e);
       return List<AccountInfo>();
@@ -119,7 +130,7 @@ class BFNBloc {
 
     print(
         '🍏 🍏 BFNBloc: getInvoices found 🔆 ${invoices.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
-    invoiceController.sink.add(invoices);
+    _invoiceController.sink.add(invoices);
     return invoices;
   }
 
@@ -135,7 +146,7 @@ class BFNBloc {
 
     print(
         '🍏 🍏 BFNBloc: getInvoiceOffers found 🔆 ${offers.length} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
-    offerController.sink.add(offers);
+    _offerController.sink.add(offers);
     return offers;
   }
 
@@ -143,7 +154,7 @@ class BFNBloc {
     var data = await Net.getDashboardData();
     print(
         '🍏 🍏 BFNBloc: getDashboardData found 🔆 ${data.toJson()} 🔆 🍏 🍏  - adding to stream 🧩 🧩 ');
-    dashController.sink.add(data);
+    _dashController.sink.add(data);
     return data;
   }
 }

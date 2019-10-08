@@ -1,7 +1,5 @@
 package com.bfn.dto;
 
-import java.util.Date;
-
 public class InvoiceOfferAllDTO {
     private String invoiceId;
     private double offerAmount, discount;

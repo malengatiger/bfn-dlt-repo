@@ -7,7 +7,7 @@ public class InvoiceDTO {
     String invoiceNumber;
     String description;
 
-    Double amount, totalAmount, valueAddedTax;
+    double amount, totalAmount, valueAddedTax;
     private Date dateRegistered;
     private AccountInfoDTO supplier, customer;
     private String supplierPublicKey, customerPublicKey;
@@ -16,8 +16,8 @@ public class InvoiceDTO {
     }
 
     public InvoiceDTO(String invoiceId, String invoiceNumber,
-                      String description, Double amount, Double totalAmount,
-                      Double valueAddedTax, Date dateRegistered,
+                      String description, double amount, double totalAmount,
+                      double valueAddedTax, Date dateRegistered,
                       AccountInfoDTO supplier, AccountInfoDTO customer, String supplierPublicKey, String customerPublicKey) {
         this.invoiceId = invoiceId;
         this.invoiceNumber = invoiceNumber;
@@ -56,27 +56,27 @@ public class InvoiceDTO {
         this.description = description;
     }
 
-    public Double getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Double getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Double totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public Double getValueAddedTax() {
+    public double getValueAddedTax() {
         return valueAddedTax;
     }
 
-    public void setValueAddedTax(Double valueAddedTax) {
+    public void setValueAddedTax(double valueAddedTax) {
         this.valueAddedTax = valueAddedTax;
     }
 

@@ -48,7 +48,7 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
       appBar: AppBar(
         title: Text('Create Offer'),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(120),
+          preferredSize: Size.fromHeight(100),
           child: Column(
             children: <Widget>[
               NameBadge(
@@ -75,95 +75,98 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
                     );
                   }),
               SizedBox(
-                height: 20,
+                height: 8,
               ),
             ],
           ),
         ),
       ),
       backgroundColor: Colors.brown[50],
-      body: ListView(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(child: InvoiceDetail(widget.invoice)),
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Card(
-              elevation: 4,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 20,
+      body: _getBody(),
+    );
+  }
+
+  Widget _getBody() {
+    return ListView(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+              color: Colors.grey[200], child: InvoiceDetail(widget.invoice)),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: Card(
+            elevation: 2,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 12,
+                ),
+                FlatButton(
+                  onPressed: _getTradingAccount,
+                  child: Text(
+                    'Select Investor',
+                    style: Styles.blueMedium,
                   ),
-                  Text(
-                    'Make Offer',
-                    style: Styles.blackBoldLarge,
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  RaisedButton(
-                    onPressed: _getTradingAccount,
-                    elevation: 2,
-                    child: Text(
-                      'Select Investor',
-                      style: Styles.whiteSmall,
-                    ),
-                  ),
-                  tradingAccount == null
-                      ? Container()
-                      : Text(
-                          tradingAccount.name,
-                          style: Styles.blueBoldMedium,
+                ),
+                tradingAccount == null
+                    ? Container()
+                    : Text(
+                        tradingAccount.name,
+                        style: Styles.blackBoldMedium,
+                      ),
+                SizedBox(
+                  height: 8,
+                ),
+                discount == null
+                    ? Container()
+                    : Text(
+                        getFormattedAmount(discountAmount, context),
+                        style: Styles.tealBoldMedium,
+                      ),
+                SizedBox(
+                  height: 8,
+                ),
+                tradingAccount == null
+                    ? Container()
+                    : Padding(
+                        padding: const EdgeInsets.only(
+                            left: 96, bottom: 20, right: 96),
+                        child: TextField(
+                          controller: _controller,
+                          style: Styles.blackBoldMedium,
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          decoration: InputDecoration(
+                              labelText: 'Discount %',
+                              hintText: '0.0',
+                              hintStyle: Styles.blackBoldMedium),
+                          onChanged: _onDiscountChanged,
                         ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  tradingAccount == null
-                      ? Container()
-                      : Padding(
-                          padding: const EdgeInsets.only(
-                              left: 48, bottom: 20, right: 48),
-                          child: TextField(
-                            controller: _controller,
-                            style: Styles.pinkBoldLarge,
-                            keyboardType:
-                                TextInputType.numberWithOptions(decimal: true),
-                            decoration: InputDecoration(
-                                labelText: 'Discount %',
-                                hintText: 'Enter Discount',
-                                hintStyle: Styles.pinkBoldLarge),
-                            onChanged: _onDiscountChanged,
+                      ),
+                tradingAccount == null
+                    ? Container()
+                    : RaisedButton(
+                        color: Colors.indigo,
+                        elevation: 8,
+                        onPressed: _submitOffer,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Submit Offer',
+                            style: Styles.whiteSmall,
                           ),
                         ),
-                  tradingAccount == null
-                      ? Container()
-                      : RaisedButton(
-                          color: Colors.indigo,
-                          elevation: 8,
-                          onPressed: _submitOffer,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Text(
-                              'Submit Offer',
-                              style: Styles.whiteSmall,
-                            ),
-                          ),
-                        ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
+                      ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -217,6 +220,7 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
 
   AccountInfo tradingAccount;
   InvoiceOffer invoiceOfferResult;
+  String discountAmount;
 
   void _getTradingAccount() async {
     var result = await Navigator.push(
@@ -233,7 +237,13 @@ class _CreateOfferState extends State<CreateOffer> implements SnackBarListener {
 
   void _onDiscountChanged(String value) {
     discount = value;
-    print('discount: $discount');
+
+    var num = double.parse(discount);
+    var m = widget.invoice.totalAmount * (num / 100);
+    print(' 😡  😡 discount: $discount 👽 👽 discount amount: $m');
+    setState(() {
+      discountAmount = m.toString();
+    });
   }
 
   @override

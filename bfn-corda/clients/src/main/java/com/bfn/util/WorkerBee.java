@@ -1,11 +1,10 @@
 package com.bfn.util;
 
+import com.bfn.contracts.InvoiceTokenType;
 import com.bfn.dto.*;
 import com.bfn.flows.admin.AccountRegistrationFlow;
 import com.bfn.flows.admin.ShareAccountInfoFlow;
-import com.bfn.flows.invoices.BuyInvoiceOfferFlow;
-import com.bfn.flows.invoices.InvoiceOfferFlow;
-import com.bfn.flows.invoices.InvoiceRegistrationFlow;
+import com.bfn.flows.invoices.*;
 import com.bfn.states.InvoiceOfferState;
 import com.bfn.states.InvoiceState;
 import com.google.api.core.ApiFuture;
@@ -23,6 +22,7 @@ import net.corda.core.concurrent.CordaFuture;
 import net.corda.core.contracts.Contract;
 import net.corda.core.contracts.ContractState;
 import net.corda.core.contracts.StateAndRef;
+import net.corda.core.contracts.UniqueIdentifier;
 import net.corda.core.identity.AnonymousParty;
 import net.corda.core.identity.Party;
 import net.corda.core.messaging.CordaRPCOps;
@@ -30,12 +30,15 @@ import net.corda.core.node.NodeInfo;
 import net.corda.core.node.services.Vault;
 import net.corda.core.node.services.vault.PageSpecification;
 import net.corda.core.node.services.vault.QueryCriteria;
+import net.corda.core.node.services.vault.Sort;
 import net.corda.core.transactions.SignedTransaction;
+import org.bouncycastle.jcajce.provider.symmetric.DSTU7624;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
+import java.math.BigDecimal;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
@@ -94,6 +97,7 @@ public class WorkerBee {
 
         List<NodeInfo> nodes = proxy.networkMapSnapshot();
         List<NodeInfoDTO> nodeList = new ArrayList<>();
+        proxy.startFlowDynamic(com.r3.corda.lib.tokens.workflows.flows.issue.IssueTokensFlow.class);
         FirebaseUtil.deleteCollection("nodes");
         for (NodeInfo info : nodes) {
             NodeInfoDTO dto = new NodeInfoDTO();
@@ -301,7 +305,7 @@ public class WorkerBee {
         data.setOffers(offers);
 
         String t1 = "\n\n\uD83E\uDDE9 \uD83E\uDDE9 List of States on ".concat(info.getLegalIdentities().get(0).getName().toString()
-        .concat(" \uD83E\uDDE9 \uD83E\uDDE9 "));
+                .concat(" \uD83E\uDDE9 \uD83E\uDDE9 "));
         String a1 = "\uD83E\uDDE9 \uD83E\uDDE9 AccountInfo found on node: \uD83C\uDF4E " + accts + " \uD83C\uDF4E partcipants:  \uD83E\uDDE1 " + acctsp;
         String a2 = "\uD83E\uDDE9 \uD83E\uDDE9 InvoiceStates found on node: \uD83C\uDF4E " + invoices + " \uD83C\uDF4E  partcipants:  \uD83E\uDDE1 " + invoicesp;
         String a3 = "\uD83E\uDDE9 \uD83E\uDDE9 InvoiceOfferStates found on node: \uD83C\uDF4E " + offers + " \uD83C\uDF4E  partcipants:  \uD83E\uDDE1 " + offersp;
@@ -310,7 +314,7 @@ public class WorkerBee {
         mList.add(a2);
         mList.add(a3);
         mList.add("\uD83E\uDDE9 \uD83E\uDDE9 Total states found:  \uD83E\uDDE1 " + (accts + invoices + offers) + "  \uD83E\uDDE1 \n\n");
-        for (String m: mList) {
+        for (String m : mList) {
             logger.info(m);
         }
         return data;
@@ -368,7 +372,7 @@ public class WorkerBee {
         mList.add(a2);
         mList.add(a3);
         mList.add("\uD83E\uDDE9 \uD83E\uDDE9 Total states found:  \uD83E\uDDE1 " + (accts + invoices + offers) + "  \uD83E\uDDE1 \n\n");
-        for (String m: mList) {
+        for (String m : mList) {
             logger.info(m);
         }
         return mList;
@@ -425,7 +429,8 @@ public class WorkerBee {
             if (customerInfo == null) {
                 throw new Exception("Customer is bloody missing");
             }
-            double m = invoice.getValueAddedTax() / 100;
+            double discAmt = invoice.getAmount() * (invoice.getValueAddedTax() / 100);
+            double tot = invoice.getAmount() + discAmt;
 
             CordaFuture<AnonymousParty> anonymousPartyCordaFuture = proxy.startTrackedFlowDynamic(
                     RequestKeyForAccount.class, customerInfo).getReturnValue();
@@ -435,12 +440,18 @@ public class WorkerBee {
                     RequestKeyForAccount.class, supplierInfo).getReturnValue();
             PublicKey supplierKey = anonymousPartyCordaFuture1.get().getOwningKey();
 
-            invoice.setTotalAmount(invoice.getAmount() + (m * invoice.getAmount()));
-            InvoiceState invoiceState = new InvoiceState(UUID.randomUUID(),
-                    invoice.getInvoiceNumber(), invoice.getDescription(),
-                    invoice.getAmount(), invoice.getTotalAmount(), invoice.getValueAddedTax(),
-                    supplierInfo, customerInfo, supplierKey, customerKey, new Date());
-
+            invoice.setTotalAmount(tot);
+            InvoiceState invoiceState = new InvoiceState(
+                    UUID.randomUUID(), invoice.getInvoiceNumber(),
+                    invoice.getDescription(),
+                    new BigDecimal(invoice.getAmount()),
+                    new BigDecimal(invoice.getTotalAmount()),
+                    new BigDecimal(invoice.getValueAddedTax()),
+                    supplierInfo,
+                    customerInfo,
+                    supplierKey,
+                    customerKey,
+                    new Date());
             CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
                     InvoiceRegistrationFlow.class, invoiceState).getReturnValue();
 
@@ -469,7 +480,7 @@ public class WorkerBee {
         }
     }
 
-    public static String startBuyInvoiceOfferFlow(CordaRPCOps proxy, String invoiceId) throws Exception {
+    public static InvoiceOfferDTO startBuyInvoiceOfferFlow(CordaRPCOps proxy, String invoiceId) throws Exception {
 
         try {
 
@@ -499,7 +510,35 @@ public class WorkerBee {
                     "\uD83C\uDF4F \uD83C\uDF4F \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06  " +
                     "\n\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C  signedTransaction returned: \uD83E\uDD4F "
                     + issueTx.getId().toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
-            return issueTx.getId().toString();
+            logger.info(" \uD83D\uDC9A \uD83D\uDC9A \uD83D\uDC9A Bought invoiceOffer:  \uD83C\uDF3A id: ".concat(refToBuy.getState().getData().getInvoiceNumber())
+                    .concat("  \uD83C\uDF3A amount: " + refToBuy.getState().getData().getOfferAmount()));
+            //create tokens
+            try {
+                Vault.Page page2 = proxy.vaultQuery(InvoiceTokenType.class);
+                if (page2.getStates().isEmpty()) {
+                    logger.error("\uD83D\uDC7F \uD83D\uDC7F InvoiceTokenType does not exist");
+                } else {
+                    InvoiceTokenType tokenType = (InvoiceTokenType) page2.getStates().get(0);
+
+                    CordaFuture<SignedTransaction> signedTransactionCordaFuture2 =
+                            proxy.startTrackedFlowDynamic(
+                                    CreateTokensForInvoiceOffer.class, refToBuy.getState(),
+                                    tokenType).getReturnValue();
+                    SignedTransaction issueTx2 = signedTransactionCordaFuture2.get();
+                    logger.info("\uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F \uD83C\uDF4F flow completed... " +
+                            "\uD83C\uDF4F \uD83C\uDF4F \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06  " +
+                            "\n\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C  signedTransaction returned: \uD83E\uDD4F "
+                            + issueTx2.getId().toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
+                    logger.info(" \uD83D\uDC9A \uD83D\uDC9A \uD83D\uDC9A Invoice tokens :  \uD83C\uDF3A id: ".concat(tokenType.getLinearId().getId().toString())
+                            .concat("  \uD83C\uDF3A amount: " + refToBuy.getState().getData().getOfferAmount()));
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage() == null ? "\uD83D\uDC7F \uD83D\uDC7F Unable to create tokens for invoice: "
+                        .concat(refToBuy.getState().getData().getInvoiceId().toString()) : e.getMessage());
+            }
+
+
+            return getDTO(refToBuy.getState().getData());
         } catch (Exception e) {
             if (e.getMessage() != null) {
                 throw new Exception("Failed to buy invoiceOffer ".concat(e.getMessage()));
@@ -570,6 +609,7 @@ public class WorkerBee {
             dto.setIdentifier(accountInfo.getIdentifier().getId().toString());
             dto.setName(accountInfo.getName());
             dto.setStatus(accountInfo.getStatus().name());
+
             try {
                 FirebaseUtil.sendAccountMessage(dto);
                 ApiFuture<DocumentReference> reference = db.collection("accounts").add(dto);
@@ -615,7 +655,7 @@ public class WorkerBee {
             }
             if (invoiceState == null) {
                 logger.warn("InvoiceState not found, \uD83D\uDC7F offer probably made on foreign node");
-//                throw new Exception("Invoice not found");
+                throw new Exception("Invoice not found");
             }
             AccountInfo investorInfo = null;
             Vault.Page<AccountInfo> acctsPage = proxy.vaultQueryByWithPagingSpec(
@@ -634,11 +674,10 @@ public class WorkerBee {
                 throw new Exception("Discount not found");
             }
 
-            invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
-                    ((100.0 - invoiceOffer.getDiscount()) / 100));
+            double nPercentage = 100.0 - (invoiceOffer.getDiscount());
+            invoiceOffer.setOfferAmount(invoiceOffer.getOriginalAmount() * (nPercentage / 100));
 
-            InvoiceOfferDTO offerDTO = sendInvoiceOffer(proxy, invoiceOffer, invoiceState, investorInfo);
-            return offerDTO;
+            return sendInvoiceOffer(proxy, invoiceOffer, invoiceState, investorInfo);
         } catch (Exception e) {
             if (e.getMessage() != null) {
                 throw new Exception("Failed to register invoiceOffer.  \uD83D\uDC7F possibly invoice not found");
@@ -648,6 +687,44 @@ public class WorkerBee {
         }
     }
 
+    public static void startCreateTokenFlow(CordaRPCOps proxy, AccountInfoDTO accountInfo) throws Exception {
+
+        try {
+            QueryCriteria criteria = new QueryCriteria.VaultQueryCriteria(Vault.StateStatus.ALL);
+            Vault.Page<AccountInfo> page = proxy.vaultQueryBy(criteria,
+                    new PageSpecification(1,200), null,
+                    AccountInfo.class);
+            AccountInfo info = null;
+            for (StateAndRef<AccountInfo> ref: page.getStates()) {
+                AccountInfo m = ref.getState().getData();
+                if (accountInfo.getIdentifier().equalsIgnoreCase(m.getIdentifier().getId().toString())) {
+                    info = m;
+                    break;
+                }
+
+            }
+            if (info == null) {
+                throw new Exception("Account not found");
+            }
+
+            Party party = info.getHost();
+            InvoiceTokenType tokenType = new InvoiceTokenType(
+                    party, party.getOwningKey(), new BigDecimal(0), new UniqueIdentifier(), 2);
+
+            CordaFuture<SignedTransaction> signedTransactionCordaFuture = proxy.startTrackedFlowDynamic(
+                    CreateInvoiceOfferTokenType.class, tokenType)
+                    .getReturnValue();
+
+            SignedTransaction issueTx = signedTransactionCordaFuture.get();
+            logger.info("\uD83C\uDF4F \uD83C\uDF4F flow completed... " +
+                    "\uD83C\uDF4F \uD83C\uDF4F \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDC4C " +
+                    "\uD83D\uDC4C \uD83D\uDC4C \uD83D\uDC4C  signedTransaction returned: \uD83E\uDD4F " +
+                    issueTx.toString().concat(" \uD83E\uDD4F \uD83E\uDD4F "));
+        } catch (Exception e) {
+            throw new Exception("TokenType creation failed. " + e.getMessage());
+        }
+
+    }
     public static List<InvoiceOfferDTO> startInvoiceOfferFlowToAllAccounts(CordaRPCOps proxy, InvoiceOfferAllDTO all) throws Exception {
 
         try {
@@ -686,11 +763,11 @@ public class WorkerBee {
             invoiceOffer.setSupplier(m);
             invoiceOffer.setOwner(m);
             logger.info("we have an account ... 2");
-            invoiceOffer.setOriginalAmount(invoiceState.getTotalAmount());
+            invoiceOffer.setOriginalAmount(invoiceState.getTotalAmount().doubleValue());
             invoiceOffer.setOfferDate(new Date());
             logger.info("we have an account ... 3");
-            invoiceOffer.setOfferAmount(invoiceState.getTotalAmount() *
-                    ((100.0 - invoiceOffer.getDiscount()) / 100));
+            double n = 100.0 - (invoiceOffer.getDiscount()) / 100;
+            invoiceOffer.setOfferAmount(invoiceOffer.getOriginalAmount() * n);
 
             logger.info("\uD83D\uDC7D \uD83D\uDC7D INVOICE: ".concat(invoiceOffer.getInvoiceId())
                     .concat(" offerAmount: " + invoiceState.getTotalAmount()));
@@ -701,7 +778,8 @@ public class WorkerBee {
                     continue;
                 }
                 invoiceOffer.setInvestor(getDTO(info.getState().getData()));
-                InvoiceOfferDTO offerDTO = sendInvoiceOffer(proxy, invoiceOffer, invoiceState, info.getState().getData());
+                InvoiceOfferDTO offerDTO = sendInvoiceOffer(proxy, invoiceOffer,
+                        invoiceState, info.getState().getData());
                 offers.add(offerDTO);
             }
             return offers;
@@ -717,8 +795,8 @@ public class WorkerBee {
     private static InvoiceOfferDTO sendInvoiceOffer(CordaRPCOps proxy, InvoiceOfferDTO invoiceOffer, InvoiceState invoiceState, AccountInfo investorInfo) throws Exception {
         InvoiceOfferState invoiceOfferState = new InvoiceOfferState(
                 invoiceState.getInvoiceId(),
-                invoiceOffer.getOfferAmount(),
-                invoiceOffer.getDiscount(),
+                new BigDecimal(invoiceOffer.getOfferAmount()),
+                new BigDecimal(invoiceOffer.getDiscount()),
                 invoiceState.getTotalAmount(),
                 invoiceState.getSupplierInfo(),
                 investorInfo,
@@ -754,14 +832,14 @@ public class WorkerBee {
 
     private static InvoiceDTO getDTO(InvoiceState state) throws Exception {
         InvoiceDTO invoice = new InvoiceDTO();
-        invoice.setAmount(state.getAmount());
+        invoice.setAmount(state.getAmount().doubleValue());
         invoice.setCustomer(getDTO(state.getCustomerInfo()));
         invoice.setSupplier(getDTO(state.getSupplierInfo()));
         invoice.setDescription(state.getDescription());
         invoice.setInvoiceId(state.getInvoiceId().toString());
         invoice.setInvoiceNumber(state.getInvoiceNumber());
-        invoice.setTotalAmount(state.getTotalAmount());
-        invoice.setValueAddedTax(state.getValueAddedTax());
+        invoice.setTotalAmount(state.getTotalAmount().doubleValue());
+        invoice.setValueAddedTax(state.getValueAddedTax().doubleValue());
 
         if (state.getSupplierPublicKey() == null) {
             throw new Exception("Supplier Public Key is null");
@@ -770,9 +848,7 @@ public class WorkerBee {
             throw new Exception("Customer Public Key is null");
         }
         String supplierString = Base64.getEncoder().encodeToString(state.getSupplierPublicKey().getEncoded());
-        ;
         String customerString = Base64.getEncoder().encodeToString(state.getCustomerPublicKey().getEncoded());
-        ;
 
         invoice.setSupplierPublicKey(state.getSupplierPublicKey() == null ? null : supplierString);
         invoice.setCustomerPublicKey(state.getCustomerPublicKey() == null ? null : customerString);
@@ -785,9 +861,9 @@ public class WorkerBee {
         InvoiceOfferDTO o = new InvoiceOfferDTO();
         o.setInvoiceId(state.getInvoiceId().toString());
         o.setInvoiceNumber(state.getInvoiceNumber());
-        o.setOfferAmount(state.getOfferAmount());
-        o.setOriginalAmount(state.getOriginalAmount());
-        o.setDiscount(state.getDiscount());
+        o.setOfferAmount(state.getOfferAmount().doubleValue());
+        o.setOriginalAmount(state.getOriginalAmount().doubleValue());
+        o.setDiscount(state.getDiscount().doubleValue());
         o.setSupplier(getDTO(state.getSupplier()));
         o.setInvestor(getDTO(state.getInvestor()));
         o.setCustomer(getDTO(state.getCustomer()));
@@ -801,9 +877,7 @@ public class WorkerBee {
             throw new Exception("Investor Public Key is null");
         }
         String supplierString = Base64.getEncoder().encodeToString(state.getSupplierPublicKey().getEncoded());
-        ;
         String investorString = Base64.getEncoder().encodeToString(state.getInvestorPublicKey().getEncoded());
-        ;
         o.setSupplierPublicKey(state.getSupplierPublicKey() == null ? null : supplierString);
         o.setInvestorPublicKey(state.getInvestorPublicKey() == null ? null : investorString);
 

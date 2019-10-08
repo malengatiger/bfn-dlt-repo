@@ -33,12 +33,12 @@ public class InvoiceOfferDTO {
     public InvoiceOfferDTO() {
     }
 
-    public AccountInfoDTO getCustomer() {
-        return customer;
+    public String getInvoiceId() {
+        return invoiceId;
     }
 
-    public void setCustomer(AccountInfoDTO customer) {
-        this.customer = customer;
+    public void setInvoiceId(String invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public String getInvoiceNumber() {
@@ -47,14 +47,6 @@ public class InvoiceOfferDTO {
 
     public void setInvoiceNumber(String invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
-    }
-
-    public String getInvoiceId() {
-        return invoiceId;
-    }
-
-    public void setInvoiceId(String invoiceId) {
-        this.invoiceId = invoiceId;
     }
 
     public double getOfferAmount() {
@@ -103,6 +95,14 @@ public class InvoiceOfferDTO {
 
     public void setOwner(AccountInfoDTO owner) {
         this.owner = owner;
+    }
+
+    public AccountInfoDTO getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(AccountInfoDTO customer) {
+        this.customer = customer;
     }
 
     public Date getOfferDate() {

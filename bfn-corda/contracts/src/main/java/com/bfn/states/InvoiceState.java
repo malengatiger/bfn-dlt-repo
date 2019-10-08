@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.Date;
@@ -28,14 +29,14 @@ public class InvoiceState implements ContractState {
     private final UUID invoiceId;
     private final String invoiceNumber;
     private final String description;
-    private final Double amount, totalAmount, valueAddedTax;
+    private final BigDecimal amount, totalAmount, valueAddedTax;
     private Date dateRegistered;
     private final AccountInfo supplierInfo, customerInfo;
     private final PublicKey supplierPublicKey, customerPublicKey;
     private final static Logger logger = LoggerFactory.getLogger(InvoiceState.class);
 
-    public InvoiceState(UUID invoiceId, String invoiceNumber, String description, Double amount, Double totalAmount,
-                        Double valueAddedTax, AccountInfo supplierInfo, AccountInfo customerInfo,
+    public InvoiceState(UUID invoiceId, String invoiceNumber, String description, BigDecimal amount, BigDecimal totalAmount,
+                        BigDecimal valueAddedTax, AccountInfo supplierInfo, AccountInfo customerInfo,
                         PublicKey supplierPublicKey, PublicKey customerPublicKey, Date dateRegistered) {
         this.invoiceId = invoiceId;
         this.invoiceNumber = invoiceNumber;
@@ -54,13 +55,16 @@ public class InvoiceState implements ContractState {
     }
 
 
+    @NotNull
+    @Override
+    public List<AbstractParty> getParticipants() {
+
+        return Arrays.asList(supplierInfo.getHost(),
+                customerInfo.getHost());
+    }
 
     public UUID getInvoiceId() {
         return invoiceId;
-    }
-
-    public AccountInfo getCustomerInfo() {
-        return customerInfo;
     }
 
     public String getInvoiceNumber() {
@@ -71,15 +75,15 @@ public class InvoiceState implements ContractState {
         return description;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public Double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public Double getValueAddedTax() {
+    public BigDecimal getValueAddedTax() {
         return valueAddedTax;
     }
 
@@ -91,6 +95,10 @@ public class InvoiceState implements ContractState {
         return supplierInfo;
     }
 
+    public AccountInfo getCustomerInfo() {
+        return customerInfo;
+    }
+
     public PublicKey getSupplierPublicKey() {
         return supplierPublicKey;
     }
@@ -98,14 +106,4 @@ public class InvoiceState implements ContractState {
     public PublicKey getCustomerPublicKey() {
         return customerPublicKey;
     }
-
-    @NotNull
-    @Override
-    public List<AbstractParty> getParticipants() {
-
-        return Arrays.asList(supplierInfo.getHost(),
-                customerInfo.getHost());
-    }
-
-
 }

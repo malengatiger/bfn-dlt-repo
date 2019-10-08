@@ -1,5 +1,6 @@
 package com.bfn.webserver;
 
+import com.bfn.dto.InvoiceOfferDTO;
 import com.bfn.util.WorkerBee;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -59,7 +60,7 @@ public class InvestorController {
         return GSON.toJson(new PingResult("List of Nodes",sb.toString()));
     }
     @GetMapping(value = "/buyInvoiceOffer", produces = "application/json")
-    private String buyInvoiceOffer(@RequestParam String invoiceId) throws Exception {
+    private InvoiceOfferDTO buyInvoiceOffer(@RequestParam String invoiceId) throws Exception {
 
        return WorkerBee.startBuyInvoiceOfferFlow(proxy,invoiceId);
     }
