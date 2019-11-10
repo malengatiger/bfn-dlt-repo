@@ -51,7 +51,7 @@ public class InvoiceContract implements Contract {
         }
         ContractState contractState = tx.getOutput(0);
         if (!(contractState instanceof InvoiceState)) {
-            throw new IllegalArgumentException("Output state must be InvoiceState");
+            throw new IllegalArgumentException("Output state must be an InvoiceState");
         }
         InvoiceState invoiceState = (InvoiceState)contractState;
         if (invoiceState.getSupplierInfo() == null) {
@@ -68,7 +68,7 @@ public class InvoiceContract implements Contract {
         if (!requiredSigners.contains(invoiceState.getCustomerInfo().getHost().getOwningKey())) {
             throw new IllegalArgumentException("Customer Party must sign");
         }
-        logger.info(" \uD83D\uDD06 \uD83D\uDD06 InvoiceContract: verification done OK! .....\uD83E\uDD1F \uD83E\uDD1F ");
+        logger.info(" \uD83D\uDD06 \uD83D\uDD06 InvoiceContract:  \uD83C\uDF4E verification done OK! .....\uD83E\uDD1F \uD83E\uDD1F ");
 
     }
 

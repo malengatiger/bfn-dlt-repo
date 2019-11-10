@@ -72,7 +72,7 @@ public class BFNWebApi {
 
     @Bean
     public FirebaseApp firebaseBean() throws Exception {
-        logger.info("\uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06  BFNWebApi:  setting up Firebase ...." +
+        logger.info("\uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06  BFNWebApi:  setting up Firebase service account ...." +
                 " \uD83D\uDD06  \uD83D\uDD06  \uD83D\uDD06");
 
         try {
@@ -88,10 +88,10 @@ public class BFNWebApi {
 
             FirebaseApp app =FirebaseApp.initializeApp(options);
             logger.info(" \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9  \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 " +
-                    "Firebase Admin Setup OK:  \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 name: "
+                    "Firebase Admin SDK Setup OK:  \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9 name: "
             .concat(app.getName()));
         } catch (Exception e) {
-            logger.error(" \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F Firebase Admin setup failed");
+            logger.error(" \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F  \uD83D\uDC7F Firebase Admin SDK setup failed");
             throw new Exception(" \uD83D\uDC7F  \uD83D\uDC7F unable to set Firebase up",e);
         }
         return null;
